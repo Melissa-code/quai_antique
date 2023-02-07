@@ -1,0 +1,41 @@
+/* Presentation image section */
+
+.food-bg {
+    background-image: url("../images/service.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 20vh;
+}
+
+/* Starters section */
+
+.starters-img {
+    background-image: url("../images/starters-img.png");
+    height: 20vh;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.card-food {
+    background-color: #913732;
+    border: 1px solid #BB9457;
+}
+
+.dishes {
+    white-space: pre-line;
+}
+
+
+
+
+/* mobile phones */
+
+@media screen and (min-device-width: 280px) and (max-device-width: 768px) {
+
+    .category-img {
+        display: none;
+    }
+}
+
+

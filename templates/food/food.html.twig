@@ -1,0 +1,148 @@
+{% extends 'base.html.twig' %}
+
+{% block css %} <link rel="stylesheet" href="{{ asset('assets/css/food.css') }}"> {% endblock css %}
+
+{% block title %} La carte {% endblock %}
+
+
+{% block main %}
+
+    {# Food presentation section #}
+
+    <section id="food-presentation">
+        <div class="row">
+            {# Food image #}
+            <article class="col-12 food-bg"></article>
+        </div>
+    </section>
+
+    {# Starters section #}
+
+    <section class="container my-5 h-100" id="starters">
+        <div class="row">
+            {# Starters image #}
+            <article class="col-md-6 d-flex justify-content-center align-items-center">
+                <img src="{{ asset('assets/images/starters-img.png') }}" width="350" height="350" alt="photo exemple d'une entrée" class="">
+            </article>
+
+            {# Starters #}
+            <article class="col-md-6">
+                <div class="d-block mx-auto">
+                    <h2 class="text-center">Les Entrées</h2>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-10">
+
+                        <div class="card card-food my-4">
+                            <div class="card-body text-white">
+                                <p class="dishes ml-3">
+                                    Carpaccio de pamplemousses - 7 €
+                                    (Pamplemousses,  fenouil, jeunes pousses)
+
+                                    Croûte savoyarde - 8 €
+                                    (Jambon de Savoie, artichaut, tapenade, toasts)
+
+                                    Ecrevisses  d’Annecy - 9 €
+                                    (Ecrevisses, ravioles, tomate cerise)
+
+                                    Sushis de Savoie - 10 €
+                                    (Ombre chevalier, riz, oeufs de lompe)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <hr>
+
+
+
+    {# LOOPS #}
+
+    {% for category in categories %}
+
+    <section class="container my-5 h-100" id="starters">
+        {% if category == 'Nos Entrées' or category == 'Nos Desserts' or category == 'Nos Salades' %}
+        <div class="row">
+
+            {# Category image #}
+
+            <article class="col-md-6 d-flex justify-content-center align-items-center">
+                <img src="{{ asset('assets/images/starters-img.png') }}" width="350" height="350" alt="photo exemple d'une entrée" class="category-img">
+            </article>
+
+
+            {# Dishes list #}
+            <article class="col-md-6">
+                <div class="d-block mx-auto">
+                    <h2 class="text-center">{{ category }}</h2>
+                </div>
+
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-10">
+                        <div class="card card-food my-4">
+                            <div class="card-body text-white ml-3">
+                                {% for dish in dishes %}
+                                    {% if category == dish.category %}
+                                    <span class="dishes">
+                                        {{ dish.name }} - {{ dish.price }} €
+                                        {{ dish.desc}}
+                                    </span>
+                                    {% endif  %}
+                                {% endfor  %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        {% else %}
+        <div class="row d-flex flex-row-reverse">
+
+            {# Category image #}
+            <article class="col-md-6 d-flex justify-content-center align-items-center ">
+                <img src="{{ asset('assets/images/starters-img.png') }}" width="350" height="350" alt="photo exemple d'une entrée" class="category-img">
+            </article>
+
+
+            {# Dishes list  #}
+            <article class="col-md-6">
+                <div class="d-block mx-auto">
+                    <h2 class="text-center">{{ category }}</h2>
+                </div>
+
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-10">
+                        <div class="card card-food my-4">
+                            <div class="card-body text-white ml-3">
+                                {% for dish in dishes %}
+                                    {% if category == dish.category %}
+                                        <span class="dishes">
+                                        {{ dish.name }} - {{ dish.price }} €
+                                        {{ dish.desc}}
+                                    </span>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        {% endif %}
+    </section>
+
+    <hr>
+
+    {% endfor %}
+
+
+    {% block javascripts %}
+        <script src=""></script>
+    {% endblock %}
+
+{% endblock main %}

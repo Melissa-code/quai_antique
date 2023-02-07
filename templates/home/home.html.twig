@@ -1,64 +1,173 @@
 {% extends 'base.html.twig' %}
 
-{% block css %}
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-{% endblock css %}
+{% block css %} <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}"> {% endblock css %}
 
-{% block title %}
-    Accueil 2
-{% endblock %}
+{% block title %} Accueil {% endblock %}
 
 
-{% block body %}
+{% block main %}
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
-                </li>
-            </ul>
+   {# Presentation section #}
+
+   <section id="presentation-image">
+       <div class="row">
+           {# Restaurant image #}
+           <article class="col-12 restaurant-img">
+               <div class="row d-flex justify-content-center align-items-center text-center text-white font-italic h-100">
+                   <div class="col-8 col-md-3 presentation-address rounded ">
+                       <h1 class="pt-3"><img src="{{ asset('assets/icons/logo-white.svg') }}" alt="Logo du restaurant Le Quai Antique" width="200"></h1>
+                       {# presentation-address #}
+                       <p>5 Quai du Jeu de Paume 73000 Chambéry</p>
+                   </div>
+               </div>
+           </article>
+       </div>
+   </section>
+
+    <section class="container my-5" id="presentation-text">
+        <article class="row d-flex justify-content-center align-items-center mt-3">
+            <div class="col-12 card presentation-card">
+                <div class="card-body text-justify">
+                    <h2 class="welcome-title d-flex flex-wrap">Bienvenue chez Le Quai Antique</h2>
+                    <p class="text-justify presentation-text">Implanté en plein coeur de Chambéry, le Quai Antique constitue le troisième restaurant du chef Arnaud Michant.
+                        Celui-ci a pour but de vous faire découvrir, au déjeuner comme au dîner, une expérience gastronomique à travers une cuisine sans artifice.
+                    </p>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <hr>
+
+    {# Concept section #}
+
+    <section class="container my-5 h-100" id="concept">
+        <div class="row d-flex justify-content-center align-items-center">
+            {# Concept text #}
+            <article class="col-12 col-md-6">
+                <div class="d-block mx-auto">
+                    <h2 class="text-center">Le Concept</h2>
+                </div>
+                <div class="card card-concept-chef my-4 p-2">
+                    <div class="card-body text-justify text-white">
+                        <p>
+                        Facile d’accès, le Quai Antique est un lieu de convivialité proposant des plats typiques
+                        savoyards remis au goût du jour dans un cadre moderne.
+                        </p>
+                        <p>
+                        Tous nos plats sont élaborés sur place uniquement à base de produits frais issus
+                        des meilleurs producteurs locaux.
+                        </p>
+                        <p>
+                        Nous proposons également d’autres spécialités comme des burgers et des salades afin de
+                        satisfaire tous les palais.
+                        </p>
+                    </div>
+                </div>
+            </article>
+            {# Concept image #}
+            <article class="col-12 col-md-6 d-flex justify-content-center">
+                <div class="mx-3">
+                    <img src="{{ asset('assets/images/concept-img.png') }}" width="350" height="350" alt="dressage des plats élaborés sur place uniquement à base de produits frais issus des meilleurs producteurs locaux" class="">
+                </div>
+            </article>
+
         </div>
-    </nav>
+    </section>
 
-<div class="container"></div>
-    <div class="row featurette">
-        <div class="col-md-6">
-            <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-            <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
+    <hr>
+
+    {# Chef section #}
+
+    <section class="container my-5 h-100" id="chef">
+        <div class="row d-flex justify-content-center align-items-center chef">
+            {# Chef image #}
+            <article class="col-12 col-md-6 d-flex justify-content-center chef-img">
+                <div class="mx-3">
+                    <img src="{{ asset('assets/images/chef-img.png') }}" width="350" height="350" alt="chef Arnaud Michant" class="">
+                </div>
+            </article>
+
+            {# Chef text #}
+            <article class="col-12 col-md-6 chef-text">
+                <div class="d-block mx-auto">
+                    <h2 class="text-center mb-3">Arnaud Michant</h2>
+                </div>
+                {# Chef card #}
+                <div class="card card-concept-chef my-4 p-2">
+                    <div class="card-body text-justify text-white">
+                        <p>
+                            Le Chef Arnaud Michant aime passionnément les produits de Savoie. C’est pourquoi il a
+                            décidé d’ouvrir son troisième restaurant dans ce département.
+                        </p>
+                        <p>
+                            Plus encore que ses deux autres restaurants Arnaud Michant le voit comme la promesse
+                            d’un voyage dans son univers culinaire.
+                        </p>
+                        <div class="d-flex flex-wrap">
+                            <span class="mr-2">Découvrir :</span>
+                            <a href="#" target="_blank" class="mr-3 text-decoration-none restaurant-link">La Maison Michant</a>,
+                            <a href="#" target="_blank" class="text-decoration-none restaurant-link">Le Goût Pur</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
         </div>
-        <div class="col-md-6">
-            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+    </section>
 
+    <hr>
+
+    {# Photos dishes gallery #}
+
+    <section class="container my-5" id="gallery">
+        <div class="row d-flex justify-content-center">
+            {# Title #}
+            <div class="col-12 text-center">
+                <h2 class="text-center">Les incontournables</h2>
+            </div>
+            {# Photos gallery #}
+            <article class="col-12 mt-4">
+                <div class="row mb-1">
+                    <a href="{{ asset('assets/images/arrange.png') }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="legende photo 1" class="col-md-4 mb-2">
+                        <span class="legend-photo">legende photo 1</span>
+                        <span class="bg"></span>
+                        <img src="{{ asset('assets/images/arrange.png') }}" alt="" class="img-fluid img-gallery ">
+                    </a>
+                    <a href="{{ asset('assets/images/restaurant.svg') }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="legende photo 2" class="col-md-4 mb-2">
+                        <span class="legend-photo">legende photo 2</span>
+                        <span class="bg-photo"></span>
+                        <img src="{{ asset('assets/images/restaurant.svg') }}" alt="" class="img-fluid img-gallery ">
+                    </a>
+                    <a href="{{ asset('assets/images/arrange.png') }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="legende photo 3" class="col-md-4 mb-2">
+                        <span class="legend-photo">legende photo 3</span>
+                        <span class="bg"></span>
+                        <img src="{{ asset('assets/images/arrange.png') }}" alt="" class="img-fluid img-gallery ">
+                    </a>
+                </div>
+
+                <div class="row mb-1">
+                    <a href="{{ asset('assets/images/arrange.png') }}" data-toggle="lightbox" data-gallery="photos-gallery" class="col-md-4 mb-2">
+                        <img src="{{ asset('assets/images/arrange.png') }}" alt="" class="img-fluid img-gallery">
+                    </a>
+                    <a href="{{ asset('assets/images/arrange.png') }}" data-toggle="lightbox" data-gallery="photos-gallery" class="col-md-4 mb-2">
+                        <img src="{{ asset('assets/images/arrange.png') }}" alt="" class="img-fluid img-gallery">
+                    </a>
+                    <a href="{{ asset('assets/images/arrange.png') }}" data-toggle="lightbox" data-gallery="photos-gallery" class="col-md-4 mb-2">
+                        <img src="{{ asset('assets/images/arrange.png') }}" alt="" class="img-fluid img-gallery">
+                    </a>
+                </div>
+
+                {# Book button #}
+                <div class="mt-4 d-flex justify-content-center">
+                    <button class="btn btn-custom">Réserver</button>
+                </div>
+
+            </article>
         </div>
-    </div>
-    </div>
+    </section>
 
-<div class="container">
-    <div class="row featurette">
-        <div class="col-md-7">
-            <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-            <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
-        </div>
-        <div class="col-md-5">
-            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+    {% block javascripts %}
+        <script src="{{ asset('assets/javascript/home.js') }}"></script>
+    {% endblock %}
 
-        </div>
-    </div>
-
-</div>
-
-{% endblock body %}
+{% endblock main %}
