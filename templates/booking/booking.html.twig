@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block css %} <link rel="stylesheet" href="{{ asset('assets/css/booking.css') }}"> {% endblock css %}
+
+{% block title %} Réservation {% endblock %}
+
+
+{% block main %}
+
+    {# Booking section #}
+
+    <section id="booking">
+        <div class="row booking-bg">
+            {# Booking background image #}
+            <article class="container h-100">
+
+                <div class="row d-flex justify-content-center align-items-center text-white">
+                    <div class="col-11 col-md-8 rounded form-bg m-1">
+                        <div class="row form-content py-4 h-100 d-flex justify-content-center align-items-center mx-1">
+                            <div class="col-12">
+                                <h2 class="text-center pb-4">Réservation</h2>
+                                <p class="text-left pb-2">Toute réservation s’arrête une heure avant la fin du service du jour-même</p>
+                            </div>
+                            <div class="col-12">
+                            <form action="" method="POST" class="form-group">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-11 col-md-3 my-1">
+                                        <input type="date" class="form-control" placeholder="Date">
+                                    </div>
+                                    <div class="col-11 col-md-3 my-1">
+                                        <input type="time" class="form-control" placeholder="Heure">
+                                    </div>
+                                    <div class="col-11 col-md-3 my-1">
+                                        <input type="number" class="form-control" placeholder="Couverts">
+                                    </div>
+                                    <div class="col-11 col-md-3 my-1">
+                                        <textarea class="form-control" id="allergies" rows="1" placeholder="Allergies">Allergies</textarea>
+                                    </div>
+                                </div>
+                                <div class="col text-center mt-4">
+                                    <button class="btn btn-custom">Réserver</button>
+                                </div>
+                            </form>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </article>
+        </div>
+    </section>
+
+
+
+
+    {% block javascripts %}
+        <script src=""></script>
+    {% endblock %}
+
+{% endblock main %}

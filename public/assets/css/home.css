@@ -103,16 +103,3 @@
 }
 
 
-
-
-.btn-custom {
-    background-color: #913732;
-    border: 1px solid #BB9457;
-    color: #FFFFFF;
-}
-
-.btn-custom:hover {
-    background-color: #FFE6A7;
-    color: black;
-    border: 1px solid #913732;
-}

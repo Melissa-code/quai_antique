@@ -7,9 +7,9 @@
 
 {% block main %}
 
-    {# Menus presentation section #}
+    {# Menus image presentation section #}
 
-    <section id="menus-presentation h-100">
+    <section id="menus-presentation" class="h-100">
         <div class="row">
             {# Menus image #}
             <article class="col-12 menus-bg">
@@ -32,96 +32,87 @@
         </div>
     </section>
 
-    {# Daymenu section #}
+    {# Menu section #}
+
     {% for menu in menus %}
 
     <section class="container h-100" id="menus">
-
         <div class="row d-flex justify-content-center align-items-center my-5">
-
+            {# Menu title  #}
             <div class="col-12 mb-4">
                 <h2 class="text-center">{{ menu }}</h2>
             </div>
 
-            {# Setmenus articles #}
-
+            {# Setmenus  #}
             <article class="col-md-6">
-
                 <div class="row d-block justify-content-end">
-
-                        <div class="card text-center light-menu my-2 mx-1 pt-3">
-                            <div class="card-body pt-md-4">
-                                <h3 class="card-title">Formule du jour légère</h3>
-                                <div class="card-text">
-                                    <ul class="list-unstyled">
-                                        <li>Le midi du lundi au vendredi</li>
-                                        <li>Entrée + plat ou Plat + dessert</li>
-                                        <li>20 €</li>
-                                    </ul>
-                                </div>
+                    <div class="card text-center light-menu my-2 mx-1 pt-3">
+                        <div class="card-body pt-md-4">
+                            <h3 class="card-title">Formule du jour légère</h3>
+                            <div class="card-text">
+                                <ul class="list-unstyled">
+                                    <li>Le midi du lundi au vendredi</li>
+                                    <li>Entrée + plat ou Plat + dessert</li>
+                                    <li>20 €</li>
+                                </ul>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="card text-center light-menu my-2 mx-1 pt-3">
-                            <div class="card-body">
-                                <h3 class="card-title font-weight-bold">Formule du jour complète</h3>
-                                <div class="card-text">
-                                    <ul class="list-unstyled">
-                                        <li>Le midi du lundi au samedi</li>
-                                        <li>Entrée + plat + dessert</li>
-                                        <li>26 €</li>
-                                    </ul>
-                                </div>
+                    <div class="card text-center light-menu my-2 mx-1 pt-3">
+                        <div class="card-body">
+                            <h3 class="card-title font-weight-bold">Formule du jour complète</h3>
+                            <div class="card-text">
+                                <ul class="list-unstyled">
+                                    <li>Le midi du lundi au samedi</li>
+                                    <li>Entrée + plat + dessert</li>
+                                    <li>26 €</li>
+                                </ul>
                             </div>
                         </div>
-
+                    </div>
                 </div>
-
             </article>
 
             {# Setmenus food #}
 
             <article class="col-md-6 ">
-
                 <div class="row d-block justify-content-start">
-
-                <div class="card my-2 mx-1 food-setmenu ">
-                    <div class="card-body ">
-                        <h4 class="card-title font-weight-bold">Entrées au choix : </h4>
-                        <div class="card-text">
-                            <ul class="food-choice card-text list-unstyled">
-                                <li class="">- La croûte savoyarde</li>
-                                <li>- Carpaccio de pamplemousse</li>
-                            </ul>
+                    <div class="card my-2 mx-1 food-setmenu ">
+                        <div class="card-body ">
+                            <h4 class="card-title font-weight-bold">Entrées au choix : </h4>
+                            <div class="card-text">
+                                <ul class="food-choice card-text list-unstyled">
+                                    <li class="">- La croûte savoyarde</li>
+                                    <li>- Carpaccio de pamplemousse</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card my-2 mx-1 food-setmenu ">
-                    <div class="card-body">
-                        <h4 class="card-title font-weight-bold">Entrées au choix : </h4>
-                        <div class="card-text">
-                            <ul class="food-choice card-text list-unstyled">
-                                <li class="">- La croûte savoyarde</li>
-                                <li>- Carpaccio de pamplemousse</li>
-                            </ul>
+                    <div class="card my-2 mx-1 food-setmenu ">
+                        <div class="card-body">
+                            <h4 class="card-title font-weight-bold">Entrées au choix : </h4>
+                            <div class="card-text">
+                                <ul class="food-choice card-text list-unstyled">
+                                    <li class="">- La croûte savoyarde</li>
+                                    <li>- Carpaccio de pamplemousse</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card my-2 mx-1 food-setmenu ">
-                    <div class="card-body">
-                        <h4 class="card-title">Entrées au choix : </h4>
-                        <div class="card-text">
-                            <ul class="food-choice card-text list-unstyled">
-                                <li class="">- La croûte savoyarde</li>
-                                <li>- Carpaccio de pamplemousse</li>
-                            </ul>
+                    <div class="card my-2 mx-1 food-setmenu ">
+                        <div class="card-body">
+                            <h4 class="card-title">Entrées au choix : </h4>
+                            <div class="card-text">
+                                <ul class="food-choice card-text list-unstyled">
+                                    <li class="">- La croûte savoyarde</li>
+                                    <li>- Carpaccio de pamplemousse</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-
                 </div>
             </article>
-
         </div>
     </section>
 

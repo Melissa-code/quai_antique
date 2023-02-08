@@ -69,6 +69,20 @@ a:hover {
 }
 
 
+
+.btn-custom {
+    background-color: #913732;
+    border: 1px solid #BB9457;
+    color: #FFFFFF;
+}
+
+.btn-custom:hover {
+    background-color: #FFE6A7;
+    color: black;
+    border: 1px solid #913732;
+}
+
+
 /* Main menu  */
 
 .navbar {
@@ -130,7 +144,7 @@ media queries
 
 /* mobile phones */
 
-@media screen and (min-device-width: 280px) and (max-device-width: 768px) {
+@media screen and (min-device-width: 280px) and (max-device-width: 767px) {
 
     h2 {
         font-size: 20px;
@@ -145,6 +159,6 @@ media queries
 
 /* tablets and computers */
 
-@media screen and (min-device-width: 769px) {
+@media screen and (min-device-width: 768px) {
 
 }
