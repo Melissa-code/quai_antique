@@ -12,7 +12,9 @@
     <section id="food-presentation">
         <div class="row">
             {# Food image #}
-            <article class="col-12 food-bg"></article>
+            <article class="col-12 food-bg">
+                <h1 class="page-title">La Carte</h1>
+            </article>
         </div>
     </section>
 
@@ -36,7 +38,7 @@
                         <div class="card card-food my-4">
                             <div class="card-body text-white">
                                 <p class="dishes ml-3">
-                                    Carpaccio de pamplemousses - 7 €
+                                    <span class="font-weight-bold">Carpaccio de pamplemousses</span> - 7 €
                                     (Pamplemousses,  fenouil, jeunes pousses)
 
                                     Croûte savoyarde - 8 €
@@ -59,12 +61,11 @@
     <hr>
 
 
-
     {# LOOPS #}
 
     {% for category in categories %}
 
-    <section class="container my-5 h-100" id="starters">
+    <section class="container my-5 h-100" id="food">
         {% if category == 'Nos Entrées' or category == 'Nos Desserts' or category == 'Nos Salades' %}
         <div class="row">
 
@@ -88,7 +89,7 @@
                                 {% for dish in dishes %}
                                     {% if category == dish.category %}
                                     <span class="dishes">
-                                        {{ dish.name }} - {{ dish.price }} €
+                                        <span class="font-weight-bold">{{ dish.name }}</span> - {{ dish.price }} €
                                         {{ dish.desc}}
                                     </span>
                                     {% endif  %}
@@ -122,7 +123,7 @@
                                 {% for dish in dishes %}
                                     {% if category == dish.category %}
                                         <span class="dishes">
-                                        {{ dish.name }} - {{ dish.price }} €
+                                            <span class="font-weight-bold">{{ dish.name }}</span> - {{ dish.price }} €
                                         {{ dish.desc}}
                                     </span>
                                     {% endif %}

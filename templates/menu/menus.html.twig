@@ -1,0 +1,137 @@
+{% extends 'base.html.twig' %}
+
+{% block css %} <link rel="stylesheet" href="{{ asset('assets/css/menus.css') }}"> {% endblock css %}
+
+{% block title %} Nos menus {% endblock %}
+
+
+{% block main %}
+
+    {# Menus presentation section #}
+
+    <section id="menus-presentation h-100">
+        <div class="row">
+            {# Menus image #}
+            <article class="col-12 menus-bg">
+                <h1 class="page-title">Nos Menus</h1>
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-4 col-md-3 d-flex justify-content-center align-items-center">
+                        <div class="choice-menu d-flex justify-content-center align-items-center p-2" >
+                            <span class="text-white mr-3">Midi</span>
+                            {# Menu toggle switch #}
+                            <label class="switch">
+                                <input type="checkbox" />
+                                <span></span>
+                            </label>
+                            <span class="text-white ml-3">Soir</span>
+                        </div>
+
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    {# Daymenu section #}
+    {% for menu in menus %}
+
+    <section class="container h-100" id="menus">
+
+        <div class="row d-flex justify-content-center align-items-center my-5">
+
+            <div class="col-12 mb-4">
+                <h2 class="text-center">{{ menu }}</h2>
+            </div>
+
+            {# Setmenus articles #}
+
+            <article class="col-md-6">
+
+                <div class="row d-block justify-content-end">
+
+                        <div class="card text-center light-menu my-2 mx-1 pt-3">
+                            <div class="card-body pt-md-4">
+                                <h3 class="card-title">Formule du jour légère</h3>
+                                <div class="card-text">
+                                    <ul class="list-unstyled">
+                                        <li>Le midi du lundi au vendredi</li>
+                                        <li>Entrée + plat ou Plat + dessert</li>
+                                        <li>20 €</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card text-center light-menu my-2 mx-1 pt-3">
+                            <div class="card-body">
+                                <h3 class="card-title font-weight-bold">Formule du jour complète</h3>
+                                <div class="card-text">
+                                    <ul class="list-unstyled">
+                                        <li>Le midi du lundi au samedi</li>
+                                        <li>Entrée + plat + dessert</li>
+                                        <li>26 €</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+
+            </article>
+
+            {# Setmenus food #}
+
+            <article class="col-md-6 ">
+
+                <div class="row d-block justify-content-start">
+
+                <div class="card my-2 mx-1 food-setmenu ">
+                    <div class="card-body ">
+                        <h4 class="card-title font-weight-bold">Entrées au choix : </h4>
+                        <div class="card-text">
+                            <ul class="food-choice card-text list-unstyled">
+                                <li class="">- La croûte savoyarde</li>
+                                <li>- Carpaccio de pamplemousse</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card my-2 mx-1 food-setmenu ">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold">Entrées au choix : </h4>
+                        <div class="card-text">
+                            <ul class="food-choice card-text list-unstyled">
+                                <li class="">- La croûte savoyarde</li>
+                                <li>- Carpaccio de pamplemousse</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card my-2 mx-1 food-setmenu ">
+                    <div class="card-body">
+                        <h4 class="card-title">Entrées au choix : </h4>
+                        <div class="card-text">
+                            <ul class="food-choice card-text list-unstyled">
+                                <li class="">- La croûte savoyarde</li>
+                                <li>- Carpaccio de pamplemousse</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <hr>
+
+    {% endfor %}
+
+
+    {% block javascripts %}
+        <script src=""></script>
+    {% endblock %}
+
+{% endblock main %}

@@ -43,9 +43,16 @@ h2 {
     color: #BB9457;
 }
 
+h3, h4 {
+    font-weight: bold;
+}
+
 h3 {
     font-size: 20px;
-    font-weight: bolder;
+}
+
+h4 {
+    font-size: 16px;
 }
 
 a {
@@ -57,7 +64,9 @@ a:hover {
     text-decoration: none;
 }
 
-
+.page-title {
+    display: none;
+}
 
 
 /* Main menu  */

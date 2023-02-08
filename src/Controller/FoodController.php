@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FoodController extends AbstractController
 {
-    #[Route('/la-carte', name: 'app_food')]
+    #[Route('/la_carte', name: 'app_food')]
     public function index()
     {
         $categories = ["Nos Entrées", "Nos Plats", "Nos Desserts", "Nos Burgers", "Nos Salades"];
