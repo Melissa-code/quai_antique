@@ -1,0 +1,19 @@
+.signup {
+    background-image: url("../images/signup.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 80%;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.form-bg {
+    background-color: black;
+    border: 1px solid #FFE6A7;
+    opacity: 0.9;
+}
+
+.required-fields {
+    font-size: 0.8rem;
+}
