@@ -45,6 +45,7 @@ class SignupType extends AbstractType
                 'constraints' => new Length(['min'=> 5, 'max'=> 100]),
                 'required' => true
             ])
+
 //            ->add('guest', EntityType::class, [
 //                'class' => Guest::class,
 //                //'choice_label' => 'quantity',
@@ -53,13 +54,7 @@ class SignupType extends AbstractType
 //                    'placeholder' => 'Ex: 2'
 //                ]
 //            ])
-            ->add('guest', ChoiceType::class, [
-                'choices' => [
-                    '1' => 1,
-                    '2' => 2,
-                    '4' => 3,
-                ],
-            ])
+
 //            ->add('allergies', EntityType::class, [
 //                'class' => Allergy::class,
 //                'choice_label' => 'title',
@@ -69,13 +64,6 @@ class SignupType extends AbstractType
 //                    'placeholder' => 'Ex: crustacés'
 //                ]
 //            ])
-            ->add('allergies', ChoiceType::class, [
-                'choices' => [
-                    'crustacés' => 1,
-                    'gluten' => 2,
-                    'arachides' => 3,
-                ],
-            ])
 
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
