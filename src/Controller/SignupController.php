@@ -24,18 +24,18 @@ class SignupController extends AbstractController
             $user = $form->getData();
 
             // Hash the password
-            $plaintextPassword = $user->getPassword();
-            //dd($plaintextPassword);
             $hashedPassword = $passwordHasher->hashPassword(
                 $user,
-                $plaintextPassword
+                $user->getPassword()
             );
-            //dd($hashedPassword);
             $user->setPassword($hashedPassword);
 
             // Save the new user data in the database
             $managerRegistry->getManager()->persist($user);
             $managerRegistry->getManager()->flush();
+
+            // Redirect the user to the home page
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('signup/signup.html.twig', [
