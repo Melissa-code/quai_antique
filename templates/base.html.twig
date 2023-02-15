@@ -42,6 +42,15 @@
                             </li>
                         </ul>
                         <ul class="navbar-nav ml-auto">
+
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_admin_dish') }}">
+                                        <img src="{{ asset('assets/icons/manage.svg') }}" alt="administration du site" style="width: 2rem">
+                                    </a>
+                                </li>
+                            {% endif %}
+
                             <li class="nav-item">
                                 {# check if the user is logged-in #}
                                 {% if not app.user %}
