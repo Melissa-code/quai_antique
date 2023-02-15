@@ -43,9 +43,16 @@
                         </ul>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_login') }}">
-                                    <img src="{{ asset('assets/icons/login.svg') }}" alt="connexion" style="width: 2rem">
-                                </a>
+                                {# check if the user is logged-in #}
+                                {% if not app.user %}
+                                    <a class="nav-link" href="{{ path('app_login') }}">
+                                        <img src="{{ asset('assets/icons/login.svg') }}" alt="connexion" style="width: 2rem">
+                                    </a>
+                                {% else %}
+                                    <a class="nav-link" href="{{ path('app_logout') }}">
+                                        <img src="{{ asset('assets/icons/logout.svg') }}" alt="déconnexion" style="width: 2rem">
+                                    </a>
+                                {% endif %}
                             </li>
                         </ul>
                     </div>
@@ -76,7 +83,12 @@
                                     <li class="nav-item mb-2"><a href="{{ path('app_menus') }}" class="p-0 dark-link">Menus</a></li>
                                     <li class="nav-item mb-2"><a href="{{ path('app_booking') }}" class="p-0 dark-link">Réservation</a></li>
                                     <li class="nav-item mb-2">
-                                        <a href="{{ path('app_login') }}" class="mr-3"><img src="{{ asset('assets/icons/login-black.svg') }}" alt="connexion" width="25"></a>
+                                        {# check if the user is logged-in #}
+                                        {% if not app.user %}
+                                            <a href="{{ path('app_login') }}" class="mr-3"><img src="{{ asset('assets/icons/login-black.svg') }}" alt="connexion" width="25"></a>
+                                        {% else %}
+                                            <a href="{{ path('app_logout') }}" class="mr-3"><img src="{{ asset('assets/icons/logout-black.svg') }}" alt="déconnexion" width="25"></a>
+                                        {% endif %}
                                     </li>
                                 </ul>
                             </div>
