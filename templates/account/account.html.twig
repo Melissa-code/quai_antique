@@ -1,8 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AccountController!{% endblock %}
+{% block css %} <link rel="stylesheet" href="{{ asset('assets/css/account.css') }}"> {% endblock css %}
+
+{% block title %} Mon compte {% endblock %}
+
 
 {% block main %}
 
-    <h1>Mon compte</h1>
+<section id="account">
+    <div class="row account">
+
+        <div class="container">
+            <div class="row d-flex justify-content-center h-100">
+                <div class="col-12 account-frame rounded align-items-center my-4">
+
+                    {# Title #}
+
+                    <div class="my-4">
+                        <h1 class="page-title">Mon compte</h1>
+                        <h2 class="text-center">Mon compte</h2>
+                    </div>
+
+                    {# User options #}
+
+                    <div class="row d-flex justify-content-center flex-wrap my-3 ">
+
+                        {# user informations #}
+                        <article class="col-md-3 card account-item mx-3 my-1">
+                            <div class="d-flex justify-content-center mt-4">
+                                <img src="{{ asset('assets/icons/user-info.svg') }}" class="card-img-top account-img" alt="mes informations" style="width: 7rem;">
+                            </div>
+                            <div class="card-body text-center mb-3">
+                                <h3 class="card-title">
+                                    <a class="text-decoration-none account-link" href="">Mes informations</a>
+                                </h3>
+                            </div>
+                        </article>
+
+                        {# user reservations list #}
+                        <article class="col-md-3 card account-item mx-3 my-1">
+                            <div class="d-flex justify-content-center mt-4">
+                                <img src="{{ asset('assets/icons/bookings.svg') }}" class="card-img-top account-img" alt="mes réservations" style="width: 7rem;">
+                            </div>
+                            <div class="card-body text-center mb-3">
+                                <h3 class="card-title">
+                                    <a class="text-decoration-none account-link" href="">Mes réservations</a>
+                                </h3>
+                            </div>
+                        </article>
+
+                        {# edit user password #}
+                        <article class="col-md-3 card account-item mx-3 my-1">
+                            <div class="d-flex justify-content-center mt-4">
+                                <img src="{{ asset('assets/icons/change-password.svg') }}" class="card-img-top account-img" alt="changer mon mot de passe" style="width: 7rem;">
+                            </div>
+                            <div class="card-body text-center mb-3">
+                                <h3 class="card-title">
+                                    <a class="text-decoration-none account-link" href="">Mon mot de passe</a>
+                                </h3>
+                            </div>
+                        </article>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
 {% endblock %}
