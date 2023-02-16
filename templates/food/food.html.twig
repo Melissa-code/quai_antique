@@ -18,55 +18,12 @@
         </div>
     </section>
 
-    {# Starters section #}
-
-    <section class="container my-5 h-100" id="starters">
-        <div class="row">
-            {# Starters image #}
-            <article class="col-md-6 d-flex justify-content-center align-items-center">
-                <img src="{{ asset('assets/images/starters-img.png') }}" width="350" height="350" alt="photo exemple d'une entrée" class="">
-            </article>
-
-            {# Starters #}
-            <article class="col-md-6">
-                <div class="d-block mx-auto">
-                    <h2 class="text-center">Les Entrées</h2>
-                </div>
-                <div class="row d-flex justify-content-center">
-                    <div class="col-10">
-
-                        <div class="card card-food my-4">
-                            <div class="card-body text-white">
-                                <p class="dishes ml-3">
-                                    <span class="font-weight-bold">Carpaccio de pamplemousses</span> - 7 €
-                                    (Pamplemousses,  fenouil, jeunes pousses)
-
-                                    Croûte savoyarde - 8 €
-                                    (Jambon de Savoie, artichaut, tapenade, toasts)
-
-                                    Ecrevisses  d’Annecy - 9 €
-                                    (Ecrevisses, ravioles, tomate cerise)
-
-                                    Sushis de Savoie - 10 €
-                                    (Ombre chevalier, riz, oeufs de lompe)
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-    </section>
-
-    <hr>
-
-
-    {# LOOPS #}
+    {#  #}
 
     {% for category in categories %}
 
     <section class="container my-5 h-100" id="food">
-        {% if category == 'Nos Entrées' or category == 'Nos Desserts' or category == 'Nos Salades' %}
+        {% if category.title == 'entrées' or category.title == 'desserts' or category.title == 'salades' %}
         <div class="row">
 
             {# Category image #}
@@ -79,7 +36,7 @@
             {# Dishes list #}
             <article class="col-md-6">
                 <div class="d-block mx-auto">
-                    <h2 class="text-center">{{ category }}</h2>
+                    <h2 class="text-center">{{ category.title|capitalize }}</h2>
                 </div>
 
                 <div class="row d-flex justify-content-center align-items-center">
@@ -87,10 +44,10 @@
                         <div class="card card-food my-4">
                             <div class="card-body text-white ml-3">
                                 {% for dish in dishes %}
-                                    {% if category == dish.category %}
+                                    {% if category.id == dish.category.id %}
                                     <span class="dishes">
-                                        <span class="font-weight-bold">{{ dish.name }}</span> - {{ dish.price }} €
-                                        {{ dish.desc}}
+                                        <span class="font-weight-bold">{{ dish.title }}</span> - {{ dish.price }} €
+                                        {{ dish.description }}
                                     </span>
                                     {% endif  %}
                                 {% endfor  %}
@@ -113,7 +70,7 @@
             {# Dishes list  #}
             <article class="col-md-6">
                 <div class="d-block mx-auto">
-                    <h2 class="text-center">{{ category }}</h2>
+                    <h2 class="text-center">{{ category.title|capitalize }}</h2>
                 </div>
 
                 <div class="row d-flex justify-content-center align-items-center">
@@ -121,10 +78,10 @@
                         <div class="card card-food my-4">
                             <div class="card-body text-white ml-3">
                                 {% for dish in dishes %}
-                                    {% if category == dish.category %}
+                                    {% if category.id == dish.category.id %}
                                         <span class="dishes">
-                                            <span class="font-weight-bold">{{ dish.name }}</span> - {{ dish.price }} €
-                                        {{ dish.desc}}
+                                            <span class="font-weight-bold">{{ dish.title }}</span> - {{ dish.price }} €
+                                        {{ dish.description }}
                                     </span>
                                     {% endif %}
                                 {% endfor %}

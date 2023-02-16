@@ -24,7 +24,7 @@ class Booking
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    private ?User $users = null;
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
@@ -75,14 +75,14 @@ class Booking
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUsers(): ?User
     {
-        return $this->user;
+        return $this->users;
     }
 
-    public function setUser(?User $user): self
+    public function setUsers(?User $users): self
     {
-        $this->user = $user;
+        $this->users = $users;
 
         return $this;
     }
