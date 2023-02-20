@@ -14,6 +14,8 @@ class HomeController extends AbstractController
     public function home(DishRepository $dishRepository): Response
     {
         $dishes = $dishRepository->findAll();
+        $favoriteDishes = $dishRepository->findFavoriteDishes(6);
+        dd($favoriteDishes);
 
         return $this->render('home/home.html.twig', [
             "dishes" => $dishes,

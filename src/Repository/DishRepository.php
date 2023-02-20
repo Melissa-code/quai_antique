@@ -45,16 +45,17 @@ class DishRepository extends ServiceEntityRepository
       *
       * @return Dish[] Returns an array of Dish objects
       */
-    public function findByExampleField($value): array
+    public function findFavoriteDishes($limit): array
     {
-        return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('d.id', 'ASC')
-            ->setMaxResults(6)
-            ->getQuery()
-            ->getResult()
+        $qb = $this->createQueryBuilder('d')
+            ->andWhere('d.favorite = 1')
+            //->setParameter('val', $value)
+            ->orderBy('d.id', 'DESC')
+            ->setMaxResults($limit)
         ;
+        $query = $qb->getQuery();
+        return $query->getResult();
+
     }
 
 
