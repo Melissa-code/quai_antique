@@ -39,13 +39,13 @@ class DishRepository extends ServiceEntityRepository
         }
     }
 
-
-     /**
-      * Select the 6 last favorite dishes
-      *
-      * @return Dish[] Returns an array of Dish objects
-      */
-    public function findFavoriteDishes($limit): array
+    /**
+     * Select the 6 last favorite dishes
+     *
+     * @param int $limit
+     * @return Dish[] Returns an array of Dish objects
+     */
+    public function findFavoriteDishes(int $limit): array
     {
         $qb = $this->createQueryBuilder('d')
             ->andWhere('d.favorite = 1')
@@ -55,7 +55,6 @@ class DishRepository extends ServiceEntityRepository
         ;
         $query = $qb->getQuery();
         return $query->getResult();
-
     }
 
 
