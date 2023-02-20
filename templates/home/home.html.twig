@@ -127,35 +127,40 @@
             </div>
             {# Photos gallery #}
             <article class="col-12 mt-4">
-                <div class="row mb-1">
-                    <a href="{{ asset('assets/images/arrange.png') }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="legende photo 1" class="col-md-4 mb-2">
-                        <span class="legend-photo">legende photo 1</span>
-                        <span class="bg"></span>
-                        <img src="{{ asset('assets/images/arrange.png') }}" alt="" class="img-fluid img-gallery ">
-                    </a>
-                    <a href="{{ asset('assets/images/restaurant.svg') }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="legende photo 2" class="col-md-4 mb-2">
-                        <span class="legend-photo">legende photo 2</span>
-                        <span class="bg-photo"></span>
-                        <img src="{{ asset('assets/images/restaurant.svg') }}" alt="" class="img-fluid img-gallery ">
-                    </a>
-                    <a href="{{ asset('assets/images/arrange.png') }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="legende photo 3" class="col-md-4 mb-2">
-                        <span class="legend-photo">legende photo 3</span>
-                        <span class="bg"></span>
-                        <img src="{{ asset('assets/images/arrange.png') }}" alt="" class="img-fluid img-gallery ">
-                    </a>
-                </div>
 
                 <div class="row mb-1">
-                    <a href="{{ asset('assets/images/arrange.png') }}" data-toggle="lightbox" data-gallery="photos-gallery" class="col-md-4 mb-2">
-                        <img src="{{ asset('assets/images/arrange.png') }}" alt="" class="img-fluid img-gallery">
+                    {% for favoriteDish in favoriteDishes %}
+                    <a href="{{ asset('assets/images/'~ favoriteDish.image) }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="legende photo 1" class="col-md-4 mb-2">
+                        <span class="legend-photo">{{ favoriteDish.title }}</span>
+                        <span class="bg"></span>
+                        <img src="{{ asset('assets/images/'~ favoriteDish.image) }}" alt="{{ favoriteDish.title }}" class="img-fluid img-gallery ">
                     </a>
-                    <a href="{{ asset('assets/images/arrange.png') }}" data-toggle="lightbox" data-gallery="photos-gallery" class="col-md-4 mb-2">
-                        <img src="{{ asset('assets/images/arrange.png') }}" alt="" class="img-fluid img-gallery">
-                    </a>
-                    <a href="{{ asset('assets/images/arrange.png') }}" data-toggle="lightbox" data-gallery="photos-gallery" class="col-md-4 mb-2">
-                        <img src="{{ asset('assets/images/arrange.png') }}" alt="" class="img-fluid img-gallery">
-                    </a>
+                    {% endfor %}
+{#                    <a href="{{ asset('assets/images/'~ favoriteDish.image) }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="legende photo 2" class="col-md-4 mb-2">#}
+{#                        <span class="legend-photo">{{ favoriteDish.title }}</span>#}
+{#                        <span class="bg-photo"></span>#}
+{#                        <img src="{{ asset('assets/images/'~ favoriteDish.image) }}" alt="" class="img-fluid img-gallery ">#}
+{#                    </a>#}
+{#                    <a href="{{ asset('assets/images/'~ favoriteDish.image) }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="legende photo 3" class="col-md-4 mb-2">#}
+{#                        <span class="legend-photo">{{ favoriteDish.title }}</span>#}
+{#                        <span class="bg"></span>#}
+{#                        <img src="{{ asset('assets/images/'~ favoriteDish.image) }}" alt="" class="img-fluid img-gallery ">#}
+{#                    </a>#}
                 </div>
+
+
+{#                <div class="row mb-1">
+{#                    <a href="{{ asset('assets/images/arrange.png') }}" data-toggle="lightbox" data-gallery="photos-gallery" class="col-md-4 mb-2">#}
+{#                        <img src="{{ asset('assets/images/arrange.png') }}" alt="" class="img-fluid img-gallery">#}
+{#                    </a>#}
+{#                    <a href="{{ asset('assets/images/arrange.png') }}" data-toggle="lightbox" data-gallery="photos-gallery" class="col-md-4 mb-2">#}
+{#                        <img src="{{ asset('assets/images/arrange.png') }}" alt="" class="img-fluid img-gallery">#}
+{#                    </a>#}
+{#                    <a href="{{ asset('assets/images/arrange.png') }}" data-toggle="lightbox" data-gallery="photos-gallery" class="col-md-4 mb-2">#}
+{#                        <img src="{{ asset('assets/images/arrange.png') }}" alt="" class="img-fluid img-gallery">#}
+{#                    </a>#}
+{#                </div>
+
 
                 {# Book button #}
                 <div class="mt-4 d-flex justify-content-center">
@@ -163,6 +168,7 @@
                 </div>
 
             </article>
+
         </div>
     </section>
 

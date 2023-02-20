@@ -13,12 +13,13 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function home(DishRepository $dishRepository): Response
     {
-        $dishes = $dishRepository->findAll();
+        //$dishes = $dishRepository->findAll();
         $favoriteDishes = $dishRepository->findFavoriteDishes(6);
-        dd($favoriteDishes);
+        //dd($favoriteDishes);
 
         return $this->render('home/home.html.twig', [
-            "dishes" => $dishes,
+            //"dishes" => $dishes,
+            "favoriteDishes" => $favoriteDishes,
         ]);
     }
 
