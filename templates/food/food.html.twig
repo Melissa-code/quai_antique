@@ -23,7 +23,7 @@
     {% for category in categories %}
 
     <section class="container my-5 h-100" id="food">
-        {% if category.title == 'entrées' or category.title == 'desserts' or category.title == 'salades' %}
+        {%  if category.id % 2 != 0 %}
         <div class="row">
 
             {# Category image #}
@@ -31,7 +31,6 @@
             <article class="col-md-6 d-flex justify-content-center align-items-center">
                 <img src="{{ asset('assets/images/' ~ category.image ) }}" width="350" height="350" alt="photo exemple d'une entrée" class="category-img">
             </article>
-
 
             {# Dishes list #}
             <article class="col-md-6">
@@ -51,6 +50,7 @@
                                     </span>
                                     {% endif  %}
                                 {% endfor  %}
+
                             </div>
                         </div>
                     </div>

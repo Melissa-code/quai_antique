@@ -26,36 +26,36 @@ class AppFixtures extends Fixture
         // Data example for categories
         $c1 = new Category();
         $c1->setTitle("entrées")
-            ->setImage("starters/ham.png");
+            ->setImage("starters.png");
         $manager->persist($c1);
 
         $c2 = new Category();
         $c2->setTitle("plats")
-            ->setImage("dishes/tartiflette.png");
+            ->setImage("dishes.png");
         $manager->persist($c2);
 
         $c3 = new Category();
         $c3->setTitle("desserts")
-            ->setImage("desserts/flan.png");
+            ->setImage("desserts.png");
         $manager->persist($c3);
 
         $c4 = new Category();
         $c4->setTitle("burgers")
-            ->setImage("burgers/original.png");
+            ->setImage("burgers.png");
         $manager->persist($c4);
 
         $c5 = new Category();
         $c5->setTitle("salades")
-            ->setImage("salads/poke-salad.png");
+            ->setImage("salads.png");
         $manager->persist($c5);
 
         // Data example for dishes
         for ($i = 0; $i < 4; $i++) {
             $d1 = new Dish();
-            $d1->setTitle("Carpaccio de pamplemousse".$i)
+            $d1->setTitle("Carpaccio de pamplemousse")
                 ->setPrice(mt_rand(7, 10))
                 ->setDescription("(Pamplemousses, fenouil, jeunes pousses)")
-                ->setImage("starters/carpaccio.png")
+                ->setImage("uploads/carpaccio.png")
                 ->setCreatedAt(new \DateTimeImmutable('now'))
                 ->setFavorite(mt_rand(0, 1))
                 ->setActive(1)
@@ -69,7 +69,7 @@ class AppFixtures extends Fixture
             $d2->setTitle("Fondue pétillante de Savoie")
                 ->setPrice(mt_rand(15, 20))
                 ->setDescription("(Beaufort, emmental de Savoie, abondance)")
-                ->setImage("dishes/fondue.png")
+                ->setImage("uploads/fondue.png")
                 ->setCreatedAt(new \DateTimeImmutable('now'))
                 ->setFavorite(mt_rand(0, 1))
                 ->setActive(1)
@@ -83,7 +83,7 @@ class AppFixtures extends Fixture
             $d3->setTitle("Gâteau de Savoie")
                 ->setPrice(mt_rand(9, 12))
                 ->setDescription("(Framboises, gâteau de Savoie)")
-                ->setImage("desserts/gateau-savoie.png")
+                ->setImage("uploads/gateau-savoie.png")
                 ->setCreatedAt(new \DateTimeImmutable('now'))
                 ->setFavorite(mt_rand(0, 1))
                 ->setActive(1)
@@ -97,7 +97,7 @@ class AppFixtures extends Fixture
             $d4->setTitle("L'original")
                 ->setPrice(mt_rand(15, 18))
                 ->setDescription("(Steak, cheddar, salade, tomate, sauce barbecue)")
-                ->setImage("burgers/originaal.png")
+                ->setImage("uploads/original.png")
                 ->setCreatedAt(new \DateTimeImmutable('now'))
                 ->setFavorite(mt_rand(0, 1))
                 ->setActive(1)
@@ -108,10 +108,10 @@ class AppFixtures extends Fixture
 
         for ($i = 0; $i < 4; $i++) {
             $d5 = new Dish();
-            $d5->setTitle("Salade César au Beaufort")
+            $d5->setTitle("Salade César au beaufort")
                 ->setPrice(mt_rand(16, 18))
-                ->setDescription("(Salade, poulet, croutons, beaufort)")
-                ->setImage("desserts/gateau-savoie")
+                ->setDescription("(Salade, poulet, croûtons, beaufort, parmesan)")
+                ->setImage("uploads/cesar.png")
                 ->setCreatedAt(new \DateTimeImmutable('now'))
                 ->setFavorite(mt_rand(0, 1))
                 ->setActive(1)

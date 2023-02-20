@@ -39,6 +39,25 @@ class DishRepository extends ServiceEntityRepository
         }
     }
 
+
+     /**
+      * Select the 6 last favorite dishes
+      *
+      * @return Dish[] Returns an array of Dish objects
+      */
+    public function findByExampleField($value): array
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('d.id', 'ASC')
+            ->setMaxResults(6)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
 //    /**
 //     * @return Dish[] Returns an array of Dish objects
 //     */
