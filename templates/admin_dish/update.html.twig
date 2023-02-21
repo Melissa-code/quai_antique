@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block css %} <link rel="stylesheet" href="{{ asset('assets/css/createUpdateDish.css') }}"> {% endblock css %}
+
+{% block title %} Modification du plat {{ dish.title }}{% endblock %}
+
+{% block main %}
+
+    {# Update a dish section #}
+
+    <section id="update-dish">
+        <div class="row update-dish">
+
+            <article class="container my-4">
+                <div class="row text-white d-flex justify-content-center mx-1">
+
+                    <div class="col-12 form-bg rounded p-2 p-md-4">
+
+                        {# Page title #}
+
+                        <div class="col-12 py-3">
+                            <h1 class="page-title">Modification du plat {{ dish.title }}</h1>
+                            <h2 class="text-center">Modification du plat : {{ dish.title }}</h2>
+                        </div>
+
+                        {# Form #}
+
+                        <div class="col-12 ">
+                            {{ form_start(form) }}
+
+                            <div class="row d-flex align-items-center ">
+                                {# Title #}
+                                <div class="col-md-5">
+                                    {{ form_row(form.title) }}
+                                </div>
+                                {# Image #}
+                                <div class="col-md-5">
+                                    {{ form_row(form.image) }}
+                                </div>
+                                <div class="col-md-2 mt-3 d-flex justify-content-center">
+                                    <img src="{{ asset('assets/images/' ~ dish.image) }}" alt="{{ dish.title }}" style="width: 6rem">
+                                </div>
+                            </div>
+
+                            <div class="row d-flex align-items-center">
+                                {# Restaurant #}
+                                <div class="col-md-2">
+                                    {{ form_row(form.restaurant) }}
+                                </div>
+                                {# Price #}
+                                <div class="col-md-2">
+                                    {{ form_row(form.price) }}
+                                </div>
+                                {# Category #}
+                                <div class="col-md-4">
+                                    {{ form_row(form.category) }}
+                                </div>
+                                {# Favorite #}
+                                <div class="col-md-2 mt-4">
+                                    {{ form_row(form.favorite) }}
+                                </div>
+                                {# Active #}
+                                <div class="col-md-2 mt-4">
+                                    {{ form_row(form.active) }}
+                                </div>
+                            </div>
+
+                            <div class="row d-flex align-items-center">
+                                {# Description #}
+                                <div class="col-6">
+                                    {{ form_row(form.description) }}
+                                </div>
+                                {# Created at #}
+                                <div class="col-md-6">
+                                    {{ form_row(form.createdAt) }}
+                                </div>
+                            </div>
+
+
+                            {# button #}
+                            <div class="row">
+
+                                <div class="col-12 d-flex justify-content-center my-3">
+                                    <input type="submit" class="btn btn-custom" value="Enregistrer">
+                                </div>
+                            </div>
+
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+{% endblock %}

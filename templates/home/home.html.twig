@@ -134,17 +134,25 @@
                 {% endif %}
                     <div class="row mb-1">
                         {% for favoriteDish in favoriteDishes %}
-                            <a class="col-md-4 mb-2" href="{{ asset('assets/images/'~ favoriteDish.image) }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="{{ favoriteDish.title }}">
-                                <span class="legend-photo">{{ favoriteDish.title }}</span>
-                                <span class="bg"></span>
-                                <img src="{{ asset('assets/images/'~ favoriteDish.image) }}" alt="{{ favoriteDish.title }}" class="img-fluid img-gallery ">
-                                {% if(admin) %}
-                                    <div class="d-flex align-items-center">
-                                        <button class="btn-admin px-3 p-2 w-50 ">Modifier</button>
-                                        <button class="btn-admin px-3 p-2 w-50 ">Supprimer</button>
-                                    </div>
-                                {% endif %}
-                            </a>
+{#                            <a class="col-md-4 mb-2" href="{{ asset('assets/images/'~ favoriteDish.image) }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="{{ favoriteDish.title }}">#}
+{#                                <span class="legend-photo">{{ favoriteDish.title }}</span>#}
+{#                                <span class="bg"></span>#}
+{#                                <img src="{{ asset('assets/images/'~ favoriteDish.image) }}" alt="{{ favoriteDish.title }}" class="img-fluid img-gallery ">#}
+{#                            </a>#}
+                            <div class="col-md-4 mb-2">
+                                <a href="{{ asset('assets/images/'~ favoriteDish.image) }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="{{ favoriteDish.title }}">
+                                    <span class="legend-photo">{{ favoriteDish.title }}</span>
+                                    <span class="bg"></span>
+                                    <img src="{{ asset('assets/images/'~ favoriteDish.image) }}" alt="{{ favoriteDish.title }}" class="img-fluid img-gallery ">
+                                </a>
+                                {# update & delete buttons #}
+                                <div class="d-flex">
+                                    {% if(admin) %}
+                                        <a class="btn btn-admin px-3 p-2 w-50" href="{{ path('app_admin_update_dish', {'id': favoriteDish.id }) }}">Modifier</a>
+                                        <a class="btn btn-admin px-3 p-2 w-50" href="">Supprimer</a>
+                                    {% endif %}
+                                </div>
+                            </div>
                         {% endfor %}
                     </div>
 
