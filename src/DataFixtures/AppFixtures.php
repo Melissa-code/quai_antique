@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Category;
 use App\Entity\Dish;
 use App\Entity\Restaurant;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -119,6 +120,7 @@ class AppFixtures extends Fixture
                 ->setCategory($c5);
             $manager->persist($d5);
         }
+
 
         // $product = new Product();
         // $manager->persist($product);

@@ -9,16 +9,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-
+    /**
+     * Display the favorite dishes in the photos gallery
+     * @param DishRepository $dishRepository
+     * @return Response
+     */
     #[Route('/', name: 'app_home')]
     public function home(DishRepository $dishRepository): Response
     {
-        //$dishes = $dishRepository->findAll();
         $favoriteDishes = $dishRepository->findFavoriteDishes(6);
-        //dd($favoriteDishes);
 
         return $this->render('home/home.html.twig', [
-            //"dishes" => $dishes,
             "favoriteDishes" => $favoriteDishes,
         ]);
     }
