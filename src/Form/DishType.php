@@ -9,10 +9,12 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class DishType extends AbstractType
 {
@@ -28,7 +30,21 @@ class DishType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'Description : '
             ])
-            ->add('image')
+            ->add('imageFile', FileType::class,[
+                'required' =>false,
+                'mapped' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/jpg'
+                        ],
+                        'mimeTypesMessage' => 'Veuillez choisir un formar valide'
+                    ])
+                ]
+            ])
             ->add('createdAt', DateTimeType::class, [
                 'label' => 'Date de création : ',
 //                'placeholder' => [

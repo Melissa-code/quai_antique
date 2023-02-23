@@ -34,11 +34,13 @@
                                     {{ form_row(form.title) }}
                                 </div>
                                 {# Image #}
+
                                 <div class="col-md-5">
-                                    {{ form_row(form.image) }}
+                                    {{ form_row(form.imageFile) }}
                                 </div>
+                                {# Display the image #}
                                 <div class="col-md-2 mt-3 d-flex justify-content-center">
-                                    <img src="{{ asset('assets/images/' ~ dish.image) }}" alt="{{ dish.title }}" style="width: 6rem">
+                                    <img src="{{ asset('assets/images/uploads/' ~ dish.image) }}" alt="{{ dish.title }}" style="width: 6rem">
                                 </div>
                             </div>
 
@@ -76,12 +78,13 @@
                                 </div>
                             </div>
 
-
                             {# button #}
-                            <div class="row">
-
+                            <div class="row d-flex">
                                 <div class="col-12 d-flex justify-content-center my-3">
-                                    <input type="submit" class="btn btn-custom" value="Enregistrer">
+                                    {# Come back #}
+                                    <a href="{{ path('app_admin_dish') }}" class="btn btn-custom">Revenir</a>
+                                    {# Save the updatings #}
+                                    <input type="submit" class="btn btn-admin" value="Modifier">
                                 </div>
                             </div>
 
