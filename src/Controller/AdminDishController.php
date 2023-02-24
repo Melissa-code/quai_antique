@@ -54,11 +54,6 @@ class AdminDishController extends AbstractController
 
         $isUpdated = $dish->getId() !== null;
 
-//        if($isUpdated) {
-//            $oldImage = $this->getParameter('directory_images_dishes').'/'.$dish->getImage();
-//            //dd($oldImage);
-//        }
-
         $form = $this->createForm(DishType::class, $dish);
         $form->handleRequest($request);
 
@@ -87,31 +82,24 @@ class AdminDishController extends AbstractController
                 // Save the name of the image file only
                 $dish->setImage($imageName);
 
-
-                // Delete the image file if it's updated
-                if(file_exists($oldImage)) {
-                    unlink($oldImage);
+                if($isUpdated) {
+                    // Delete the image file if it's updated
+                    if(file_exists($oldImage)) {
+                        unlink($oldImage);
+                    }
                 }
+
             }
 
             // Save the changes in the database
             $managerRegistry->getManager()->persist($dish);
             $managerRegistry->getManager()->flush();
 
-            // Delete the image file if it's updated
-//            if($isUpdated){
-//                if(file_exists($oldImage) ) {
-//                    unlink($oldImage);
-//                }
-//            }
-
             // Display a success message
             $this->addFlash("success", ($isUpdated) ? "La modification a bien été effectuée." : "L'ajout a bien été effectué.");
-            //return $this->redirectToRoute('app_admin_dish');
-
         }
 
-        return $this->render('admin_dish/update.html.twig', [
+        return $this->render('admin_dish/createUpdate.html.twig', [
             "form" => $form->createView(),
             "dish" => $dish,
             "isUpdated" => $isUpdated,
