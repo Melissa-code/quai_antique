@@ -2,11 +2,13 @@
 
 {% block css %} <link rel="stylesheet" href="{{ asset('assets/css/createUpdateDish.css') }}"> {% endblock css %}
 
-{% block title %} Modification du plat {{ dish.title }}{% endblock %}
+
+{% block title %} Modification/création d'un plat {% endblock %}
+
 
 {% block main %}
 
-    {# Update a dish section #}
+    {# Create or update a dish section #}
 
     <section id="update-dish">
         <div class="row update-dish">
@@ -14,13 +16,31 @@
             <article class="container my-4">
                 <div class="row text-white d-flex justify-content-center mx-1">
 
+                    {# Message flash #}
+
+                    <div class="col-md-8 confirm-message text-center">
+                        {% for label, messages in app.flashes %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ label }} alert-dismissible fade show font-weight-bold" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+
                     <div class="col-12 form-bg rounded p-2 p-md-4">
 
                         {# Page title #}
 
                         <div class="col-12 py-3">
-                            <h1 class="page-title">Modification du plat {{ dish.title }}</h1>
-                            <h2 class="text-center">Modification du plat : {{ dish.title }}</h2>
+                            {% if isUpdated %}
+                                <h1 class="page-title">Modification du plat {{ dish.title }}</h1>
+                                <h2 class="text-center">Modification du plat : {{ dish.title }}</h2>
+                            {% else %}
+                                <h1 class="page-title">Création d'un plat</h1>
+                                <h2 class="text-center">Création d'un plat</h2>
+                            {% endif %}
                         </div>
 
                         {# Form #}
@@ -40,7 +60,7 @@
                                 </div>
                                 {# Display the image #}
                                 <div class="col-md-2 mt-3 d-flex justify-content-center">
-                                    <img src="{{ asset('assets/images/uploads/' ~ dish.image) }}" alt="{{ dish.title }}" style="width: 6rem">
+                                    <img src="{{ asset('assets/images/uploads/' ~ dish.image) }}" alt="{{ dish.title }}" class="rounded" style="width: 6rem">
                                 </div>
                             </div>
 
@@ -82,9 +102,13 @@
                             <div class="row d-flex">
                                 <div class="col-12 d-flex justify-content-center my-3">
                                     {# Come back #}
-                                    <a href="{{ path('app_admin_dish') }}" class="btn btn-custom">Revenir</a>
-                                    {# Save the updatings #}
-                                    <input type="submit" class="btn btn-admin" value="Modifier">
+                                    <a href="{{ path('app_admin_dish') }}" class="btn btn-custom mr-2">Revenir</a>
+                                    {% if isUpdated %}
+                                        {# Save the updatings #}
+                                        <input type="submit" class="btn btn-admin ml-2" value="Modifier">
+                                    {% else %}
+                                        <input type="submit" class="btn btn-admin ml-2" value="Créer">
+                                    {% endif  %}
                                 </div>
                             </div>
 

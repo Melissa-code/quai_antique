@@ -129,7 +129,7 @@
             <article class="col-12 mt-1">
                 {% if(admin) %}
                     <div class="row text-center d-block mx-auto m-3">
-                        <button class="btn-admin rounded px-3 p-2">Ajouter un plat</button>
+                        <a href="{{ path('app_admin_create_dish') }}" class="btn-admin rounded px-3 p-2">Ajouter un plat</a>
                     </div>
                 {% endif %}
                     <div class="row mb-1">
@@ -140,7 +140,7 @@
 {#                                <img src="{{ asset('assets/images/'~ favoriteDish.image) }}" alt="{{ favoriteDish.title }}" class="img-fluid img-gallery ">#}
 {#                            </a>#}
                             <div class="col-md-4 mb-2">
-                                <a href="{{ asset('assets/images/'~ favoriteDish.image) }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="{{ favoriteDish.title }}">
+                                <a href="{{ asset('assets/images/uploads/'~ favoriteDish.image) }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="{{ favoriteDish.title }}">
                                     <span class="legend-photo">{{ favoriteDish.title }}</span>
                                     <span class="bg"></span>
                                     <img src="{{ asset('assets/images/uploads/'~ favoriteDish.image) }}" alt="{{ favoriteDish.title }}" class="img-fluid img-gallery ">

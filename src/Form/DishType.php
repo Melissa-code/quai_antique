@@ -31,6 +31,7 @@ class DishType extends AbstractType
                 'label' => 'Description : '
             ])
             ->add('imageFile', FileType::class,[
+                'label'=> 'Image : ',
                 'required' =>false,
                 'mapped' => false,
                 'constraints' => [
@@ -66,7 +67,7 @@ class DishType extends AbstractType
                 'label' => 'Restaurant :',
                 'class' => Restaurant::class,
                 'choice_label' => 'id',
-                'disabled' => true
+                'disabled' => false
             ])
             ->add('category', EntityType::class, [
                 'label' => 'Catégorie : ',
