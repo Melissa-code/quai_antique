@@ -16,7 +16,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class AdminDishController extends AbstractController
 {
     /**
-     * Display the add update & delete buttons on the home page
+     * Display the favorite dishes & the Create - Update - Delete buttons on the home page
      * @param DishRepository $dishRepository
      * @return Response
      */
@@ -32,7 +32,7 @@ class AdminDishController extends AbstractController
     }
 
     /**
-     * Update a dish form
+     * Update a dish with a form
      * @param Dish|null $dish
      * @param Request $request
      * @param ManagerRegistry $managerRegistry
@@ -104,6 +104,34 @@ class AdminDishController extends AbstractController
             "dish" => $dish,
             "isUpdated" => $isUpdated,
         ]);
+    }
+
+    /**
+     * Delete a dish
+     * @param Dish $dish
+     * @param Request $request
+     * @param ManagerRegistry $managerRegistry
+     * @return Response
+     */
+    #[Route('/admin/supprimer_plat/{id}', name: 'app_admin_delete_dish', methods: 'DELETE')]
+    public function delete(Dish $dish, Request $request, ManagerRegistry $managerRegistry) : Response
+    {
+        $image = $this->getParameter('directory_images_dishes').'/'.$dish->getImage();
+
+        if($this->isCsrfTokenValid('REMOVE'.$dish->getId(), $request->get('_token')));
+
+            // Delete the dish in the database
+            $managerRegistry->getManager()->remove($dish);
+            $managerRegistry->getManager()->flush();
+
+            // Delete the image in the server
+            if($image) {
+                if(file_exists($image)) {
+                    unlink($image);
+                }
+            }
+            $this->addFlash("success", "La suppression a bien été effectuée.");
+            return $this->redirectToRoute('app_admin_create_dish');
     }
 
 

@@ -79,7 +79,7 @@
 
     {# Chef section #}
 
-    <section class="container my-5 h-100" id="chef">
+    <section class="container my-4 h-100" id="chef">
         <div class="row d-flex justify-content-center align-items-center chef">
             {# Chef image #}
             <article class="col-12 col-md-6 d-flex justify-content-center chef-img">
@@ -128,7 +128,7 @@
             {# Photos gallery #}
             <article class="col-12 mt-1">
                 {% if(admin) %}
-                    <div class="row text-center d-block mx-auto m-3">
+                    <div class="row text-center d-block mx-auto m-4">
                         <a href="{{ path('app_admin_create_dish') }}" class="btn-admin rounded px-3 p-2">Ajouter un plat</a>
                     </div>
                 {% endif %}
@@ -140,16 +140,23 @@
 {#                                <img src="{{ asset('assets/images/'~ favoriteDish.image) }}" alt="{{ favoriteDish.title }}" class="img-fluid img-gallery ">#}
 {#                            </a>#}
                             <div class="col-md-4 mb-2">
-                                <a href="{{ asset('assets/images/uploads/'~ favoriteDish.image) }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="{{ favoriteDish.title }}">
+                                <a href="{{ asset('assets/images/'~ favoriteDish.image) }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="{{ favoriteDish.title }}">
                                     <span class="legend-photo">{{ favoriteDish.title }}</span>
                                     <span class="bg"></span>
                                     <img src="{{ asset('assets/images/uploads/'~ favoriteDish.image) }}" alt="{{ favoriteDish.title }}" class="img-fluid img-gallery ">
                                 </a>
                                 {# update & delete buttons #}
-                                <div class="d-flex">
+                                <div class="row d-flex align-items-center m-0">
                                     {% if(admin) %}
                                         <a class="btn btn-admin px-3 p-2 w-50" href="{{ path('app_admin_update_dish', {'id': favoriteDish.id }) }}">Modifier</a>
-                                        <a class="btn btn-admin px-3 p-2 w-50" href="">Supprimer</a>
+
+                                        {# Delete button #}
+                                        <form class="w-50" method="POST" action="{{ path('app_admin_delete_dish', {'id': favoriteDish.id }) }}" onsubmit="return confirm('Confirmez-vous la suppression de ce plat ?')">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('REMOVE' ~ favoriteDish.id) }}">
+                                            <input type="submit" class="btn btn-admin px-3 p-2 w-100" value="Supprimer">
+                                        </form>
+{#                                        <a class="btn btn-admin px-3 p-2 w-50" href="">Supprimer</a>#}
                                     {% endif %}
                                 </div>
                             </div>
