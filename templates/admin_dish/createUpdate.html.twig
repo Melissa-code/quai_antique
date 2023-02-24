@@ -29,7 +29,7 @@
                         {% endfor %}
                     </div>
 
-                    <div class="col-12 form-bg rounded p-2 p-md-4">
+                    <div class="col-md-10 form-bg rounded p-2 p-md-4 my-5">
 
                         {# Page title #}
 
@@ -45,37 +45,40 @@
 
                         {# Form #}
 
-                        <div class="col-12 ">
+                        <div class="col-12">
                             {{ form_start(form) }}
 
-                            <div class="row d-flex align-items-center ">
-                                {# Title #}
-                                <div class="col-md-5">
-                                    {{ form_row(form.title) }}
-                                </div>
-                                {# Image #}
-
-                                <div class="col-md-5">
-                                    {{ form_row(form.imageFile) }}
-                                </div>
+                            <div class="row d-flex justify-content-center mb-3">
                                 {# Display the image #}
                                 <div class="col-md-2 mt-3 d-flex justify-content-center">
                                     <img src="{{ asset('assets/images/uploads/' ~ dish.image) }}" alt="{{ dish.title }}" class="rounded" style="width: 6rem">
                                 </div>
                             </div>
 
+                            <div class="row d-flex align-items-center ">
+                                {# Title #}
+                                <div class="col-md-6">
+                                    {{ form_row(form.title) }}
+                                </div>
+                                {# Image #}
+                                <div class="col-md-6">
+                                    {{ form_row(form.imageFile) }}
+                                </div>
+
+                            </div>
+
                             <div class="row d-flex align-items-center">
-                                {# Restaurant #}
-                                <div class="col-md-2">
-                                    {{ form_row(form.restaurant) }}
+                                {# Category #}
+                                <div class="col-md-4">
+                                    {{ form_row(form.category) }}
                                 </div>
                                 {# Price #}
                                 <div class="col-md-2">
                                     {{ form_row(form.price) }}
                                 </div>
-                                {# Category #}
-                                <div class="col-md-4">
-                                    {{ form_row(form.category) }}
+                                {# Restaurant #}
+                                <div class="col-md-2">
+                                    {{ form_row(form.restaurant) }}
                                 </div>
                                 {# Favorite #}
                                 <div class="col-md-2 mt-4">
@@ -89,7 +92,7 @@
 
                             <div class="row d-flex align-items-center">
                                 {# Description #}
-                                <div class="col-6">
+                                <div class="col-md-6">
                                     {{ form_row(form.description) }}
                                 </div>
                                 {# Created at #}
@@ -100,7 +103,7 @@
 
                             {# button #}
                             <div class="row d-flex">
-                                <div class="col-12 d-flex justify-content-center my-3">
+                                <div class="col-12 d-flex justify-content-center my-4">
                                     {# Come back #}
                                     <a href="{{ path('app_admin_dish') }}" class="btn btn-custom mr-2">Revenir</a>
                                     {% if isUpdated %}
