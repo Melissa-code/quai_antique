@@ -69,7 +69,10 @@ class AdminDishController extends AbstractController
                 // Reformat the image file name to be conform to an URL
                 $imageFileReformat = $slugger->slug($imageFileOriginal);
                 // Create a unique name & unique id for the image file
-                $imageName = $imageFileReformat.'-'.uniqid().'-'.$imageFile->getExtension();
+
+                //$imageName = $imageFileReformat.'-'.uniqid().'-'.$imageFile->getExtension();
+                $imageName = $imageFileReformat.'-'.uniqid().'-.png';
+
                 // Move the image file to a specific directory in the server
                 try {
                     $imageFile->move(
@@ -88,7 +91,6 @@ class AdminDishController extends AbstractController
                         unlink($oldImage);
                     }
                 }
-
             }
 
             // Save the changes in the database
