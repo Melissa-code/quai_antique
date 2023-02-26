@@ -61,7 +61,7 @@ class DishRepository extends ServiceEntityRepository
      * Select all the dishes by ascending price
      * @return array
      */
-    public function findDishesInAlphabeticalOrder(): array
+    public function findDishesByAscendingPrice(): array
     {
         $qb = $this->createQueryBuilder('d')
             ->orderBy('d.price', 'ASC')
