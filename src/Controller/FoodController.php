@@ -21,7 +21,8 @@ class FoodController extends AbstractController
     public function dishes(CategoryRepository $categoryRepository, DishRepository $dishRepository): Response
     {
         $categories = $categoryRepository->findAll();
-        $dishes = $dishRepository->findAll();
+        //$dishes = $dishRepository->findAll();
+        $dishes = $dishRepository->findDishesInAlphabeticalOrder();
 
         return $this->render('food/food.html.twig', [
             'categories' => $categories,
