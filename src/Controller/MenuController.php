@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Repository\DaytimeRepository;
+use App\Repository\MenuRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,10 +12,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class MenuController extends AbstractController
 {
     #[Route('/menus', name: 'app_menus')]
-    public function menu(DaytimeRepository $daytimeRepository): Response
+    public function menu(DaytimeRepository $daytimeRepository, MenuRepository $menuRepository): Response
     {
-        $menus = ["Menu du jour", "Menu dégustation", "Menu burger", "Menu salade"];
-
+        $menus = $menuRepository->findAll();
         $daytimes = $daytimeRepository->findAll();
 
         return $this->render('menu/menus.html.twig', [
