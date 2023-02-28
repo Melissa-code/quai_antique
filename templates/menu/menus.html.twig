@@ -17,13 +17,18 @@
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-4 col-md-3 d-flex justify-content-center align-items-center">
                         <div class="choice-menu d-flex justify-content-center align-items-center p-2" >
-                            <span class="text-white mr-3">Midi</span>
-                            {# Menu toggle switch #}
-                            <label class="switch">
-                                <input type="checkbox" />
-                                <span></span>
-                            </label>
-                            <span class="text-white ml-3">Soir</span>
+                            {% for daytime in daytimes %}
+                                {% if daytime.id == 1 %}
+                                    <span class="text-white mr-3">{{ daytime.title }}</span>
+                                    {# Menu toggle switch #}
+                                    <label class="switch">
+                                        <input type="checkbox" />
+                                        <span></span>
+                                    </label>
+                                {% else %}
+                                    <span class="text-white ml-3">{{ daytime.title }}</span>
+                                {% endif %}
+                            {% endfor %}
                         </div>
 
                     </div>
