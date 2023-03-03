@@ -50,7 +50,7 @@
                 <h2 class="text-center">{{ menu.title }}</h2>
             </div>
 
-            {# Setmenus  #}
+            {# Setmenus #}
 
             <article class="col-md-6">
                 {% for setmenu in menu.setmenus %}
@@ -71,45 +71,103 @@
                 {% endfor %}
             </article>
 
+
             {# Setmenus food #}
 
-            <article class="col-md-6 ">
+            <article class="col-md-6">
                 <div class="row d-block justify-content-start">
-                    <div class="card my-2 mx-1 food-setmenu ">
-                        <div class="card-body ">
-                            <h4 class="card-title font-weight-bold">Entrées au choix : </h4>
-                            <div class="card-text">
-                                <ul class="food-choice card-text list-unstyled">
-                                    <li class="">- La croûte savoyarde</li>
-                                    <li>- Carpaccio de pamplemousse</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card my-2 mx-1 food-setmenu ">
+
+                    {#  Starters of the setmenus #}
+
+                    <div class="card my-2 mx-1 food-setmenu">
                         <div class="card-body">
-                            <h4 class="card-title font-weight-bold">Entrées au choix : </h4>
+                            <h4 class="card-title font-weight-bold">Entrées au choix :</h4>
                             <div class="card-text">
                                 <ul class="food-choice card-text list-unstyled">
-                                    <li class="">- La croûte savoyarde</li>
-                                    <li>- Carpaccio de pamplemousse</li>
+                                    {% if menu.id == 1 %}
+                                        {% for starterMenu1 in startersMenu1 %}
+                                        <li>- {{ starterMenu1.title }}</li>
+                                        {% endfor %}
+                                    {% elseif menu.id == 2 %}
+                                        {% for starterMenu2 in startersMenu2 %}
+                                            <li>- {{ starterMenu2.title }}</li>
+                                        {% endfor %}
+                                    {% elseif menu.id == 3 %}
+                                        {% for starterMenu3 in startersMenu3 %}
+                                            <li>- {{ starterMenu3.title }}</li>
+                                        {% endfor %}
+                                    {% elseif menu.id == 4 %}
+                                        {% for starterMenu4 in startersMenu4 %}
+                                            <li>- {{ starterMenu4.title }}</li>
+                                        {% endfor %}
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="card my-2 mx-1 food-setmenu ">
+
+                    {#  Dishes of the setmenus #}
+
+                    <div class="card my-2 mx-1 food-setmenu">
                         <div class="card-body">
-                            <h4 class="card-title">Entrées au choix : </h4>
+                            <h4 class="card-title font-weight-bold">Plats au choix :</h4>
                             <div class="card-text">
                                 <ul class="food-choice card-text list-unstyled">
-                                    <li class="">- La croûte savoyarde</li>
-                                    <li>- Carpaccio de pamplemousse</li>
+                                    {% if menu.id == 1 %}
+                                        {% for dishMenu1 in dishesMenu1 %}
+                                            <li>- {{ dishMenu1.title }}</li>
+                                        {% endfor %}
+                                    {% elseif menu.id == 2 %}
+                                        {% for dishMenu2 in dishesMenu2 %}
+                                            <li>- {{ dishMenu2.title }}</li>
+                                        {% endfor %}
+                                    {% elseif menu.id == 3 %}
+                                        {% for dishMenu3 in dishesMenu3 %}
+                                            <li>- {{ dishMenu3.title }}</li>
+                                        {% endfor %}
+                                    {% elseif menu.id == 4 %}
+                                        {% for dishMenu4 in dishesMenu4 %}
+                                            <li>- {{ dishMenu4.title }}</li>
+                                        {% endfor %}
+                                    {% endif %}
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    {#  Desserts of the setmenus #}
+
+                    <div class="card my-2 mx-1 food-setmenu">
+                        <div class="card-body">
+                            <h4 class="card-title font-weight-bold">Desserts au choix :</h4>
+                            <div class="card-text">
+                                <ul class="food-choice card-text list-unstyled">
+                                    {% if menu.id == 1 %}
+                                        {% for dessertMenu1 in dessertsMenu1 %}
+                                            <li>- {{ dessertMenu1.title }}</li>
+                                        {% endfor %}
+                                    {% elseif menu.id == 2 %}
+                                        {% for dessertMenu2 in dessertsMenu2 %}
+                                            <li>- {{ dessertMenu2.title }}</li>
+                                        {% endfor %}
+                                    {% elseif menu.id == 3 %}
+                                        {% for dessertMenu3 in dessertsMenu3 %}
+                                            <li>- {{ dessertMenu3.title }}</li>
+                                        {% endfor %}
+                                    {% elseif menu.id == 4 %}
+                                        {% for dessertMenu4 in dessertsMenu4 %}
+                                            <li>- {{ dessertMenu4.title }}</li>
+                                        {% endfor %}
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </article>
+
         </div>
     </section>
 
