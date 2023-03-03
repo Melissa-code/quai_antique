@@ -31,32 +31,36 @@ class MenuController extends AbstractController
         $menus = $menuRepository->findAll();
         $daytimes = $daytimeRepository->findAll();
         $setmenus = $setmenuRepository->findAll();
-        //$dishes = $dishRepository->findAll();
-        //$categories = $categoryRepository->findAll();
 
-        $startersMenu1 = $dishRepository->findDishesByCategory("entrées",  1);
-        $dishesMenu1 = $dishRepository->findDishesByCategory("plats",  1);
-        $dessertsMenu1 = $dishRepository->findDishesByCategory("desserts",  1);
+        $dishes = $dishRepository->findAll();
+        $categories = $categoryRepository->findAll();
 
-        $startersMenu2 = $dishRepository->findDishesByCategory("entrées",  3);
-        $dishesMenu2 = $dishRepository->findDishesByCategory("plats",  3);
-        $dessertsMenu2 = $dishRepository->findDishesByCategory("desserts",  3);
+       // $burgersCategory = $categoryRepository->find(29);
 
-        $startersMenu3 = $dishRepository->findDishesByCategory("entrées",  5);
-        $dishesMenu3 = $dishRepository->findDishesByCategory("burgers",  5);
-        $dessertsMenu3 = $dishRepository->findDishesByCategory("desserts",  5);
+        $startersMenu1 = $dishRepository->findDishesByCategory("entrées",  "jour");
+        $dishesMenu1 = $dishRepository->findDishesByCategory("plats",  "jour");
+        $dessertsMenu1 = $dishRepository->findDishesByCategory("desserts",  "jour");
 
-        $startersMenu4 = $dishRepository->findDishesByCategory("entrées",  7);
-        $dishesMenu4 = $dishRepository->findDishesByCategory("salades",  7);
-        $dessertsMenu4 = $dishRepository->findDishesByCategory("desserts",  7);
+        $startersMenu2 = $dishRepository->findDishesByCategory("entrées",  "dégustation");
+        $dishesMenu2 = $dishRepository->findDishesByCategory("plats",  "dégustation");
+        $dessertsMenu2 = $dishRepository->findDishesByCategory("desserts",  "dégustation");
+
+        $startersMenu3 = $dishRepository->findDishesByCategory("entrées",  "burger");
+        $dishesMenu3 = $dishRepository->findDishesByCategory("burgers",  "burger");
+        $dessertsMenu3 = $dishRepository->findDishesByCategory("desserts",  "burger");
+
+        $startersMenu4 = $dishRepository->findDishesByCategory("entrées",  "salade");
+        $dishesMenu4 = $dishRepository->findDishesByCategory("salades",  "salade");
+        $dessertsMenu4 = $dishRepository->findDishesByCategory("desserts",  "salade");
 
 
         return $this->render('menu/menus.html.twig', [
             'menus' => $menus,
             'daytimes'=> $daytimes,
             'setmenus' => $setmenus,
-            ///'dishes' => $dishes,
-            //'categories' => $categories,
+
+            'dishes' => $dishes,
+            'categories' => $categories,
 
             'startersMenu1' =>  $startersMenu1,
             'dishesMenu1' => $dishesMenu1,

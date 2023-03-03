@@ -76,17 +76,31 @@ class DishRepository extends ServiceEntityRepository
      * @param int $setmenu
      * @return array
      */
-    public function findDishesByCategory(string $category, int $setmenu): array
+//    public function findDishesByCategory(string $category, int $setmenu): array
+//    {
+//        return $this->getEntityManager()->createQuery(
+//            'SELECT DISTINCT d FROM App\Entity\Dish d
+//                JOIN d.category c
+//                JOIN d.setmenus s
+//                WHERE c.title = :category AND s.id = :setmenus
+//                ORDER BY d.price ASC'
+//        )
+//            ->setParameter('category', $category)
+//            ->setParameter('setmenus', $setmenu)
+//            ->getResult();
+//    }
+
+    public function findDishesByCategory(string $category, string $setmenu): array
     {
         return $this->getEntityManager()->createQuery(
             'SELECT DISTINCT d FROM App\Entity\Dish d
                 JOIN d.category c
                 JOIN d.setmenus s
-                WHERE c.title = :category AND s.id = :setmenus
+                WHERE c.title = :category AND s.title LIKE :setmenus 
                 ORDER BY d.price ASC'
         )
             ->setParameter('category', $category)
-            ->setParameter('setmenus', $setmenu)
+            ->setParameter('setmenus', '%'. $setmenu. '%')
             ->getResult();
     }
 
