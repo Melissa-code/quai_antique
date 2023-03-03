@@ -44,6 +44,7 @@ class MenuController extends AbstractController
         $dishesMenu4 = $dishRepository->findDishesByCategory("salades",  "salade");
         $dessertsMenu4 = $dishRepository->findDishesByCategory("desserts",  "salade");
 
+        $noon = true;
 
         return $this->render('menu/menus.html.twig', [
             'menus' => $menus,
@@ -65,6 +66,8 @@ class MenuController extends AbstractController
             'startersMenu4' => $startersMenu4,
             'dishesMenu4' => $dishesMenu4,
             'dessertsMenu4' => $dessertsMenu4,
+
+            'noon' => $noon,
         ]);
     }
 }
