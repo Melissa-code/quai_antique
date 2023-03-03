@@ -110,10 +110,14 @@
 
                     <div class="card my-2 mx-1 food-setmenu">
                         <div class="card-body">
-
-                            <h4 class="card-title font-weight-bold">plats au choix :</h4>
-
-                            <div class="card-text">
+                            {% if (menu.title == "Menu burger") %}
+                            <h4 class="card-title font-weight-bold">Burgers au choix :</h4>
+                            {% elseif (menu.title == "Menu salade") %}
+                                <h4 class="card-title font-weight-bold">Salades au choix :</h4>
+                            {% else %}
+                                <h4 class="card-title font-weight-bold">Plats au choix :</h4>
+                            {% endif %}
+                                    <div class="card-text">
                                 <ul class="food-choice card-text list-unstyled">
                                     {% if menu.id == 1 %}
                                         {% for dishMenu1 in dishesMenu1 %}

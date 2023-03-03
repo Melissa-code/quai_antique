@@ -3,12 +3,10 @@
 namespace App\Controller;
 
 
-use App\Repository\CategoryRepository;
 use App\Repository\DaytimeRepository;
 use App\Repository\DishRepository;
 use App\Repository\MenuRepository;
 use App\Repository\SetmenuRepository;
-use App\Service\MenuService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,21 +19,14 @@ class MenuController extends AbstractController
      * @param MenuRepository $menuRepository
      * @param SetmenuRepository $setmenuRepository
      * @param DishRepository $dishRepository
-     * @param CategoryRepository $categoryRepository
-     * @param MenuService $menuService
      * @return Response
      */
     #[Route('/menus', name: 'app_menus')]
-    public function menu(DaytimeRepository $daytimeRepository, MenuRepository $menuRepository, SetmenuRepository $setmenuRepository, DishRepository $dishRepository, CategoryRepository $categoryRepository, MenuService $menuService): Response
+    public function menu(DaytimeRepository $daytimeRepository, MenuRepository $menuRepository, SetmenuRepository $setmenuRepository, DishRepository $dishRepository): Response
     {
         $menus = $menuRepository->findAll();
         $daytimes = $daytimeRepository->findAll();
         $setmenus = $setmenuRepository->findAll();
-
-        $dishes = $dishRepository->findAll();
-        $categories = $categoryRepository->findAll();
-
-       // $burgersCategory = $categoryRepository->find(29);
 
         $startersMenu1 = $dishRepository->findDishesByCategory("entrées",  "jour");
         $dishesMenu1 = $dishRepository->findDishesByCategory("plats",  "jour");
@@ -59,10 +50,7 @@ class MenuController extends AbstractController
             'daytimes'=> $daytimes,
             'setmenus' => $setmenus,
 
-            'dishes' => $dishes,
-            'categories' => $categories,
-
-            'startersMenu1' =>  $startersMenu1,
+            'startersMenu1' => $startersMenu1,
             'dishesMenu1' => $dishesMenu1,
             'dessertsMenu1' => $dessertsMenu1,
 
@@ -77,7 +65,6 @@ class MenuController extends AbstractController
             'startersMenu4' => $startersMenu4,
             'dishesMenu4' => $dishesMenu4,
             'dessertsMenu4' => $dessertsMenu4,
-
         ]);
     }
 }
