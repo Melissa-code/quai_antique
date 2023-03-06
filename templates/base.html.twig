@@ -19,67 +19,20 @@
     <body>
 
         {# Header #}
-
-        <header id="top">
-
-            {# Main menu for navigation #}
-            <nav class="navbar navbar-expand-md navbar-dark">
-                <div class="container mt-2">
-                    <a class="navbar-brand" href="{{ path('app_home') }}"><img src="{{ asset('assets/icons/logo.svg') }}" alt="Logo du site Le Quai Antique"></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-navbar" aria-controls="menu-navbar" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="menu-navbar">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item ml-md-4">
-                                <a class="nav-link" href="{{ path('app_food') }}">La Carte</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_menus') }}">Menus</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_booking') }}">Réservation</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav ml-auto">
-
-                            {% if app.user and is_granted('ROLE_ADMIN') %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('app_admin_dish') }}#gallery">
-                                        <img src="{{ asset('assets/icons/manage.svg') }}" alt="administration du site" style="width: 2rem">
-                                    </a>
-                                </li>
-                            {% endif %}
-
-                            <li class="nav-item">
-                                {# check if the user is logged-in #}
-                                {% if not app.user %}
-                                    <a class="nav-link" href="{{ path('app_login') }}">
-                                        <img src="{{ asset('assets/icons/login.svg') }}" alt="connexion" style="width: 2rem">
-                                    </a>
-                                {% else %}
-                                    <a class="nav-link" href="{{ path('app_logout') }}">
-                                        <img src="{{ asset('assets/icons/logout.svg') }}" alt="déconnexion" style="width: 2rem">
-                                    </a>
-                                {% endif %}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
+        {% include 'partials/_header.html.twig' %}
 
         {# Main #}
-
         <main class="container-fluid">
             {% block main %}{% endblock main %}
         </main>
 
-        {% include 'base/_footer.html.twig' %}
+        {# Footer #}
+        {% include 'partials/_footer.html.twig' %}
 
+        {# Jquery & Bootstrap JS #}
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-
+        {# Ekko-lightbox JS for Bootstrap #}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
         {% block javascripts %}{% endblock %}
 

@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Daytime;
 use App\Entity\Dish;
 use App\Entity\Menu;
+use App\Entity\Openingday;
 use App\Entity\Restaurant;
 use App\Entity\Setmenu;
 use App\Entity\User;
@@ -123,130 +124,137 @@ class AppFixtures extends Fixture
 //            $manager->persist($d5);
 //        }
 
-        // Data example for daytime
-        $dt1 = new Daytime();
-        $dt1->setTitle("Midi");
-        $manager->persist($dt1);
+//        // Data example for daytime
+//        $dt1 = new Daytime();
+//        $dt1->setTitle("Midi");
+//        $manager->persist($dt1);
+//
+//        $dt2 = new Daytime();
+//        $dt2->setTitle("Soir");
+//        $manager->persist($dt2);
+//
+//        // Data example for menu
+//        $m1 = new Menu();
+//        $m1->setTitle("Menu du jour")
+//            ->setActive(1)
+//            ->addDaytime($dt1);
+//        $manager->persist($m1);
+//
+//        $m2 = new Menu();
+//        $m2->setTitle("Menu dégustation")
+//            ->setActive(1)
+//            ->addDaytime($dt2);
+//        $manager->persist($m2);
+//
+//        $m3 = new Menu();
+//        $m3->setTitle("Menu burger")
+//            ->setActive(1)
+//            ->addDaytime($dt1)
+//            ->addDaytime($dt2);
+//        $manager->persist($m3);
+//
+//        $m4 = new Menu();
+//        $m4->setTitle("Menu salade")
+//            ->setActive(1)
+//            ->addDaytime($dt1)
+//            ->addDaytime($dt2);
+//        $manager->persist($m4);
+//
+//        // Data example for setmenu
+//        $sm1 = new Setmenu();
+//        $sm1->setTitle("Formule du jour légère")
+//            ->setActive(1)
+//            ->setShortdesc("Le midi du lundi au vendredi")
+//            ->setDescription("Entrée + Plat ou Plat + Dessert")
+//            ->setPrice(20)
+//            ->setMenu($m1)
+//            // ->addDish($d1)
+//            ;
+//        $manager->persist($sm1);
+//
+//        $sm2 = new Setmenu();
+//        $sm2->setTitle("Formule du jour complète")
+//            ->setActive(1)
+//            ->setShortdesc("Le midi du lundi au samedi")
+//            ->setDescription("Entrée + Plat + Dessert")
+//            ->setPrice(26)
+//            ->setMenu($m1)
+//            // ->addDish($d1)
+//        ;
+//        $manager->persist($sm2);
+//
+//        $sm3 = new Setmenu();
+//        $sm3->setTitle("Formule dégustation légère")
+//            ->setActive(1)
+//            ->setShortdesc("Le soir du lundi au vendredi")
+//            ->setDescription("Entrée + Plat ou Plat + Dessert")
+//            ->setPrice(27)
+//            ->setMenu($m2)
+//            // ->addDish($d1)
+//        ;
+//        $manager->persist($sm3);
+//
+//        $sm4 = new Setmenu();
+//        $sm4->setTitle("Formule dégustation complète")
+//            ->setActive(1)
+//            ->setShortdesc("Le soir du lundi au samedi")
+//            ->setDescription("Entrée + Plat + Dessert")
+//            ->setPrice(35)
+//            ->setMenu($m2)
+//            // ->addDish($d1)
+//        ;
+//        $manager->persist($sm4);
+//
+//        $sm5 = new Setmenu();
+//        $sm5->setTitle("Formule burger légère")
+//            ->setActive(1)
+//            ->setShortdesc("Le soir et midi du lundi au vendredi")
+//            ->setDescription("Entrée + Plat ou Plat + Dessert")
+//            ->setPrice(18)
+//            ->setMenu($m3)
+//            // ->addDish($d1)
+//        ;
+//        $manager->persist($sm5);
+//
+//        $sm6 = new Setmenu();
+//        $sm6->setTitle("Formule burger complète")
+//            ->setActive(1)
+//            ->setShortdesc("Le soir et midi du lundi au samedi")
+//            ->setDescription("Entrée + Plat + Dessert")
+//            ->setPrice(24)
+//            ->setMenu($m3)
+//            // ->addDish($d1)
+//        ;
+//        $manager->persist($sm6);
+//
+//        $sm7 = new Setmenu();
+//        $sm7->setTitle("Formule salade légère")
+//            ->setActive(1)
+//            ->setShortdesc("Le soir et midi du lundi au vendredi")
+//            ->setDescription("Entrée + Plat ou Plat + Dessert")
+//            ->setPrice(19)
+//            ->setMenu($m4)
+//            // ->addDish($d1)
+//        ;
+//        $manager->persist($sm7);
+//
+//        $sm8 = new Setmenu();
+//        $sm8->setTitle("Formule salade complète")
+//            ->setActive(1)
+//            ->setShortdesc("Le soir et midi du lundi au samedi")
+//            ->setDescription("Entrée + Plat + Dessert")
+//            ->setPrice(25)
+//            ->setMenu($m4)
+//            // ->addDish($d1)
+//        ;
+//        $manager->persist($sm8);
 
-        $dt2 = new Daytime();
-        $dt2->setTitle("Soir");
-        $manager->persist($dt2);
-
-        // Data example for menu
-        $m1 = new Menu();
-        $m1->setTitle("Menu du jour")
-            ->setActive(1)
-            ->addDaytime($dt1);
-        $manager->persist($m1);
-
-        $m2 = new Menu();
-        $m2->setTitle("Menu dégustation")
-            ->setActive(1)
-            ->addDaytime($dt2);
-        $manager->persist($m2);
-
-        $m3 = new Menu();
-        $m3->setTitle("Menu burger")
-            ->setActive(1)
-            ->addDaytime($dt1)
-            ->addDaytime($dt2);
-        $manager->persist($m3);
-
-        $m4 = new Menu();
-        $m4->setTitle("Menu salade")
-            ->setActive(1)
-            ->addDaytime($dt1)
-            ->addDaytime($dt2);
-        $manager->persist($m4);
-
-        // Data example for setmenu
-        $sm1 = new Setmenu();
-        $sm1->setTitle("Formule du jour légère")
-            ->setActive(1)
-            ->setShortdesc("Le midi du lundi au vendredi")
-            ->setDescription("Entrée + Plat ou Plat + Dessert")
-            ->setPrice(20)
-            ->setMenu($m1)
-            // ->addDish($d1)
-            ;
-        $manager->persist($sm1);
-
-        $sm2 = new Setmenu();
-        $sm2->setTitle("Formule du jour complète")
-            ->setActive(1)
-            ->setShortdesc("Le midi du lundi au samedi")
-            ->setDescription("Entrée + Plat + Dessert")
-            ->setPrice(26)
-            ->setMenu($m1)
-            // ->addDish($d1)
-        ;
-        $manager->persist($sm2);
-
-        $sm3 = new Setmenu();
-        $sm3->setTitle("Formule dégustation légère")
-            ->setActive(1)
-            ->setShortdesc("Le soir du lundi au vendredi")
-            ->setDescription("Entrée + Plat ou Plat + Dessert")
-            ->setPrice(27)
-            ->setMenu($m2)
-            // ->addDish($d1)
-        ;
-        $manager->persist($sm3);
-
-        $sm4 = new Setmenu();
-        $sm4->setTitle("Formule dégustation complète")
-            ->setActive(1)
-            ->setShortdesc("Le soir du lundi au samedi")
-            ->setDescription("Entrée + Plat + Dessert")
-            ->setPrice(35)
-            ->setMenu($m2)
-            // ->addDish($d1)
-        ;
-        $manager->persist($sm4);
-
-        $sm5 = new Setmenu();
-        $sm5->setTitle("Formule burger légère")
-            ->setActive(1)
-            ->setShortdesc("Le soir et midi du lundi au vendredi")
-            ->setDescription("Entrée + Plat ou Plat + Dessert")
-            ->setPrice(18)
-            ->setMenu($m3)
-            // ->addDish($d1)
-        ;
-        $manager->persist($sm5);
-
-        $sm6 = new Setmenu();
-        $sm6->setTitle("Formule burger complète")
-            ->setActive(1)
-            ->setShortdesc("Le soir et midi du lundi au samedi")
-            ->setDescription("Entrée + Plat + Dessert")
-            ->setPrice(24)
-            ->setMenu($m3)
-            // ->addDish($d1)
-        ;
-        $manager->persist($sm6);
-
-        $sm7 = new Setmenu();
-        $sm7->setTitle("Formule salade légère")
-            ->setActive(1)
-            ->setShortdesc("Le soir et midi du lundi au vendredi")
-            ->setDescription("Entrée + Plat ou Plat + Dessert")
-            ->setPrice(19)
-            ->setMenu($m4)
-            // ->addDish($d1)
-        ;
-        $manager->persist($sm7);
-
-        $sm8 = new Setmenu();
-        $sm8->setTitle("Formule salade complète")
-            ->setActive(1)
-            ->setShortdesc("Le soir et midi du lundi au samedi")
-            ->setDescription("Entrée + Plat + Dessert")
-            ->setPrice(25)
-            ->setMenu($m4)
-            // ->addDish($d1)
-        ;
-        $manager->persist($sm8);
+        // Data examples for Openingday
+        $o1 = new Openingday();
+        $o1->setDay("lundi")
+            ->setOpen(1)
+            ->setRestaurant(6);
+        $manager->persist($o1);
 
 
         // $product = new Product();
