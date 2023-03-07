@@ -6,7 +6,10 @@ namespace App\Controller;
 use App\Repository\DaytimeRepository;
 use App\Repository\DishRepository;
 use App\Repository\MenuRepository;
+use App\Repository\OpeningdayRepository;
+use App\Repository\OpeninghourRepository;
 use App\Repository\SetmenuRepository;
+use App\Service\OpeningService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,7 +25,7 @@ class MenuController extends AbstractController
      * @return Response
      */
     #[Route('/menus', name: 'app_menus')]
-    public function menu(DaytimeRepository $daytimeRepository, MenuRepository $menuRepository, SetmenuRepository $setmenuRepository, DishRepository $dishRepository): Response
+    public function menu(DaytimeRepository $daytimeRepository, MenuRepository $menuRepository, SetmenuRepository $setmenuRepository, DishRepository $dishRepository, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, OpeningService $openingService): Response
     {
         $menus = $menuRepository->findAll();
         $daytimes = $daytimeRepository->findAll();
@@ -44,6 +47,13 @@ class MenuController extends AbstractController
         $dishesMenu4 = $dishRepository->findDishesByCategory("salades",  "salade");
         $dessertsMenu4 = $dishRepository->findDishesByCategory("desserts",  "salade");
 
+        $openingdays = $openingdayRepository->findAll();
+        $openinghours = $openinghourRepository->findAll();
+
+        $noon = "12:00-14:00";
+        $evening = "19:00-22:00";
+        $eveningSaturday = "19:00-23:00";
+
         return $this->render('menu/menus.html.twig', [
             'menus' => $menus,
             'daytimes'=> $daytimes,
@@ -64,6 +74,11 @@ class MenuController extends AbstractController
             'startersMenu4' => $startersMenu4,
             'dishesMenu4' => $dishesMenu4,
             'dessertsMenu4' => $dessertsMenu4,
+
+            "noon"=> $noon,
+            "evening" => $evening,
+            "eveningSaturday" => $eveningSaturday,
+            "opening" => $openingService->displayOpeningDays($openingdays),
         ]);
     }
 }

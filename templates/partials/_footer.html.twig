@@ -30,13 +30,13 @@
                     <div class="col-md-4 pt-3 ">
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><h3>Horaires</h3></li>
-                            <li class="nav-item mb-2"><span class="font-weight-bold">Lundi:</span> {{ noon }} et {{ evening }}</li>
-                            <li class="nav-item mb-2"><span class="font-weight-bold">Mardi:</span> {{ noon }} et {{ evening }}</li>
-                            <li class="nav-item mb-2"><span class="font-weight-bold">Mercredi: Fermé</span></li>
-                            <li class="nav-item mb-2"><span class="font-weight-bold">Jeudi: </span>{{ noon }} et {{ evening }}</li>
-                            <li class="nav-item mb-2"><span class="font-weight-bold">Vendredi: </span> {{ noon }} et {{ evening }}</li>
-                            <li class="nav-item mb-2"><span class="font-weight-bold">Samedi:</span> {{ eveningSaturday }}</li>
-                            <li class="nav-item mb-2"><span class="font-weight-bold">Dimanche: </span> {{ noon }}</li>
+                            <li class="nav-item mb-2"><span class="font-weight-bold">{{ opening[0]|capitalize }} :</span> {{ noon }} et {{ evening }}</li>
+                            <li class="nav-item mb-2"><span class="font-weight-bold">{{ opening[1]|capitalize }} :</span> {{ noon }} et {{ evening }}</li>
+                            <li class="nav-item mb-2"><span class="font-weight-bold">{{ opening[2]|capitalize }} : Fermé</span></li>
+                            <li class="nav-item mb-2"><span class="font-weight-bold">{{ opening[3]|capitalize }} : </span>{{ noon }} et {{ evening }}</li>
+                            <li class="nav-item mb-2"><span class="font-weight-bold">{{ opening[4]|capitalize }} : </span> {{ noon }} et {{ evening }}</li>
+                            <li class="nav-item mb-2"><span class="font-weight-bold">{{ opening[5]|capitalize }} :</span> {{ eveningSaturday }}</li>
+                            <li class="nav-item mb-2"><span class="font-weight-bold">{{ opening[6]|capitalize }} : </span> {{ noon }}</li>
                         </ul>
                     </div>
 

@@ -59,7 +59,7 @@ class AdminDishController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $oldImage = $this->getParameter('directory_images_dishes').'/'.$dish->getImage();
-            //dd($oldImage);
+            // dd($oldImage);
 
             // Get the uploaded image file
             $imageFile = $form->get('imageFile')->getData();

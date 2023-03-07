@@ -7,26 +7,39 @@ use App\Entity\Daytime;
 use App\Entity\Dish;
 use App\Entity\Menu;
 use App\Entity\Openingday;
+use App\Entity\Openinghour;
 use App\Entity\Restaurant;
 use App\Entity\Setmenu;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\DBAL\Types\TimeImmutableType;
 use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {
+
+    //public const RESTAURANT_REFERENCE = 6;
+
     public function load(ObjectManager $manager): void
     {
+        /** *****************************************/
+        //             Dishes
+        /****************************************** */
+
+        /*********** Restaurant **********/
+
         // Data example for restaurants
-//        $r1 = new Restaurant();
-//        $r1->setName("Le Quai Antique")
-//            ->setAddress("5 Quai du Jeu de Paume")
-//            ->setZipcode("73 000")
-//            ->setCity("Chambéry")
-//            ->setPhone("+33(0)4 79 60 26 26")
-//            ->setEmail("quai-antique@infos-restaurant.com")
-//            ->setNbseatings(60);
-//        $manager->persist($r1);
+        $r1 = new Restaurant();
+        $r1->setName("Le Quai Antique")
+            ->setAddress("5 Quai du Jeu de Paume")
+            ->setZipcode("73 000")
+            ->setCity("Chambéry")
+            ->setPhone("+33(0)4 79 60 26 26")
+            ->setEmail("quai-antique@infos-restaurant.com")
+            ->setNbseatings(60);
+        $manager->persist($r1);
+
+        /*********** Categories **********/
 
         // Data example for categories
 //        $c1 = new Category();
@@ -53,6 +66,8 @@ class AppFixtures extends Fixture
 //        $c5->setTitle("salades")
 //            ->setImage("salads.png");
 //        $manager->persist($c5);
+
+        /*********** Dishes **********/
 
         // Data example for dishes
 //            $d1 = new Dish();
@@ -124,6 +139,13 @@ class AppFixtures extends Fixture
 //            $manager->persist($d5);
 //        }
 
+
+        /** *****************************************/
+        //              Menus
+        /****************************************** */
+
+        /*********** Day time : noon / evening **********/
+
 //        // Data example for daytime
 //        $dt1 = new Daytime();
 //        $dt1->setTitle("Midi");
@@ -133,6 +155,8 @@ class AppFixtures extends Fixture
 //        $dt2->setTitle("Soir");
 //        $manager->persist($dt2);
 //
+        /*********** Menus **********/
+
 //        // Data example for menu
 //        $m1 = new Menu();
 //        $m1->setTitle("Menu du jour")
@@ -160,6 +184,8 @@ class AppFixtures extends Fixture
 //            ->addDaytime($dt2);
 //        $manager->persist($m4);
 //
+        /*********** Setmenus **********/
+
 //        // Data example for setmenu
 //        $sm1 = new Setmenu();
 //        $sm1->setTitle("Formule du jour légère")
@@ -249,12 +275,98 @@ class AppFixtures extends Fixture
 //        ;
 //        $manager->persist($sm8);
 
-        // Data examples for Openingday
-        $o1 = new Openingday();
-        $o1->setDay("lundi")
+
+        /** *****************************************/
+        //              Opening
+        /****************************************** */
+
+        /*********** Opening days **********/
+
+        $od1 = new Openingday();
+        $od1->setDay("lundi")
             ->setOpen(1)
-            ->setRestaurant(6);
-        $manager->persist($o1);
+            ->setRestaurant($r1)
+            ;
+        $manager->persist($od1);
+
+        $od2 = new Openingday();
+        $od2->setDay("mardi")
+            ->setOpen(1)
+            ->setRestaurant($r1)
+            ;
+        $manager->persist($od2);
+
+        $od3 = new Openingday();
+        $od3->setDay("mercredi")
+            ->setOpen(0)
+            ->setRestaurant($r1)
+            ;
+        $manager->persist($od3);
+
+        $od4 = new Openingday();
+        $od4->setDay("jeudi")
+            ->setOpen(1)
+            ->setRestaurant($r1)
+            ;
+        $manager->persist($od4);
+
+        $od5 = new Openingday();
+        $od5->setDay("vendredi")
+            ->setOpen(1)
+            ->setRestaurant($r1)
+            ;
+        $manager->persist($od5);
+
+        $od6 = new Openingday();
+        $od6->setDay("samedi")
+            ->setOpen(1)
+            ->setRestaurant($r1)
+            ;
+        $manager->persist($od6);
+
+        $od7 = new Openingday();
+        $od7->setDay("dimanche")
+            ->setOpen(1)
+            ->setRestaurant($r1)
+            ;
+        $manager->persist($od7);
+
+
+        /*********** Opening hours **********/
+
+        $h1 = new \DateTime("12:00:00");
+        $h2 = new \DateTime("14:00:00");
+        $h3 = new \DateTime("19:00:00");
+        $h4 = new \DateTime("22:00:00");
+        $h5 = new \DateTime("23:00:00");
+
+        $oh1 = new Openinghour();
+        $oh1->setStarthour($h1)
+            ->setEndhour($h2)
+            ->addOpeningday($od1)
+            ->addOpeningday($od2)
+            ->addOpeningday($od4)
+            ->addOpeningday($od5)
+            ->addOpeningday($od7)
+            ;
+        $manager->persist($oh1);
+
+        $oh2 = new Openinghour();
+        $oh2->setStarthour($h3)
+            ->setEndhour($h4)
+            ->addOpeningday($od1)
+            ->addOpeningday($od2)
+            ->addOpeningday($od4)
+            ->addOpeningday($od5)
+        ;
+        $manager->persist($oh2);
+
+        $oh3 = new Openinghour();
+        $oh3->setStarthour($h3)
+            ->setEndhour($h5)
+            ->addOpeningday($od6)
+        ;
+        $manager->persist($oh3);
 
 
         // $product = new Product();
