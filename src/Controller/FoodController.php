@@ -6,7 +6,6 @@ use App\Repository\CategoryRepository;
 use App\Repository\DishRepository;
 use App\Repository\OpeningdayRepository;
 use App\Repository\OpeninghourRepository;
-// use App\Repository\RestaurantRepository;
 use App\Repository\RestaurantRepository;
 use App\Service\OpeningService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

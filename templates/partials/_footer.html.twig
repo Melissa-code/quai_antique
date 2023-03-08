@@ -7,16 +7,15 @@
             <div class="container">
                 <div class="row">
 
-                    {# menu #}
+                    {# Menu #}
                     <div class="col-md-4 pt-3">
-
                         <ul class="nav flex-column">
                             <li class="nav-item"><h3><a href="{{ path('app_home') }}#top"><img src="{{ asset('assets/icons/logo-black.svg') }}" alt="Logo du site Le Quai Antique" width="200"></a></h3></li>
                             <li class="nav-item mb-2"><a href="{{ path('app_food') }}" class="p-0 dark-link">La Carte</a></li>
                             <li class="nav-item mb-2"><a href="{{ path('app_menus') }}" class="p-0 dark-link">Menus</a></li>
                             <li class="nav-item mb-2"><a href="{{ path('app_booking') }}" class="p-0 dark-link">Réservation</a></li>
                             <li class="nav-item mb-2">
-                                {# check if the user is logged-in #}
+                                {# Check if the user is logged-in #}
                                 {% if not app.user %}
                                     <a href="{{ path('app_login') }}" class="mr-3"><img src="{{ asset('assets/icons/login-black.svg') }}" alt="connexion" width="25"></a>
                                 {% else %}
@@ -26,17 +25,93 @@
                         </ul>
                     </div>
 
-                    {# Opening hours #}
+                    {# Opening days and opening hours #}
                     <div class="col-md-4 pt-3 ">
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><h3>Horaires</h3></li>
-                            <li class="nav-item mb-2"><span class="font-weight-bold">{{ openingDay[0]|capitalize }} :</span> {{ openingHour[0] }} et {{ openingHour[1] }}</li>
-                            <li class="nav-item mb-2"><span class="font-weight-bold">{{ openingDay[1]|capitalize }} :</span> {{ openingHour[0] }} et {{ openingHour[1] }}</li>
-                            <li class="nav-item mb-2"><span class="font-weight-bold">{{ openingDay[2]|capitalize }} :  {{ openingHour[3] }}</span></li>
-                            <li class="nav-item mb-2"><span class="font-weight-bold">{{ openingDay[3]|capitalize }} : </span>{{ openingHour[0] }} et {{ openingHour[1] }}</li>
-                            <li class="nav-item mb-2"><span class="font-weight-bold">{{ openingDay[4]|capitalize }} : </span> {{ openingHour[0] }} et {{ openingHour[1] }}</li>
-                            <li class="nav-item mb-2"><span class="font-weight-bold">{{ openingDay[5]|capitalize }} :</span> {{ openingHour[2] }}</li>
-                            <li class="nav-item mb-2"><span class="font-weight-bold">{{ openingDay[6]|capitalize }} : </span> {{ openingHour[0] }}</li>
+                            <li class="nav-item mb-2 d-flex align-items-center">
+                                <h3 class="mr-4">Horaires</h3>
+                                {# Check if the admin is logged-in #}
+                                {% if app.user %}
+                                    <a href="" class="btn-adminFooter rounded py-1 px-2"><img src="" alt="">Ajouter</a>
+                                {% endif %}
+                            </li>
+                            {# Monday #}
+                            <li class="nav-item mb-2">
+                                <span class="font-weight-bold">{{ openingDay[0]|capitalize }} :</span> {{ openingHour[0] }} et {{ openingHour[1] }}
+                                {# Check if the admin is logged-in #}
+                                {% if is_granted('ROLE_ADMIN') %}
+                                <span class="">
+                                    <a href="" class="btn-adminFooter rounded py-1 px-2"><img src="{{ asset('assets/icons/edit.svg') }}" alt=""></a>
+                                    <a href="" class="btn-adminFooter rounded py-1 px-2"><img src="{{ asset('assets/icons/trash.svg') }}" alt=""></a>
+                                </span >
+                                {% endif %}
+                            </li>
+                            {# Tuesday #}
+                            <li class="nav-item mb-2">
+                                <span class="font-weight-bold">{{ openingDay[1]|capitalize }} :</span> {{ openingHour[0] }} et {{ openingHour[1] }}
+                                {# Check if the admin is logged-in #}
+                                {% if is_granted('ROLE_ADMIN') %}
+                                <span class="">
+                                    <a href="" class="btn-adminFooter rounded py-1 px-2"><img src="{{ asset('assets/icons/edit.svg') }}" alt=""></a>
+                                    <a href="" class="btn-adminFooter rounded py-1 px-2"><img src="{{ asset('assets/icons/trash.svg') }}" alt=""></a>
+                                </span>
+                                {% endif %}
+                            </li>
+                            {# Wednesday #}
+                            <li class="nav-item mb-2">
+                                <span class="font-weight-bold">{{ openingDay[2]|capitalize }} :  {{ openingHour[3] }}</span>
+                                {# Check if the admin is logged-in #}
+                                {% if is_granted('ROLE_ADMIN') %}
+                                <span class="">
+                                    <a href="" class="btn-adminFooter rounded py-1 px-2"><img src="{{ asset('assets/icons/edit.svg') }}" alt=""></a>
+                                    <a href="" class="btn-adminFooter rounded py-1 px-2"><img src="{{ asset('assets/icons/trash.svg') }}" alt=""></a>
+                                </span>
+                                {% endif %}
+                            </li>
+                            {# Thursday #}
+                            <li class="nav-item mb-2">
+                                <span class="font-weight-bold">{{ openingDay[3]|capitalize }} : </span>{{ openingHour[0] }} et {{ openingHour[1] }}
+                                {# Check if the admin is logged-in #}
+                                {% if is_granted('ROLE_ADMIN') %}
+                                <span class="">
+                                    <a href="" class="btn-adminFooter rounded py-1 px-2"><img src="{{ asset('assets/icons/edit.svg') }}" alt=""></a>
+                                    <a href="" class="btn-adminFooter rounded py-1 px-2"><img src="{{ asset('assets/icons/trash.svg') }}" alt=""></a>
+                                </span>
+                                {% endif %}
+                            </li>
+                            {# Friday #}
+                            <li class="nav-item mb-2">
+                                <span class="font-weight-bold">{{ openingDay[4]|capitalize }} : </span> {{ openingHour[0] }} et {{ openingHour[1] }}
+                                {# Check if the admin is logged-in #}
+                                <span class="">
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="" class="btn-adminFooter rounded py-1 px-2"><img src="{{ asset('assets/icons/edit.svg') }}" alt=""></a>
+                                    <a href="" class="btn-adminFooter rounded py-1 px-2"><img src="{{ asset('assets/icons/trash.svg') }}" alt=""></a>
+                                </span>
+                                {% endif %}
+                            </li>
+                            {# Saturday #}
+                            <li class="nav-item mb-2">
+                                <span class="font-weight-bold">{{ openingDay[5]|capitalize }} :</span> {{ openingHour[2] }}
+                                {# Check if the admin is logged-in #}
+                                {% if is_granted('ROLE_ADMIN') %}
+                                <span class="">
+                                    <a href="" class="btn-adminFooter rounded py-1 px-2"><img src="{{ asset('assets/icons/edit.svg') }}" alt=""></a>
+                                    <a href="" class="btn-adminFooter rounded py-1 px-2"><img src="{{ asset('assets/icons/trash.svg') }}" alt=""></a>
+                                </span>
+                                {% endif %}
+                            </li>
+                            {# Sunday #}
+                            <li class="nav-item mb-2">
+                                <span class="font-weight-bold">{{ openingDay[6]|capitalize }} : </span> {{ openingHour[0] }}
+                                {# Check if the admin is logged-in #}
+                                {% if is_granted('ROLE_ADMIN') %}
+                                <span class="">
+                                    <a href="" class="btn-adminFooter rounded py-1 px-2"><img src="{{ asset('assets/icons/edit.svg') }}" alt=""></a>
+                                    <a href="" class="btn-adminFooter rounded py-1 px-2"><img src="{{ asset('assets/icons/trash.svg') }}" alt=""></a>
+                                </span>
+                                {% endif %}
+                            </li>
                         </ul>
                     </div>
 
