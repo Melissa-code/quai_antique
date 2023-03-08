@@ -8,6 +8,7 @@ use App\Repository\DishRepository;
 use App\Repository\MenuRepository;
 use App\Repository\OpeningdayRepository;
 use App\Repository\OpeninghourRepository;
+use App\Repository\RestaurantRepository;
 use App\Repository\SetmenuRepository;
 use App\Service\OpeningService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,14 +23,19 @@ class MenuController extends AbstractController
      * @param MenuRepository $menuRepository
      * @param SetmenuRepository $setmenuRepository
      * @param DishRepository $dishRepository
+     * @param OpeningdayRepository $openingdayRepository
+     * @param OpeninghourRepository $openinghourRepository
+     * @param OpeningService $openingService
+     * @param RestaurantRepository $restaurantRepository
      * @return Response
      */
     #[Route('/menus', name: 'app_menus')]
-    public function menu(DaytimeRepository $daytimeRepository, MenuRepository $menuRepository, SetmenuRepository $setmenuRepository, DishRepository $dishRepository, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, OpeningService $openingService): Response
+    public function menu(DaytimeRepository $daytimeRepository, MenuRepository $menuRepository, SetmenuRepository $setmenuRepository, DishRepository $dishRepository, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, OpeningService $openingService, RestaurantRepository $restaurantRepository): Response
     {
         $menus = $menuRepository->findAll();
         $daytimes = $daytimeRepository->findAll();
         $setmenus = $setmenuRepository->findAll();
+        $restaurant = $restaurantRepository->find(6);
 
         $startersMenu1 = $dishRepository->findDishesByCategory("entrées",  "jour");
         $dishesMenu1 = $dishRepository->findDishesByCategory("plats",  "jour");
@@ -49,10 +55,6 @@ class MenuController extends AbstractController
 
         $openingdays = $openingdayRepository->findAll();
         $openinghours = $openinghourRepository->findAll();
-
-        $noon = "12:00-14:00";
-        $evening = "19:00-22:00";
-        $eveningSaturday = "19:00-23:00";
 
         return $this->render('menu/menus.html.twig', [
             'menus' => $menus,
@@ -75,11 +77,9 @@ class MenuController extends AbstractController
             'dishesMenu4' => $dishesMenu4,
             'dessertsMenu4' => $dessertsMenu4,
 
-            "noon"=> $noon,
-            "evening" => $evening,
-            "eveningSaturday" => $eveningSaturday,
-            "openingDay" => $openingService->displayOpeningDays($openingdays),
-            "openingHour" => $openingService->displayOpeningHours($openinghours),
+            'openingDay' => $openingService->displayOpeningDays($openingdays),
+            'openingHour' => $openingService->displayOpeningHours($openinghours, $openingdays),
+            'restaurant' => $restaurant,
         ]);
     }
 }

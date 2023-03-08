@@ -5,6 +5,10 @@ namespace App\Controller;
 use App\Entity\Dish;
 use App\Form\DishType;
 use App\Repository\DishRepository;
+use App\Repository\OpeningdayRepository;
+use App\Repository\OpeninghourRepository;
+use App\Repository\RestaurantRepository;
+use App\Service\OpeningService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -18,16 +22,27 @@ class AdminDishController extends AbstractController
     /**
      * Display the favorite dishes & the Create - Update - Delete buttons on the home page
      * @param DishRepository $dishRepository
+     * @param OpeningdayRepository $openingdayRepository
+     * @param OpeninghourRepository $openinghourRepository
+     * @param OpeningService $openingService
+     * @param RestaurantRepository $restaurantRepository
      * @return Response
      */
     #[Route('/admin/plats', name: 'app_admin_dish')]
-    public function homeAdmin(DishRepository $dishRepository): Response
+    public function homeAdmin(DishRepository $dishRepository, OpeningdayRepository $openingdayRepository,  OpeninghourRepository $openinghourRepository, OpeningService $openingService, RestaurantRepository $restaurantRepository): Response
     {
         $favoriteDishes = $dishRepository->findFavoriteDishes(6);
 
+        $openingdays = $openingdayRepository->findAll();
+        $openinghours = $openinghourRepository->findAll();
+        $restaurant = $restaurantRepository->find(6);
+
         return $this->render('home/home.html.twig', [
-            "favoriteDishes" => $favoriteDishes,
-            "admin" => true,
+            'favoriteDishes' => $favoriteDishes,
+            'admin' => true,
+            'openingDay' => $openingService->displayOpeningDays($openingdays),
+            'openingHour' => $openingService->displayOpeningHours($openinghours, $openingdays),
+            'restaurant' => $restaurant,
         ]);
     }
 
@@ -37,12 +52,20 @@ class AdminDishController extends AbstractController
      * @param Request $request
      * @param ManagerRegistry $managerRegistry
      * @param SluggerInterface $slugger
+     * @param OpeningdayRepository $openingdayRepository
+     * @param OpeninghourRepository $openinghourRepository
+     * @param OpeningService $openingService
+     * @param RestaurantRepository $restaurantRepository
      * @return Response
      */
     #[Route('/admin/creer_plat', name: 'app_admin_create_dish')]
     #[Route('/admin/modifier_plat{id}', name: 'app_admin_update_dish')]
-    public function updateDish(Dish $dish = null, Request $request, ManagerRegistry $managerRegistry, SluggerInterface $slugger): Response
+    public function updateDish(Dish $dish = null, Request $request, ManagerRegistry $managerRegistry, SluggerInterface $slugger, OpeningdayRepository $openingdayRepository,  OpeninghourRepository $openinghourRepository, OpeningService $openingService, RestaurantRepository $restaurantRepository): Response
     {
+        $openingdays = $openingdayRepository->findAll();
+        $openinghours = $openinghourRepository->findAll();
+        $restaurant = $restaurantRepository->find(6);
+
         // If a dish doesn't exists, create a new object Dish
         if(!$dish) {
             $dish = new Dish();
@@ -102,9 +125,12 @@ class AdminDishController extends AbstractController
         }
 
         return $this->render('admin_dish/createUpdate.html.twig', [
-            "form" => $form->createView(),
-            "dish" => $dish,
-            "isUpdated" => $isUpdated,
+            'form' => $form->createView(),
+            'dish' => $dish,
+            'isUpdated' => $isUpdated,
+            'openingDay' => $openingService->displayOpeningDays($openingdays),
+            'openingHour' => $openingService->displayOpeningHours($openinghours, $openingdays),
+            'restaurant' => $restaurant,
         ]);
     }
 

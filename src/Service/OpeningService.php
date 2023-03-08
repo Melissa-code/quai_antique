@@ -51,12 +51,10 @@ class OpeningService
         }
         // array_unique() : Delete the duplicate values from the 2 arrays $startHours & $endHours
         $uniqueStartHours = array_unique($startHours);
-        //dd($uniqueStartHours);
         $noonStartHour = ($uniqueStartHours[0]);
         $eveningStartHour = ($uniqueStartHours[5]);
 
         $uniqueEndHours = array_unique($endHours);
-        //dd($uniqueEndHours);
         $noonEndHour = ($uniqueEndHours[0]);
         $eveningEndHour = ($uniqueEndHours[5]);
         $eveningSaturdayEndHour = ($uniqueEndHours[9]);
@@ -67,7 +65,6 @@ class OpeningService
         $hours[] .= $eveningStartHour ."-" . $eveningSaturdayEndHour;
         $hours[] .= $closed;
 
-        //dd($hours);
         return $hours ;
     }
 

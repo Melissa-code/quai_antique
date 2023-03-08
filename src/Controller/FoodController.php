@@ -7,6 +7,7 @@ use App\Repository\DishRepository;
 use App\Repository\OpeningdayRepository;
 use App\Repository\OpeninghourRepository;
 // use App\Repository\RestaurantRepository;
+use App\Repository\RestaurantRepository;
 use App\Service\OpeningService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,30 +19,28 @@ class FoodController extends AbstractController
      * Get and display all the dishes on the La Carte page
      * @param CategoryRepository $categoryRepository
      * @param DishRepository $dishRepository
+     * @param OpeningdayRepository $openingdayRepository
+     * @param OpeninghourRepository $openinghourRepository
+     * @param OpeningService $openingService
+     * @param RestaurantRepository $restaurantRepository
      * @return Response
      */
     #[Route('/la_carte', name: 'app_food')]
-    public function dishes(CategoryRepository $categoryRepository, DishRepository $dishRepository, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, OpeningService $openingService): Response
+    public function dishes(CategoryRepository $categoryRepository, DishRepository $dishRepository, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, OpeningService $openingService, RestaurantRepository $restaurantRepository): Response
     {
         $categories = $categoryRepository->findAll();
         $dishes = $dishRepository->findDishesByAscendingPrice();
-
         $openingdays = $openingdayRepository->findAll();
         $openinghours = $openinghourRepository->findAll();
-
-        $noon = "12:00-14:00";
-        $evening = "19:00-22:00";
-        $eveningSaturday = "19:00-23:00";
+        $restaurant = $restaurantRepository->find(6);
 
         return $this->render('food/food.html.twig', [
             'categories' => $categories,
             'dishes' => $dishes,
-
-            "noon"=> $noon,
-            "evening" => $evening,
-            "eveningSaturday" => $eveningSaturday,
-            "openingDay" => $openingService->displayOpeningDays($openingdays),
-            "openingHour" => $openingService->displayOpeningHours($openinghours),
+            'openingDay' => $openingService->displayOpeningDays($openingdays),
+            'openingHour' => $openingService->displayOpeningHours($openinghours, $openingdays),
+            'restaurant' => $restaurant,
         ]);
     }
+
 }

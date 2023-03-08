@@ -2,11 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Openingday;
-use App\Entity\Openinghour;
 use App\Repository\DishRepository;
 use App\Repository\OpeningdayRepository;
 use App\Repository\OpeninghourRepository;
+use App\Repository\RestaurantRepository;
 use App\Service\OpeningService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,30 +19,25 @@ class HomeController extends AbstractController
      * @param OpeningdayRepository $openingdayRepository
      * @param OpeninghourRepository $openinghourRepository
      * @param OpeningService $openingService
+     * @param RestaurantRepository $restaurantRepository
      * @return Response
      */
     #[Route('/', name: 'app_home')]
-    public function home(DishRepository $dishRepository, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, OpeningService $openingService): Response
+    public function home(DishRepository $dishRepository, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, OpeningService $openingService, RestaurantRepository $restaurantRepository): Response
     {
         $favoriteDishes = $dishRepository->findFavoriteDishes(6);
 
         $openingdays = $openingdayRepository->findAll();
         $openinghours = $openinghourRepository->findAll();
-
-//        $noon = "12:00-14:00";
-//        $evening = "19:00-22:00";
-//        $eveningSaturday = "19:00-23:00";
+        $restaurant = $restaurantRepository->find(6);
 
         return $this->render('home/home.html.twig', [
-            "favoriteDishes" => $favoriteDishes,
-            "admin" => false,
-
-//            "noon"=> $noon,
-//            "evening" => $evening,
-//            "eveningSaturday" => $eveningSaturday,
-            "openingDay" => $openingService->displayOpeningDays($openingdays),
-            "openingHour" => $openingService->displayOpeningHours($openinghours, $openingdays),
-        ]);
+            'favoriteDishes' => $favoriteDishes,
+            'admin' => false,
+            'openingDay' => $openingService->displayOpeningDays($openingdays),
+            'openingHour' => $openingService->displayOpeningHours($openinghours, $openingdays),
+            'restaurant' => $restaurant,
+            ]);
     }
 
 
