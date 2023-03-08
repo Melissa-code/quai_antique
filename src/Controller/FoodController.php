@@ -40,7 +40,8 @@ class FoodController extends AbstractController
             "noon"=> $noon,
             "evening" => $evening,
             "eveningSaturday" => $eveningSaturday,
-            "opening" => $openingService->displayOpeningDays($openingdays),
+            "openingDay" => $openingService->displayOpeningDays($openingdays),
+            "openingHour" => $openingService->displayOpeningHours($openinghours),
         ]);
     }
 }

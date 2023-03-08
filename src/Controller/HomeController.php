@@ -30,18 +30,19 @@ class HomeController extends AbstractController
         $openingdays = $openingdayRepository->findAll();
         $openinghours = $openinghourRepository->findAll();
 
-        $noon = "12:00-14:00";
-        $evening = "19:00-22:00";
-        $eveningSaturday = "19:00-23:00";
+//        $noon = "12:00-14:00";
+//        $evening = "19:00-22:00";
+//        $eveningSaturday = "19:00-23:00";
 
         return $this->render('home/home.html.twig', [
             "favoriteDishes" => $favoriteDishes,
             "admin" => false,
 
-            "noon"=> $noon,
-            "evening" => $evening,
-            "eveningSaturday" => $eveningSaturday,
-            "opening" => $openingService->displayOpeningDays($openingdays),
+//            "noon"=> $noon,
+//            "evening" => $evening,
+//            "eveningSaturday" => $eveningSaturday,
+            "openingDay" => $openingService->displayOpeningDays($openingdays),
+            "openingHour" => $openingService->displayOpeningHours($openinghours, $openingdays),
         ]);
     }
 
