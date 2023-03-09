@@ -47,6 +47,12 @@
             "migrations/.gitignore"
         ]
     },
+    "knplabs/doctrine-behaviors": {
+        "version": "2.6.2"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v6.1.1"
+    },
     "phpunit/phpunit": {
         "version": "9.5",
         "recipe": {

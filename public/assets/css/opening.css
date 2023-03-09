@@ -13,8 +13,20 @@
 
 .table-bg {
     background-color: black;
-    opacity: 1;
     color: #FFFFFF;
+}
+
+
+/* Pagination */
+
+.pagination .page-item .page-link {
+    background-color: #913732;
+    color: #FFFFFF;
+    border: 1px solid #BB9457;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #BB9457;
 }
 
 
