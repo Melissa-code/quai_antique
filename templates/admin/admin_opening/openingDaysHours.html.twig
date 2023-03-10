@@ -16,9 +16,9 @@
 
                         {# Title #}
 
-                        <div class="py-3">
+                        <div class="py-2 mb-3">
                             <h1 class="page-title">Administration des horaires </h1>
-                            <h2 class="text-center mb-4">Administration des horaires </h2>
+                            <h2 class="text-center">Administration des horaires </h2>
                         </div>
 
                         {# Table #}
@@ -39,7 +39,8 @@
                             {% for openingday in openingdays %}
                                 {% for openinghour in openingday.openinghours %}
                                     <tr>
-                                        <th scope="row">{{ openingday.id }}</th>
+                                        <th scope="row" class="text-center">{{ openingday.id }}</th>
+                                        {# Display noon or evening after the day #}
                                         {% if openinghour.starthour|date("H:i") <= "14:00" %}
                                             <td class="text-center">{{ openingday.day|capitalize }} midi</td>
                                         {% else %}
@@ -49,14 +50,14 @@
                                         <td class="text-center">{{ openinghour.endhour|date("H:i") }}</td>
                                         <td class="text-center">
                                             <span class="d-flex justify-content-center">
-                                                {# Update  #}
-                                                <a class="btn btn-admin mr-2" href="">
-                                                    <img src="{{ asset('assets/icons/edit.svg') }}" alt="modifier l'horaire" width="15">
+                                                {# Update button #}
+                                                <a class="btn btn-admin mr-2" href="{{ path('app_admin_updateOpening', {'id': openingday.id}) }}">
+                                                    <img src="{{ asset('assets/icons/edit.svg') }}" alt="Modifier l'horaire" width="15">
                                                 </a>
-                                                {# Delete #}
+                                                {# Delete button #}
                                                 <form method="POST" action="" onsubmit="return confirm('Confirmer la suppression de l\'horaire')" >
                                                     <button type="submit" class="btn btn-admin">
-                                                        <img src="{{ asset('assets/icons/trash.svg') }}" alt="supprimer l'horaire" width="15">
+                                                        <img src="{{ asset('assets/icons/trash.svg') }}" alt="Supprimer l'horaire" width="15">
                                                     </button>
                                                 </form>
                                             </span>
@@ -67,6 +68,15 @@
 
                             </tbody>
                         </table>
+
+                        {# Create new hours button #}
+                        <div class="text-center mb-3">
+                            <a href="" class="btn btn-admin w-100 ">
+                                <img src="{{ asset('assets/icons/add.svg') }}" alt="Ajouter un nouvel horaire" width="28">
+                                Ajouter un horaire
+                            </a>
+                        </div>
+
                     </div>
 
                     {# Display navigation for a pagination #}
@@ -79,9 +89,6 @@
 
         </div>
     </section>
-
-
-
 
 
     {% block javascripts %}

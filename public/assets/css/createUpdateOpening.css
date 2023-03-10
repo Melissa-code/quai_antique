@@ -1,0 +1,13 @@
+.update-opening {
+    background-image: url("../images/cooking.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 80%;
+}
+
+.form-bg {
+    background-color: black;
+    border: 1px solid #FFE6A7;
+    opacity: 0.9;
+}

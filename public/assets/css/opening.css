@@ -25,6 +25,12 @@
     border: 1px solid #BB9457;
 }
 
+.pagination .page-item .page-link:hover {
+    background-color: #913732;
+    color: #FFE6A7;
+    border: 1px solid #BB9457;
+}
+
 .pagination .page-item.disabled .page-link {
     color: #BB9457;
 }
