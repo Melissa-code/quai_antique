@@ -116,4 +116,18 @@ class Openinghour
 
         return $this;
     }
+
+
+    /**
+     * Display the id, the start hour and the end hour
+     * @return string
+     */
+    public function __toString() : string {
+        $id = $this->getId();
+        $starthour = $this->getStarthour()->format('H:i');
+        $endhour = $this->getEndhour()->format('H:i');
+        return sprintf("%s : %s - %s", $id, $starthour, $endhour);
+    }
+
+
 }

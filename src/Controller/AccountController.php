@@ -23,14 +23,7 @@ class AccountController extends AbstractController
     #[Route('/compte', name: 'app_account')]
     public function account(OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, OpeningService $openingService, RestaurantRepository $restaurantRepository): Response
     {
-        $openingdays = $openingdayRepository->findAll();
-        $openinghours = $openinghourRepository->findAll();
-        $restaurant = $restaurantRepository->find(6);
-
         return $this->render('account/account.html.twig', [
-            'openingDay' => $openingService->displayOpeningDays($openingdays),
-            'openingHour' => $openingService->displayOpeningHours($openinghours, $openingdays),
-            'restaurant' => $restaurant,
         ]);
     }
 }

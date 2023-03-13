@@ -26,7 +26,7 @@ class Openingday
     private ?Restaurant $restaurant = null;
 
 
-    #[ORM\ManyToMany(targetEntity: Openinghour::class, mappedBy: 'openingdays', cascade:['persist'])]
+    #[ORM\ManyToMany(targetEntity: Openinghour::class, mappedBy: 'openingdays')]
     private Collection $openinghours;
 
     #[ORM\OneToMany(mappedBy: 'openingday', targetEntity: Booking::class)]
@@ -135,4 +135,7 @@ class Openingday
 
         return $this;
     }
+
+
+
 }

@@ -17,8 +17,8 @@
                         {# Title #}
 
                         <div class="py-2 mb-3">
-                            <h1 class="page-title">Administration des horaires </h1>
-                            <h2 class="text-center">Administration des horaires </h2>
+                            <h1 class="page-title">Créer des heures</h1>
+                            <h2 class="text-center">Créer des heures</h2>
                         </div>
 
                         {# Table #}
@@ -27,31 +27,32 @@
                             <thead>
                             <tr>
                                 <th scope="col" class="text-center">Id</th>
-                                <th scope="col" class="text-center">Jour</th>
                                 <th scope="col" class="text-center">Début du service</th>
                                 <th scope="col" class="text-center">Fin du service</th>
+{#                                <th scope="col" class="text-center">Jour</th>#}
                                 <th scope="col" class="text-center">Action</th>
                             </tr>
                             </thead>
 
                             <tbody>
                             {# Days of the week #}
-                            {% for openingday in openingdays %}
-                                {% for openinghour in openingday.openinghours %}
+                            {% for openinghour in openinghours %}
+{#                                {% for openingday in openinghour.openingdays %}#}
+
                                     <tr>
-                                        <th scope="row" class="text-center">{{ openingday.id }}</th>
-                                        {% if openinghour.starthour|date("H:i") <= "14:00" %}
-                                            <td class="text-center">{{ openingday.day|capitalize }} midi</td>
-                                        {% else %}
-                                            <td class="text-center">{{ openingday.day|capitalize }} soir</td>
-                                        {% endif %}
+                                        <th scope="row" class="text-center">{{ openinghour.id }}</th>
                                         <td class="text-center">{{ openinghour.starthour|date("H:i") }}</td>
                                         <td class="text-center">{{ openinghour.endhour|date("H:i") }}</td>
+{#                                        {% if openinghour.starthour|date("H:i") <= "14:00" %}#}
+{#                                            <td class="text-center">{{ openingday.day|capitalize }} midi</td>#}
+{#                                        {% else %}#}
+{#                                            <td class="text-center">{{ openingday.day|capitalize }} soir</td>#}
+{#                                        {% endif %}#}
 
                                         <td class="text-center">
                                             <span class="d-flex justify-content-center">
                                                 {# Update button #}
-                                                <a class="btn btn-admin mr-2" href="{{ path('app_admin_updateOpening', {'id': openingday.id}) }}">
+                                                <a class="btn btn-admin mr-2" href="{{ path('app_admin_updateOpening', {'id': openinghour.id}) }}">
                                                     <img src="{{ asset('assets/icons/edit.svg') }}" alt="Modifier l'horaire" width="15">
                                                 </a>
                                                 {# Delete button #}
@@ -63,19 +64,20 @@
                                             </span>
                                         </td>
                                     </tr>
-                                {% endfor %}
+{#                                {% endfor %}#}
 
-{#                                {% if openingday.open == false %}#}
-{#                                <tr>#}
-{#                                    <th scope="row" class="text-center">{{ openingday.id }}</th>#}
-{#                                    <td class="text-center">{{ openingday.day|capitalize }} midi</td>#}
-{#                                    <td class="text-center">{{ closed }}</td>#}
-{#                                    <td class="text-center">{{ closed }}</td>#}
-{#                                    <td class="text-center">{{ openingday.day|capitalize }} soir</td>#}
-{#                                    <td class="text-center">{{ closed }}</td>#}
-{#                                    <td class="text-center">{{ closed }}</td>#}
-{#                                </tr>#}
-{#                                {% endif %}#}
+                                {#                                {% if openingday.open == false %}#}
+                                {#                                <tr>#}
+                                {#                                    <th scope="row" class="text-center">{{ openingday.id }}</th>#}
+                                {#                                    <td class="text-center">{{ openingday.day|capitalize }} midi</td>#}
+                                {#                                    <td class="text-center">{{ closed }}</td>#}
+                                {#                                    <td class="text-center">{{ closed }}</td>#}
+                                {#                                    <td class="text-center">{{ openingday.day|capitalize }} soir</td>#}
+                                {#                                    <td class="text-center">{{ closed }}</td>#}
+                                {#                                    <td class="text-center">{{ closed }}</td>#}
+                                {#                                </tr>#}
+                                {#                                {% endif %}#}
+
                             {% endfor %}
 
                             </tbody>
@@ -83,9 +85,9 @@
 
                         {# Create new hours button #}
                         <div class="text-center mb-3">
-{#                            <a href="{{ path('app_admin_createOpening') }}" class="btn btn-admin w-100 ">#}
-                                <img src="{{ asset('assets/icons/add.svg') }}" alt="Ajouter un nouvel horaire" width="28">
-                                Ajouter un horaire
+                            {#                            <a href="{{ path('app_admin_createOpening') }}" class="btn btn-admin w-100 ">#}
+                            <img src="{{ asset('assets/icons/add.svg') }}" alt="Ajouter un nouvel horaire" width="28">
+                            Ajouter un horaire
                             </a>
                         </div>
 

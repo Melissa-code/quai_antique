@@ -46,7 +46,20 @@
                         {# Form #}
 
                         <div class="col-12">
-                            {{ form_start(form) }}
+
+
+{#                            {% block body %}#}
+{#                                {{ form_start(form) }}#}
+{#                                {{ form_widget(form._token) }}#}
+
+{#                                {{ form_widget(form) }}#}
+
+{#                                <button>Modifier</button>#}
+{#                                {{ form_end(form, { render_rest: false}) }}#}
+{#                                {{ form_end(form, { render_rest: false}) }}#}
+{#                            {% endblock %}#}
+
+                           {{ form_start(form) }}#}
 
 {#                            {{ form_widget(form) }}#}
 
@@ -70,37 +83,32 @@
                                 <div class="col-md-12">
 
                                     <div class="row ">
-                                        {% for openinghour in form.openinghours %}
+
                                         <div class="col-md-6">
-                                            {{ form_row(openinghour.starthour) }}
+                                            {{ form_row(form.openinghours) }}
                                         </div>
-                                        {% endfor %}
-                                        {% for openinghour in form.openinghours %}
-                                        <div class="col-md-6">
-                                            {{ form_row(openinghour.endhour) }}
-                                        </div>
-                                        {% endfor %}
 
                                     </div>
                                 </div>
                             </div>
+                            <button>Modifier</button>
+                             {{ form_end(form) }}
 
+{#                            #}{# buttons #}
+{#                            <div class="row d-flex">#}
+{#                                <div class="col-12 d-flex justify-content-center my-4">#}
+{#                                    #}{# Come back #}
+{#                                    <a href="{{ path('app_admin_opening') }}" class="btn btn-custom mr-2">Revenir</a>#}
+{#                                    {% if isUpdated %}#}
+{#                                        #}{# Save the updatings #}
+{#                                        <input type="submit" class="btn btn-admin ml-2" value="Modifier">#}
+{#                                    {% else %}#}
+{#                                        <input type="submit" class="btn btn-admin ml-2" value="Ajouter">#}
+{#                                    {% endif  %}#}
+{#                                </div>#}
+{#                            </div>#}
 
-                            {# buttons #}
-                            <div class="row d-flex">
-                                <div class="col-12 d-flex justify-content-center my-4">
-                                    {# Come back #}
-                                    <a href="{{ path('app_admin_opening') }}" class="btn btn-custom mr-2">Revenir</a>
-                                    {% if isUpdated %}
-                                        {# Save the updatings #}
-                                        <input type="submit" class="btn btn-admin ml-2" value="Modifier">
-                                    {% else %}
-                                        <input type="submit" class="btn btn-admin ml-2" value="Ajouter">
-                                    {% endif  %}
-                                </div>
-                            </div>
-
-                            {{ form_end(form) }}
+{#                            {{ form_end(form) }}#}
                         </div>
                     </div>
                 </div>

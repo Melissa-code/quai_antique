@@ -69,4 +69,5 @@ class Daytime
 
         return $this;
     }
+
 }

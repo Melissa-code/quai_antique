@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Openingday;
 use App\Entity\Openinghour;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,12 +18,20 @@ class OpeninghourType extends AbstractType
             ->add('starthour', TimeType::class, [
                 'label' => 'Ouverture : ',
                 'widget' => 'single_text',
-                //'input'  => 'datetime_immutable'
+                'required' => false,
             ])
             ->add('endhour', TimeType::class, [
                 'label' => 'Fermeture : ',
                 'widget' => 'single_text',
-                //'input'  => 'datetime_immutable'
+                'required' => false,
+            ])
+            ->add('openingdays', EntityType::class, [
+                'class' => Openingday::class,
+                'choice_label' => 'day',
+                'label' => 'Jour :',
+                'multiple' => true,
+                'expanded' => true,
+                'disabled' => true,
             ])
         ;
     }
