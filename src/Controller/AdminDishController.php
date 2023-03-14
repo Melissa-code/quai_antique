@@ -32,7 +32,7 @@ class AdminDishController extends AbstractController
     }
 
     /**
-     * Update a dish with a form
+     * Create or Update a dish with a form
      * @param Dish|null $dish
      * @param Request $request
      * @param ManagerRegistry $managerRegistry
@@ -41,7 +41,7 @@ class AdminDishController extends AbstractController
      */
     #[Route('/admin/creer_plat', name: 'app_admin_create_dish')]
     #[Route('/admin/modifier_plat{id}', name: 'app_admin_update_dish')]
-    public function updateDish(Dish $dish = null, Request $request, ManagerRegistry $managerRegistry, SluggerInterface $slugger): Response
+    public function createOrUpdateDish(Dish $dish = null, Request $request, ManagerRegistry $managerRegistry, SluggerInterface $slugger): Response
     {
         // If a dish doesn't exists, create a new object Dish
         if(!$dish) {

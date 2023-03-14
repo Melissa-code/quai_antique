@@ -25,8 +25,6 @@ class AdminOpeningController extends AbstractController
      * List the opening days and their hours
      * @param OpeningdayRepository $openingdayRepository
      * @param OpeninghourRepository $openinghourRepository
-     * @param OpeningService $openingService
-     * @param RestaurantRepository $restaurantRepository
      * @param PaginatorInterface $paginator
      * @param Request $request
      * @return Response
@@ -114,20 +112,20 @@ class AdminOpeningController extends AbstractController
 
 
     /**
-     * Update the opening hours of a day
-     * @param Openinghour $openinghour
+     * Create or Update the opening hours of a day
+     * @param Openinghour|null $openinghour
      * @param ManagerRegistry $managerRegistry
-     * @param OpeningdayRepository $openingdayRepository
-     * @param OpeninghourRepository $openinghourRepository
      * @param Request $request
      * @return Response
      */
+    #[Route('/admin/creation_horaires', name: 'app_admin_create_openingHours')]
     #[Route('/admin/modification_horaires{id}', name: 'app_admin_updateOpeningHours', methods: 'GET|POST')]
-    public function updateOpeningHours(Openinghour $openinghour, ManagerRegistry $managerRegistry, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, Request $request): Response
+    public function createOrUpdateOpeningHours(Openinghour $openinghour = null, ManagerRegistry $managerRegistry, Request $request): Response
     {
-        $openingdays = $openingdayRepository->findAll();
-        $openinghours = $openinghourRepository->findAll();
-        $isUpdated = true;
+        if(!$openinghour) {
+            $openinghour = new Openinghour();
+        }
+        $isUpdated = $openinghour->getId() !== null;
 
         $form = $this->createForm(OpeninghourType::class, $openinghour);
         $form->handleRequest($request);
@@ -142,9 +140,8 @@ class AdminOpeningController extends AbstractController
         }
 
         return $this->render('admin/admin_opening/createUpdateHours.html.twig', [
-            'openingdays' => $openingdays,
-            'openinghours' => $openinghours,
             'isUpdated' =>  $isUpdated,
+            'openinghour' => $openinghour,
             'form' => $form->createView(),
         ]);
     }

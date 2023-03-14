@@ -3,12 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Openingday;
-use App\Entity\Openinghour;
-use App\Repository\OpeningdayRepository;
-use App\Repository\OpeninghourRepository;
-use DateTime;
-use Doctrine\Persistence\ManagerRegistry;
-use function Symfony\Component\HttpKernel\Log\format;
+
 
 class OpeningService
 {
@@ -17,7 +12,8 @@ class OpeningService
      * @param $openingdays
      * @return array
      */
-    public function displayOpeningDays(array $openingdays): array{
+    public function displayOpeningDays(array $openingdays): array
+    {
         $days = [];
 
         foreach($openingdays as $openingday) {
@@ -29,10 +25,10 @@ class OpeningService
     /**
      * Display the opening hours of the restaurant
      * @param Openingday $day
-     * @return mixed|string
+     * @return mixed
      */
-    public function displayOPeningHours(Openingday $day) {
-
+    public function displayOpeningHours(Openingday $day): mixed
+    {
         $hours = [];
 
         foreach ($day->getOpeninghours() as $hour) {
@@ -57,59 +53,6 @@ class OpeningService
             return "Fermé";
         }
     }
-
-
-
-    /**
-     * Display the opening hours of the restaurant
-     * @param array $openinghours
-     * @return array|string
-     */
-    public function displayHours(array $openinghours, array $openingdays): array|string
-    {
-        $startHours = [];
-        $endHours = [];
-
-        foreach($openinghours as $openinghour) {
-            foreach($openingdays as $openingday) {
-                foreach($openingday->getOpeninghours() as $day) {
-                    if($day->getId() === $openinghour->getId()) {
-                        $startHour = $openinghour->getStarthour();
-                        // format() : display the Datetime to the format Hour & minutes (24 Hours)
-                        $startHour = $startHour->format("H:i");
-                        $endHour = $openinghour->getEndhour();
-                        $endHour = $endHour->format("H:i");
-                        // Save each $startHour & $endHour in the arrays $startHours[] & $endHours[]
-                        $startHours[] .= $startHour;
-                        $endHours[] .= $endHour;
-                    } else {
-                        $closed = "Fermé";
-                    }
-                }
-            }
-        }
-
-        // array_unique() : Delete the duplicate values from the 2 arrays $startHours & $endHours
-        $uniqueStartHours = array_unique($startHours);
-        $noonStartHour = ($uniqueStartHours[0]);
-        $eveningStartHour = ($uniqueStartHours[6]);
-
-        $uniqueEndHours = array_unique($endHours);
-        $noonEndHour = ($uniqueEndHours[0]);
-        $eveningEndHour = ($uniqueEndHours[6]);
-        $eveningSaturdayEndHour = ($uniqueEndHours[10]);
-
-        $hours = [];
-        $hours[] .= $noonStartHour ."-" . $noonEndHour;
-        $hours[] .= $eveningStartHour ."-" . $eveningEndHour;
-        $hours[] .= $eveningStartHour ."-" . $eveningSaturdayEndHour;
-        $hours[] .= $closed;
-
-        return $hours ;
-    }
-
-
-
 
 
 }
