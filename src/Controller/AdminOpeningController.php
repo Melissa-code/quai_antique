@@ -4,7 +4,9 @@ namespace App\Controller;
 
 
 use App\Entity\Openingday;
+use App\Entity\Openinghour;
 use App\Form\OpeningdayType;
+use App\Form\OpeninghourType;
 use App\Repository\OpeningdayRepository;
 use App\Repository\OpeninghourRepository;
 use App\Repository\RestaurantRepository;
@@ -30,20 +32,23 @@ class AdminOpeningController extends AbstractController
      * @return Response
      */
     #[Route('/admin/horaires_ouverture', name: 'app_admin_opening')]
-    public function openingDaysHours(OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, OpeningService $openingService, RestaurantRepository $restaurantRepository, PaginatorInterface $paginator, Request $request): Response
+    public function openingDaysHours(OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $openinghours = $openinghourRepository->findAll();
+        $openingdays = $openingdayRepository->findAll();
+        $closed = "Fermé";
 
-        // Pagination (4 days per page) : $days replace $openingdays = $openingdayRepository->findAll();
-        $days = $paginator->paginate(
-            $openingdayRepository->findAllWithPagination(), /* query NOT result */
+        // Pagination (4 days per page) : $hours replace $openinghours = $openinghourRepository->findAll();
+        $hours = $paginator->paginate(
+            $openinghourRepository->findAllWithPagination(), /* query NOT result */
             $request->query->getInt('page', 1), /* page number */
             4 /* limit per page */
         );
 
-        return $this->render('admin/admin_opening/openingDaysHours.html.twig', [
-            'openingdays' => $days,
-            'openinghours' => $openinghours,
+        return $this->render('admin/admin_opening/openingHours.html.twig', [
+            'openinghours' => $hours,
+            'closed' => $closed,
+            'openingdays' => $openingdays,
         ]);
     }
 
@@ -110,31 +115,33 @@ class AdminOpeningController extends AbstractController
 
     /**
      * Update the opening hours of a day
-     * @param Openingday $openingday
+     * @param Openinghour $openinghour
      * @param ManagerRegistry $managerRegistry
      * @param OpeningdayRepository $openingdayRepository
      * @param OpeninghourRepository $openinghourRepository
-     * @param OpeningService $openingService
-     * @param RestaurantRepository $restaurantRepository
      * @param Request $request
      * @return Response
      */
-    #[Route('/admin/modification_horaires{id}', name: 'app_admin_updateOpening', methods: 'GET|POST')]
-    public function updateOpening(Openingday $openingday, ManagerRegistry $managerRegistry, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, Request $request): Response
+    #[Route('/admin/modification_horaires{id}', name: 'app_admin_updateOpeningHours', methods: 'GET|POST')]
+    public function updateOpeningHours(Openinghour $openinghour, ManagerRegistry $managerRegistry, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, Request $request): Response
     {
         $openingdays = $openingdayRepository->findAll();
         $openinghours = $openinghourRepository->findAll();
         $isUpdated = true;
 
-        $form = $this->createForm(OpeningdayType::class, $openingday);
+        $form = $this->createForm(OpeninghourType::class, $openinghour);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // Save the changes in the database
-            $managerRegistry->getManager()->persist($openingday);
+            $managerRegistry->getManager()->persist($openinghour);
             $managerRegistry->getManager()->flush();
+
+            // Display a success message
+            $this->addFlash("success", ($isUpdated) ? "La modification a bien été effectuée." : "L'ajout a bien été effectué.");
+            return $this->redirectToRoute('app_admin_opening');
         }
 
-        return $this->render('admin/admin_opening/createUpdate.html.twig', [
+        return $this->render('admin/admin_opening/createUpdateHours.html.twig', [
             'openingdays' => $openingdays,
             'openinghours' => $openinghours,
             'isUpdated' =>  $isUpdated,

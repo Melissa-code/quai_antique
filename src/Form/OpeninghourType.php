@@ -31,7 +31,7 @@ class OpeninghourType extends AbstractType
                 'label' => 'Jour :',
                 'multiple' => true,
                 'expanded' => true,
-                'disabled' => true,
+                'disabled' => false,
             ])
         ;
     }

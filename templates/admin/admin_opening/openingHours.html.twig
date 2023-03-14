@@ -8,20 +8,33 @@
 {% block main %}
 
     <section id="opening">
-        <div class="row opening-list">
+        <div class="row opening-list d-flex justify-content-center">
+
+            {# Message flash #}
+
+            <div class="col-md-8 confirm-message text-center mt-2">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }} alert-dismissible fade show font-weight-bold" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
 
             <article class="container h-100">
                 <div class="row text-white d-flex justify-content-center align-items-center mx-1 my-md-4">
-                    <div class="col-12 list-bg rounded p-2 p-md-4 my-md-4">
+                    <div class="col-12 list-bg rounded p-2 p-md-4 my-md-3">
 
                         {# Title #}
 
                         <div class="py-2 mb-3">
-                            <h1 class="page-title">Créer des heures</h1>
-                            <h2 class="text-center">Créer des heures</h2>
+                            <h1 class="page-title">Horaires d'ouverture</h1>
+                            <h2 class="text-center">Horaires d'ouverture</h2>
                         </div>
 
-                        {# Table #}
+                        {# Table with the hours #}
 
                         <table class="table table-bg">
                             <thead>
@@ -29,65 +42,72 @@
                                 <th scope="col" class="text-center">Id</th>
                                 <th scope="col" class="text-center">Début du service</th>
                                 <th scope="col" class="text-center">Fin du service</th>
-{#                                <th scope="col" class="text-center">Jour</th>#}
+                                <th scope="col" class="text-center">Jour</th>
                                 <th scope="col" class="text-center">Action</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            {# Days of the week #}
                             {% for openinghour in openinghours %}
-{#                                {% for openingday in openinghour.openingdays %}#}
-
+                                {% for openingday in openinghour.openingdays %}
                                     <tr>
                                         <th scope="row" class="text-center">{{ openinghour.id }}</th>
                                         <td class="text-center">{{ openinghour.starthour|date("H:i") }}</td>
                                         <td class="text-center">{{ openinghour.endhour|date("H:i") }}</td>
-{#                                        {% if openinghour.starthour|date("H:i") <= "14:00" %}#}
-{#                                            <td class="text-center">{{ openingday.day|capitalize }} midi</td>#}
-{#                                        {% else %}#}
-{#                                            <td class="text-center">{{ openingday.day|capitalize }} soir</td>#}
-{#                                        {% endif %}#}
+                                        {% if openinghour.starthour|date("H:i") <= "14:00" %}
+                                            <td class="text-center">{{ openingday.day|capitalize }} midi</td>
+                                        {% else %}
+                                            <td class="text-center">{{ openingday.day|capitalize }} soir</td>
+                                        {% endif %}
 
                                         <td class="text-center">
                                             <span class="d-flex justify-content-center">
                                                 {# Update button #}
-                                                <a class="btn btn-admin mr-2" href="{{ path('app_admin_updateOpening', {'id': openinghour.id}) }}">
-                                                    <img src="{{ asset('assets/icons/edit.svg') }}" alt="Modifier l'horaire" width="15">
+                                                <a class="btn btn-admin mr-2" href="{{ path('app_admin_updateOpeningHours', {'id': openinghour.id}) }}">
+                                                    <img src="{{ asset('assets/icons/edit.svg') }}" alt="Modifier un horaire" width="15">
                                                 </a>
                                                 {# Delete button #}
                                                 <form method="POST" action="" onsubmit="return confirm('Confirmer la suppression de l\'horaire')" >
                                                     <button type="submit" class="btn btn-admin">
-                                                        <img src="{{ asset('assets/icons/trash.svg') }}" alt="Supprimer l'horaire" width="15">
+                                                        <img src="{{ asset('assets/icons/trash.svg') }}" alt="Supprimer un horaire" width="15">
                                                     </button>
                                                 </form>
                                             </span>
                                         </td>
                                     </tr>
-{#                                {% endfor %}#}
+                                {% endfor %}
+                            {% endfor %}
 
-                                {#                                {% if openingday.open == false %}#}
-                                {#                                <tr>#}
-                                {#                                    <th scope="row" class="text-center">{{ openingday.id }}</th>#}
-                                {#                                    <td class="text-center">{{ openingday.day|capitalize }} midi</td>#}
-                                {#                                    <td class="text-center">{{ closed }}</td>#}
-                                {#                                    <td class="text-center">{{ closed }}</td>#}
-                                {#                                    <td class="text-center">{{ openingday.day|capitalize }} soir</td>#}
-                                {#                                    <td class="text-center">{{ closed }}</td>#}
-                                {#                                    <td class="text-center">{{ closed }}</td>#}
-                                {#                                </tr>#}
-                                {#                                {% endif %}#}
+                            {#  Update the closed days #}
 
+                            {% for openingday in openingdays %}
+                                {% if openingday.open == false %}
+                                    <tr class="closed-day">
+                                        <th scope="row" class="text-center">{{ openingday.id }}</th>
+                                        <td class="text-center">{{ closed }}</td>
+                                        <td class="text-center">{{ closed }}</td>
+                                        <td class="text-center">{{ openingday.day }}</td>
+                                        <td class="text-center">
+                                            <span class="d-flex justify-content-center">
+                                                {# Update button #}
+                                                <a class="btn btn-admin w-50" href="">
+                                                    <img src="{{ asset('assets/icons/edit.svg') }}" alt="Modifier un jour de fermeture" width="15">
+                                                </a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                {% endif %}
                             {% endfor %}
 
                             </tbody>
                         </table>
 
                         {# Create new hours button #}
+
                         <div class="text-center mb-3">
-                            {#                            <a href="{{ path('app_admin_createOpening') }}" class="btn btn-admin w-100 ">#}
-                            <img src="{{ asset('assets/icons/add.svg') }}" alt="Ajouter un nouvel horaire" width="28">
-                            Ajouter un horaire
+                            <a href="" class="btn btn-admin w-100 ">
+                                <img src="{{ asset('assets/icons/add.svg') }}" alt="Ajouter un nouvel horaire" width="28">
+                                Ajouter un horaire
                             </a>
                         </div>
 
@@ -95,7 +115,7 @@
 
                     {# Display navigation for a pagination #}
                     <div class="navigation ">
-                        {{ knp_pagination_render(openingdays) }}
+                        {{ knp_pagination_render(openinghours) }}
                     </div>
 
                 </div>
