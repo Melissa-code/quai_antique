@@ -63,11 +63,13 @@
                                         <td class="text-center">
                                             <span class="d-flex justify-content-center">
                                                 {# Update button #}
-                                                <a class="btn btn-admin mr-2" href="{{ path('app_admin_updateOpeningHours', {'id': openinghour.id}) }}">
+                                                <a class="btn btn-admin mr-2" href="{{ path('app_admin_update_openingHours', {'id': openinghour.id}) }}">
                                                     <img src="{{ asset('assets/icons/edit.svg') }}" alt="Modifier un horaire" width="15">
                                                 </a>
                                                 {# Delete button #}
-                                                <form method="POST" action="" onsubmit="return confirm('Confirmer la suppression de l\'horaire')" >
+                                                <form method="POST" action="{{ path('app_admin_delete_openingHours', {'id': openinghour.id }) }}" onsubmit="return confirm('Confirmer la suppression de l\'horaire')" >
+                                                    <input type="hidden" name="_method" value="delete">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('remove' ~ openinghour.id) }}">
                                                     <button type="submit" class="btn btn-admin">
                                                         <img src="{{ asset('assets/icons/trash.svg') }}" alt="Supprimer un horaire" width="15">
                                                     </button>

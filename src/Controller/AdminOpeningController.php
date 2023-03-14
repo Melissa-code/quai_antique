@@ -118,8 +118,8 @@ class AdminOpeningController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[Route('/admin/creation_horaires', name: 'app_admin_create_openingHours')]
-    #[Route('/admin/modification_horaires{id}', name: 'app_admin_updateOpeningHours', methods: 'GET|POST')]
+    #[Route('/admin/creation_horaire', name: 'app_admin_create_openingHours')]
+    #[Route('/admin/modification_horaire{id}', name: 'app_admin_update_openingHours', methods: 'GET|POST')]
     public function createOrUpdateOpeningHours(Openinghour $openinghour = null, ManagerRegistry $managerRegistry, Request $request): Response
     {
         if(!$openinghour) {
@@ -144,6 +144,26 @@ class AdminOpeningController extends AbstractController
             'openinghour' => $openinghour,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * Delete the opening hours of a day
+     * @param Openinghour $openinghour
+     * @param Request $request
+     * @param ManagerRegistry $managerRegistry
+     * @return Response
+     */
+    #[Route('/admin/supprimer_horaire/{id}', name: 'app_admin_delete_openingHours', methods: 'DELETE')]
+    public function delete(Openinghour $openinghour, Request $request, ManagerRegistry $managerRegistry) : Response
+    {
+        if($this->isCsrfTokenValid("remove".$openinghour->getId(), $request->get("_token"))) {
+            // Delete the hours in the database
+            $managerRegistry->getManager()->remove($openinghour);
+            $managerRegistry->getManager()->flush();
+
+            $this->addFlash("success", "La suppression a bien été effectuée.");
+            return $this->redirectToRoute('app_admin_opening');
+        }
     }
 
 

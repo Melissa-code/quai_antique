@@ -38,15 +38,15 @@ class OpeningService
             if(count($hours) > 1) {
                 $lastHour = end($hours);
                 foreach ($hours as $hour) {
-                    if($lastHour === $hour) {
-                        return $hour . " ";
+                    if($hour === $lastHour) {
+                        return $hour ." ";
                     } else {
-                        return $hour . " et ". $lastHour;
+                        return $hour ." et ".$lastHour;
                     }
                 }
             } else {
                 foreach ($hours as $hour) {
-                    return $hour ;
+                    return $hour;
                 }
             }
         } else {
