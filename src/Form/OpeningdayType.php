@@ -23,31 +23,19 @@ class OpeningdayType extends AbstractType
                 'disabled' => true,
             ])
             ->add('open', CheckboxType::class, [
-                'label'    => 'Ouvert',
+                'label' => 'Ouvert',
                 'required' => false,
             ])
-            ->add('restaurant', EntityType::class, [
-                'label' => 'Restaurant :',
-                'class' => Restaurant::class,
-                'choice_label' => 'name',
-                'disabled' => true,
-            ])
-            ->add('openinghours', EntityType::class, [
-                'class' => Openinghour::class,
-                //'choice_label' => 'id',
-                'choice_label' => function ($hour) {
-                    return $hour;},
-                'label' => 'Heures d\'ouverture :',
-                'multiple' => true,
-                'expanded' => true,
 
-            ])
-
-//            ->add('openinghours', CollectionType::class, [
-//               'entry_type' => OpeninghourType::class,
-//               'entry_options' => ['label' => false],
-//                'allow_add' => true,
-//                'by_reference' => false,
+//            ->add('openinghours', EntityType::class, [
+//                'class' => Openinghour::class,
+//                //'choice_label' => 'id',
+//                'choice_label' => function ($hour) {
+//                    return $hour;
+//                },
+//                'label' => 'Heures d\'ouverture :',
+//                'multiple' => true,
+//                'expanded' => true,
 //            ])
         ;
     }

@@ -9,8 +9,6 @@ use App\Form\OpeningdayType;
 use App\Form\OpeninghourType;
 use App\Repository\OpeningdayRepository;
 use App\Repository\OpeninghourRepository;
-use App\Repository\RestaurantRepository;
-use App\Service\OpeningService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,11 +28,21 @@ class AdminOpeningController extends AbstractController
      * @return Response
      */
     #[Route('/admin/horaires_ouverture', name: 'app_admin_opening')]
-    public function openingDaysHours(OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, PaginatorInterface $paginator, Request $request): Response
+    public function openingHours(OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $openinghours = $openinghourRepository->findAll();
         $openingdays = $openingdayRepository->findAll();
         $closed = "Fermé";
+
+        // Change the attribute open = true of the object Openingday if there is the attribute openinghours
+        foreach ($openingdays as $openingday) {
+            foreach ($openingday->getOpeninghours() as $hour) {
+                if($hour->getstarthour() and $hour->getEndhour() and $openingday->isOpen() === false) {
+                    $openingday->setOpen(true) ;
+                    $openingdayRepository->setOpen(1);
+                }
+            }
+        }
 
         // Pagination (4 days per page) : $hours replace $openinghours = $openinghourRepository->findAll();
         $hours = $paginator->paginate(
@@ -50,77 +58,17 @@ class AdminOpeningController extends AbstractController
         ]);
     }
 
-
-    /**
-     * Create an opening day and its hours
-     * @param ManagerRegistry $managerRegistry
-     * @param OpeningdayRepository $openingdayRepository
-     * @param OpeninghourRepository $openinghourRepository
-     * @param OpeningService $openingService
-     * @param RestaurantRepository $restaurantRepository
-     * @param Request $request
-     * @return Response
-     */
-//    #[Route('/admin/ajout_horaires', name: 'app_admin_createOpening')]
-//    public function createOpening(ManagerRegistry $managerRegistry, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, OpeningService $openingService, RestaurantRepository $restaurantRepository, Request $request): Response
-//    {
-//        // Variables for the footer
-//        $openingdays = $openingdayRepository->findAll();
-//        $openinghours = $openinghourRepository->findAll();
-//        $restaurant = $restaurantRepository->find(6);
-//
-//        $isUpdated = false;
-//        $openingday = new Openingday();
-//        for($i = 0; $i < 2; $i++) {
-//            $openinghour = new Openinghour();
-//            $openingday->addOpeninghour($openinghour);
-//        }
-//        $form = $this->createForm(OpeningdayType::class, $openingday);
-//        $form->handleRequest($request);
-//        if ($form->isSubmitted() && $form->isValid()) {
-//
-//            // Check if the opening day already exists
-//            foreach ($openingday->getOpeninghours() as $openingType){
-//                $startHour = $openinghourRepository->findOneByStarthour($openingType->getStarthour());
-//                $endHour = $openinghourRepository->findOneByEndhour($openingType->getEndhour());
-//                if($startHour){
-//                    $openingday->removeOpeninghour($openingType);
-//                    $openingday->addOpeninghour($openingType);
-//                }
-//                if($endHour){
-//                    $openingday->removeOpeninghour($openingType);
-//                    $openingday->addOpeninghour($openingType);
-//                }
-//            }
-//
-//            // Save the changes in the database
-//            $managerRegistry->getManager()->persist($openingday);
-//            $managerRegistry->getManager()->flush();
-//        }
-//
-//        return $this->render('admin/admin_opening/createUpdate.html.twig', [
-//            'openingDay' => $openingService->displayOpeningDays($openingdays),
-//            'openingHour' => $openingService->displayOpeningHours($openinghours, $openingdays),
-//            'restaurant' => $restaurant,
-//
-//            'openingdays' => $openingdays,
-//            'openinghours' => $openinghours,
-//            'isUpdated' =>  $isUpdated,
-//            'form' => $form->createView(),
-//        ]);
-//    }
-
-
     /**
      * Create or Update the opening hours of a day
      * @param Openinghour|null $openinghour
+     * @param OpeningdayRepository $openingdayRepository
      * @param ManagerRegistry $managerRegistry
      * @param Request $request
      * @return Response
      */
     #[Route('/admin/creation_horaire', name: 'app_admin_create_openingHours')]
-    #[Route('/admin/modification_horaire{id}', name: 'app_admin_update_openingHours', methods: 'GET|POST')]
-    public function createOrUpdateOpeningHours(Openinghour $openinghour = null, ManagerRegistry $managerRegistry, Request $request): Response
+    #[Route('/admin/modification_horaire/{id}', name: 'app_admin_update_openingHours', methods: 'GET|POST')]
+    public function createOrUpdateOpeningHours(Openinghour $openinghour = null, OpeningdayRepository $openingdayRepository, ManagerRegistry $managerRegistry, Request $request): Response
     {
         if(!$openinghour) {
             $openinghour = new Openinghour();
@@ -130,6 +78,7 @@ class AdminOpeningController extends AbstractController
         $form = $this->createForm(OpeninghourType::class, $openinghour);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
             // Save the changes in the database
             $managerRegistry->getManager()->persist($openinghour);
             $managerRegistry->getManager()->flush();
@@ -165,6 +114,56 @@ class AdminOpeningController extends AbstractController
             return $this->redirectToRoute('app_admin_opening');
         }
     }
+
+    /******************
+     * OPENING DAY
+     *****************
+
+     * List all the days
+     * @param OpeningdayRepository $openingdayRepository
+     * @return Response
+     */
+    #[Route('/admin/jours_ouverture', name: 'app_admin_openingDays')]
+    public function openingDays(OpeningdayRepository $openingdayRepository): Response
+    {
+        $openingdays = $openingdayRepository->findAll();
+
+        return $this->render('admin/admin_opening/openingDays.html.twig', [
+            'openingdays' => $openingdays,
+        ]);
+    }
+
+    /**
+     * Update a closed day
+     * @param Openingday $openingday
+     * @param ManagerRegistry $managerRegistry
+     * @param Request $request
+     * @return Response
+     */
+    #[Route('/admin/modification_jour/{id}', name: 'app_admin_update_closedDay', methods: 'GET|POST')]
+    public function updateClosedDay(Openingday $openingday, ManagerRegistry $managerRegistry, Request $request): Response
+    {
+        $form = $this->createForm(OpeningdayType::class, $openingday);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $managerRegistry->getManager()->persist($openingday);
+            $managerRegistry->getManager()->flush();
+            if($openingday->isOpen()) {
+                return $this->redirectToRoute('app_admin_create_openingHours');
+            }
+            else {
+                return $this->redirectToRoute('app_admin_openingDays');
+            }
+            //$this->addFlash("success", "La modification du jour a bien été effectuée.");
+            //return $this->redirectToRoute('app_admin_create_openingHours');
+        }
+
+        return $this->render('admin/admin_opening/updateDay.html.twig', [
+            'openingday' => $openingday,
+            'form' => $form->createView(),
+        ]);
+    }
+
 
 
 }

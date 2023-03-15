@@ -3,6 +3,9 @@
 namespace App\Service;
 
 use App\Entity\Openingday;
+use App\Entity\Openinghour;
+use App\Repository\OpeningdayRepository;
+use App\Repository\OpeninghourRepository;
 
 
 class OpeningService
@@ -53,6 +56,8 @@ class OpeningService
             return "Fermé";
         }
     }
+
+
 
 
 }

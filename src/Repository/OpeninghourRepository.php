@@ -50,6 +50,8 @@ class OpeninghourRepository extends ServiceEntityRepository
             ->getQuery();
     }
 
+
+
 //    /**
 //     * @return Openinghour[] Returns an array of Openinghour objects
 //     */

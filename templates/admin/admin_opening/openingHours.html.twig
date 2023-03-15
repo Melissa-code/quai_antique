@@ -91,8 +91,8 @@
                                         <td class="text-center">{{ openingday.day }}</td>
                                         <td class="text-center">
                                             <span class="d-flex justify-content-center">
-                                                {# Update button #}
-                                                <a class="btn btn-admin w-50" href="">
+                                                {# Update a closed day button #}
+                                                <a class="btn btn-admin w-50" href="{{ path('app_admin_openingDays') }}">
                                                     <img src="{{ asset('assets/icons/edit.svg') }}" alt="Modifier un jour de fermeture" width="15">
                                                 </a>
                                             </span>
@@ -113,7 +113,11 @@
                             </a>
                         </div>
 
+                        <div class="col-12 d-flex justify-content-center my-4">
+                            <a href="{{ path('app_admin_openingDays') }}" class="btn btn-custom mr-2 w-100">Modifier un jour d'ouverture</a>
+                        </div>
                     </div>
+
 
                     {# Display navigation for a pagination #}
                     <div class="navigation ">

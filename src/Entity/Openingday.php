@@ -25,7 +25,6 @@ class Openingday
     #[ORM\JoinColumn(nullable: false)]
     private ?Restaurant $restaurant = null;
 
-
     #[ORM\ManyToMany(targetEntity: Openinghour::class, mappedBy: 'openingdays')]
     private Collection $openinghours;
 

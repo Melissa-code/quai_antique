@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block css %} <link rel="stylesheet" href="{{ asset('assets/css/opening.css') }}"> {% endblock css %}
+
+{% block title %} Administration des jours {% endblock %}
+
+
+{% block main %}
+
+    <section id="opening">
+        <div class="row opening-list d-flex justify-content-center">
+
+            {# Message flash #}
+
+            <div class="col-md-8 confirm-message text-center mt-2">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }} alert-dismissible fade show font-weight-bold" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+
+            <article class="container h-100">
+                <div class="row text-white d-flex justify-content-center align-items-center mx-1 my-md-4">
+                    <div class="col-12 list-bg rounded p-2 p-md-4 my-md-3">
+
+                        {# Title #}
+
+                        <div class="py-2 mb-3">
+                            <h1 class="page-title">Jours d'ouverture</h1>
+                            <h2 class="text-center">Jours d'ouverture</h2>
+                        </div>
+
+                        {# Table with the hours #}
+
+                        <table class="table table-bg">
+                            <thead>
+                            <tr>
+                                <th scope="col" class="text-center">Id</th>
+                                <th scope="col" class="text-center">Jour</th>
+                                <th scope="col" class="text-center">Ouvert</th>
+{#                                <th scope="col" class="text-center">Midi</th>#}
+{#                                <th scope="col" class="text-center">Soir</th>#}
+                                <th scope="col" class="text-center">Action</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for openingday in openingdays %}
+                                    <tr>
+                                        <th scope="row" class="text-center">{{ openingday.id }}</th>
+                                        <td class="text-center">{{ openingday.day|capitalize }}</td>
+                                        {% if(openingday.open == 1) %}
+                                        <td class="text-center">{{ 'Ouvert' }}</td>
+                                        {% else %}
+                                            <td class="text-center">{{ 'Fermé' }}</td>
+                                        {% endif %}
+
+                                        <td class="text-center">
+                                            <span class="d-flex justify-content-center">
+                                                {# Update button #}
+                                                <a class="btn btn-admin mr-2" href="{{ path('app_admin_update_closedDay', {'id': openingday.id}) }}">
+                                                    <img src="{{ asset('assets/icons/edit.svg') }}" alt="Modifier un jour" width="15">
+                                                </a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+
+
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+
+    {% block javascripts %}
+        <script src=""></script>
+    {% endblock %}
+
+{% endblock main %}
