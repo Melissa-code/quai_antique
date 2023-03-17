@@ -15,14 +15,14 @@
                             <li class="nav-item mb-2"><a href="{{ path('app_menus') }}" class="p-0 dark-link">Menus</a></li>
                             <li class="nav-item mb-2"><a href="{{ path('app_booking') }}" class="p-0 dark-link">Réservation</a></li>
                             <li class="nav-item mb-2">
-                                {# Check if the user is logged-in #}
+                                {# Login or Logout : Check if the user is logged-in #}
                                 {% if not app.user %}
                                     <a href="{{ path('app_login') }}" class="mr-3"><img src="{{ asset('assets/icons/login-black.svg') }}" alt="connexion" width="25"></a>
                                 {% else %}
                                     <a href="{{ path('app_logout') }}" class="mr-3"><img src="{{ asset('assets/icons/logout-black.svg') }}" alt="déconnexion" width="25"></a>
                                 {% endif %}
 
-                                {# Check if the admin is logged-in #}
+                                {# Administration of the dishes & openning hours : Check if the admin is logged-in #}
                                 {% if app.user and is_granted('ROLE_ADMIN') %}
                                     <a href="{{ path('app_admin_dish') }}#gallery" class="mr-3">
                                         <img src="{{ asset('assets/icons/dish-dome-black.svg') }}" alt="administration des plats favoris" width="20">
@@ -45,31 +45,59 @@
                             </li>
                                 <li class="nav-item mb-2">
                                     <span class="font-weight-bold">{{ openingDay[0]|capitalize }} :</span>
-                                    {% if openingHoursWednesday == closed %}
-                                        <span>{{ openingHoursMonday }}</span>
+                                    {% if openingHoursMonday == closed %}
+                                        <span class="font-weight-bold">{{ openingHoursMonday }}</span>
+                                    {% else %}
+                                        <span >{{ openingHoursMonday }}</span>
                                     {% endif %}
                                 </li>
                                 <li class="nav-item mb-2">
                                     <span class="font-weight-bold">{{ openingDay[1]|capitalize }} :</span>
-                                    {{ openingHoursTuesday }}
+                                    {% if openingHoursTuesday == closed %}
+                                        <span class="font-weight-bold">{{ openingHoursTuesday }}</span>
+                                    {% else %}
+                                            <span >{{ openingHoursTuesday }}</span>
+                                    {% endif %}
                                 </li>
                                 <li class="nav-item mb-2">
                                     <span class="font-weight-bold">{{ openingDay[2]|capitalize }} :</span>
                                     {% if openingHoursWednesday == closed %}
                                         <span class="font-weight-bold">{{ openingHoursWednesday }}</span>
+                                    {% else %}
+                                        <span >{{ openingHoursWednesday  }}</span>
                                     {% endif %}
                                 </li>
                                 <li class="nav-item mb-2">
-                                    <span class="font-weight-bold">{{ openingDay[3]|capitalize }} : </span>{{ openingHoursThirsday }}
+                                    <span class="font-weight-bold">{{ openingDay[3]|capitalize }} :</span>
+                                    {% if openingHoursThirsday == closed %}
+                                        <span class="font-weight-bold">{{ openingHoursThirsday }}</span>
+                                    {% else %}
+                                        <span >{{ openingHoursThirsday }}</span>
+                                    {% endif %}
                                 </li>
                                 <li class="nav-item mb-2">
-                                    <span class="font-weight-bold">{{ openingDay[4]|capitalize }} : </span> {{ openingHoursFriday }}
+                                    <span class="font-weight-bold">{{ openingDay[4]|capitalize }} :</span>
+                                    {% if openingHoursFriday == closed %}
+                                        <span class="font-weight-bold">{{ openingHoursFriday }}</span>
+                                    {% else %}
+                                        <span >{{ openingHoursFriday }}</span>
+                                    {% endif %}
                                 </li>
                                 <li class="nav-item mb-2">
-                                    <span class="font-weight-bold">{{ openingDay[5]|capitalize }} :</span> {{ openingHoursSaturday }}
+                                    <span class="font-weight-bold">{{ openingDay[5]|capitalize }} :</span>
+                                    {% if openingHoursSaturday == closed %}
+                                        <span class="font-weight-bold">{{ openingHoursSaturday }}</span>
+                                    {% else %}
+                                        <span >{{ openingHoursSaturday }}</span>
+                                    {% endif %}
                                 </li>
                                 <li class="nav-item mb-2">
-                                    <span class="font-weight-bold">{{ openingDay[6]|capitalize }} : </span> {{ openingHoursSunday }}
+                                    <span class="font-weight-bold">{{ openingDay[6]|capitalize }} :</span>
+                                    {% if openingHoursSunday == closed %}
+                                        <span class="font-weight-bold">{{ openingHoursSunday }}</span>
+                                    {% else %}
+                                        <span >{{ openingHoursSunday }}</span>
+                                    {% endif %}
                                 </li>
                         </ul>
                     </div>
