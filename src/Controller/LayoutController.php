@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class LayoutController extends AbstractController
 {
     /**
-     * Footer     // https://symfony.com/doc/4.1/templating/embedding_controllers.html
+     * Footer
      * @param RestaurantRepository $restaurantRepository
      * @param OpeningdayRepository $openingdayRepository
      * @param OpeningService $openingService
@@ -29,8 +29,10 @@ class LayoutController extends AbstractController
         $friday = $openingdayRepository->findOneBy(['day'=> 'vendredi']);
         $saturday = $openingdayRepository->findOneBy(['day'=> 'samedi']);
         $sunday = $openingdayRepository->findOneBy(['day'=> 'dimanche']);
+        $closed = "Fermé";
 
         return $this->render('layout/footer.html.twig', [
+            'closed' => $closed,
             'restaurant' => $restaurant,
             'openingDay' => $openingService->displayOpeningDays($openingdays),
             'openingHoursMonday' => $openingService->displayOpeningHours($monday),

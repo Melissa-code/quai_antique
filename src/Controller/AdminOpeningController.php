@@ -34,15 +34,6 @@ class AdminOpeningController extends AbstractController
         $openingdays = $openingdayRepository->findAll();
         $closed = "Fermé";
 
-        // Change the attribute open = true of the object Openingday if there is the attribute openinghours
-        foreach ($openingdays as $openingday) {
-            foreach ($openingday->getOpeninghours() as $hour) {
-                if($hour->getstarthour() and $hour->getEndhour() and $openingday->isOpen() === false) {
-                    $openingday->setOpen(true) ;
-                    $openingdayRepository->setOpen(1);
-                }
-            }
-        }
 
         // Pagination (4 days per page) : $hours replace $openinghours = $openinghourRepository->findAll();
         $hours = $paginator->paginate(

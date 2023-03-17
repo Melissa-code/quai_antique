@@ -3,9 +3,6 @@
 namespace App\Service;
 
 use App\Entity\Openingday;
-use App\Entity\Openinghour;
-use App\Repository\OpeningdayRepository;
-use App\Repository\OpeninghourRepository;
 
 
 class OpeningService
@@ -25,6 +22,7 @@ class OpeningService
         return $days;
     }
 
+
     /**
      * Display the opening hours of the restaurant
      * @param Openingday $day
@@ -33,18 +31,21 @@ class OpeningService
     public function displayOpeningHours(Openingday $day): mixed
     {
         $hours = [];
-
         foreach ($day->getOpeninghours() as $hour) {
             $hours[] .= "{$hour->getStarthour()->format("H:i")} - {$hour->getEndhour()->format("H:i")} ";
         }
         if($hours) {
             if(count($hours) > 1) {
+                $firstHour = reset($hours);
                 $lastHour = end($hours);
+                if($lastHour < 17 && $lastHour < $firstHour) {
+                    $hours = array_reverse($hours);
+                }
                 foreach ($hours as $hour) {
-                    if($hour === $lastHour) {
+                    if($hour === end($hours)) {
                         return $hour ." ";
                     } else {
-                        return $hour ." et ".$lastHour;
+                        return $hour ." et ".end($hours);
                     }
                 }
             } else {

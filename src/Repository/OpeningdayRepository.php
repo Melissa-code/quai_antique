@@ -51,31 +51,52 @@ class OpeningdayRepository extends ServiceEntityRepository
     }
 
 
+//    /**
+//     * https://www.doctrine-project.org/projects/doctrine-orm/en/2.14/reference/dql-doctrine-query-language.html#update-queries
+//     * @param array $openinghours
+//     * @return int|mixed|string
+//     */
+//    public function addHours(array $openinghours)
+//    {
+//        return $this->getEntityManager()->createQuery(
+//            'UPDATE App\Entity\Openingday d
+//                SET d.openinghours = :openinghours'
+//        )
+//            ->setParameter('openinghours', $openinghours)
+//            ->getResult();
+//    }
+
     /**
-     * https://www.doctrine-project.org/projects/doctrine-orm/en/2.14/reference/dql-doctrine-query-language.html#update-queries
-     * @param array $openinghours
+     * @param int $open
+     * @param $id
      * @return int|mixed|string
      */
-    public function addHours(array $openinghours)
+    public function updateOpen(int $open, $id)
     {
         return $this->getEntityManager()->createQuery(
-            'UPDATE App\Entity\Openingday d 
-                SET d.openinghours = :openinghours'
-        )
-            ->setParameter('openinghours', $openinghours)
-            ->getResult();
-    }
-
-
-    public function setOpen(int $open)
-    {
-        return $this->getEntityManager()->createQuery(
-            'UPDATE App\Entity\Openingday d 
-                SET d.open = :open'
+            'UPDATE App\Entity\Openingday o 
+                SET o.open = :open
+                WHERE o.id = :id'
         )
             ->setParameter('open', $open)
+            ->setParameter('id', $id)
             ->getResult();
     }
+
+    // TEST EN COURS
+    public function findDayByName(string $day): array
+    {
+        return $this->getEntityManager()->createQuery(
+            'SELECT o.day FROM App\Entity\Openingday o
+                JOIN o.openingshours h
+                WHERE o.day = :day
+                '
+        )
+            ->setParameter('day', $day)
+            ->getResult() ;
+    }
+
+
 //    /**
 //     * @return Openingday[] Returns an array of Openingday objects
 //     */
