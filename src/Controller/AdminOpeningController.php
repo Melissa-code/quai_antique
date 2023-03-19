@@ -39,14 +39,45 @@ class AdminOpeningController extends AbstractController
             foreach ($openinghours as $openinghour) {
                 foreach ($openingday->getOpeninghours() as $hourOfDay) {
                     if($hourOfDay->getId() === $openinghour->getId() && $openingday->isOpen() === false) {
-                        echo $openingday->getDay();
+                        //echo $openingday->getDay();
                         $openingdayRepository->updateOpen(1, $openingday->getId());
+                        $openingday->setOpen(true);
                     }
                 }
             }
         }
 
         // Change the attribute open of a day: true to false if it doesn't have any hours
+        $daysWithHours = [];
+        foreach ($openingdays as $openingday) {
+            foreach ($openinghours as $openinghour) {
+                foreach ($openingday->getOpeninghours() as $hourOfDay) {
+                    if($hourOfDay->getId() === $openinghour->getId()) {
+                        $daysWithHours[] .= $openingday->getDay();
+                    }
+                }
+            }
+        }
+        //dd($days);
+
+        $notFoundDays = [];
+        foreach ($openingdays as $openingday) {
+            if(!in_array($openingday->getDay(), $daysWithHours)) {
+                $notFoundDays[] .= $openingday->getDay();
+            }
+        }
+        //dd($notFoundDays);
+
+        foreach ($openingdays as $openingday){
+            foreach ($notFoundDays as $notFoundDay) {
+                if($openingday->getDay() === $notFoundDay) {
+                    echo $notFoundDay;
+                    $openingdayRepository->updateOpen(0, $openingday->getId());
+                    $openingday->setOpen(false);
+                }
+            }
+        }
+
 
 
 
