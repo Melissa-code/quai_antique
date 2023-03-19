@@ -34,28 +34,23 @@ class AdminOpeningController extends AbstractController
         $openingdays = $openingdayRepository->findAll();
         $closed = "Fermé";
 
-        foreach ($openinghours as $openinghour) {
-            foreach ($openingdays as $openingday) {
-                foreach($openingday->getOpeninghours() as $hour) {
-                    if ($hour === $openinghour && $openingday->isOpen() === false) {
-                        // tous les jours qui ont des horaires
-                        //echo $openingday->getDay();
-                        //dd($openingday->isOpen());
+        // Change the attribute open of a day: false to true if the day get openinghours
+        foreach ($openingdays as $openingday) {
+            foreach ($openinghours as $openinghour) {
+                foreach ($openingday->getOpeninghours() as $hourOfDay) {
+                    if($hourOfDay->getId() === $openinghour->getId() && $openingday->isOpen() === false) {
+                        echo $openingday->getDay();
                         $openingdayRepository->updateOpen(1, $openingday->getId());
-                        $openingday->setOpen(1);
-                        //dd($openingday->isOpen());
-                    } elseif ($hour != $openinghour && $openingday->isOpen() === true) {
-                        //echo $openingday->getDay();
-                        // echo $openinghour.$openingday->getDay();
-                        $openingdayRepository->updateOpen(0, $openingday->getId());
-                        $openingday->setOpen(0);
                     }
                 }
             }
         }
 
+        // Change the attribute open of a day: true to false if it doesn't have any hours
 
-        // Pagination (4 days per page) : $hours replace $openinghours = $openinghourRepository->findAll();
+
+
+        // Pagination (4 hours per page) : $hours replace $openinghours = $openinghourRepository->findAll();
         $hours = $paginator->paginate(
             $openinghourRepository->findAllWithPagination(), /* query NOT result */
             $request->query->getInt('page', 1), /* page number */
@@ -66,6 +61,7 @@ class AdminOpeningController extends AbstractController
             'openinghours' => $hours,
             'closed' => $closed,
             'openingdays' => $openingdays,
+
         ]);
     }
 

@@ -51,6 +51,25 @@ class OpeningdayRepository extends ServiceEntityRepository
     }
 
 
+    /**
+     * Change the value of open of a day
+     * @param int $open
+     * @param $id
+     * @return int|string
+     */
+    public function updateOpen(int $open, $id): int|string
+    {
+        return $this->getEntityManager()->createQuery(
+            'UPDATE App\Entity\Openingday o            
+                SET o.open = :open           
+                WHERE o.id = :id'
+        )
+            ->setParameter('open', $open)
+            ->setParameter('id', $id)
+            ->getResult();
+    }
+
+
 //    /**
 //     * https://www.doctrine-project.org/projects/doctrine-orm/en/2.14/reference/dql-doctrine-query-language.html#update-queries
 //     * @param array $openinghours
@@ -65,37 +84,6 @@ class OpeningdayRepository extends ServiceEntityRepository
 //            ->setParameter('openinghours', $openinghours)
 //            ->getResult();
 //    }
-
-    /**
-     * @param int $open
-     * @param $id
-     * @return int|mixed|string
-     */
-    public function updateOpen(int $open, $id)
-    {
-        return $this->getEntityManager()->createQuery(
-            'UPDATE App\Entity\Openingday o 
-                SET o.open = :open
-                WHERE o.id = :id'
-        )
-            ->setParameter('open', $open)
-            ->setParameter('id', $id)
-            ->getResult();
-    }
-
-    // TEST EN COURS
-    public function findDayByName(string $day): array
-    {
-        return $this->getEntityManager()->createQuery(
-            'SELECT o.day FROM App\Entity\Openingday o
-                JOIN o.openingshours h
-                WHERE o.day = :day
-                '
-        )
-            ->setParameter('day', $day)
-            ->getResult() ;
-    }
-
 
 //    /**
 //     * @return Openingday[] Returns an array of Openingday objects
