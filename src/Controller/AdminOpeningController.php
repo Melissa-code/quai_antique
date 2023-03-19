@@ -9,6 +9,7 @@ use App\Form\OpeningdayType;
 use App\Form\OpeninghourType;
 use App\Repository\OpeningdayRepository;
 use App\Repository\OpeninghourRepository;
+use App\Service\OpeningService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +22,7 @@ class AdminOpeningController extends AbstractController
 {
     /**
      * List the opening days and their hours
+     * @param OpeningService $openingService
      * @param OpeningdayRepository $openingdayRepository
      * @param OpeninghourRepository $openinghourRepository
      * @param PaginatorInterface $paginator
@@ -28,7 +30,7 @@ class AdminOpeningController extends AbstractController
      * @return Response
      */
     #[Route('/admin/horaires_ouverture', name: 'app_admin_opening')]
-    public function openingHours(OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, PaginatorInterface $paginator, Request $request): Response
+    public function openingHours(OpeningService $openingService,OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $openinghours = $openinghourRepository->findAll();
         $openingdays = $openingdayRepository->findAll();
@@ -48,38 +50,17 @@ class AdminOpeningController extends AbstractController
         }
 
         // Change the attribute open of a day: true to false if it doesn't have any hours
-        $daysWithHours = [];
-        foreach ($openingdays as $openingday) {
-            foreach ($openinghours as $openinghour) {
-                foreach ($openingday->getOpeninghours() as $hourOfDay) {
-                    if($hourOfDay->getId() === $openinghour->getId()) {
-                        $daysWithHours[] .= $openingday->getDay();
-                    }
-                }
-            }
-        }
-        //dd($days);
-
-        $notFoundDays = [];
-        foreach ($openingdays as $openingday) {
-            if(!in_array($openingday->getDay(), $daysWithHours)) {
-                $notFoundDays[] .= $openingday->getDay();
-            }
-        }
-        //dd($notFoundDays);
-
+        $daysWithHours = $openingService->getDaysWithHours($openingdays, $openinghours);
+        $notFoundDays = $openingService->getNotFoundDaysInOpeningdaysArray($openingdays, $daysWithHours);
         foreach ($openingdays as $openingday){
             foreach ($notFoundDays as $notFoundDay) {
                 if($openingday->getDay() === $notFoundDay) {
-                    echo $notFoundDay;
+                    //echo $notFoundDay;
                     $openingdayRepository->updateOpen(0, $openingday->getId());
                     $openingday->setOpen(false);
                 }
             }
         }
-
-
-
 
         // Pagination (4 hours per page) : $hours replace $openinghours = $openinghourRepository->findAll();
         $hours = $paginator->paginate(

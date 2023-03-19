@@ -58,6 +58,41 @@ class OpeningService
         }
     }
 
+    /**
+     * Get the opening days with their opening hours
+     * @param array $openingdays
+     * @param array $openinghours
+     * @return ?array
+     */
+    public function getDaysWithHours(array $openingdays, array $openinghours) : ?array {
+        $daysWithHours = [];
+        foreach ($openingdays as $openingday) {
+            foreach ($openinghours as $openinghour) {
+                foreach ($openingday->getOpeninghours() as $hourOfDay) {
+                    if($hourOfDay->getId() === $openinghour->getId()) {
+                        $daysWithHours[] .= $openingday->getDay();
+                    }
+                }
+            }
+        }
+        return $daysWithHours;
+    }
+
+    /**
+     * Get the days that are not in the array of the opening days
+     * @param array $openingdays
+     * @param array $daysWithHours
+     * @return ?array
+     */
+    public function getNotFoundDaysInOpeningdaysArray(array $openingdays, array $daysWithHours): ?array {
+        $notFoundDays = [];
+        foreach ($openingdays as $openingday) {
+            if(!in_array($openingday->getDay(), $daysWithHours)) {
+                $notFoundDays[] .= $openingday->getDay();
+            }
+        }
+        return $notFoundDays;
+    }
 
 
 
