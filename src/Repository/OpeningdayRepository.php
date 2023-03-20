@@ -50,9 +50,8 @@ class OpeningdayRepository extends ServiceEntityRepository
             ->getQuery();
     }
 
-
     /**
-     * Change the value of open of a day
+     * Change the value of open of a day if their hours are updating
      * @param int $open
      * @param $id
      * @return int|string
@@ -69,21 +68,6 @@ class OpeningdayRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-
-//    /**
-//     * https://www.doctrine-project.org/projects/doctrine-orm/en/2.14/reference/dql-doctrine-query-language.html#update-queries
-//     * @param array $openinghours
-//     * @return int|mixed|string
-//     */
-//    public function addHours(array $openinghours)
-//    {
-//        return $this->getEntityManager()->createQuery(
-//            'UPDATE App\Entity\Openingday d
-//                SET d.openinghours = :openinghours'
-//        )
-//            ->setParameter('openinghours', $openinghours)
-//            ->getResult();
-//    }
 
 //    /**
 //     * @return Openingday[] Returns an array of Openingday objects

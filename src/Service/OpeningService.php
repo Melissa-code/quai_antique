@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Openingday;
+use phpDocumentor\Reflection\Type;
 
 
 class OpeningService
@@ -21,7 +22,6 @@ class OpeningService
         }
         return $days;
     }
-
 
     /**
      * Display the opening hours of the restaurant
@@ -64,7 +64,8 @@ class OpeningService
      * @param array $openinghours
      * @return ?array
      */
-    public function getDaysWithHours(array $openingdays, array $openinghours) : ?array {
+    public function getDaysWithHours(array $openingdays, array $openinghours) : ?array
+    {
         $daysWithHours = [];
         foreach ($openingdays as $openingday) {
             foreach ($openinghours as $openinghour) {
@@ -84,7 +85,8 @@ class OpeningService
      * @param array $daysWithHours
      * @return ?array
      */
-    public function getNotFoundDaysInOpeningdaysArray(array $openingdays, array $daysWithHours): ?array {
+    public function getNotFoundDaysInOpeningdays(array $openingdays, array $daysWithHours): ?array
+    {
         $notFoundDays = [];
         foreach ($openingdays as $openingday) {
             if(!in_array($openingday->getDay(), $daysWithHours)) {
@@ -93,7 +95,6 @@ class OpeningService
         }
         return $notFoundDays;
     }
-
 
 
 }

@@ -50,7 +50,19 @@ class OpeninghourRepository extends ServiceEntityRepository
             ->getQuery();
     }
 
-
+    /**
+     * Find all the opening hours in ascending start hour order
+     * @return array (hours)
+     */
+    public function findAllByAscendingHours(): array
+    {
+        return $this->createQueryBuilder('o')
+            ->orderBy('o.starthour', 'ASC')
+            //->orderBy('o.endhour', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
 
 //    /**
 //     * @return Openinghour[] Returns an array of Openinghour objects

@@ -30,8 +30,8 @@
                         {# Title #}
 
                         <div class="py-2 mb-3">
-                            <h1 class="page-title">Horaires d'ouverture</h1>
-                            <h2 class="text-center">Horaires d'ouverture</h2>
+                            <h1 class="page-title">Administration des horaires</h1>
+                            <h2 class="text-center">Administration des horaires</h2>
                         </div>
 
                         {# Table with the hours #}
@@ -42,70 +42,37 @@
                                 <th scope="col" class="text-center">Id</th>
                                 <th scope="col" class="text-center">Début du service</th>
                                 <th scope="col" class="text-center">Fin du service</th>
-{#                                <th scope="col" class="text-center">Jour</th>#}
                                 <th scope="col" class="text-center">Action</th>
                             </tr>
                             </thead>
-
                             <tbody>
-                            {% for openinghour in openinghours %}
-{#                                {% for openingday in openinghour.openingdays %}#}
-                                    <tr>
-                                        <th scope="row" class="text-center">{{ openinghour.id }}</th>
-                                        <td class="text-center">{{ openinghour.starthour|date("H:i") }}</td>
-                                        <td class="text-center">{{ openinghour.endhour|date("H:i") }}</td>
-{#                                        {% if openinghour.starthour|date("H:i") <= "14:00" %}#}
-{#                                            <td class="text-center">{{ openingday.day|capitalize }} midi</td>#}
-{#                                        {% else %}#}
-{#                                            <td class="text-center">{{ openingday.day|capitalize }} soir</td>#}
-{#                                        {% endif %}#}
-
-                                        <td class="text-center">
-                                            <span class="d-flex justify-content-center">
-                                                {# Update button #}
-                                                <a class="btn btn-admin mr-2" href="{{ path('app_admin_update_openingHours', {'id': openinghour.id}) }}">
-                                                    <img src="{{ asset('assets/icons/edit.svg') }}" alt="Modifier un horaire" width="15">
-                                                </a>
-                                                {# Delete button #}
-                                                <form method="POST" action="{{ path('app_admin_delete_openingHours', {'id': openinghour.id }) }}" onsubmit="return confirm('Confirmer la suppression de l\'horaire')" >
-                                                    <input type="hidden" name="_method" value="delete">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token('remove' ~ openinghour.id) }}">
-                                                    <button type="submit" class="btn btn-admin">
-                                                        <img src="{{ asset('assets/icons/trash.svg') }}" alt="Supprimer un horaire" width="15">
-                                                    </button>
-                                                </form>
-                                            </span>
-                                        </td>
-                                    </tr>
-{#                                {% endfor %}#}
+                            {% for openinghour in ascendingOpeninghours %}
+                                <tr>
+                                    <th scope="row" class="text-center">{{ openinghour.id }}</th>
+                                    <td class="text-center">{{ openinghour.starthour|date("H:i") }}</td>
+                                    <td class="text-center">{{ openinghour.endhour|date("H:i") }}</td>
+                                    <td class="text-center">
+                                        <span class="d-flex justify-content-center">
+                                            {# Update an opening hour button #}
+                                            <a class="btn btn-admin mr-2" href="{{ path('app_admin_update_openingHours', {'id': openinghour.id}) }}">
+                                                <img src="{{ asset('assets/icons/edit.svg') }}" alt="Modifier un horaire" width="15">
+                                            </a>
+                                            {# Delete an opening hour button #}
+                                            <form method="POST" action="{{ path('app_admin_delete_openingHours', {'id': openinghour.id }) }}" onsubmit="return confirm('Confirmer la suppression de l\'horaire')" >
+                                                <input type="hidden" name="_method" value="delete">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('remove' ~ openinghour.id) }}">
+                                                <button type="submit" class="btn btn-admin">
+                                                    <img src="{{ asset('assets/icons/trash.svg') }}" alt="Supprimer un horaire" width="15">
+                                                </button>
+                                            </form>
+                                        </span>
+                                    </td>
+                                </tr>
                             {% endfor %}
-
-                            {#  Update the closed days #}
-
-                            {% for openingday in openingdays %}
-                                {% if openingday.open == false %}
-                                    <tr class="closed-day">
-                                        <th scope="row" class="text-center">{{ openingday.id }}</th>
-                                        <td class="text-center">{{ closed }}</td>
-                                        <td class="text-center">{{ closed }}</td>
-{#                                        <td class="text-center">{{ openingday.day }}</td>#}
-                                        <td class="text-center">
-                                            <span class="d-flex justify-content-center">
-                                                {# Update a closed day button #}
-                                                <a class="btn btn-admin w-50" href="{{ path('app_admin_openingDays') }}">
-                                                    <img src="{{ asset('assets/icons/edit.svg') }}" alt="Modifier un jour de fermeture" width="15">
-                                                </a>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                {% endif %}
-                            {% endfor %}
-
                             </tbody>
                         </table>
 
-                        {# Create new hours button #}
-
+                        {# Create a new opening hour button #}
                         <div class="text-center mb-3">
                             <a href="{{ path('app_admin_create_openingHours') }}" class="btn btn-admin w-100 ">
                                 <img src="{{ asset('assets/icons/add.svg') }}" alt="Ajouter un nouvel horaire" width="28">
@@ -113,15 +80,11 @@
                             </a>
                         </div>
 
-                        <div class="col-12 d-flex justify-content-center my-4">
-                            <a href="{{ path('app_admin_openingDays') }}" class="btn btn-custom mr-2 w-100">Modifier un jour d'ouverture</a>
-                        </div>
                     </div>
-
 
                     {# Display navigation for a pagination #}
                     <div class="navigation ">
-                        {{ knp_pagination_render(openinghours) }}
+                        {{ knp_pagination_render(ascendingOpeninghours) }}
                     </div>
 
                 </div>
@@ -129,7 +92,6 @@
 
         </div>
     </section>
-
 
     {% block javascripts %}
         <script src=""></script>
