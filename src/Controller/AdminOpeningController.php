@@ -30,6 +30,7 @@ class AdminOpeningController extends AbstractController
     #[Route('/admin/horaires_ouverture', name: 'app_admin_opening')]
     public function openingHours(OpeningService $openingService, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $findAllByAscendingHours = $openinghourRepository->findAllByAscendingHours();
         $openinghours = $openinghourRepository->findAll();
         $openingdays = $openingdayRepository->findAll();
         $closed = "Fermé";

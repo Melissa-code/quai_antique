@@ -47,6 +47,7 @@ class OpeninghourRepository extends ServiceEntityRepository
     public function findAllWithPagination() : Query
     {
         return $this->createQueryBuilder('o')
+            ->orderBy(' o.starthour', 'ASC')
             ->getQuery();
     }
 
@@ -57,9 +58,7 @@ class OpeninghourRepository extends ServiceEntityRepository
     public function findAllByAscendingHours(): array
     {
         return $this->createQueryBuilder('o')
-            ->orderBy('o.starthour', 'ASC')
-            //->orderBy('o.endhour', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy(' o.starthour', 'ASC')
             ->getQuery()
             ->getResult();
     }
