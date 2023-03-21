@@ -11,3 +11,16 @@
     border: 1px solid #FFE6A7;
     opacity: 0.9;
 }
+
+/* *********************************************
+               Media queries
+********************************************** */
+
+/* mobile phones */
+
+@media screen and (min-device-width: 280px) and (max-device-width: 767px) {
+
+    .update-opening {
+        background: #000000;
+    }
+}

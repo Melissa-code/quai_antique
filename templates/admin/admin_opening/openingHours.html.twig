@@ -9,33 +9,38 @@
 
     <section id="opening">
         <div class="row opening-list d-flex justify-content-center">
-
-            {# Message flash #}
-
-            <div class="col-md-8 confirm-message text-center mt-2">
-                {% for label, messages in app.flashes %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{ label }} alert-dismissible fade show font-weight-bold" role="alert">
-                            {{ message }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    {% endfor %}
-                {% endfor %}
-            </div>
-
             <article class="container h-100">
-                <div class="row text-white d-flex justify-content-center align-items-center mx-1 my-md-4">
-                    <div class="col-12 list-bg rounded p-2 p-md-4 my-md-3">
+                <div class="row text-white d-flex justify-content-center align-items-center mx-1 my-md-5">
+                    <div class="col-12 list-bg rounded p-2 p-md-4 my-md-5">
+
+                        {# Flash messages  #}
+                        <div class="confirm-message text-center mt-2">
+                        {% for label, flashes in app.session.flashbag.all %}
+                            {% for flash in flashes %}
+                                {% if ( label == 'success' ) %}
+                                    {# Success message  #}
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        {{ flash }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+                                    </div>
+                                {% elseif ( label == 'error' ) %}
+                                    {# Error message  #}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        {{ flash }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        </div>
 
                         {# Title #}
-
                         <div class="py-2 mb-3">
                             <h1 class="page-title">Administration des horaires</h1>
                             <h2 class="text-center">Administration des horaires</h2>
                         </div>
 
                         {# Table with the hours #}
-
                         <table class="table table-bg">
                             <thead>
                             <tr>
@@ -73,18 +78,17 @@
                         </table>
 
                         {# Create a new opening hour button #}
-                        <div class="text-center mb-3">
-                            <a href="{{ path('app_admin_create_openingHours') }}" class="btn btn-admin w-100 ">
+                        <div class="text-center mb-5">
+                            <a href="{{ path('app_admin_create_openingHours') }}" class="btn btn-admin w-100">
                                 <img src="{{ asset('assets/icons/add.svg') }}" alt="Ajouter un nouvel horaire" width="28">
                                 Ajouter un horaire
                             </a>
                         </div>
 
-                    </div>
-
-                    {# Display navigation for a pagination #}
-                    <div class="navigation ">
-                        {{ knp_pagination_render(ascendingOpeninghours) }}
+                        {# Display navigation for a pagination #}
+                        <div class="navigation mt-2 d-flex justify-content-center">
+                            {{ knp_pagination_render(ascendingOpeninghours) }}
+                        </div>
                     </div>
 
                 </div>

@@ -26,6 +26,7 @@ class SignupController extends AbstractController
         $user = new User();
         $form = $this->createForm(SignupType::class, $user);
         $form->handleRequest($request);
+        //$form->get('cgu')->getData();
 
         if($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();

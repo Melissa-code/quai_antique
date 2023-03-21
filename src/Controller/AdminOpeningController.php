@@ -30,7 +30,6 @@ class AdminOpeningController extends AbstractController
     #[Route('/admin/horaires_ouverture', name: 'app_admin_opening')]
     public function openingHours(OpeningService $openingService, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $findAllByAscendingHours = $openinghourRepository->findAllByAscendingHours();
         $openinghours = $openinghourRepository->findAll();
         $openingdays = $openingdayRepository->findAll();
         $closed = "Fermé";
@@ -76,7 +75,8 @@ class AdminOpeningController extends AbstractController
     }
 
     /**
-     * Create or Update the opening hours of a day
+     * Create or Update an opening hour
+     * @param OpeninghourRepository $openinghourRepository
      * @param Openinghour|null $openinghour
      * @param ManagerRegistry $managerRegistry
      * @param Request $request
@@ -84,7 +84,7 @@ class AdminOpeningController extends AbstractController
      */
     #[Route('/admin/creation_horaire', name: 'app_admin_create_openingHours')]
     #[Route('/admin/modification_horaire/{id}', name: 'app_admin_update_openingHours', methods: 'GET|POST')]
-    public function createOrUpdateOpeningHours(Openinghour $openinghour = null, ManagerRegistry $managerRegistry, Request $request): Response
+    public function createOrUpdateOpeningHours(OpeninghourRepository $openinghourRepository, Openinghour $openinghour = null, ManagerRegistry $managerRegistry, Request $request): Response
     {
         if(!$openinghour) {
             $openinghour = new Openinghour();
@@ -94,10 +94,23 @@ class AdminOpeningController extends AbstractController
         $form = $this->createForm(OpeninghourType::class, $openinghour);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $managerRegistry->getManager()->persist($openinghour);
-            $managerRegistry->getManager()->flush();
-            $this->addFlash("success", ($isUpdated) ? "La modification a bien été effectuée." : "L'ajout a bien été effectué.");
-            return $this->redirectToRoute('app_admin_opening');
+            // Check if a duplicate already exists in the database
+            $startHour = $openinghour->getStarthour();
+            $endHour = $openinghour->getEndhour();
+            $openingStarthour = $openinghourRepository->findOneBy(array('starthour'=> $startHour));
+            $openingEndhour = $openinghourRepository->findOneBy(array('endhour'=> $endHour));
+            if($openingStarthour && $openingEndhour) {
+                if ($startHour == $openingStarthour->getStarthour() && $endHour == $openingEndhour->getEndhour()) {
+                    $this->addFlash("error", "Cet horaire existe déjà.");
+                    return $this->redirectToRoute('app_admin_opening');
+                }
+            }
+            else {
+                $managerRegistry->getManager()->persist($openinghour);
+                $managerRegistry->getManager()->flush();
+                $this->addFlash("success", ($isUpdated) ? "La modification a bien été effectuée." : "L'ajout a bien été effectué.");
+                return $this->redirectToRoute('app_admin_opening');
+            }
         }
 
         return $this->render('admin/admin_opening/createUpdateHours.html.twig', [

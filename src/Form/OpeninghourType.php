@@ -9,6 +9,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 class OpeninghourType extends AbstractType
 {
@@ -18,12 +20,12 @@ class OpeninghourType extends AbstractType
             ->add('starthour', TimeType::class, [
                 'label' => 'Ouverture : ',
                 'widget' => 'single_text',
-                'required' => false,
+                'required' => true,
             ])
             ->add('endhour', TimeType::class, [
                 'label' => 'Fermeture : ',
                 'widget' => 'single_text',
-                'required' => false,
+                'required' => true,
             ])
             ->add('openingdays', EntityType::class, [
                 'class' => Openingday::class,
