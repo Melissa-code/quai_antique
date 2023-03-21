@@ -51,16 +51,12 @@ class AdminDishController extends AbstractController
             $date = new \DateTimeImmutable();
             $dish->setCreatedAt($date);
         }
-
         $isUpdated = $dish->getId() !== null;
 
         $form = $this->createForm(DishType::class, $dish);
         $form->handleRequest($request);
-
         if($form->isSubmitted() && $form->isValid()) {
             $oldImage = $this->getParameter('directory_images_dishes').'/'.$dish->getImage();
-            // dd($oldImage);
-
             // Get the uploaded image file
             $imageFile = $form->get('imageFile')->getData();
             //Check if the image is valid
@@ -69,10 +65,8 @@ class AdminDishController extends AbstractController
                 // Reformat the image file name to be conform to an URL
                 $imageFileReformat = $slugger->slug($imageFileOriginal);
                 // Create a unique name & unique id for the image file
-
                 //$imageName = $imageFileReformat.'-'.uniqid().'-'.$imageFile->getExtension();
                 $imageName = $imageFileReformat.'-'.uniqid().'-.png';
-
                 // Move the image file to a specific directory in the server
                 try {
                     $imageFile->move(
@@ -101,7 +95,7 @@ class AdminDishController extends AbstractController
             $this->addFlash("success", ($isUpdated) ? "La modification a bien été effectuée." : "L'ajout a bien été effectué.");
         }
 
-        return $this->render('admin_dish/createUpdate.html.twig', [
+        return $this->render('admin/admin_dish/createUpdate.html.twig', [
             'form' => $form->createView(),
             'dish' => $dish,
             'isUpdated' => $isUpdated,

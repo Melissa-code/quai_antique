@@ -16,23 +16,43 @@
             <article class="container my-4">
                 <div class="row text-white d-flex justify-content-center mx-1">
 
-                    {# Message flash #}
+{#                    #}{# Message flash #}
 
-                    <div class="col-md-8 confirm-message text-center">
-                        {% for label, messages in app.flashes %}
-                            {% for message in messages %}
-                                <div class="alert alert-{{ label }} alert-dismissible fade show font-weight-bold" role="alert">
-                                    {{ message }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
-                                </div>
-                            {% endfor %}
-                        {% endfor %}
-                    </div>
+{#                    <div class="col-md-8 confirm-message text-center">#}
+{#                        {% for label, messages in app.flashes %}#}
+{#                            {% for message in messages %}#}
+{#                                <div class="alert alert-{{ label }} alert-dismissible fade show font-weight-bold" role="alert">#}
+{#                                    {{ message }}#}
+{#                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>#}
+{#                                </div>#}
+{#                            {% endfor %}#}
+{#                        {% endfor %}#}
+{#                    </div>#}
 
                     <div class="col-md-10 form-bg rounded p-2 p-md-4 my-5">
 
-                        {# Page title #}
+                        {# Flash messages  #}
+                        <div class="confirm-message text-center mt-2 font-weight-bold">
+                            {% for label, flashes in app.session.flashbag.all %}
+                                {% for flash in flashes %}
+                                    {% if ( label == 'success' ) %}
+                                        {# Success message #}
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            {{ flash }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+                                        </div>
+                                    {% elseif ( label == 'error' ) %}
+                                        {# Error message #}
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            {{ flash }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
 
+                        {# Page title #}
                         <div class="col-12 py-3">
                             {% if isUpdated %}
                                 <h1 class="page-title">Modification du plat {{ dish.title }}</h1>

@@ -18,7 +18,7 @@ class Openingday
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Length(min: 3, max: 20, minMessage: 'Le jour doit comporter au minimum {{ limit }} caractères', maxMessage: 'Le jour doit comporter au maximum {{ limit }} caractères')]
+    #[Assert\Length(min: 3, max: 30, minMessage: 'Le jour doit comporter au minimum {{ limit }} caractères', maxMessage: 'Le jour doit comporter au maximum {{ limit }} caractères')]
     private ?string $day = null;
 
     #[ORM\Column]

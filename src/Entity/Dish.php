@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: DishRepository::class)]
 class Dish
@@ -18,27 +19,33 @@ class Dish
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min: 3, max: 50, minMessage: 'Le nom doit comporter au minimum {{ limit }} caractères', maxMessage: 'Le nom doit comporter au maximum {{ limit }} caractères',)]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[Assert\Range(notInRangeMessage: 'Le prix doit être compris entre {{ min }} et {{ max }} €', min: 0.1, max: 2000,)]
     private ?string $price = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(min: 3, max: 255, minMessage: 'La description doit comporter au minimum {{ limit }} caractères', maxMessage: 'La description doit comporter au maximum {{ limit }} caractères',)]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    // Not mapped to the datatabase
+    // Attribute not mapped to the datatabase
     private ?File $imageFile = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(allowNull : false)]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
     private ?bool $favorite = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
     private ?bool $active = null;
 
     #[ORM\ManyToOne(inversedBy: 'dishes')]

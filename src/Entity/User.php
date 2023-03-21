@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -19,6 +21,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email(
+        message: 'The email {{ value }} is not a valid email.',
+    )]
+    #[Assert\NotBlank(allowNull : false)]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -28,12 +34,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotBlank(allowNull : false)]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min: 3, max: 50, minMessage: 'Le nom doit comporter au minimum {{ limit }} caractères', maxMessage: 'Le nom doit comporter au maximum {{ limit }} caractères')]
+    #[Assert\NotBlank(allowNull : false)]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min: 3, max: 50, minMessage: 'Le prénom doit comporter au minimum {{ limit }} caractères', maxMessage: 'Le prénom doit comporter au maximum {{ limit }} caractères')]
+    #[Assert\NotBlank(allowNull : false)]
     private ?string $firstname = null;
 
     #[ORM\ManyToMany(targetEntity: Allergy::class, inversedBy: 'users')]

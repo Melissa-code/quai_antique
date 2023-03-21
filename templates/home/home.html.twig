@@ -123,13 +123,15 @@
         <div class="row d-flex justify-content-center">
             {# Title #}
             <div class="col-12 text-center">
-                <h2 class="text-center">Les incontournables</h2>
+                <h2 class="text-center">Les plats favoris</h2>
             </div>
             {# Photos gallery #}
             <article class="col-12 mt-1">
                 {% if(admin) %}
-                    <div class="row text-center d-block mx-auto m-4">
-                        <a href="{{ path('app_admin_create_dish') }}" class="btn-admin rounded px-3 p-2">Ajouter un plat</a>
+                    <div class="row my-3">
+                        <div class="col-12 d-flex justify-content-center">
+                            <a href="{{ path('app_admin_create_dish') }}" class="btn btn-admin w-100 p-2">Ajouter un plat</a>
+                        </div>
                     </div>
                 {% endif %}
                     <div class="row mb-1">
@@ -157,8 +159,7 @@
                         {% endfor %}
                     </div>
 
-
-                {# Book button #}
+                {# Link to the booking page #}
                 <div class="mt-4 d-flex justify-content-center">
                     <a class="btn btn-custom" href="{{ path('app_booking') }}">Réserver</a>
                 </div>

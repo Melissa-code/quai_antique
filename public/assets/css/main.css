@@ -68,6 +68,7 @@ a:hover {
     display: none;
 }
 
+/* ***** Buttons ****** */
 
 .btn-custom {
     background-color: #913732;
@@ -81,7 +82,6 @@ a:hover {
     border: 1px solid #913732;
 }
 
-
 .btn-admin {
     background-color: #FFE6A7;
     border: 1px solid #913732;
@@ -93,23 +93,6 @@ a:hover {
     color: #FFFFFF;
     border: 1px solid #BB9457;
 }
-
-
-.btn-adminFooter {
-    background-color: #BB9457;
-    border: 1px solid #913732;
-    color: #000000;
-}
-
-.btn-adminFooter:hover {
-    background-color: #913732;
-    color: #FFFFFF;
-    border: 1px solid #BB9457;
-}
-
-
-
-
 
 
 /* Main menu  */
