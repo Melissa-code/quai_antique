@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Category;
 use App\Entity\Daytime;
 use App\Entity\Dish;
+use App\Entity\Guest;
 use App\Entity\Menu;
 use App\Entity\Openingday;
 use App\Entity\Openinghour;
@@ -29,15 +30,15 @@ class AppFixtures extends Fixture
         /*********** Restaurant **********/
 
         // Data example for restaurants
-        $r1 = new Restaurant();
-        $r1->setName("Le Quai Antique")
-            ->setAddress("5 Quai du Jeu de Paume")
-            ->setZipcode("73 000")
-            ->setCity("Chambéry")
-            ->setPhone("+33(0)4 79 60 26 26")
-            ->setEmail("quai-antique@infos-restaurant.com")
-            ->setNbseatings(60);
-        $manager->persist($r1);
+//        $r1 = new Restaurant();
+//        $r1->setName("Le Quai Antique")
+//            ->setAddress("5 Quai du Jeu de Paume")
+//            ->setZipcode("73 000")
+//            ->setCity("Chambéry")
+//            ->setPhone("+33(0)4 79 60 26 26")
+//            ->setEmail("quai-antique@infos-restaurant.com")
+//            ->setNbseatings(60);
+//        $manager->persist($r1);
 
         /*********** Categories **********/
 
@@ -282,91 +283,129 @@ class AppFixtures extends Fixture
 
         /*********** Opening days **********/
 
-        $od1 = new Openingday();
-        $od1->setDay("lundi")
-            ->setOpen(1)
-            ->setRestaurant($r1)
-            ;
-        $manager->persist($od1);
-
-        $od2 = new Openingday();
-        $od2->setDay("mardi")
-            ->setOpen(1)
-            ->setRestaurant($r1)
-            ;
-        $manager->persist($od2);
-
-        $od3 = new Openingday();
-        $od3->setDay("mercredi")
-            ->setOpen(0)
-            ->setRestaurant($r1)
-            ;
-        $manager->persist($od3);
-
-        $od4 = new Openingday();
-        $od4->setDay("jeudi")
-            ->setOpen(1)
-            ->setRestaurant($r1)
-            ;
-        $manager->persist($od4);
-
-        $od5 = new Openingday();
-        $od5->setDay("vendredi")
-            ->setOpen(1)
-            ->setRestaurant($r1)
-            ;
-        $manager->persist($od5);
-
-        $od6 = new Openingday();
-        $od6->setDay("samedi")
-            ->setOpen(1)
-            ->setRestaurant($r1)
-            ;
-        $manager->persist($od6);
-
-        $od7 = new Openingday();
-        $od7->setDay("dimanche")
-            ->setOpen(1)
-            ->setRestaurant($r1)
-            ;
-        $manager->persist($od7);
+//        $od1 = new Openingday();
+//        $od1->setDay("lundi")
+//            ->setOpen(1)
+//            ->setRestaurant($r1)
+//            ;
+//        $manager->persist($od1);
+//
+//        $od2 = new Openingday();
+//        $od2->setDay("mardi")
+//            ->setOpen(1)
+//            ->setRestaurant($r1)
+//            ;
+//        $manager->persist($od2);
+//
+//        $od3 = new Openingday();
+//        $od3->setDay("mercredi")
+//            ->setOpen(0)
+//            ->setRestaurant($r1)
+//            ;
+//        $manager->persist($od3);
+//
+//        $od4 = new Openingday();
+//        $od4->setDay("jeudi")
+//            ->setOpen(1)
+//            ->setRestaurant($r1)
+//            ;
+//        $manager->persist($od4);
+//
+//        $od5 = new Openingday();
+//        $od5->setDay("vendredi")
+//            ->setOpen(1)
+//            ->setRestaurant($r1)
+//            ;
+//        $manager->persist($od5);
+//
+//        $od6 = new Openingday();
+//        $od6->setDay("samedi")
+//            ->setOpen(1)
+//            ->setRestaurant($r1)
+//            ;
+//        $manager->persist($od6);
+//
+//        $od7 = new Openingday();
+//        $od7->setDay("dimanche")
+//            ->setOpen(1)
+//            ->setRestaurant($r1)
+//            ;
+//        $manager->persist($od7);
 
 
         /*********** Opening hours **********/
 
-        $h1 = new \DateTime("12:00:00");
-        $h2 = new \DateTime("14:00:00");
-        $h3 = new \DateTime("19:00:00");
-        $h4 = new \DateTime("22:00:00");
-        $h5 = new \DateTime("23:00:00");
+//        $h1 = new \DateTime("12:00:00");
+//        $h2 = new \DateTime("14:00:00");
+//        $h3 = new \DateTime("19:00:00");
+//        $h4 = new \DateTime("22:00:00");
+//        $h5 = new \DateTime("23:00:00");
+//
+//        $oh1 = new Openinghour();
+//        $oh1->setStarthour($h1)
+//            ->setEndhour($h2)
+//            ->addOpeningday($od1)
+//            ->addOpeningday($od2)
+//            ->addOpeningday($od4)
+//            ->addOpeningday($od5)
+//            ->addOpeningday($od7)
+//            ;
+//        $manager->persist($oh1);
+//
+//        $oh2 = new Openinghour();
+//        $oh2->setStarthour($h3)
+//            ->setEndhour($h4)
+//            ->addOpeningday($od1)
+//            ->addOpeningday($od2)
+//            ->addOpeningday($od4)
+//            ->addOpeningday($od5)
+//        ;
+//        $manager->persist($oh2);
+//
+//        $oh3 = new Openinghour();
+//        $oh3->setStarthour($h3)
+//            ->setEndhour($h5)
+//            ->addOpeningday($od6)
+//        ;
+//        $manager->persist($oh3);
 
-        $oh1 = new Openinghour();
-        $oh1->setStarthour($h1)
-            ->setEndhour($h2)
-            ->addOpeningday($od1)
-            ->addOpeningday($od2)
-            ->addOpeningday($od4)
-            ->addOpeningday($od5)
-            ->addOpeningday($od7)
-            ;
-        $manager->persist($oh1);
+        /** *****************************************/
+        //             Booking
+        /****************************************** */
 
-        $oh2 = new Openinghour();
-        $oh2->setStarthour($h3)
-            ->setEndhour($h4)
-            ->addOpeningday($od1)
-            ->addOpeningday($od2)
-            ->addOpeningday($od4)
-            ->addOpeningday($od5)
-        ;
-        $manager->persist($oh2);
+        /*********** Guest **********/
 
-        $oh3 = new Openinghour();
-        $oh3->setStarthour($h3)
-            ->setEndhour($h5)
-            ->addOpeningday($od6)
-        ;
-        $manager->persist($oh3);
+        $q1 = 1;
+        $q2 = 2;
+        $q3 = 3;
+        $q4 = 4;
+        $q5 = 5;
+        $q6 = 6;
+
+        $g1 = new Guest();
+        $g1->setQuantity($q1);
+        $manager->persist($g1);
+
+        $g2 = new Guest();
+        $g2->setQuantity($q2);
+        $manager->persist($g2);
+
+        $g3 = new Guest();
+        $g3->setQuantity($q3);
+        $manager->persist($g3);
+
+        $g4 = new Guest();
+        $g4->setQuantity($q4);
+        $manager->persist($g4);
+
+        $g5 = new Guest();
+        $g5->setQuantity($q5);
+        $manager->persist($g5);
+
+        $g6 = new Guest();
+        $g6->setQuantity($q6);
+        $manager->persist($g6);
+
 
 
         // $product = new Product();

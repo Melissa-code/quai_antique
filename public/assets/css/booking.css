@@ -5,12 +5,6 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 50vh;
-    padding-top: 80px;
-    padding-bottom: 80px;
-    text-align: center;
-    display: block;
-    color: #000000;
 }
 
 .form-bg {
@@ -26,7 +20,7 @@
 
 
 /*********************************************************************
-media queries
+                        Media queries
 **********************************************************************/
 
 /* mobile phones */
@@ -35,25 +29,6 @@ media queries
 
     .booking-bg {
         background: black;
-        height: 70vh;
-        padding-top: 20px;
-        padding-bottom: 20px;
     }
 
-}
-
-@media screen and (min-device-width: 768px) and (max-device-width: 991px) {
-
-    .booking-bg {
-        background-image: url("../images/booking-bg.png");
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 50vh;
-        padding-top: 100px;
-        padding-bottom: 150px;
-        text-align: center;
-        display: block;
-        color: #000000;
-    }
 }

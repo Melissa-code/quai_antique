@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
+use function Symfony\Component\HttpKernel\Log\format;
 
 
 class AdminOpeningController extends AbstractController
@@ -95,12 +96,11 @@ class AdminOpeningController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // Check if a duplicate already exists in the database
-            $startHour = $openinghour->getStarthour();
-            $endHour = $openinghour->getEndhour();
-            $openingStarthour = $openinghourRepository->findOneBy(array('starthour'=> $startHour));
-            $openingEndhour = $openinghourRepository->findOneBy(array('endhour'=> $endHour));
-            if($openingStarthour && $openingEndhour) {
-                if ($startHour == $openingStarthour->getStarthour() && $endHour == $openingEndhour->getEndhour()) {
+            $startHourTyped = $openinghour->getStarthour();
+            $endHourTyped = $openinghour->getEndhour();
+            $openingHour = $openinghourRepository->findOneBy(array('starthour'=> $startHourTyped, 'endhour'=> $endHourTyped));
+            if($openingHour) {
+                if ($startHourTyped == $openingHour->getStarthour() && $endHourTyped == $openingHour->getEndhour()) {
                     $this->addFlash("error", "Cet horaire existe déjà.");
                     return $this->redirectToRoute('app_admin_opening');
                 }

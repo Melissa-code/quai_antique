@@ -38,7 +38,7 @@ class Booking
     #[ORM\JoinColumn(nullable: false)]
     private ?Guest $guest = null;
 
-    #[ORM\ManyToMany(targetEntity: Allergy::class, inversedBy: 'bookings')]
+    #[ORM\ManyToMany(targetEntity: Allergy::class, inversedBy: 'bookings', cascade: ['persist'])]
     private Collection $allergies;
 
     public function __construct()

@@ -21,26 +21,45 @@
                                 <h2 class="text-center pb-4">Réservation</h2>
                                 <p class="text-left pb-2">Toute réservation s’arrête une heure avant la fin du service du jour-même</p>
                             </div>
+
                             <div class="col-12">
-                            <form action="" method="POST" class="form-group">
+
+                                {{ form_start(form) }}
+
                                 <div class="row d-flex justify-content-center">
-                                    <div class="col-11 col-md-3 my-1">
-                                        <input type="date" class="form-control" placeholder="Date">
+
+                                    <div class="col-md-6">
+                                       {{ form_row(form.guest) }}
                                     </div>
-                                    <div class="col-11 col-md-3 my-1">
-                                        <input type="time" class="form-control" placeholder="Heure">
+
+                                    <div class="col-md-6">
+                                        {{ form_row(form.allergies) }}
                                     </div>
-                                    <div class="col-11 col-md-3 my-1">
-                                        <input type="number" class="form-control" placeholder="Couverts">
-                                    </div>
-                                    <div class="col-11 col-md-3 my-1">
-                                        <textarea class="form-control" id="allergies" rows="1" placeholder="Allergies">Allergies</textarea>
-                                    </div>
+
                                 </div>
+
                                 <div class="col text-center mt-4">
                                     <button class="btn btn-custom">Réserver</button>
                                 </div>
-                            </form>
+
+                                {{ form_end(form) }}
+                            </div>
+
+                            {#
+                            <div class="col-12">
+
+                                <div class="row d-flex justify-content-center">
+
+{#                                    <div class="col-11 col-md-3 my-1">#}
+{#                                        <input type="date" class="form-control" placeholder="Date">#}
+{#                                    </div>#}
+{#                                    <div class="col-11 col-md-3 my-1">#}
+{#                                        <input type="time" class="form-control" placeholder="Heure">#}
+{#                                    </div>#}
+
+
+                                </div>
+
                             </div>
 
                         </div>
