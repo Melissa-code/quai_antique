@@ -48,8 +48,8 @@ class BookingController extends AbstractController
 
             // Check if the user is logged in
             if($user) {
-                $managerRegistry->getManager()->persist($booking);
-                $managerRegistry->getManager()->flush();
+                //$managerRegistry->getManager()->persist($booking);
+                //$managerRegistry->getManager()->flush();
                 $this->addFlash("success", "La réservation a bien été effectuée.");
                 $this->redirectToRoute('app_login');
             } else {

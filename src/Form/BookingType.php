@@ -7,16 +7,22 @@ use App\Entity\Booking;
 use App\Entity\Guest;
 use App\Entity\Openingday;
 use App\Entity\Openinghour;
+use DateTime;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Range;
 
 class BookingType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $now = new DateTime('now');
+        $duration =  new DateTime('+30 days');
         $builder
 //            ->add('openingday', EntityType::class, [
 //                'label' => 'jour : ',
@@ -27,6 +33,7 @@ class BookingType extends AbstractType
             ->add('date', DateType::class, [
                 'label' => 'Date : ',
                 'widget' => 'single_text',
+                'constraints' => new Range(['min'=> $now , 'max'=> $duration, 'notInRangeMessage'=> 'Réservation impossible avant {{ min }} et après {{ max }}.']),
                 'required' => true,
                 'mapped' => false,
             ])
