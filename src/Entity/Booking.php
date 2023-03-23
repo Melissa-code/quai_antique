@@ -24,7 +24,8 @@ class Booking
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $users = null;
+    private ?User $user = null;
+    //private ?User $users = null;
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
@@ -38,7 +39,7 @@ class Booking
     #[ORM\JoinColumn(nullable: false)]
     private ?Guest $guest = null;
 
-    #[ORM\ManyToMany(targetEntity: Allergy::class, inversedBy: 'bookings', cascade: ['persist'])]
+    #[ORM\ManyToMany(targetEntity: Allergy::class, inversedBy: 'bookings')]
     private Collection $allergies;
 
     public function __construct()
@@ -75,14 +76,25 @@ class Booking
         return $this;
     }
 
-    public function getUsers(): ?User
+//    public function getUsers(): ?User
+//    {
+//        return $this->users;
+//    }
+
+    public function getUser(): ?User
     {
-        return $this->users;
+        return $this->user;
     }
 
-    public function setUsers(?User $users): self
+//    public function setUsers(?User $users): self
+//    {
+//        $this->users = $users;
+//
+//        return $this;
+//    }
+    public function setUser(?User $user): self
     {
-        $this->users = $users;
+        $this->user = $user;
 
         return $this;
     }

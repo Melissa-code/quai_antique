@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Allergy;
 use App\Entity\Category;
 use App\Entity\Daytime;
 use App\Entity\Dish;
@@ -12,6 +13,7 @@ use App\Entity\Openinghour;
 use App\Entity\Restaurant;
 use App\Entity\Setmenu;
 use App\Entity\User;
+use ContainerGnXxtY5\getAllergyRepositoryService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\DBAL\Types\TimeImmutableType;
 use Doctrine\Persistence\ObjectManager;
@@ -375,37 +377,69 @@ class AppFixtures extends Fixture
 
         /*********** Guest **********/
 
-        $q1 = 1;
-        $q2 = 2;
-        $q3 = 3;
-        $q4 = 4;
-        $q5 = 5;
-        $q6 = 6;
+//        $q1 = 1;
+//        $q2 = 2;
+//        $q3 = 3;
+//        $q4 = 4;
+//        $q5 = 5;
+//        $q6 = 6;
 
-        $g1 = new Guest();
-        $g1->setQuantity($q1);
-        $manager->persist($g1);
+//        $g1 = new Guest();
+//        $g1->setQuantity($q1);
+//        $manager->persist($g1);
+//
+//        $g2 = new Guest();
+//        $g2->setQuantity($q2);
+//        $manager->persist($g2);
+//
+//        $g3 = new Guest();
+//        $g3->setQuantity($q3);
+//        $manager->persist($g3);
+//
+//        $g4 = new Guest();
+//        $g4->setQuantity($q4);
+//        $manager->persist($g4);
+//
+//        $g5 = new Guest();
+//        $g5->setQuantity($q5);
+//        $manager->persist($g5);
+//
+//        $g6 = new Guest();
+//        $g6->setQuantity($q6);
+//        $manager->persist($g6);
 
-        $g2 = new Guest();
-        $g2->setQuantity($q2);
-        $manager->persist($g2);
+        /*********** Allergy **********/
 
-        $g3 = new Guest();
-        $g3->setQuantity($q3);
-        $manager->persist($g3);
+        $t1 = "Aucune";
+        $t2 = "Arachide";
+        $t3 = "Mollusques ou crustacés";
+        $t4 = "Lait ou oeuf";
+        $t5 = "Moutarde";
+        $t6 = "Soja";
 
-        $g4 = new Guest();
-        $g4->setQuantity($q4);
-        $manager->persist($g4);
+        $a1 = new Allergy();
+        $a1->setTitle($t1);
+        $manager->persist($a1);
 
-        $g5 = new Guest();
-        $g5->setQuantity($q5);
-        $manager->persist($g5);
+        $a2 = new Allergy();
+        $a2->setTitle($t2);
+        $manager->persist($a2);
 
-        $g6 = new Guest();
-        $g6->setQuantity($q6);
-        $manager->persist($g6);
+        $a3 = new Allergy();
+        $a3->setTitle($t3);
+        $manager->persist($a3);
 
+        $a4 = new Allergy();
+        $a4->setTitle($t4);
+        $manager->persist($a4);
+
+        $a5 = new Allergy();
+        $a5->setTitle($t5);
+        $manager->persist($a5);
+
+        $a6 = new Allergy();
+        $a6->setTitle($t6);
+        $manager->persist($a6);
 
 
         // $product = new Product();

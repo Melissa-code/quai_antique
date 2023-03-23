@@ -22,7 +22,6 @@ class FoodController extends AbstractController
         $categories = $categoryRepository->findAll();
         $dishes = $dishRepository->findDishesByAscendingPrice();
 
-
         return $this->render('food/food.html.twig', [
             'categories' => $categories,
             'dishes' => $dishes,

@@ -12,65 +12,76 @@
     <section id="booking">
         <div class="row booking-bg">
             {# Booking background image #}
-            <article class="container h-100">
+            <article class="container h-100 my-md-5">
 
                 <div class="row d-flex justify-content-center align-items-center text-white">
                     <div class="col-11 col-md-8 rounded form-bg m-1">
                         <div class="row form-content py-4 h-100 d-flex justify-content-center align-items-center mx-1">
                             <div class="col-12">
+
+                                {# Flash messages  #}
+
+                                <div class="confirm-message text-center mt-2 font-weight-bold">
+                                    {% for label, flashes in app.session.flashbag.all %}
+                                        {% for flash in flashes %}
+                                            {% if ( label == 'success' ) %}
+                                                {# Success message  #}
+                                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                    {{ flash }}
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+                                                </div>
+                                            {% elseif ( label == 'error' ) %}
+                                                {# Error message  #}
+                                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                    {{ flash }}
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+
+                                {# Title #}
+
                                 <h2 class="text-center pb-4">Réservation</h2>
-                                <p class="text-left pb-2">Toute réservation s’arrête une heure avant la fin du service du jour-même</p>
+                                <p class="text-left pb-2">La réservation n'est plus possible une heure avant la fin du service du jour-même</p>
                             </div>
 
                             <div class="col-12">
-
                                 {{ form_start(form) }}
-
                                 <div class="row d-flex justify-content-center">
-
+                                    {# Number of guests #}
                                     <div class="col-md-6">
-                                       {{ form_row(form.guest) }}
+                                        {{ form_row(form.guest) }}
                                     </div>
-
+                                    {# Day #}
+                                    <div class="col-md-6">
+                                        {{ form_row(form.openingday) }}
+                                    </div>
+                                </div>
+                                <div class="row d-flex justify-content-center">
+                                    {# Hours #}
+                                    <div class="col-md-6">
+                                        {{ form_row(form.openinghour) }}
+                                    </div>
+                                    {# Allergies #}
                                     <div class="col-md-6">
                                         {{ form_row(form.allergies) }}
                                     </div>
-
                                 </div>
-
+                                {# Save button #}
                                 <div class="col text-center mt-4">
                                     <button class="btn btn-custom">Réserver</button>
                                 </div>
-
                                 {{ form_end(form) }}
                             </div>
-
-                            {#
-                            <div class="col-12">
-
-                                <div class="row d-flex justify-content-center">
-
-{#                                    <div class="col-11 col-md-3 my-1">#}
-{#                                        <input type="date" class="form-control" placeholder="Date">#}
-{#                                    </div>#}
-{#                                    <div class="col-11 col-md-3 my-1">#}
-{#                                        <input type="time" class="form-control" placeholder="Heure">#}
-{#                                    </div>#}
-
-
-                                </div>
-
-                            </div>
-
                         </div>
 
                     </div>
                 </div>
-
             </article>
         </div>
     </section>
-
 
 
 
