@@ -12,7 +12,7 @@
     <section id="booking">
         <div class="row booking-bg">
             {# Booking background image #}
-            <article class="container h-100 my-md-5">
+            <article class="container h-100 my-5">
 
                 <div class="row d-flex justify-content-center align-items-center text-white">
                     <div class="col-11 col-md-8 rounded form-bg m-1">
@@ -44,8 +44,9 @@
                                 {# Title #}
 
                                 <h2 class="text-center pb-4">Réservation</h2>
-                                <p class="text-left pb-2">La réservation n'est plus possible une heure avant la fin du service du jour-même</p>
                             </div>
+
+                            {# Booking form #}
 
                             <div class="col-12">
                                 {{ form_start(form) }}
@@ -56,7 +57,8 @@
                                     </div>
                                     {# Day #}
                                     <div class="col-md-6">
-                                        {{ form_row(form.openingday) }}
+{#                                        {{ form_row(form.openingday) }}#}
+                                        {{ form_row(form.date) }}
                                     </div>
                                 </div>
                                 <div class="row d-flex justify-content-center">

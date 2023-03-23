@@ -7,11 +7,9 @@ use App\Entity\Booking;
 use App\Entity\Guest;
 use App\Entity\Openingday;
 use App\Entity\Openinghour;
-use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,14 +18,17 @@ class BookingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            //->add('createdAt')
-            //->add('restaurant')
-            //->add('users')
-            ->add('openingday', EntityType::class, [
-                'label' => 'jour : ',
-                'class' => Openingday::class,
-                'choice_label' => 'day',
+//            ->add('openingday', EntityType::class, [
+//                'label' => 'jour : ',
+//                'class' => Openingday::class,
+//                'choice_label' => 'day',
+//                'required' => true,
+//            ])
+            ->add('date', DateType::class, [
+                'label' => 'Date : ',
+                'widget' => 'single_text',
                 'required' => true,
+                'mapped' => false,
             ])
             ->add('openinghour', EntityType::class, [
                 'label' => 'Horaire : ',
@@ -37,7 +38,7 @@ class BookingType extends AbstractType
                 'required' => true,
             ])
             ->add('guest', EntityType::class, [
-                'label' => 'Nombre de personnes : ',
+                'label' => 'Nombre de convives : ',
                 'class' => Guest::class,
                 'choice_label' => 'quantity',
                 'required' => true,
