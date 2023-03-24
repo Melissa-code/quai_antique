@@ -10,6 +10,8 @@ use App\Repository\OpeningdayRepository;
 use App\Repository\OpeninghourRepository;
 use App\Repository\RestaurantRepository;
 use App\Service\BookingService;
+
+use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,26 +31,32 @@ class BookingController extends AbstractController
         $booking->setRestaurant($restaurant);
         $user = $this->getUser();
         $booking->setUser($user);
-        //dd($booking->getUser());
+
+        // Noon hours with a 15 minutes time slot
+        $noonStartTime = '12:00:00';
+        $noonEndTime = '13:15:00';
+        $noonHours = $bookingService->getHoursBySlice($noonStartTime,$noonEndTime);
+
+        // Evening hours with a 15 minutes time slot
+        $eveningStartTime = '19:00:00';
+        $eveningEndTime = '21:15:00';
+        $eveningHours = $bookingService->getHoursBySlice($eveningStartTime, $eveningEndTime);
 
         $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            //$date = $form->get('date')->getData();
             $bookedAtSelected = $booking->getBookedAt();
             $dayOfBookedAt = $bookedAtSelected->format("D");
             $dayOfBookedAt = $bookingService->translateToFrench($dayOfBookedAt);
-            //dd($dayOfBookedAt);
 
             // Find the Openingday object by the value of the day
             $openingDay = $openingdayRepository->findOneBy(array('day'=> $dayOfBookedAt));
-            //dd($openingDay);
             $booking->setOpeningday($openingDay);
 
-            // Check if the user is logged in
+            // Check if the user is logged in to make a booking
             if($user) {
-                $managerRegistry->getManager()->persist($booking);
-                $managerRegistry->getManager()->flush();
+                //$managerRegistry->getManager()->persist($booking);
+                //$managerRegistry->getManager()->flush();
                 $this->addFlash("success", "La réservation a bien été effectuée.");
                 $this->redirectToRoute('app_login');
             } else {
@@ -59,6 +67,8 @@ class BookingController extends AbstractController
 
         return $this->render('booking/booking.html.twig', [
             'booking' => $booking,
+            'noonHours' => $noonHours,
+            'eveningHours' => $eveningHours,
             'form' => $form->createView(),
         ]);
     }

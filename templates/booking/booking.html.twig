@@ -12,7 +12,7 @@
     <section id="booking">
         <div class="row booking-bg">
             {# Booking background image #}
-            <article class="container h-100 my-5">
+            <article class="container h-100 my-4 my-md-5">
 
                 <div class="row d-flex justify-content-center align-items-center text-white">
                     <div class="col-11 col-md-8 rounded form-bg m-1">
@@ -57,17 +57,30 @@
                                     </div>
                                     {# Day #}
                                     <div class="col-md-6">
-{#                                        {{ form_row(form.openingday) }}#}
                                         {{ form_row(form.bookedAt) }}
                                     </div>
                                 </div>
                                 <div class="row d-flex justify-content-center">
                                     {# Hours #}
-                                    <div class="col-md-6">
-                                        {{ form_row(form.openinghour) }}
+                                    <div class="col-12 my-2">
+                                        <p>Midi:</p>
+                                    {% for noonHour in noonHours %}
+                                        <input type="button" id="noonHour" value="{{ noonHour }}" class="btn btn-hour mr-1 my-1">
+                                    {% endfor %}
                                     </div>
+                                </div>
+                                <div class="row d-flex justify-content-center">
+                                    {# Hours #}
+                                    <div class="col-12 my-2">
+                                        <p>Soir:</p>
+                                        {% for eveningHour in eveningHours %}
+                                            <input type="button" id="eveningHour" value="{{ eveningHour }}" class="btn btn-hour mr-1 my-1">
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="row d-flex justify-content-center">
                                     {# Allergies #}
-                                    <div class="col-md-6">
+                                    <div class="col-12">
                                         {{ form_row(form.allergies) }}
                                     </div>
                                 </div>

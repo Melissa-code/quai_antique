@@ -30,14 +30,8 @@ class BookingType extends AbstractType
                 'constraints' => new Range(['min'=> $now , 'max'=> $duration, 'notInRangeMessage'=> 'Réservation impossible le jour même et après 30 jours.']),
                 'required' => true,
             ])
-            ->add('openinghour', EntityType::class, [
-                'label' => 'Horaire : ',
-                'class' => Openinghour::class,
-                'choice_label' => 'id',
-                'required' => true,
-            ])
             ->add('guest', EntityType::class, [
-                'label' => 'Nombre de convives : ',
+                'label' => 'Nombre de couverts : ',
                 'class' => Guest::class,
                 'choice_label' => 'quantity',
                 'required' => true,

@@ -18,6 +18,22 @@
     z-index: 1;
 }
 
+/**** hour buttons ****/
+
+.btn-hour {
+    background-color: #FFFFFF;
+    border: 1px solid #BB9457;
+    color: #000000;
+    font-weight: bold;
+}
+
+.btn-hour:hover {
+    background-color: #FFE6A7;
+    border: 1px solid #913732;
+    color: #000000;
+    font-weight: bold;
+}
+
 
 /*********************************************************************
                         Media queries
