@@ -22,26 +22,18 @@ class BookingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $now = new DateTime('now');
-        $duration =  new DateTime('+30 days');
+        $duration =  new DateTime('now +30 days');
         $builder
-//            ->add('openingday', EntityType::class, [
-//                'label' => 'jour : ',
-//                'class' => Openingday::class,
-//                'choice_label' => 'day',
-//                'required' => true,
-//            ])
-            ->add('date', DateType::class, [
+            ->add('bookedAt', DateType::class, [
                 'label' => 'Date : ',
                 'widget' => 'single_text',
-                'constraints' => new Range(['min'=> $now , 'max'=> $duration, 'notInRangeMessage'=> 'Réservation impossible avant {{ min }} et après {{ max }}.']),
+                'constraints' => new Range(['min'=> $now , 'max'=> $duration, 'notInRangeMessage'=> 'Réservation impossible le jour même et après 30 jours.']),
                 'required' => true,
-                'mapped' => false,
             ])
             ->add('openinghour', EntityType::class, [
                 'label' => 'Horaire : ',
                 'class' => Openinghour::class,
                 'choice_label' => 'id',
-
                 'required' => true,
             ])
             ->add('guest', EntityType::class, [

@@ -34,22 +34,21 @@ class BookingController extends AbstractController
         $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
+            //$date = $form->get('date')->getData();
+            $bookedAtSelected = $booking->getBookedAt();
+            $dayOfBookedAt = $bookedAtSelected->format("D");
+            $dayOfBookedAt = $bookingService->translateToFrench($dayOfBookedAt);
+            //dd($dayOfBookedAt);
 
-            // Get the value of schedule from the form
-            $date = $form->get('date')->getData();
-            $dayOfDate = $date->format("D");
-            $day = $bookingService->translateToFrench($dayOfDate);
-            //dd($schedule);
-
-            // Find the Openingday object by the value of schedule
-            $openingDay = $openingdayRepository->findOneBy(array('day'=> $day));
+            // Find the Openingday object by the value of the day
+            $openingDay = $openingdayRepository->findOneBy(array('day'=> $dayOfBookedAt));
             //dd($openingDay);
             $booking->setOpeningday($openingDay);
 
             // Check if the user is logged in
             if($user) {
-                //$managerRegistry->getManager()->persist($booking);
-                //$managerRegistry->getManager()->flush();
+                $managerRegistry->getManager()->persist($booking);
+                $managerRegistry->getManager()->flush();
                 $this->addFlash("success", "La réservation a bien été effectuée.");
                 $this->redirectToRoute('app_login');
             } else {

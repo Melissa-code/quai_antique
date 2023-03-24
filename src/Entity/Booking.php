@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\BookingRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
@@ -35,12 +36,16 @@ class Booking
     #[ORM\JoinColumn(nullable: false)]
     private ?Openinghour $openinghour = null;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $bookedAt = null;
+
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Guest $guest = null;
 
     #[ORM\ManyToMany(targetEntity: Allergy::class, inversedBy: 'bookings')]
     private Collection $allergies;
+
 
     public function __construct()
     {
@@ -123,6 +128,18 @@ class Booking
         return $this;
     }
 
+    public function getBookedAt(): ?\DateTimeInterface
+    {
+        return $this->bookedAt;
+    }
+
+    public function setBookedAt(\DateTimeInterface $bookedAt): self
+    {
+        $this->bookedAt = $bookedAt;
+
+        return $this;
+    }
+
     public function getGuest(): ?Guest
     {
         return $this->guest;
@@ -158,4 +175,6 @@ class Booking
 
         return $this;
     }
+
+
 }
