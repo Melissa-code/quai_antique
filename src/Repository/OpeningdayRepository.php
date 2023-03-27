@@ -56,7 +56,7 @@ class OpeningdayRepository extends ServiceEntityRepository
      * @param $id
      * @return int|string
      */
-    public function updateOpen(int $open, $id): int|string
+    public function updateOpen(int $open, int $id): int|string
     {
         return $this->getEntityManager()->createQuery(
             'UPDATE App\Entity\Openingday o            
@@ -67,6 +67,7 @@ class OpeningdayRepository extends ServiceEntityRepository
             ->setParameter('id', $id)
             ->getResult();
     }
+
 
 
 //    /**

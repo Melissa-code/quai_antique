@@ -11,7 +11,8 @@ use DateTimeZone;
 
 class BookingService
 {
-    /** Translate an english day to french
+    /**
+     * Translate an english day to french
      * @param $day
      * @return string
      */
@@ -36,7 +37,7 @@ class BookingService
     }
 
     /**
-     *  Get an array of the hours with a 15 minutes time slot
+     * Get an array of the hours with a 15 minutes time slot
      * @param string $startTime
      * @param $endTime
      * @return array
@@ -53,5 +54,66 @@ class BookingService
         }
         return($hours);
     }
+
+    /**
+     * Get the noon start time of a day
+     * @param $hoursOfDay
+     * @return string
+     */
+    public function getNoonStartTime($hoursOfDay): string
+    {
+        foreach ($hoursOfDay as $hour) {
+            $startTime = $hour->getStarthour()->format('H:i:s');
+            if (!empty($startTime) && $startTime < "17:00:00") {
+                return $startTime;
+            }
+        }
+    }
+
+    /**
+     * Get the noon end time of a day
+     * @param $hoursOfDay
+     * @return string
+     */
+    public function getNoonEndTime($hoursOfDay): string
+    {
+        foreach ($hoursOfDay as $hour) {
+            $endTime = $hour->getEndhour()->format('H:i:s');
+            if(!empty($endTime) && $endTime < "17:00:00") {
+                return $endTime;
+            }
+        }
+    }
+
+    /**
+     * Get the evening start time of a day
+     * @param $hoursOfDay
+     * @return string
+     */
+    public function getEveningStartTime($hoursOfDay): string
+    {
+        foreach ($hoursOfDay as $hour) {
+            $startTime = $hour->getStarthour()->format('H:i:s');
+            if(!empty($startTime) && $startTime > "17:00:00") {
+                return $startTime;
+            }
+        }
+    }
+
+    /**
+     * Get the evening end time of a day
+     * @param $hoursOfDay
+     * @return string
+     */
+    public function getEveningEndTime($hoursOfDay): string
+    {
+        foreach ($hoursOfDay as $hour) {
+            $endTime = $hour->getEndhour()->format('H:i:s');
+            if(!empty($endTime) && $endTime > "17:00:00") {
+                return $endTime;
+            }
+        }
+    }
+
 
 }

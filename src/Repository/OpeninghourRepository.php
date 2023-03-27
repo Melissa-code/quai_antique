@@ -63,6 +63,20 @@ class OpeninghourRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+
+    public function findStarthoursByDay($hour, $day)
+    {
+        return $this->createQueryBuilder('o')
+            ->select('o.starthour')
+            ->where("o.starthour < :hour")
+            ->join('o.openingdays', 'od')
+            ->andWhere('od.day = :day')
+            ->setParameter('hour', $hour)
+            ->setParameter('day', $day)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Openinghour[] Returns an array of Openinghour objects
 //     */
