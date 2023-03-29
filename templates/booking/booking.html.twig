@@ -62,92 +62,148 @@
                                 </div>
                                 <div class="row d-flex justify-content-center">
                                     {# Noon hours #}
-                                    <div class="col-12 my-2">
+                                    <div class="col-12 my-2" id="noon-monday">
                                         <p>Lundi midi :</p>
                                         {% for noonHourMonday in noonHoursMonday %}
-                                            <input type="button" id="" value="{{ noonHourMonday }}" class="btn btn-hour mr-1 my-1">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-hour mr-1 my-1">
+                                                    <input type="checkbox" id="noonHourMonday" name="startAt" value="{{ noonHourMonday }}"> {{ noonHourMonday }}
+                                                </label>
+                                            </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2">
+                                    <div class="col-12 my-2" id="noon-tuesday">
                                         <p>Mardi midi :</p>
                                         {% for noonHourTuesday in noonHoursTuesday %}
-                                            <input type="button" id="" value="{{ noonHourTuesday }}" class="btn btn-hour mr-1 my-1">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-hour mr-1 my-1">
+                                                    <input type="checkbox" id="noonHourTuesday" name="startAt" value="{{ noonHourTuesday }}"> {{ noonHourTuesday }}
+                                                </label>
+                                            </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2">
+                                    <div class="col-12 my-2" id="noon-wednesday">
                                         <p>Mercredi midi :</p>
                                         {% for noonHourWednesday in noonHoursWednesday %}
-                                            <input type="button" id=""  value="{{ noonHourWednesday }}" class="btn btn-hour mr-1 my-1">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-hour mr-1 my-1">
+                                                    <input type="checkbox" id="noonHourWednesday" name="startAt" value="{{ noonHourWednesday }}"> {{ noonHourWednesday }}
+                                                </label>
+                                            </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2">
+                                    <div class="col-12 my-2" id="noon-thursday">
                                         <p>Jeudi midi :</p>
                                         {% for noonHourThursday in noonHoursThursday %}
-                                            <input type="button" id=""  value="{{ noonHourThursday }}" class="btn btn-hour mr-1 my-1">
+                                            <div class="btn-group btn-group-toggle" data-toggle="button">
+                                                <label class="btn btn-hour mr-1 my-1">
+                                                    <input type="checkbox" id="noonHourThursday" name="startAt" value="{{ noonHourThursday }}"> {{ noonHourThursday }}
+                                                </label>
+                                            </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2">
+                                    <div class="col-12 my-2" id="noon-friday">
                                         <p>Vendredi midi :</p>
                                         {% for noonHourFriday in noonHoursFriday %}
-                                            <input type="button" id=""  value="{{ noonHourFriday }}" class="btn btn-hour mr-1 my-1">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-hour mr-1 my-1">
+                                                    <input type="checkbox" id="noonHourFriday" name="startAt" value="{{ noonHourFriday }}"> {{ noonHourFriday }}
+                                                </label>
+                                            </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2">
+                                    <div class="col-12 my-2" id="noon-saturday">
                                         <p>Samedi midi :</p>
                                         {% for noonHourSaturday in noonHoursSaturday %}
-                                            <input type="button" id=""  value="{{ noonHourSaturday }}" class="btn btn-hour mr-1 my-1">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-hour mr-1 my-1">
+                                                    <input type="checkbox" id="noonHourSaturday" name="noonHourSaturday" value="{{ noonHourSaturday }}"> {{ noonHourSaturday }}
+                                                </label>
+                                            </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2">
+                                    <div class="col-12 my-2" id="noon-sunday">
                                         <p>Dimanche midi :</p>
                                         {% for noonHourSunday in noonHoursSunday %}
-                                            <input type="button" id=""  value="{{ noonHourSunday }}" class="btn btn-hour mr-1 my-1">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-hour mr-1 my-1">
+                                                    <input type="checkbox" id="noonHourSunday" name="noonHourSunday" value="{{ noonHourSunday }}"> {{ noonHourSunday }}
+                                                </label>
+                                            </div>
                                         {% endfor %}
                                     </div>
 
                                 </div>
                                 <div class="row d-flex justify-content-center">
                                     {# Evening hours #}
-                                    <div class="col-12 my-2">
+                                    <div class="col-12 my-2" id="evening-monday">
                                         <p>Lundi soir:</p>
                                         {% for eveningHourMonday in eveningHoursMonday %}
-                                            <input type="button" id="eveningHour" value="{{ eveningHourMonday }}" class="btn btn-hour mr-1 my-1">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-hour mr-1 my-1">
+                                                    <input type="checkbox" id="eveningHourMonday" name="eveningHourMonday" value="{{ eveningHourMonday }}"> {{ eveningHourMonday }}
+                                                </label>
+                                            </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2">
+                                    <div class="col-12 my-2" id="evening-tuesday">
                                         <p>Mardi soir:</p>
                                         {% for eveningHourTuesday in eveningHoursTuesday %}
-                                            <input type="button" id="eveningHour" value="{{ eveningHourTuesday }}" class="btn btn-hour mr-1 my-1">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-hour mr-1 my-1">
+                                                    <input type="checkbox" id="eveningHourTuesday" name="eveningHourTuesday" value="{{ eveningHourTuesday }}"> {{ eveningHourTuesday }}
+                                                </label>
+                                            </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2">
+                                    <div class="col-12 my-2" id="evening-wednesday">
                                         <p>Mercredi soir:</p>
                                         {% for eveningHourWednesday in eveningHoursWednesday %}
-                                            <input type="button" id="eveningHour" value="{{ eveningHourWednesday }}" class="btn btn-hour mr-1 my-1">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-hour mr-1 my-1">
+                                                    <input type="checkbox" id="eveningHourWednesday" name="eveningHourWednesday" value="{{ eveningHourWednesday }}"> {{ eveningHourWednesday }}
+                                                </label>
+                                            </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2">
+                                    <div class="col-12 my-2" id="evening-thursday">
                                         <p>Jeudi soir:</p>
                                         {% for eveningHourThursday in eveningHoursThursday %}
-                                            <input type="button" id="eveningHour" value="{{ eveningHourThursday }}" class="btn btn-hour mr-1 my-1">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-hour mr-1 my-1">
+                                                    <input type="checkbox" id="eveningHourThursday" name="eveningHourThursday" value="{{ eveningHourThursday }}"> {{ eveningHourThursday }}
+                                                </label>
+                                            </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2">
+                                    <div class="col-12 my-2" id="evening-friday">
                                         <p>Vendredi soir:</p>
                                         {% for eveningHourFriday in eveningHoursFriday %}
-                                            <input type="button" id="eveningHour" value="{{ eveningHourFriday }}" class="btn btn-hour mr-1 my-1">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-hour mr-1 my-1">
+                                                    <input type="checkbox" id="eveningHourFriday" name="eveningHourFriday" value="{{ eveningHourFriday }}"> {{ eveningHourFriday }}
+                                                </label>
+                                            </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2">
+                                    <div class="col-12 my-2" id="evening-saturday">
                                         <p>Samedi soir:</p>
                                         {% for eveningHourSaturday in eveningHoursSaturday %}
-                                            <input type="button" id="eveningHour" value="{{ eveningHourSaturday }}" class="btn btn-hour mr-1 my-1">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-hour mr-1 my-1">
+                                                    <input type="checkbox" id="eveningHourSaturday" name="eveningHourSaturday" value="{{ eveningHourSaturday }}"> {{ eveningHourSaturday }}
+                                                </label>
+                                            </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2">
+                                    <div class="col-12 my-2" id="evening-sunday">
                                         <p>Dimanche soir:</p>
                                         {% for eveningHourSunday in eveningHoursSunday %}
-                                            <input type="button" id="eveningHour" value="{{ eveningHourSunday }}" class="btn btn-hour mr-1 my-1">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-hour mr-1 my-1">
+                                                    <input type="checkbox" id="eveningHourSunday" name="eveningHourSunday" value="{{ eveningHourSunday }}"> {{ eveningHourSunday }}
+                                                </label>
+                                            </div>
                                         {% endfor %}
                                     </div>
 
@@ -176,7 +232,7 @@
 
 
     {% block javascripts %}
-        <script src=""></script>
+        <script src="{{ asset('assets/javascript/booking.js') }}"></script>
     {% endblock %}
 
 {% endblock main %}

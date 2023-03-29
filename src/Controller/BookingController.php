@@ -12,6 +12,7 @@ use App\Repository\RestaurantRepository;
 use App\Service\BookingService;
 
 use DateTime;
+use Doctrine\DBAL\Types\TimeImmutableType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,11 +32,6 @@ class BookingController extends AbstractController
         $booking->setRestaurant($restaurant);
         $user = $this->getUser();
         $booking->setUser($user);
-
-        //$noonStartTime = '12:00:00';
-        //$noonEndTime = '13:15:00';
-        //$eveningStartTime = '19:00:00';
-        //$eveningEndTime = '21:15:00';
 
         // Hours of the days of the week
         $hoursOfMonday = $openingdayRepository->findOneBy(array('day'=>'lundi'))->getOpeninghours();
@@ -186,7 +182,11 @@ class BookingController extends AbstractController
         }
 
         //dd($eveningHoursSunday);
+        /**
+         * TO DO : a method which return $noonHour for each day
+         */
 
+        // Form
         $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
@@ -197,10 +197,21 @@ class BookingController extends AbstractController
             $openingDay = $openingdayRepository->findOneBy(array('day'=> $dayOfBookedAt));
             $booking->setOpeningday($openingDay);
 
+            // Get the value of the start hour button checked by the user
+            $startAt = $request->request->get('startAt');
+            $booking->setStartAt(new DateTime($startAt));
+            //echo gettype($startAt); //string
+
+            // Find the opening hour of the day by the start time
+            $openingDay = $booking->getOpeningday()->getDay();
+            $openingHour = $openinghourRepository->findOneByHours($startAt, $openingDay);
+            //dd($openingHour); //Array
+            $booking->setOpeninghour($openingHour);
+
             // Check if the user is logged-in to make a booking
             if($user) {
-                //$managerRegistry->getManager()->persist($booking);
-                //$managerRegistry->getManager()->flush();
+                $managerRegistry->getManager()->persist($booking);
+                $managerRegistry->getManager()->flush();
                 $this->addFlash("success", "La réservation a bien été effectuée.");
                 $this->redirectToRoute('app_login');
             } else {

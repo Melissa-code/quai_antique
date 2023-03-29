@@ -35,7 +35,7 @@ class AdminOpeningController extends AbstractController
         $openingdays = $openingdayRepository->findAll();
         $closed = "Fermé";
 
-        // Change the attribute open of a day: false to true if the day get opening hours
+        // Update the attribute open of a day: false to true if the day get opening hours
         foreach ($openingdays as $openingday) {
             foreach ($openinghours as $openinghour) {
                 foreach ($openingday->getOpeninghours() as $hourOfDay) {
@@ -48,7 +48,7 @@ class AdminOpeningController extends AbstractController
             }
         }
 
-        // Change the attribute open of a day: true to false if it doesn't have any opening hours
+        // Update the attribute open of a day: true to false if it doesn't have any opening hours
         $daysWithHours = $openingService->getDaysWithHours($openingdays, $openinghours);
         $notFoundDays = $openingService->getNotFoundDaysInOpeningdays($openingdays, $daysWithHours);
         foreach ($openingdays as $openingday) {

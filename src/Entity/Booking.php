@@ -43,6 +43,9 @@ class Booking
     #[ORM\JoinColumn(nullable: false)]
     private ?Guest $guest = null;
 
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $startAt = null;
+
     #[ORM\ManyToMany(targetEntity: Allergy::class, inversedBy: 'bookings')]
     private Collection $allergies;
 
@@ -152,6 +155,18 @@ class Booking
         return $this;
     }
 
+    public function getStartAt(): ?\DateTimeInterface
+    {
+        return $this->startAt;
+    }
+
+    public function setStartAt(\DateTimeInterface $startAt): self
+    {
+        $this->startAt = $startAt;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Allergy>
      */
@@ -175,6 +190,5 @@ class Booking
 
         return $this;
     }
-
 
 }

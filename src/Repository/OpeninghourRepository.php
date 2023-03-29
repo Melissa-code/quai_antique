@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Openinghour;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -63,19 +64,26 @@ class OpeninghourRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-
-    public function findStarthoursByDay($hour, $day)
+    /**
+     * Find the opening hour for the startAt of a booking
+     * @param string $startAt
+     * @param string $openingDay
+     * @return Openinghour|null
+     * @throws NonUniqueResultException
+     */
+    public function findOneByHours(string $startAt, string $openingDay): ?Openinghour
     {
-        return $this->createQueryBuilder('o')
-            ->select('o.starthour')
-            ->where("o.starthour < :hour")
-            ->join('o.openingdays', 'od')
-            ->andWhere('od.day = :day')
-            ->setParameter('hour', $hour)
-            ->setParameter('day', $day)
-            ->getQuery()
-            ->getResult();
+        return $this->getEntityManager()->createQuery(
+            'SELECT DISTINCT o FROM App\Entity\OpeningHour o             
+                JOIN o.openingdays d
+                WHERE d.day = :openingDay AND o.starthour < :startAt and o.endhour > :startAt'
+        )
+            ->setParameter('startAt', $startAt)
+            ->setParameter('openingDay', $openingDay)
+            ->getOneOrNullResult();
     }
+
+
 
 //    /**
 //     * @return Openinghour[] Returns an array of Openinghour objects
