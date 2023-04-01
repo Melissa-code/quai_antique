@@ -138,6 +138,15 @@ class Openingday
         return $this;
     }
 
-
+    /**
+     * Get the day and its opening hours in an array
+     * @return array|null
+     */
+    public function toArray(): ?array {
+        return [
+            "day" => $this->getDay(),
+            "hours" => $this->getOpeninghours()
+        ];
+    }
 
 }

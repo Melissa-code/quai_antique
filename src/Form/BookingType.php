@@ -26,6 +26,9 @@ class BookingType extends AbstractType
         $builder
             ->add('bookedAt', DateType::class, [
                 'label' => 'Date : ',
+                'attr' => array(
+                    'class' => 'date-input'
+                ),
                 'widget' => 'single_text',
                 'constraints' => new Range(['min'=> $now , 'max'=> $duration, 'notInRangeMessage'=> 'Réservation impossible le jour même et après 30 jours.']),
                 'required' => true,

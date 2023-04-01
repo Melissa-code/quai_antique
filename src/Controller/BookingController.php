@@ -236,6 +236,7 @@ class BookingController extends AbstractController
             'eveningHoursSaturday' => $eveningHoursSaturday,
             'noonHoursSunday' => $noonHoursSunday,
             'eveningHoursSunday' => $eveningHoursSunday,
+            'days' => $openingdayRepository->findAll(),
             'form' => $form->createView(),
         ]);
     }

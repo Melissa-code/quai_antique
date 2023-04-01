@@ -34,6 +34,19 @@
     font-weight: bold;
 }
 
+/* *** Hours *** */
+
+#noon-monday, #evening-monday {
+    display: inline-block;
+}
+
+#noon-tuesday, #noon-wednesday, #noon-thursday, #noon-friday, #noon-saturday, #noon-sunday {
+    display: none;
+}
+#evening-tuesday, #evening-wednesday, #evening-thursday, #evening-friday, #evening-saturday, #evening-sunday {
+    display: none;
+}
+
 
 /*********************************************************************
                         Media queries

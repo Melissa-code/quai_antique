@@ -19,7 +19,7 @@
                         <div class="row form-content py-4 h-100 d-flex justify-content-center align-items-center mx-1">
                             <div class="col-12">
 
-                                {# Flash messages  #}
+                                {# Flash success or error messages  #}
 
                                 <div class="confirm-message text-center mt-2 font-weight-bold">
                                     {% for label, flashes in app.session.flashbag.all %}
@@ -56,10 +56,12 @@
                                         {{ form_row(form.guest) }}
                                     </div>
                                     {# Day #}
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 ">
                                         {{ form_row(form.bookedAt) }}
                                     </div>
                                 </div>
+                                <div class="hour"></div>
+
                                 <div class="row d-flex justify-content-center">
                                     {# Noon hours #}
                                     <div class="col-12 my-2" id="noon-monday">
@@ -232,6 +234,7 @@
 
 
     {% block javascripts %}
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="{{ asset('assets/javascript/booking.js') }}"></script>
     {% endblock %}
 
