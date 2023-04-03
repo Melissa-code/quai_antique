@@ -35,156 +35,33 @@ class BookingController extends AbstractController
 
         // Hours of the days of the week
         $hoursOfMonday = $openingdayRepository->findOneBy(array('day'=>'lundi'))->getOpeninghours();
-        if(!$hoursOfMonday->isEmpty()) {
-            $noonStartTimeMonday = $bookingService->getNoonStartTime($hoursOfMonday);
-            $noonEndTimeMonday = $bookingService->getNoonEndTime($hoursOfMonday);
-            $eveningStartTimeMonday = $bookingService->getEveningStartTime($hoursOfMonday);
-            $eveningEndTimeMonday = $bookingService->getEveningEndTime($hoursOfMonday);
-            if(!empty($noonStartTimeMonday && $noonEndTimeMonday)) {
-                $noonHoursMonday = $bookingService->getHoursBySlice($noonStartTimeMonday, $noonEndTimeMonday);
-            } else {
-                $noonHoursMonday = ["Fermé"];
-            }
-            if(!empty($eveningStartTimeMonday && $eveningEndTimeMonday)) {
-                $eveningHoursMonday = $bookingService->getHoursBySlice($eveningStartTimeMonday, $eveningEndTimeMonday);
-            } else {
-                $eveningHoursMonday = ["Fermé"];
-            }
-        } else {
-            $noonHoursMonday = ["Fermé"];
-            $eveningHoursMonday = ["Fermé"];
-            }
+        $noonHoursMonday = $bookingService->getNoonHoursOfTheDay($hoursOfMonday);
+        $eveningHoursMonday = $bookingService->getEveningHoursOfTheDay($hoursOfMonday);
 
         $hoursOfTuesday = $openingdayRepository->findOneBy(array('day'=>'mardi'))->getOpeninghours();
-        if(!$hoursOfTuesday->isEmpty()) {
-            $noonStartTimeTuesday = $bookingService->getNoonStartTime($hoursOfTuesday);
-            $noonEndTimeTuesday = $bookingService->getNoonEndTime($hoursOfTuesday);
-            $eveningStartTimeTuesday = $bookingService->getEveningStartTime($hoursOfTuesday);
-            $eveningEndTimeTuesday = $bookingService->getEveningEndTime($hoursOfTuesday);
-            if(!empty($noonStartTimeTuesday && $noonEndTimeTuesday )) {
-                $noonHoursTuesday = $bookingService->getHoursBySlice($noonStartTimeTuesday, $noonEndTimeTuesday );
-            } else {
-                $noonHoursTuesday = ["Fermé"];
-            }
-            if(!empty($eveningStartTimeTuesday && $eveningEndTimeTuesday)) {
-                $eveningHoursTuesday = $bookingService->getHoursBySlice($eveningStartTimeTuesday, $eveningEndTimeTuesday);
-            } else {
-                $eveningHoursTuesday = ["Fermé"];
-            }
-        } else {
-            $noonHoursTuesday = ["Fermé"];
-            $eveningHoursTuesday = ["Fermé"];
-        }
+        $noonHoursTuesday = $bookingService->getNoonHoursOfTheDay($hoursOfTuesday);
+        $eveningHoursTuesday = $bookingService->getEveningHoursOfTheDay($hoursOfTuesday);
 
         $hoursOfWednesday = $openingdayRepository->findOneBy(array('day'=>'mercredi'))->getOpeninghours();
-        if(!$hoursOfWednesday->isEmpty()){
-            $noonStartTimeWednesday = $bookingService->getNoonStartTime($hoursOfWednesday);
-            $noonEndTimeWednesday = $bookingService->getNoonEndTime($hoursOfWednesday);
-            $eveningStartTimeWednesday = $bookingService->getEveningStartTime($hoursOfWednesday);
-            $eveningEndTimeWednesday = $bookingService->getEveningEndTime($hoursOfWednesday);
-            if(!empty($noonStartTimeWednesday && $noonEndTimeWednesday)) {
-                $noonHoursWednesday = $bookingService->getHoursBySlice( $noonStartTimeWednesday, $noonEndTimeWednesday);
-            } else {
-                $noonHoursWednesday = ["Fermé"];
-            }
-            if(!empty($eveningStartTimeWednesday && $eveningEndTimeWednesday)) {
-                $eveningHoursWednesday = $bookingService->getHoursBySlice($eveningStartTimeWednesday, $eveningEndTimeWednesday);
-            } else {
-                $eveningHoursWednesday = ["Fermé"];
-            }
-        } else {
-            $noonHoursWednesday = ["Fermé"];
-            $eveningHoursWednesday = ["Fermé"];
-        }
+        $noonHoursWednesday = $bookingService->getNoonHoursOfTheDay($hoursOfWednesday);
+        $eveningHoursWednesday = $bookingService->getEveningHoursOfTheDay($hoursOfWednesday);
 
         $hoursOfThursday = $openingdayRepository->findOneBy(array('day'=>'jeudi'))->getOpeninghours();
-        if(!$hoursOfThursday->isEmpty()){
-            $noonStartTimeThursday = $bookingService->getNoonStartTime($hoursOfThursday);
-            $noonEndTimeThursday = $bookingService->getNoonEndTime($hoursOfThursday);
-            $eveningStartTimeThursday = $bookingService->getEveningStartTime($hoursOfThursday);
-            $eveningEndTimeThursday = $bookingService->getEveningEndTime($hoursOfThursday);
-            if(!empty($noonStartTimeThursday && $noonEndTimeThursday)) {
-                $noonHoursThursday = $bookingService->getHoursBySlice($noonStartTimeThursday, $noonEndTimeThursday);
-            } else {
-                $noonHoursThursday = ["Fermé"];
-            }
-            if(!empty($eveningStartTimeThursday && $eveningEndTimeThursday)) {
-                $eveningHoursThursday = $bookingService->getHoursBySlice($eveningStartTimeThursday, $eveningEndTimeThursday);
-            } else {
-                $eveningHoursThursday = ["Fermé"];
-            }
-        } else {
-            $noonHoursThursday = ["Fermé"];
-            $eveningHoursThursday = ["Fermé"];
-        }
+        $noonHoursThursday = $bookingService->getNoonHoursOfTheDay($hoursOfThursday);
+        $eveningHoursThursday = $bookingService->getEveningHoursOfTheDay($hoursOfThursday);
 
         $hoursOfFriday = $openingdayRepository->findOneBy(array('day'=>'vendredi'))->getOpeninghours();
-        if(!$hoursOfFriday->isEmpty()){
-            $noonStartTimeFriday = $bookingService->getNoonStartTime($hoursOfFriday);
-            $noonEndTimeFriday = $bookingService->getNoonEndTime($hoursOfFriday);
-            $eveningStartTimeFriday = $bookingService->getEveningStartTime($hoursOfFriday);
-            $eveningEndTimeFriday = $bookingService->getEveningEndTime($hoursOfFriday);
-            if(!empty($noonStartTimeFriday && $noonEndTimeFriday)) {
-                $noonHoursFriday = $bookingService->getHoursBySlice($noonStartTimeFriday, $noonEndTimeFriday);
-            } else {
-                $noonHoursFriday  = ["Fermé"];
-            }
-            if(!empty($eveningStartTimeFriday && $eveningEndTimeFriday)) {
-                $eveningHoursFriday = $bookingService->getHoursBySlice($eveningStartTimeFriday, $eveningEndTimeFriday);
-            } else {
-                $eveningHoursFriday = ["Fermé"];
-            }
-        } else {
-            $noonHoursFriday  = ["Fermé"];
-            $eveningHoursFriday = ["Fermé"];
-        }
+        $noonHoursFriday = $bookingService->getNoonHoursOfTheDay($hoursOfFriday);
+        $eveningHoursFriday = $bookingService->getEveningHoursOfTheDay($hoursOfFriday);
 
         $hoursOfSaturday = $openingdayRepository->findOneBy(array('day'=>'samedi'))->getOpeninghours();
-        if(!$hoursOfSaturday->isEmpty()){
-            $noonStartTimeSaturday = $bookingService->getNoonStartTime($hoursOfSaturday);
-            $noonEndTimeSaturday = $bookingService->getNoonEndTime($hoursOfSaturday);
-            $eveningStartTimeSaturday = $bookingService->getEveningStartTime($hoursOfSaturday);
-            $eveningEndTimeSaturday = $bookingService->getEveningEndTime($hoursOfSaturday);
-            if(!empty($noonStartTimeSaturday && $noonEndTimeSaturday)) {
-                $noonHoursSaturday = $bookingService->getHoursBySlice($noonStartTimeSaturday, $noonEndTimeSaturday);
-            } else {
-                $noonHoursSaturday  = ["Fermé"];
-            }
-            if(!empty($eveningStartTimeSaturday && $eveningEndTimeSaturday)) {
-                $eveningHoursSaturday = $bookingService->getHoursBySlice($eveningStartTimeSaturday, $eveningEndTimeSaturday);
-            } else {
-                $eveningHoursSaturday = ["Fermé"];
-            }
-        } else {
-            $noonHoursSaturday  = ["Fermé"];
-            $eveningHoursSaturday = ["Fermé"];
-        }
+        $noonHoursSaturday = $bookingService->getNoonHoursOfTheDay($hoursOfSaturday);
+        $eveningHoursSaturday = $bookingService->getEveningHoursOfTheDay($hoursOfSaturday);
 
         $hoursOfSunday = $openingdayRepository->findOneBy(array('day'=>'dimanche'))->getOpeninghours();
-        if(!$hoursOfSunday->isEmpty()){
-            $noonStartTimeSunday = $bookingService->getNoonStartTime($hoursOfSunday);
-            $noonEndTimeSunday = $bookingService->getNoonEndTime($hoursOfSunday);
-            $eveningStartTimeSunday = $bookingService->getEveningStartTime($hoursOfSunday);
-            $eveningEndTimeSunday = $bookingService->getEveningEndTime($hoursOfSunday);
-            if(!empty($noonStartTimeSunday && $noonEndTimeSunday)) {
-                $noonHoursSunday = $bookingService->getHoursBySlice($noonStartTimeSunday, $noonEndTimeSunday);
-            } else {
-                $noonHoursSunday = ["Fermé"];
-            }
-            if(!empty($eveningStartTimeSunday && $eveningEndTimeSunday)) {
-                $eveningHoursSunday = $bookingService->getHoursBySlice($eveningStartTimeSunday, $eveningEndTimeSunday);
-            } else {
-                $eveningHoursSunday = ["Fermé"];
-            }
-        } else {
-            $noonHoursSunday = ["Fermé"];
-            $eveningHoursSunday = ["Fermé"];
-        }
-
+        $noonHoursSunday = $bookingService->getNoonHoursOfTheDay($hoursOfSunday);
+        $eveningHoursSunday= $bookingService->getEveningHoursOfTheDay($hoursOfSunday);
         //dd($eveningHoursSunday);
-        /**
-         * TO DO : a method which return $noonHour for each day
-         */
 
         // Form
         $form = $this->createForm(BookingType::class, $booking);

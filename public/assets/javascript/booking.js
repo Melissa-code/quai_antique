@@ -1,4 +1,3 @@
-//const selectedDate = document.querySelector('.selected-date');
 const noonMonday = document.querySelector("#noon-monday");
 const eveningMonday = document.querySelector("#evening-monday");
 const noonTuesday = document.querySelector("#noon-tuesday");
@@ -16,17 +15,17 @@ const eveningSunday = document.querySelector("#evening-sunday");
 
 /**
  * Display the hours of a day
- * @param noonDay
- * @param eveningDay
+ * @param noon
+ * @param evening
  */
-function displayHours(noonDay, eveningDay) {
-    noonDay.style.display = "inline-block";
-    eveningDay.style.display = "inline-block";
+function displayHours(noon, evening) {
+    noon.style.display = "inline-block";
+    evening.style.display = "inline-block";
 }
 
 /**
  * Not display the hours of the others days
- * @param daysArray
+ * @param daysArray (array of days)
  */
 function notDisplayHours(daysArray) {
     for(let i = 0; i < daysArray.length; i++) {
@@ -82,24 +81,15 @@ function getHoursOfTheDay(day) {
  * Display the opening hours of the selected day from the date input
  */
 function getDay() {
-
-    /** TO DO : Get the day from the selected date by the user **/
-    // Get the value in the input date
     let selectedDate = document.querySelector('.date-input').value;
-    //console.log(selectedDate); // string
     // Convert string into Date (timestamp)
     selectedDate = Date.parse(selectedDate);
-    //console.log(selectedDate);
     // Convert timestamp into Date
     selectedDate = new Date (selectedDate);
-    //console.log(selectedDate);
     // Get the day of the selected date
     let day = selectedDate.getDay();
-    //console.log(day);
-
-    /** TO DO : Get the hours of the day **/
     getHoursOfTheDay(day);
-};
+}
 
 /**
  * When the booking page is loaded

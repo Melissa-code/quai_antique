@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Service;
 
 
@@ -9,6 +8,7 @@ use DatePeriod;
 use DateTime;
 use DateTimeZone;
 use Exception;
+
 
 class BookingService
 {
@@ -36,7 +36,6 @@ class BookingService
                 return "dimanche";
         }
     }
-
 
     /**
      * Get the noon start time of a day
@@ -102,9 +101,8 @@ class BookingService
         return null;
     }
 
-
     /**
-     * Get an array of the hours with a 15 minutes time slot
+     * Get an array of the hours with 15 minutes time slot
      * @param string $startTime
      * @param $endTime
      * @return ?array
@@ -122,9 +120,54 @@ class BookingService
             $dt = $dt->format('H:i');
             $hours[] .= $dt;
         }
-        return($hours);
+        return $hours;
     }
 
+    /**
+     * Get the noon hours of a day
+     * @param  $hoursOfTheDay
+     * @return array|null
+     * @throws Exception
+     */
+    public function getNoonHoursOfTheDay($hoursOfTheDay) : ?array
+    {
+        if(!$hoursOfTheDay->isEmpty()) {
+            $noonStartTime = $this->getNoonStartTime($hoursOfTheDay);
+            $noonEndTime = $this->getNoonEndTime($hoursOfTheDay);
+
+            if(!empty($noonStartTime && $noonEndTime)) {
+                $noonHours = $this->getHoursBySlice($noonStartTime, $noonEndTime);
+            } else {
+                $noonHours = ["Fermé"];
+            }
+        } else {
+            $noonHours = ["Fermé"];
+        }
+        return $noonHours;
+    }
+
+    /**
+     * Get the evening hours of a day
+     * @param $hoursOfTheDay
+     * @return array|null
+     * @throws Exception
+     */
+    public function getEveningHoursOfTheDay($hoursOfTheDay) : ?array
+    {
+        if(!$hoursOfTheDay->isEmpty()) {
+            $eveningStartTime = $this->getEveningStartTime($hoursOfTheDay);
+            $eveningEndTime = $this->getEveningEndTime($hoursOfTheDay);
+
+            if(!empty($eveningStartTime && $eveningEndTime)) {
+                $eveningHours = $this->getHoursBySlice($eveningStartTime, $eveningEndTime);
+            } else {
+                $eveningHours = ["Fermé"];
+            }
+        } else {
+            $eveningHours = ["Fermé"];
+        }
+        return $eveningHours;
+    }
 
 
 
