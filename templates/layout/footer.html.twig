@@ -17,18 +17,21 @@
                             <li class="nav-item mb-2">
                                 {# Login or Logout : Check if the user is logged-in #}
                                 {% if not app.user %}
-                                    <a href="{{ path('app_login') }}" class="mr-3"><img src="{{ asset('assets/icons/login-black.svg') }}" alt="connexion" width="25"></a>
+                                    <a href="{{ path('app_login') }}" class="mr-4"><img src="{{ asset('assets/icons/login-black.svg') }}" alt="connexion" width="25"></a>
                                 {% else %}
-                                    <a href="{{ path('app_logout') }}" class="mr-3"><img src="{{ asset('assets/icons/logout-black.svg') }}" alt="déconnexion" width="25"></a>
+                                    <a href="{{ path('app_logout') }}" class="mr-4"><img src="{{ asset('assets/icons/logout-black.svg') }}" alt="déconnexion" width="25"></a>
                                 {% endif %}
 
                                 {# Administration of the dishes & openning hours : Check if the admin is logged-in #}
                                 {% if app.user and is_granted('ROLE_ADMIN') %}
-                                    <a href="{{ path('app_admin_dish') }}#gallery" class="mr-3">
+                                    <a href="{{ path('app_admin_dish') }}#gallery" class="mr-2">
                                         <img src="{{ asset('assets/icons/dish-dome-black.svg') }}" alt="administration des plats favoris" width="20">
                                     </a>
-                                    <a href="{{ path('app_admin_opening') }}" class="mr-3">
+                                    <a href="{{ path('app_admin_opening') }}" class="mr-2">
                                         <img src="{{ asset('assets/icons/hour-black.svg') }}" alt="administration des horaires d'ouverture" width="20">
+                                    </a>
+                                    <a href="{{ path('app_admin_booking') }}" class="mr-2">
+                                        <img src="{{ asset('assets/icons/booking-black.svg') }}" alt="administration des réservations" width="20">
                                     </a>
                                 {% endif %}
                             </li>

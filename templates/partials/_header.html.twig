@@ -22,17 +22,18 @@
                         <a class="nav-link" href="{{ path('app_booking') }}">Réservation</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto ">
                     {# Check if the admmin is logged-in #}
                     {% if app.user and is_granted('ROLE_ADMIN') %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_admin_dish') }}#gallery">
+                        <li class="nav-item d-flex mr-md-5">
+                            <a class="nav-link mx-2 mx-md-0" href="{{ path('app_admin_dish') }}#gallery">
                                 <img src="{{ asset('assets/icons/dish-dome.svg') }}" alt="administration des plats favoris" style="width: 1.5rem">
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_admin_opening') }}">
+                            <a class="nav-link mx-2 mx-md-0" href="{{ path('app_admin_opening') }}">
                                 <img src="{{ asset('assets/icons/hour.svg') }}" alt="administration des horaires d'ouverture" style="width: 1.5rem">
+                            </a>
+                            <a class="nav-link mx-2 mx-md-0" href="{{ path('app_admin_booking') }}">
+                                <img src="{{ asset('assets/icons/booking.svg') }}" alt="administration des réservations" style="width: 1.5rem">
                             </a>
                         </li>
                     {% endif %}
