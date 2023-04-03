@@ -10,9 +10,7 @@ use App\Repository\OpeningdayRepository;
 use App\Repository\OpeninghourRepository;
 use App\Repository\RestaurantRepository;
 use App\Service\BookingService;
-
 use DateTime;
-use Doctrine\DBAL\Types\TimeImmutableType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,7 +59,6 @@ class BookingController extends AbstractController
         $hoursOfSunday = $openingdayRepository->findOneBy(array('day'=>'dimanche'))->getOpeninghours();
         $noonHoursSunday = $bookingService->getNoonHoursOfTheDay($hoursOfSunday);
         $eveningHoursSunday= $bookingService->getEveningHoursOfTheDay($hoursOfSunday);
-        //dd($eveningHoursSunday);
 
         // Form
         $form = $this->createForm(BookingType::class, $booking);
@@ -77,23 +74,21 @@ class BookingController extends AbstractController
             // Get the value of the start hour button checked by the user
             $startAt = $request->request->get('startAt');
             $booking->setStartAt(new DateTime($startAt));
-            //echo gettype($startAt); //string
 
             // Find the opening hour of the day by the start time
             $openingDay = $booking->getOpeningday()->getDay();
             $openingHour = $openinghourRepository->findOneByHours($startAt, $openingDay);
-            //dd($openingHour); //Array
             $booking->setOpeninghour($openingHour);
 
             // Check if the user is logged-in to make a booking
             if($user) {
-                $managerRegistry->getManager()->persist($booking);
-                $managerRegistry->getManager()->flush();
+                //$managerRegistry->getManager()->persist($booking);
+                //$managerRegistry->getManager()->flush();
                 $this->addFlash("success", "La réservation a bien été effectuée.");
-                $this->redirectToRoute('app_login');
+                return $this->redirectToRoute('app_account');
             } else {
-                $this->addFlash("error", "Vous devez être connecté pour effectuer une réservation");
-                $this->redirectToRoute('app_home');
+                $this->addFlash("error", "Vous devez vous connecter pour effectuer une réservation.");
+                return $this->redirectToRoute('app_login');
             }
         }
 
@@ -113,7 +108,6 @@ class BookingController extends AbstractController
             'eveningHoursSaturday' => $eveningHoursSaturday,
             'noonHoursSunday' => $noonHoursSunday,
             'eveningHoursSunday' => $eveningHoursSunday,
-            'days' => $openingdayRepository->findAll(),
             'form' => $form->createView(),
         ]);
     }

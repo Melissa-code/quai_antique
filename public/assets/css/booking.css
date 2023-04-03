@@ -48,6 +48,27 @@
 }
 
 
+/**** Bookings list ****/
+
+.booking-list {
+    background-image: url("../images/cooking.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.list-bg {
+    background-color: black;
+    border: 1px solid #FFE6A7;
+    opacity: 0.9;
+}
+
+.table-bg {
+    background-color: black;
+    color: #FFFFFF;
+}
+
+
 /*********************************************************************
                         Media queries
 **********************************************************************/

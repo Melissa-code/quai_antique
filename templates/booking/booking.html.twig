@@ -19,28 +19,6 @@
                         <div class="row form-content py-4 h-100 d-flex justify-content-center align-items-center mx-1">
                             <div class="col-12">
 
-                                {# Flash success or error messages  #}
-
-                                <div class="confirm-message text-center mt-2 font-weight-bold">
-                                    {% for label, flashes in app.session.flashbag.all %}
-                                        {% for flash in flashes %}
-                                            {% if ( label == 'success' ) %}
-                                                {# Success message  #}
-                                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                    {{ flash }}
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
-                                                </div>
-                                            {% elseif ( label == 'error' ) %}
-                                                {# Error message  #}
-                                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                    {{ flash }}
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
-                                                </div>
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endfor %}
-                                </div>
-
                                 {# Title #}
 
                                 <h2 class="text-center pb-4">Réservation</h2>
@@ -74,6 +52,7 @@
                                             </div>
                                         {% endfor %}
                                     </div>
+
                                     <div class="col-12 my-2" id="noon-tuesday">
                                         <p>Mardi midi :</p>
                                         {% for noonHourTuesday in noonHoursTuesday %}

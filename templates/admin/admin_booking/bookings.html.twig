@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block css %} <link rel="stylesheet" href="{{ asset('assets/css/booking.css') }}"> {% endblock css %}
+
+{% block title %} Administration des réservations {% endblock %}
+
+
+{% block main %}
+
+    <section id="booking">
+        <div class="row booking-list d-flex justify-content-center">
+            <article class="container h-100">
+                <div class="row text-white d-flex justify-content-center align-items-center mx-1 my-md-5">
+                    <div class="col-12 list-bg rounded p-2 p-md-4 my-md-5">
+
+                        {# Flash messages  #}
+                        <div class="confirm-message text-center mt-2 font-weight-bold">
+                            {% for label, flashes in app.session.flashbag.all %}
+                                {% for flash in flashes %}
+                                    {% if ( label == 'success' ) %}
+                                        {# Success message  #}
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            {{ flash }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+                                        </div>
+                                    {% elseif ( label == 'error' ) %}
+                                        {# Error message  #}
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            {{ flash }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+
+                        {# Title #}
+
+                        <div class="py-2 mb-3">
+                            <h1 class="page-title">Administration des réservations</h1>
+                            <h2 class="text-center">Administration des réservations</h2>
+                        </div>
+
+                        {# Table with the bookings #}
+
+                        <table class="table table-bg">
+                            <thead>
+                            <tr>
+                                <th scope="col" class="text-center">Id</th>
+                                <th scope="col" class="text-center">Date</th>
+                                <th scope="col" class="text-center">Client</th>
+                                <th scope="col" class="text-center">Réservation</th>
+                                <th scope="col" class="text-center">Heure d'arrivée</th>
+                                <th scope="col" class="text-center">Nombre d'invités</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for booking in bookings %}
+                                <tr>
+                                    <td class="text-center">{{ booking.id }}</td>
+                                    <td class="text-center">{{ booking.createdAt|date('d/m/Y') }}</td>
+                                    <td class="text-center">{{ booking.user.firstname }} {{ booking.user.lastname }}</td>
+                                    <td class="text-center">{{ booking.bookedAt|date('d/m/Y') }}</td>
+                                    <td class="text-center">{{ booking.startAt|date("H:i") }}</td>
+                                    <td class="text-center">{{ booking.guest.id }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                        {# Display navigation for a pagination #}
+{#                        <div class="navigation mt-2 d-flex justify-content-center">#}
+{#                            {{ knp_pagination_render(ascendingOpeninghours) }}#}
+{#                        </div>#}
+                    </div>
+
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    {% block javascripts %}
+        <script src=""></script>
+    {% endblock %}
+
+{% endblock main %}

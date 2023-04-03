@@ -53,7 +53,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Guest $guest = null;
 
-    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Booking::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Booking::class)]
     private Collection $bookings;
 
     public function __construct()
