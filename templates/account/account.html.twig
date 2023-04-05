@@ -16,24 +16,28 @@
 
                     {# Flash success or error messages  #}
 
-                    <div class="confirm-message text-center mt-2 font-weight-bold">
-                        {% for label, flashes in app.session.flashbag.all %}
-                            {% for flash in flashes %}
-                                {% if ( label == 'success' ) %}
-                                    {# Success message  #}
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        {{ flash }}
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
-                                    </div>
-                                {% elseif ( label == 'error' ) %}
-                                    {# Error message  #}
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        {{ flash }}
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        {% endfor %}
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-10 d-flex justify-content-center">
+                            <div class="confirm-message text-center mt-2 font-weight-bold">
+                                {% for label, flashes in app.session.flashbag.all %}
+                                    {% for flash in flashes %}
+                                        {% if ( label == 'success' ) %}
+                                            {# Success message  #}
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                {{ flash }}
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+                                            </div>
+                                        {% elseif ( label == 'error' ) %}
+                                            {# Error message  #}
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                {{ flash }}
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
 
                     {# Title #}

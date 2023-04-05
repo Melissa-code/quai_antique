@@ -4,8 +4,8 @@ namespace App\Controller;
 
 
 use App\Entity\Booking;
-use App\Entity\Openingday;
 use App\Form\BookingType;
+use App\Repository\BookingRepository;
 use App\Repository\OpeningdayRepository;
 use App\Repository\OpeninghourRepository;
 use App\Repository\RestaurantRepository;
@@ -21,8 +21,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookingController extends AbstractController
 {
     #[Route('/reservation', name: 'app_booking')]
-    public function book(RestaurantRepository $restaurantRepository, Request $request, ManagerRegistry $managerRegistry, BookingService $bookingService, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository): Response
+    public function book(RestaurantRepository $restaurantRepository, Request $request, ManagerRegistry $managerRegistry, BookingService $bookingService, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, BookingRepository $bookingRepository): Response
     {
+        $bookings = $bookingRepository->findAll();
+
         $booking = new Booking();
         $date = new \DateTimeImmutable();
         $booking->setCreatedAt($date);
@@ -82,10 +84,46 @@ class BookingController extends AbstractController
 
             // Check if the user is logged-in to make a booking
             if($user) {
-                //$managerRegistry->getManager()->persist($booking);
-                //$managerRegistry->getManager()->flush();
-                $this->addFlash("success", "La réservation a bien été effectuée.");
-                return $this->redirectToRoute('app_account');
+                // Check if a date and hour of booking already exist in the DB
+                $bookingsDate = $bookingRepository->findBy(array('bookedAt' => $bookedAtSelected, 'openinghour' => $booking->getOpeninghour()));
+
+                if($bookingsDate) {
+                    echo 'date de résa existe déjà';
+                    $guests = [];
+                    foreach ($bookingsDate as $bookingDate) {
+                        if($bookingDate->getBookedAt() == $bookedAtSelected && $bookingDate->getOpeninghour() == $booking->getOpeninghour()) {
+                            $guests[] .= $bookingDate->getGuest()->getQuantity();
+                        }
+                    }
+                    $nbGuests = array_sum($guests) + $booking->getGuest()->getQuantity();
+                    echo '  Total nb d invités à la même date: ' . $nbGuests;
+                    $remainingSeats = ($restaurant->getNbseatings() - $nbGuests);
+                    $booking->setRemainingseats($remainingSeats);
+                    echo '  Places restantes ' . $remainingSeats;
+
+                    // Check the limit of the guests
+                    if ($booking->getRemainingseats() < 52) {
+                        echo '  Nb de Places restantes à la même date si < 52 : ' . $booking->getRemainingseats();
+                        $this->addFlash("error", "Réservation impossible, le restaurant est complet.");
+
+                    } else {
+                        echo '  Réservation Enregistrée';
+                        $managerRegistry->getManager()->persist($booking);
+                        $managerRegistry->getManager()->flush();
+                        $this->addFlash("success", "La réservation a bien été effectuée.");
+                        return $this->redirectToRoute('app_account');
+                    }
+                } else {
+                    $remainingSeats = $restaurant->getNbseatings() - $booking->getGuest()->getQuantity();
+                    $booking->setRemainingseats($remainingSeats) ;
+                    echo 'total places restantes : '.$remainingSeats;
+                    echo 'date de résa n existe pas';
+                    //$managerRegistry->getManager()->persist($booking);
+                    //$managerRegistry->getManager()->flush();
+                    $this->addFlash("success", "La réservation a bien été effectuée.");
+                    return $this->redirectToRoute('app_account');
+                }
+
             } else {
                 $this->addFlash("error", "Vous devez vous connecter pour effectuer une réservation.");
                 return $this->redirectToRoute('app_login');

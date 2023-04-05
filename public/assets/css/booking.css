@@ -22,14 +22,14 @@
 
 .btn-hour {
     background-color: #FFFFFF;
-    border: 1px solid #BB9457;
+    border: 2px solid #FFE6A7;
     color: #000000;
     font-weight: bold;
 }
 
 .btn-hour:hover {
     background-color: #FFE6A7;
-    border: 1px solid #913732;
+    border: 2px solid #913732;
     color: #000000;
     font-weight: bold;
 }
@@ -46,6 +46,8 @@
 #evening-tuesday, #evening-wednesday, #evening-thursday, #evening-friday, #evening-saturday, #evening-sunday {
     display: none;
 }
+
+
 
 
 /**** Bookings list ****/

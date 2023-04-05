@@ -39,15 +39,18 @@ class Booking
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $bookedAt = null;
 
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $startAt = null;
+
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Guest $guest = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $startAt = null;
-
     #[ORM\ManyToMany(targetEntity: Allergy::class, inversedBy: 'bookings')]
     private Collection $allergies;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $remainingseats = null;
 
 
     public function __construct()
@@ -143,18 +146,6 @@ class Booking
         return $this;
     }
 
-    public function getGuest(): ?Guest
-    {
-        return $this->guest;
-    }
-
-    public function setGuest(?Guest $guest): self
-    {
-        $this->guest = $guest;
-
-        return $this;
-    }
-
     public function getStartAt(): ?\DateTimeInterface
     {
         return $this->startAt;
@@ -163,6 +154,18 @@ class Booking
     public function setStartAt(\DateTimeInterface $startAt): self
     {
         $this->startAt = $startAt;
+
+        return $this;
+    }
+
+    public function getGuest(): ?Guest
+    {
+        return $this->guest;
+    }
+
+    public function setGuest(?Guest $guest): self
+    {
+        $this->guest = $guest;
 
         return $this;
     }
@@ -187,6 +190,18 @@ class Booking
     public function removeAllergy(Allergy $allergy): self
     {
         $this->allergies->removeElement($allergy);
+
+        return $this;
+    }
+
+    public function getRemainingseats(): ?int
+    {
+        return $this->remainingseats;
+    }
+
+    public function setRemainingseats(?int $remainingseats): self
+    {
+        $this->remainingseats = $remainingseats;
 
         return $this;
     }

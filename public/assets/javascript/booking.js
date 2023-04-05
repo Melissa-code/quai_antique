@@ -13,6 +13,9 @@ const eveningSaturday  = document.querySelector("#evening-saturday");
 const noonSunday = document.querySelector("#noon-sunday");
 const eveningSunday = document.querySelector("#evening-sunday");
 
+
+
+
 /**
  * Display the hours of a day
  * @param noon
@@ -96,4 +99,5 @@ function getDay() {
  */
 window.addEventListener("load", function(e) {
     document.querySelector('.date-input').addEventListener('change', getDay);
+
 });
