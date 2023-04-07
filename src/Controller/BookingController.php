@@ -23,7 +23,7 @@ class BookingController extends AbstractController
     #[Route('/reservation', name: 'app_booking')]
     public function book(RestaurantRepository $restaurantRepository, Request $request, ManagerRegistry $managerRegistry, BookingService $bookingService, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, BookingRepository $bookingRepository): Response
     {
-        $bookings = $bookingRepository->findAll();
+        //$bookings = $bookingRepository->findAll();
 
         $booking = new Booking();
         $date = new \DateTimeImmutable();
@@ -108,8 +108,8 @@ class BookingController extends AbstractController
 
                     } else {
                         echo '  Réservation Enregistrée';
-                        $managerRegistry->getManager()->persist($booking);
-                        $managerRegistry->getManager()->flush();
+                        //$managerRegistry->getManager()->persist($booking);
+                        //$managerRegistry->getManager()->flush();
                         $this->addFlash("success", "La réservation a bien été effectuée.");
                         return $this->redirectToRoute('app_account');
                     }
@@ -149,4 +149,26 @@ class BookingController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
+    /**
+     * @param RestaurantRepository $restaurantRepository
+     * @param Request $request
+     * @param BookingService $bookingService
+     * @param OpeningdayRepository $openingdayRepository
+     * @param OpeninghourRepository $openinghourRepository
+     * @param BookingRepository $bookingRepository
+     * @return Response
+     */
+    #[Route('/reservations', name: 'app_bookings')]
+    public function bookings(RestaurantRepository $restaurantRepository, Request $request,  BookingService $bookingService, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, BookingRepository $bookingRepository): Response
+    {
+        $bookings = $bookingRepository->findAll();
+        $arrayOfBookings = [];
+        foreach ($bookings as $booking) {
+            $arrayOfBookings[] = $booking->toArray();
+        }
+        return $this->json($arrayOfBookings);
+    }
+
 }

@@ -206,4 +206,17 @@ class Booking
         return $this;
     }
 
+    /**
+     * Put the objet to an array
+     * @return array|null
+     */
+    public function toArray() : ?array
+    {
+        return [
+            "bookedAt" => $this->getBookedAt(),
+            "startAt" => $this->getStartAt(),
+            "remainingSeats" => $this->getRemainingseats()
+        ];
+    }
+
 }

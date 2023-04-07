@@ -94,10 +94,89 @@ function getDay() {
     getHoursOfTheDay(day);
 }
 
+function getHour() {
+    console.log(startAt.value);
+}
+
+/**
+ * Get the date in a string format year-month-day
+ * @param date
+ * @returns {*}
+ */
+function editDateFormat(date) {
+    let momentDate = moment(date);
+    return momentDate.format("YYYY-MM-DD");
+}
+
+/**
+ * Get the hour in a string format Hour:minutes
+ * @param hour
+ * @returns {*}
+ */
+function editHourFormat(hour) {
+    let momentHour = moment(hour);
+    return momentHour.format("H:m");
+}
+
+/**
+ * Display the booking with the date the openinghour and the remaining seats
+ */
+function getBookings(event) {
+    let selectedDate = document.querySelector('.date-input').value;
+
+
+    event.preventDefault();
+
+    axios.get(this.href).then(response => {
+        const bookings = document.querySelector("div.displayBookings");
+
+        if(this.classList.contains("btn-primary")) {
+            response.data.forEach(booking => {
+
+                dateOfBooking = booking.bookedAt;
+                dateOfBooking = editDateFormat(dateOfBooking);
+                hourOfBooking = booking.startAt;
+                hourOfBooking = editHourFormat(hourOfBooking);
+                //console.log(hourOfBooking);
+
+                //document.querySelectorAll(".start-at").forEach(startAt => {
+                    //startAt.addEventListener('click', getHour);
+                    //console.log(startAt.value);
+                //});
+
+              if(dateOfBooking === selectedDate) {
+                  // Create a li element and display remaining seats
+                  const node = document.createElement("li");
+                  node.textContent = "places restantes: "+ booking.remainingSeats + ', ' + booking.startAt;
+                  bookings.appendChild(node);
+                }
+
+
+            });
+            this.classList.replace("btn-primary", "btn-danger");
+            this.textContent = "Masquer les réservations";
+        } else {
+            bookings.innerHTML = "";
+            this.classList.replace("btn-danger", "btn-primary");
+            this.textContent = "Afficher les réservations";
+        }
+    }).catch(error => {
+        console.error(error);
+        window.alert("Une erreur est survenue.")
+    })
+
+}
+
+
 /**
  * When the booking page is loaded
  */
 window.addEventListener("load", function(e) {
     document.querySelector('.date-input').addEventListener('change', getDay);
+    document.querySelector("a.js-bookings").addEventListener("click", getBookings);
+
+    // document.querySelectorAll(".start-at").forEach(startAt => {
+    //     startAt.addEventListener('click', getHour);
+    // });
 
 });
