@@ -94,9 +94,6 @@ function getDay() {
     getHoursOfTheDay(day);
 }
 
-function getHour() {
-    console.log(startAt.value);
-}
 
 /**
  * Get the date in a string format year-month-day
@@ -119,13 +116,31 @@ function editHourFormat(hour) {
 }
 
 /**
+ * Get the value (string) of the hour selected
+ * @returns {*}
+ */
+function getHour() {
+    let hours = document.querySelectorAll('.start-at');
+    for(let i = 0; i < hours.length; i++) {
+        if(hours[i].checked) {
+            console.log(typeof hours[i].value);
+            console.log(hours[i].value);
+            return hours[i].value;
+        }
+    }
+}
+
+
+
+/**
  * Display the booking with the date the openinghour and the remaining seats
  */
 function getBookings(event) {
-    let selectedDate = document.querySelector('.date-input').value;
-
-
     event.preventDefault();
+    let selectedDate = document.querySelector(".date-input").value;
+    let selectedHour = getHour();
+    const noonBookings = document.querySelector(".noon-bookings");
+    const eveningBookings = document.querySelector(".evening-bookings");
 
     axios.get(this.href).then(response => {
         const bookings = document.querySelector("div.displayBookings");
@@ -137,19 +152,14 @@ function getBookings(event) {
                 dateOfBooking = editDateFormat(dateOfBooking);
                 hourOfBooking = booking.startAt;
                 hourOfBooking = editHourFormat(hourOfBooking);
-                //console.log(hourOfBooking);
-
-                //document.querySelectorAll(".start-at").forEach(startAt => {
-                    //startAt.addEventListener('click', getHour);
-                    //console.log(startAt.value);
-                //});
 
               if(dateOfBooking === selectedDate) {
-                  // Create a li element and display remaining seats
-                  const node = document.createElement("li");
-                  node.textContent = "places restantes: "+ booking.remainingSeats + ', ' + booking.startAt;
-                  bookings.appendChild(node);
-                }
+                  if(selectedHour > "7:00" && selectedHour < "17:00" &&  hourOfBooking > "7:00" && hourOfBooking < "17:00") {
+                      const node = document.createElement("li");
+                      node.textContent = "places restantes: "+ booking.remainingSeats + ', ' + hourOfBooking;
+                      bookings.appendChild(node);
+                  }
+              }
 
 
             });
@@ -175,8 +185,8 @@ window.addEventListener("load", function(e) {
     document.querySelector('.date-input').addEventListener('change', getDay);
     document.querySelector("a.js-bookings").addEventListener("click", getBookings);
 
-    // document.querySelectorAll(".start-at").forEach(startAt => {
-    //     startAt.addEventListener('click', getHour);
-    // });
+    document.querySelectorAll(".start-at").forEach(startAt => {
+        startAt.addEventListener('click', getHour);
+    });
 
 });

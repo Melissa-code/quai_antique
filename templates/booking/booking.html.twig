@@ -47,7 +47,10 @@
                             {# Number of the remaining places #}
 
                             <a href="{{ path('app_bookings') }}" class="btn btn-primary js-bookings">Afficher les réservations</a>
-                            <div class="displayBookings"></div>
+                            <div class="displayBookings">
+                                <div class="noon-bookings"></div>
+                                <div class="evening-bookings"></div>
+                            </div>
 
                             {# Booking form #}
 
@@ -69,9 +72,9 @@
                                     <div class="col-12 my-2" id="noon-monday">
                                         <p>Lundi midi :</p>
                                         {% for noonHourMonday in noonHoursMonday %}
-                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-hour mr-1 my-1">
-                                                    <input type="checkbox" id="noonHourMonday" name="startAt" value="{{ noonHourMonday }}" class="start-at"> {{ noonHourMonday }}
+                                            <div class="btn-group btn-group-toggle " data-toggle="buttons">
+                                                <label class="btn btn-hour mr-1 my-1 ">
+                                                    <input type="radio" id="noonHourMonday" name="startAt" value="{{ noonHourMonday }}" class="start-at"> {{ noonHourMonday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
@@ -82,7 +85,7 @@
                                         {% for noonHourTuesday in noonHoursTuesday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                 <label class="btn btn-hour mr-1 my-1">
-                                                    <input type="checkbox" id="noonHourTuesday" name="startAt" value="{{ noonHourTuesday }}" class="start-at"> {{ noonHourTuesday }}
+                                                    <input type="radio" id="noonHourTuesday" name="startAt" value="{{ noonHourTuesday }}" class="start-at"> {{ noonHourTuesday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
@@ -92,7 +95,7 @@
                                         {% for noonHourWednesday in noonHoursWednesday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                 <label class="btn btn-hour mr-1 my-1">
-                                                    <input type="checkbox" id="noonHourWednesday" name="startAt" value="{{ noonHourWednesday }}" class="start-at"> {{ noonHourWednesday }}
+                                                    <input type="radio" id="noonHourWednesday" name="startAt" value="{{ noonHourWednesday }}" class="start-at"> {{ noonHourWednesday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
@@ -102,7 +105,7 @@
                                         {% for noonHourThursday in noonHoursThursday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="button">
                                                 <label class="btn btn-hour mr-1 my-1">
-                                                    <input type="checkbox" id="noonHourThursday" name="startAt" value="{{ noonHourThursday }}" class="start-at"> {{ noonHourThursday }}
+                                                    <input type="radio" id="noonHourThursday" name="startAt" value="{{ noonHourThursday }}" class="start-at"> {{ noonHourThursday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
@@ -112,7 +115,7 @@
                                         {% for noonHourFriday in noonHoursFriday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                 <label class="btn btn-hour mr-1 my-1">
-                                                    <input type="checkbox" id="noonHourFriday" name="startAt" value="{{ noonHourFriday }}" class="start-at"> {{ noonHourFriday }}
+                                                    <input type="radio" id="noonHourFriday" name="startAt" value="{{ noonHourFriday }}" class="start-at"> {{ noonHourFriday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
@@ -122,7 +125,7 @@
                                         {% for noonHourSaturday in noonHoursSaturday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                 <label class="btn btn-hour mr-1 my-1">
-                                                    <input type="checkbox" id="noonHourSaturday" name="startAt" value="{{ noonHourSaturday }}" class="start-at"> {{ noonHourSaturday }}
+                                                    <input type="radio" id="noonHourSaturday" name="startAt" value="{{ noonHourSaturday }}" class="start-at"> {{ noonHourSaturday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
@@ -132,7 +135,7 @@
                                         {% for noonHourSunday in noonHoursSunday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                 <label class="btn btn-hour mr-1 my-1">
-                                                    <input type="checkbox" id="noonHourSunday" name="startAt" value="{{ noonHourSunday }}" class="start-at"> {{ noonHourSunday }}
+                                                    <input type="radio" id="noonHourSunday" name="startAt" value="{{ noonHourSunday }}" class="start-at"> {{ noonHourSunday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
@@ -146,7 +149,7 @@
                                         {% for eveningHourMonday in eveningHoursMonday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                 <label class="btn btn-hour mr-1 my-1">
-                                                    <input type="checkbox" id="eveningHourMonday" name="startAt" value="{{ eveningHourMonday }}" class="start-at"> {{ eveningHourMonday }}
+                                                    <input type="radio" id="eveningHourMonday" name="startAt" value="{{ eveningHourMonday }}" class="start-at"> {{ eveningHourMonday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
@@ -156,7 +159,7 @@
                                         {% for eveningHourTuesday in eveningHoursTuesday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                 <label class="btn btn-hour mr-1 my-1">
-                                                    <input type="checkbox" id="eveningHourTuesday" name="startAt" value="{{ eveningHourTuesday }}" class="start-at"> {{ eveningHourTuesday }}
+                                                    <input type="radio" id="eveningHourTuesday" name="startAt" value="{{ eveningHourTuesday }}" class="start-at"> {{ eveningHourTuesday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
@@ -166,7 +169,7 @@
                                         {% for eveningHourWednesday in eveningHoursWednesday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                 <label class="btn btn-hour mr-1 my-1">
-                                                    <input type="checkbox" id="eveningHourWednesday" name="startAt" value="{{ eveningHourWednesday }}" class="start-at"> {{ eveningHourWednesday }}
+                                                    <input type="radio" id="eveningHourWednesday" name="startAt" value="{{ eveningHourWednesday }}" class="start-at"> {{ eveningHourWednesday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
@@ -176,7 +179,7 @@
                                         {% for eveningHourThursday in eveningHoursThursday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                 <label class="btn btn-hour mr-1 my-1">
-                                                    <input type="checkbox" id="eveningHourThursday" name="startAt" value="{{ eveningHourThursday }}" class="start-at"> {{ eveningHourThursday }}
+                                                    <input type="radio" id="eveningHourThursday" name="startAt" value="{{ eveningHourThursday }}" class="start-at"> {{ eveningHourThursday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
@@ -186,7 +189,7 @@
                                         {% for eveningHourFriday in eveningHoursFriday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                 <label class="btn btn-hour mr-1 my-1">
-                                                    <input type="checkbox" id="eveningHourFriday" name="startAt" value="{{ eveningHourFriday }}" class="start-at"> {{ eveningHourFriday }}
+                                                    <input type="radio" id="eveningHourFriday" name="startAt" value="{{ eveningHourFriday }}" class="start-at"> {{ eveningHourFriday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
@@ -196,7 +199,7 @@
                                         {% for eveningHourSaturday in eveningHoursSaturday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                 <label class="btn btn-hour mr-1 my-1">
-                                                    <input type="checkbox" id="eveningHourSaturday" name="startAt" value="{{ eveningHourSaturday }}" class="start-at"> {{ eveningHourSaturday }}
+                                                    <input type="radio" id="eveningHourSaturday" name="startAt" value="{{ eveningHourSaturday }}" class="start-at"> {{ eveningHourSaturday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
@@ -206,7 +209,7 @@
                                         {% for eveningHourSunday in eveningHoursSunday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                 <label class="btn btn-hour mr-1 my-1">
-                                                    <input type="checkbox" id="eveningHourSunday" name="startAt" value="{{ eveningHourSunday }}" class="start-at"> {{ eveningHourSunday }}
+                                                    <input type="radio" id="eveningHourSunday" name="startAt" value="{{ eveningHourSunday }}" class="start-at"> {{ eveningHourSunday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
