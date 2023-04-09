@@ -15,7 +15,6 @@ const eveningSunday = document.querySelector("#evening-sunday");
 
 
 
-
 /**
  * Display the hours of a day
  * @param noon
@@ -139,11 +138,13 @@ function getBookings(event) {
     event.preventDefault();
     let selectedDate = document.querySelector(".date-input").value;
     let selectedHour = getHour();
-    const noonBookings = document.querySelector(".noon-bookings");
-    const eveningBookings = document.querySelector(".evening-bookings");
+    //const noonBookings = document.querySelector(".noon-bookings");
+    //const eveningBookings = document.querySelector(".evening-bookings");
 
     axios.get(this.href).then(response => {
         const bookings = document.querySelector("div.displayBookings");
+        let noonHoursOfBookings;
+        let eveningHoursOfBooking = [];
 
         if(this.classList.contains("btn-primary")) {
             response.data.forEach(booking => {
@@ -154,7 +155,12 @@ function getBookings(event) {
                 hourOfBooking = editHourFormat(hourOfBooking);
 
               if(dateOfBooking === selectedDate) {
-                  if(selectedHour > "7:00" && selectedHour < "17:00" &&  hourOfBooking > "7:00" && hourOfBooking < "17:00") {
+                  if (hourOfBooking > "07:00" && hourOfBooking < "17:00" && selectedHour > "07:00" && selectedHour < "17:00"){
+                      const node = document.createElement("li");
+                      node.textContent = "places restantes: "+ booking.remainingSeats + ', ' + hourOfBooking;
+                      bookings.appendChild(node);
+                  }
+                  else if (hourOfBooking > "17:00"  && selectedHour > "17:00"){
                       const node = document.createElement("li");
                       node.textContent = "places restantes: "+ booking.remainingSeats + ', ' + hourOfBooking;
                       bookings.appendChild(node);
