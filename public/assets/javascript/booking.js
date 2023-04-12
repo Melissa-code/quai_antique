@@ -14,7 +14,6 @@ const noonSunday = document.querySelector("#noon-sunday");
 const eveningSunday = document.querySelector("#evening-sunday");
 
 
-
 /**
  * Display the hours of a day
  * @param noon
@@ -93,7 +92,6 @@ function getDay() {
     getHoursOfTheDay(day);
 }
 
-
 /**
  * Get the date in a string format year-month-day
  * @param date
@@ -122,22 +120,24 @@ function getHour() {
     let hours = document.querySelectorAll('.start-at');
     for(let i = 0; i < hours.length; i++) {
         if(hours[i].checked) {
-            console.log(typeof hours[i].value);
-            console.log(hours[i].value);
             return hours[i].value;
         }
     }
 }
 
-function getGuest() {
-    //let guest = document.querySelector('#booking_guest').options[0];
-    //console.log(guest);
-    let liste, texte;
-    liste = document.querySelector('#booking_guest');
-    texte = liste.options[liste.selectedIndex].text;
-    console.log(texte);
+/**
+ * Get the value (integer) of the number of the guests selected
+ * @returns {number}
+ */
+function getNumberOfGuestsSelected() {
+    let listOfGuests, numberOfGuests;
+    listOfGuests = document.querySelector('#booking_guest');
+    numberOfGuests = listOfGuests.options[listOfGuests.selectedIndex].text;
+    //console.log(typeof numberOfGuests);
+    numberOfGuests = parseInt(numberOfGuests)
+    //console.log(typeof numberOfGuests);
+    return numberOfGuests;
 }
-
 
 
 /**
@@ -147,9 +147,11 @@ function getBookings(event) {
     event.preventDefault();
     let selectedDate = document.querySelector(".date-input").value;
     let selectedHour = getHour();
+    let result = [];
+    let remainingSeats = 60;
 
     axios.get(this.href).then(response => {
-        const bookings = document.querySelector("div.displayBookings");
+        const bookings = document.querySelector("ul.displayBookings");
 
         if(this.classList.contains("btn-primary")) {
             response.data.forEach(booking => {
@@ -160,19 +162,32 @@ function getBookings(event) {
 
               if(dateOfBooking === selectedDate) {
                   if (hourOfBooking > "07:00" && hourOfBooking < "17:00" && selectedHour > "07:00" && selectedHour < "17:00"){
-                      const node = document.createElement("li");
-                      node.textContent = "places restantes: "+ booking.remainingSeats + ', ' + hourOfBooking;
-                      bookings.appendChild(node);
+                      result.push(booking.remainingSeats);
                   }
                   else if (hourOfBooking > "17:00"  && selectedHour > "17:00"){
-                      const node = document.createElement("li");
-                      node.textContent = "places restantes: "+ booking.remainingSeats + ', ' + hourOfBooking;
-                      bookings.appendChild(node);
+                      result.push(booking.remainingSeats);
                   }
               }
-
-
             });
+
+            if(result.length > 1) {
+                const last = result[result.length-1];
+                console.log(last);
+                const node = document.createElement("li");
+                node.textContent = "places restantes: "+ (last - getNumberOfGuestsSelected());
+                bookings.appendChild(node);
+            } else if(result.length === 1) {
+                const last = result[result.length-1];
+                console.log(last);
+                const node = document.createElement("li");
+                node.textContent = "places restantes: "+ (last - getNumberOfGuestsSelected());
+                bookings.appendChild(node);
+            } else if(result.length < 1){
+                const node = document.createElement("li");
+                node.textContent = "places restantes: "+ (remainingSeats - getNumberOfGuestsSelected());
+                bookings.appendChild(node);
+            }
+
             this.classList.replace("btn-primary", "btn-danger");
             this.textContent = "Masquer les réservations";
         } else {
@@ -193,12 +208,11 @@ function getBookings(event) {
  */
 window.addEventListener("load", function(e) {
    //console.log(document.querySelector('#booking_guest'));
-    document.querySelector('#booking_guest').addEventListener('change', getGuest);
+    document.querySelector('#booking_guest').addEventListener('change', getNumberOfGuestsSelected);
 
     document.querySelector('.date-input').addEventListener('change', getDay);
     document.querySelector("a.js-bookings").addEventListener("click", getBookings);
     document.querySelectorAll(".start-at").forEach(startAt => {
         startAt.addEventListener('click', getHour);
     });
-
 });
