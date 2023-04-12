@@ -129,6 +129,15 @@ function getHour() {
     }
 }
 
+function getGuest() {
+    //let guest = document.querySelector('#booking_guest').options[0];
+    //console.log(guest);
+    let liste, texte;
+    liste = document.querySelector('#booking_guest');
+    texte = liste.options[liste.selectedIndex].text;
+    console.log(texte);
+}
+
 
 
 /**
@@ -138,20 +147,15 @@ function getBookings(event) {
     event.preventDefault();
     let selectedDate = document.querySelector(".date-input").value;
     let selectedHour = getHour();
-    //const noonBookings = document.querySelector(".noon-bookings");
-    //const eveningBookings = document.querySelector(".evening-bookings");
 
     axios.get(this.href).then(response => {
         const bookings = document.querySelector("div.displayBookings");
-        let noonHoursOfBookings;
-        let eveningHoursOfBooking = [];
 
         if(this.classList.contains("btn-primary")) {
             response.data.forEach(booking => {
-
-                dateOfBooking = booking.bookedAt;
+                let dateOfBooking = booking.bookedAt;
                 dateOfBooking = editDateFormat(dateOfBooking);
-                hourOfBooking = booking.startAt;
+                let hourOfBooking = booking.startAt;
                 hourOfBooking = editHourFormat(hourOfBooking);
 
               if(dateOfBooking === selectedDate) {
@@ -188,9 +192,11 @@ function getBookings(event) {
  * When the booking page is loaded
  */
 window.addEventListener("load", function(e) {
+   //console.log(document.querySelector('#booking_guest'));
+    document.querySelector('#booking_guest').addEventListener('change', getGuest);
+
     document.querySelector('.date-input').addEventListener('change', getDay);
     document.querySelector("a.js-bookings").addEventListener("click", getBookings);
-
     document.querySelectorAll(".start-at").forEach(startAt => {
         startAt.addEventListener('click', getHour);
     });
