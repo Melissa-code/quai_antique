@@ -44,94 +44,88 @@
                                 <h2 class="text-center pb-4">Réservation</h2>
                             </div>
 
-                            {# Number of the remaining places #}
-
-                            <a href="{{ path('app_bookings') }}" class="btn btn-primary js-bookings">Afficher les réservations</a>
-                            <ul class="displayBookings list-unstyled"></ul>
-
                             {# Booking form #}
 
                             <div class="col-12">
                                 {{ form_start(form) }}
-                                <div class="row d-flex justify-content-center">
+                                <div class="row">
                                     {# Number of guests #}
-                                    <div class="col-md-6 guests">
-                                        {{ form_row(form.guest, {'attr': {'id': 'guest'}}) }}
+                                    <div class="col-md-6">
+                                        {{ form_row(form.guest) }}
                                     </div>
-                                    {# Day #}
+                                    {# Date of the booking #}
                                     <div class="col-md-6">
                                         {{ form_row(form.bookedAt) }}
                                     </div>
                                 </div>
 
-                                <div class="row d-flex justify-content-center">
+                                <div class="row">
                                     {# Noon hours #}
-                                    <div class="col-12 my-2" id="noon-monday">
-                                        <p>Lundi midi :</p>
+                                    <div class="col-12 my-1" id="noon-monday">
+                                        <label class="d-block">Lundi midi :</label>
                                         {% for noonHourMonday in noonHoursMonday %}
-                                            <div class="btn-group btn-group-toggle " data-toggle="buttons">
-                                                <label class="btn btn-hour mr-1 my-1 ">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-hour mr-1 mb-2">
                                                     <input type="radio" id="noonHourMonday" name="startAt" value="{{ noonHourMonday }}" class="start-at"> {{ noonHourMonday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
                                     </div>
-
-                                    <div class="col-12 my-2" id="noon-tuesday">
-                                        <p>Mardi midi :</p>
+                                    <div class="col-12 my-1" id="noon-tuesday">
+                                        <label class="d-block">Mardi midi :</label>
                                         {% for noonHourTuesday in noonHoursTuesday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-hour mr-1 my-1">
+                                                <label class="btn btn-hour mr-1 mb-2">
                                                     <input type="radio" id="noonHourTuesday" name="startAt" value="{{ noonHourTuesday }}" class="start-at"> {{ noonHourTuesday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2" id="noon-wednesday">
-                                        <p>Mercredi midi :</p>
+                                    <div class="col-12 my-1" id="noon-wednesday">
+                                        <label class="d-block">Mercredi midi :</label>
                                         {% for noonHourWednesday in noonHoursWednesday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-hour mr-1 my-1">
+                                                <label class="btn btn-hour mr-1 mb-2">
                                                     <input type="radio" id="noonHourWednesday" name="startAt" value="{{ noonHourWednesday }}" class="start-at"> {{ noonHourWednesday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2" id="noon-thursday">
-                                        <p>Jeudi midi :</p>
+                                    <div class="col-12 my-1" id="noon-thursday">
+                                        <label class="d-block">Jeudi midi :</label>
                                         {% for noonHourThursday in noonHoursThursday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="button">
-                                                <label class="btn btn-hour mr-1 my-1">
+                                                <label class="btn btn-hour mr-1 mb-2">
                                                     <input type="radio" id="noonHourThursday" name="startAt" value="{{ noonHourThursday }}" class="start-at"> {{ noonHourThursday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2" id="noon-friday">
-                                        <p>Vendredi midi :</p>
+                                    <div class="col-12 my-1" id="noon-friday">
+                                        <label class="d-block">Vendredi midi :</label>
                                         {% for noonHourFriday in noonHoursFriday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-hour mr-1 my-1">
+                                                <label class="btn btn-hour mr-1 mb-2">
                                                     <input type="radio" id="noonHourFriday" name="startAt" value="{{ noonHourFriday }}" class="start-at"> {{ noonHourFriday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2" id="noon-saturday">
-                                        <p>Samedi midi :</p>
+                                    <div class="col-12 my-1" id="noon-saturday">
+                                        <label class="d-block">Samedi midi :</label>
                                         {% for noonHourSaturday in noonHoursSaturday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-hour mr-1 my-1">
+                                                <label class="btn btn-hour mr-1 mb-2">
                                                     <input type="radio" id="noonHourSaturday" name="startAt" value="{{ noonHourSaturday }}" class="start-at"> {{ noonHourSaturday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2" id="noon-sunday">
-                                        <p>Dimanche midi :</p>
+                                    <div class="col-12 my-1" id="noon-sunday">
+                                        <label class="d-block">Dimanche midi :</label>
                                         {% for noonHourSunday in noonHoursSunday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-hour mr-1 my-1">
+                                                <label class="btn btn-hour mr-1 mb-2">
                                                     <input type="radio" id="noonHourSunday" name="startAt" value="{{ noonHourSunday }}" class="start-at"> {{ noonHourSunday }}
                                                 </label>
                                             </div>
@@ -141,87 +135,92 @@
 
                                 <div class="row d-flex justify-content-center">
                                     {# Evening hours #}
-                                    <div class="col-12 my-2" id="evening-monday">
-                                        <p>Lundi soir:</p>
+                                    <div class="col-12 my-1" id="evening-monday">
+                                        <label class="d-block">Lundi soir :</label>
                                         {% for eveningHourMonday in eveningHoursMonday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-hour mr-1 my-1">
+                                                <label class="btn btn-hour mr-1 mb-2">
                                                     <input type="radio" id="eveningHourMonday" name="startAt" value="{{ eveningHourMonday }}" class="start-at"> {{ eveningHourMonday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2" id="evening-tuesday">
-                                        <p>Mardi soir:</p>
+                                    <div class="col-12 my-1" id="evening-tuesday">
+                                        <label class="d-block">Mardi soir :</label>
                                         {% for eveningHourTuesday in eveningHoursTuesday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-hour mr-1 my-1">
+                                                <label class="btn btn-hour mr-1 mb-2">
                                                     <input type="radio" id="eveningHourTuesday" name="startAt" value="{{ eveningHourTuesday }}" class="start-at"> {{ eveningHourTuesday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2" id="evening-wednesday">
-                                        <p>Mercredi soir:</p>
+                                    <div class="col-12 my-1" id="evening-wednesday">
+                                        <label class="d-block">Mercredi soir :</label>
                                         {% for eveningHourWednesday in eveningHoursWednesday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-hour mr-1 my-1">
+                                                <label class="btn btn-hour mr-1 mb-2">
                                                     <input type="radio" id="eveningHourWednesday" name="startAt" value="{{ eveningHourWednesday }}" class="start-at"> {{ eveningHourWednesday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2" id="evening-thursday">
-                                        <p>Jeudi soir:</p>
+                                    <div class="col-12 my-1" id="evening-thursday">
+                                        <label class="d-block">Jeudi soir :</label>
                                         {% for eveningHourThursday in eveningHoursThursday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-hour mr-1 my-1">
+                                                <label class="btn btn-hour mr-1 mb-2">
                                                     <input type="radio" id="eveningHourThursday" name="startAt" value="{{ eveningHourThursday }}" class="start-at"> {{ eveningHourThursday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2" id="evening-friday">
-                                        <p>Vendredi soir:</p>
+                                    <div class="col-12 my-1" id="evening-friday">
+                                        <label class="d-block">Vendredi soir :</label>
                                         {% for eveningHourFriday in eveningHoursFriday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-hour mr-1 my-1">
+                                                <label class="btn btn-hour mr-1 mb-2">
                                                     <input type="radio" id="eveningHourFriday" name="startAt" value="{{ eveningHourFriday }}" class="start-at"> {{ eveningHourFriday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2" id="evening-saturday">
-                                        <p>Samedi soir:</p>
+                                    <div class="col-12 my-1" id="evening-saturday">
+                                        <label class="d-block">Samedi soir :</label>
                                         {% for eveningHourSaturday in eveningHoursSaturday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-hour mr-1 my-1">
+                                                <label class="btn btn-hour mr-1 mb-2">
                                                     <input type="radio" id="eveningHourSaturday" name="startAt" value="{{ eveningHourSaturday }}" class="start-at"> {{ eveningHourSaturday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-2" id="evening-sunday">
-                                        <p>Dimanche soir:</p>
+                                    <div class="col-12 my-1" id="evening-sunday">
+                                        <label class="d-block">Dimanche soir :</label>
                                         {% for eveningHourSunday in eveningHoursSunday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-hour mr-1 my-1">
+                                                <label class="btn btn-hour mr-1 mb-2">
                                                     <input type="radio" id="eveningHourSunday" name="startAt" value="{{ eveningHourSunday }}" class="start-at"> {{ eveningHourSunday }}
                                                 </label>
                                             </div>
                                         {% endfor %}
                                     </div>
-
                                 </div>
 
                                 <div class="row d-flex justify-content-center">
                                     {# Allergies #}
-                                    <div class="col-12">
+                                    <div class="col-md-6">
                                         {{ form_row(form.allergies) }}
                                     </div>
+                                    {# See the number of the remaining seats #}
+                                    <div class="col-md-6">
+                                        <a href="{{ path('app_bookings') }}" class="btn btn-displaySeats js-bookings">Afficher les places disponibles</a>
+                                        <ul class="displayBookings list-unstyled mt-2"></ul>
+                                    </div>
                                 </div>
-                                {# Save button #}
-                                <div class="col text-center mt-4">
+
+                                <div class="col-12 text-center">
+                                    {# Save a booking button #}
                                     <button class="btn btn-custom">Réserver</button>
                                 </div>
                                 {{ form_end(form) }}
@@ -233,8 +232,6 @@
             </article>
         </div>
     </section>
-
-
 
     {% block javascripts %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>

@@ -18,7 +18,7 @@
     z-index: 1;
 }
 
-/**** hour buttons ****/
+/* Buttons of the hours */
 
 .btn-hour {
     background-color: #FFFFFF;
@@ -34,7 +34,7 @@
     font-weight: bold;
 }
 
-/**** Hours list ****/
+/* List of the buttons of the hours */
 
 #noon-monday, #evening-monday {
     display: inline-block;
@@ -47,10 +47,23 @@
     display: none;
 }
 
+/* Button to see or hide the number of the remaining seats */
 
+.btn-displaySeats, .btn-hideSeats {
+    background-color: #000000;
+    border: 1px solid #FFE6A7;
+    color: #FFFFFF;
+}
 
+.btn-displaySeats:hover, .btn-hideSeats:hover {
+    color: #FFE6A7;
+}
 
-/**** Bookings list ****/
+/*********************************************************************
+                        Admin bookings Page
+**********************************************************************/
+
+/* Bookings list */
 
 .booking-list {
     background-image: url("../images/cooking.png");
@@ -70,7 +83,6 @@
     color: #FFFFFF;
 }
 
-
 /*********************************************************************
                         Media queries
 **********************************************************************/
@@ -78,9 +90,7 @@
 /* mobile phones */
 
 @media screen and (min-device-width: 280px) and (max-device-width: 767px) {
-
     .booking-bg {
         background: black;
     }
-
 }

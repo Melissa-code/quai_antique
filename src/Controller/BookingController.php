@@ -150,21 +150,17 @@ class BookingController extends AbstractController
         ]);
     }
 
-
     /**
-     * @param RestaurantRepository $restaurantRepository
-     * @param Request $request
-     * @param BookingService $bookingService
-     * @param OpeningdayRepository $openingdayRepository
-     * @param OpeninghourRepository $openinghourRepository
+     * Put all the booking in a array and return it in a JSON format
      * @param BookingRepository $bookingRepository
      * @return Response
      */
     #[Route('/reservations', name: 'app_bookings')]
-    public function bookings(RestaurantRepository $restaurantRepository, Request $request,  BookingService $bookingService, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, BookingRepository $bookingRepository): Response
+    public function bookings(BookingRepository $bookingRepository): Response
     {
         $bookings = $bookingRepository->findAll();
         $arrayOfBookings = [];
+
         foreach ($bookings as $booking) {
             $arrayOfBookings[] = $booking->toArray();
         }

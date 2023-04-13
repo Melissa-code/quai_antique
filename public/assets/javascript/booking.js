@@ -13,29 +13,32 @@ const eveningSaturday  = document.querySelector("#evening-saturday");
 const noonSunday = document.querySelector("#noon-sunday");
 const eveningSunday = document.querySelector("#evening-sunday");
 
+/*************************************************
+ *      Booking time
+ *************************************************/
 
 /**
- * Display the hours of a day
- * @param noon
- * @param evening
+ * Display booking hours of a day
+ * @param noonHours
+ * @param eveningHours
  */
-function displayHours(noon, evening) {
-    noon.style.display = "inline-block";
-    evening.style.display = "inline-block";
+function displayHours(noonHours, eveningHours) {
+    noonHours.style.display = "inline-block";
+    eveningHours.style.display = "inline-block";
 }
 
 /**
  * Not display the hours of the others days
- * @param daysArray (array of days)
+ * @param arrayOfDays (array)
  */
-function notDisplayHours(daysArray) {
-    for(let i = 0; i < daysArray.length; i++) {
-        daysArray[i].style.display = "none";
+function notDisplayHours(arrayOfDays) {
+    for(let i = 0; i < arrayOfDays.length; i++) {
+        arrayOfDays[i].style.display = "none";
     }
 }
 
 /**
- * Display the hours of a day selected by the User (The hours of Monday are diplayed by default)
+ * Display the hours of a day selected by the User (The hours of Monday are displayed by default)
  * @param day (is an integer : Sunday is 0)
  */
 function getHoursOfTheDay(day) {
@@ -83,14 +86,17 @@ function getHoursOfTheDay(day) {
  */
 function getDay() {
     let selectedDate = document.querySelector('.date-input').value;
-    // Convert string into Date (timestamp)
+    // Convert string into timestamp
     selectedDate = Date.parse(selectedDate);
     // Convert timestamp into Date
     selectedDate = new Date (selectedDate);
-    // Get the day of the selected date
     let day = selectedDate.getDay();
     getHoursOfTheDay(day);
 }
+
+/*************************************************
+ *      Remaining seats
+ *************************************************/
 
 /**
  * Get the date in a string format year-month-day
@@ -126,35 +132,34 @@ function getHour() {
 }
 
 /**
- * Get the value (integer) of the number of the guests selected
+ * Get the value (int) of the number of the guests selected by the user
  * @returns {number}
  */
 function getNumberOfGuestsSelected() {
     let listOfGuests, numberOfGuests;
     listOfGuests = document.querySelector('#booking_guest');
     numberOfGuests = listOfGuests.options[listOfGuests.selectedIndex].text;
-    //console.log(typeof numberOfGuests);
     numberOfGuests = parseInt(numberOfGuests)
-    //console.log(typeof numberOfGuests);
     return numberOfGuests;
 }
 
-
 /**
- * Display the booking with the date the openinghour and the remaining seats
+ * Display the remaining seats
+ * @param event
  */
 function getBookings(event) {
     event.preventDefault();
     let selectedDate = document.querySelector(".date-input").value;
     let selectedHour = getHour();
-    let result = [];
+    let arrayOfRemainingSeats = [];
     let remainingSeats = 60;
 
     axios.get(this.href).then(response => {
         const bookings = document.querySelector("ul.displayBookings");
-
-        if(this.classList.contains("btn-primary")) {
+        // response.data is the array of the bookings saved in the database in a JSON format
+        if(this.classList.contains("btn-displaySeats")) {
             response.data.forEach(booking => {
+                // Get the values of the date and the hour of each booking saved in the database in a string format
                 let dateOfBooking = booking.bookedAt;
                 dateOfBooking = editDateFormat(dateOfBooking);
                 let hourOfBooking = booking.startAt;
@@ -162,54 +167,58 @@ function getBookings(event) {
 
               if(dateOfBooking === selectedDate) {
                   if (hourOfBooking > "07:00" && hourOfBooking < "17:00" && selectedHour > "07:00" && selectedHour < "17:00"){
-                      result.push(booking.remainingSeats);
+                      arrayOfRemainingSeats.push(booking.remainingSeats);
                   }
                   else if (hourOfBooking > "17:00"  && selectedHour > "17:00"){
-                      result.push(booking.remainingSeats);
+                      arrayOfRemainingSeats.push(booking.remainingSeats);
                   }
               }
             });
-
-            if(result.length > 1) {
-                const last = result[result.length-1];
-                console.log(last);
+            // last is the last value of the array of the remaining seats
+            const last = arrayOfRemainingSeats[arrayOfRemainingSeats.length-1];
+            if(arrayOfRemainingSeats.length > 1) {
+                if((last - getNumberOfGuestsSelected()) <= 10) {
+                    console.log(last - getNumberOfGuestsSelected());
+                    alert("Réservation impossible car le restaurant est complet.")
+                } else {
+                    const node = document.createElement("li");
+                    node.textContent = "Places disponibles : " + (last - getNumberOfGuestsSelected());
+                    bookings.appendChild(node);
+                }
+            } else if(arrayOfRemainingSeats.length === 1) {
+                if((last - getNumberOfGuestsSelected()) <= 10) {
+                    console.log(last - getNumberOfGuestsSelected());
+                    alert("Réservation impossible car le restaurant est complet.")
+                } else {
+                    const node = document.createElement("li");
+                    node.textContent = "Places disponibles : " + (last - getNumberOfGuestsSelected());
+                    bookings.appendChild(node);
+                }
+            // If the array of remaining seats is empty
+            } else if(arrayOfRemainingSeats.length < 1){
                 const node = document.createElement("li");
-                node.textContent = "places restantes: "+ (last - getNumberOfGuestsSelected());
-                bookings.appendChild(node);
-            } else if(result.length === 1) {
-                const last = result[result.length-1];
-                console.log(last);
-                const node = document.createElement("li");
-                node.textContent = "places restantes: "+ (last - getNumberOfGuestsSelected());
-                bookings.appendChild(node);
-            } else if(result.length < 1){
-                const node = document.createElement("li");
-                node.textContent = "places restantes: "+ (remainingSeats - getNumberOfGuestsSelected());
+                node.textContent = "Places disponibles : "+ (remainingSeats - getNumberOfGuestsSelected());
                 bookings.appendChild(node);
             }
 
-            this.classList.replace("btn-primary", "btn-danger");
-            this.textContent = "Masquer les réservations";
+            this.classList.replace("btn-displaySeats", "btn-hideSeats");
+            this.textContent = "Masquer les places disponibles";
         } else {
             bookings.innerHTML = "";
-            this.classList.replace("btn-danger", "btn-primary");
-            this.textContent = "Afficher les réservations";
+            this.classList.replace("btn-hideSeats", "btn-displaySeats");
+            this.textContent = "Afficher les places disponibles";
         }
     }).catch(error => {
         console.error(error);
         window.alert("Une erreur est survenue.")
     })
-
 }
 
-
 /**
- * When the booking page is loaded
+ * Load the booking page
  */
 window.addEventListener("load", function(e) {
-   //console.log(document.querySelector('#booking_guest'));
     document.querySelector('#booking_guest').addEventListener('change', getNumberOfGuestsSelected);
-
     document.querySelector('.date-input').addEventListener('change', getDay);
     document.querySelector("a.js-bookings").addEventListener("click", getBookings);
     document.querySelectorAll(".start-at").forEach(startAt => {
