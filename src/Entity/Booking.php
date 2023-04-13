@@ -42,6 +42,9 @@ class Booking
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $startAt = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $remainingseats = null;
+
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Guest $guest = null;
@@ -49,8 +52,6 @@ class Booking
     #[ORM\ManyToMany(targetEntity: Allergy::class, inversedBy: 'bookings')]
     private Collection $allergies;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $remainingseats = null;
 
 
     public function __construct()

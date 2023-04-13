@@ -5,8 +5,6 @@ namespace App\Form;
 use App\Entity\Allergy;
 use App\Entity\Booking;
 use App\Entity\Guest;
-use App\Entity\Openingday;
-use App\Entity\Openinghour;
 use DateTime;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -25,7 +23,8 @@ class BookingType extends AbstractType
         $duration =  new DateTime('now +30 days');
         $builder
             ->add('bookedAt', DateType::class, [
-                'label' => 'Date : ',
+                //'translation_domain' => 'messages',
+                //'label' => 'label.bookedAt-domain',
                 'attr' => array(
                     'class' => 'date-input'
                 ),
@@ -34,7 +33,7 @@ class BookingType extends AbstractType
                 'required' => true,
             ])
             ->add('guest', EntityType::class, [
-                'label' => 'Nombre de couverts : ',
+                //'label' => 'Nombre de convives :',
                 'class' => Guest::class,
                 'choice_label' => 'quantity',
                 'required' => true,
@@ -44,10 +43,7 @@ class BookingType extends AbstractType
                 'choice_label' => 'title',
                 'multiple' => true,
                 'expanded' => true,
-                'label' => 'Allergies :',
-                'attr' => [
-                    'placeholder' => 'Ex: crustacés'
-                ]
+                //'label' => 'Allergies :',
             ])
         ;
     }

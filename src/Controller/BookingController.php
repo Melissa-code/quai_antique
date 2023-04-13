@@ -23,7 +23,8 @@ class BookingController extends AbstractController
     #[Route('/reservation', name: 'app_booking')]
     public function book(RestaurantRepository $restaurantRepository, Request $request, ManagerRegistry $managerRegistry, BookingService $bookingService, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, BookingRepository $bookingRepository): Response
     {
-        //$bookings = $bookingRepository->findAll();
+        //$language = $request->server->get('HTTP_ACCEPT_LANGUAGE');
+    	//dd($language);
 
         $booking = new Booking();
         $date = new \DateTimeImmutable();

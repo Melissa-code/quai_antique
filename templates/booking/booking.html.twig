@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{#{% trans_default_domain 'app' %}#}
+
 {% block css %} <link rel="stylesheet" href="{{ asset('assets/css/booking.css') }}"> {% endblock css %}
 
 {% block title %} Réservation {% endblock %}
@@ -51,11 +53,12 @@
                                 <div class="row">
                                     {# Number of guests #}
                                     <div class="col-md-6">
-                                        {{ form_row(form.guest) }}
+                                        {{ form_row(form.guest, {'label': 'guest'|trans}) }}
                                     </div>
                                     {# Date of the booking #}
                                     <div class="col-md-6">
-                                        {{ form_row(form.bookedAt) }}
+                                        {{ form_row(form.bookedAt, {'label': 'date'|trans}) }}
+
                                     </div>
                                 </div>
 
@@ -210,7 +213,7 @@
                                 <div class="row d-flex justify-content-center">
                                     {# Allergies #}
                                     <div class="col-md-6">
-                                        {{ form_row(form.allergies) }}
+                                        {{ form_row(form.allergies, {'label': 'allergies'|trans}) }}
                                     </div>
                                     {# See the number of the remaining seats #}
                                     <div class="col-md-6">

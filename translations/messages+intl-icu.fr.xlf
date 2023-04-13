@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="hJg8YPf" resname="guest">
+        <source>guest</source>
+        <target>Nombre de convives :</target>
+      </trans-unit>
+      <trans-unit id="DodjLNR" resname="date">
+        <source>date</source>
+        <target>Date :</target>
+      </trans-unit>
+      <trans-unit id="aDSoW3e" resname="allergies">
+        <source>allergies</source>
+        <target>Allergies :</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
