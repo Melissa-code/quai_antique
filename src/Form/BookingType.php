@@ -11,8 +11,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Range;
 
 class BookingType extends AbstractType
@@ -21,10 +19,9 @@ class BookingType extends AbstractType
     {
         $now = new DateTime('now');
         $duration =  new DateTime('now +30 days');
+
         $builder
             ->add('bookedAt', DateType::class, [
-                //'translation_domain' => 'messages',
-                //'label' => 'label.bookedAt-domain',
                 'attr' => array(
                     'class' => 'date-input'
                 ),
@@ -33,7 +30,6 @@ class BookingType extends AbstractType
                 'required' => true,
             ])
             ->add('guest', EntityType::class, [
-                //'label' => 'Nombre de convives :',
                 'class' => Guest::class,
                 'choice_label' => 'quantity',
                 'required' => true,
@@ -43,7 +39,6 @@ class BookingType extends AbstractType
                 'choice_label' => 'title',
                 'multiple' => true,
                 'expanded' => true,
-                //'label' => 'Allergies :',
             ])
         ;
     }
