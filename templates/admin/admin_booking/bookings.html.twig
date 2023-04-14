@@ -13,27 +13,6 @@
                 <div class="row text-white d-flex justify-content-center align-items-center mx-1 my-md-5">
                     <div class="col-12 list-bg rounded p-2 p-md-4 my-md-5">
 
-                        {# Flash messages  #}
-                        <div class="confirm-message text-center mt-2 font-weight-bold">
-                            {% for label, flashes in app.session.flashbag.all %}
-                                {% for flash in flashes %}
-                                    {% if ( label == 'success' ) %}
-                                        {# Success message  #}
-                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                            {{ flash }}
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
-                                        </div>
-                                    {% elseif ( label == 'error' ) %}
-                                        {# Error message  #}
-                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                            {{ flash }}
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endfor %}
-                        </div>
-
                         {# Title #}
 
                         <div class="py-2 mb-3">
@@ -44,14 +23,18 @@
                         {# Table with the bookings #}
 
                         <table class="table table-bg">
+                            <div class="btn btn-maximumGuests my-4">
+                               Seuil maximum de convives<span class="ml-3 badge badge-light"> {{ maximumGuests }}</span>
+                            </div>
+
                             <thead>
                             <tr>
                                 <th scope="col" class="text-center">Id</th>
-                                <th scope="col" class="text-center">Date</th>
-                                <th scope="col" class="text-center">Client</th>
                                 <th scope="col" class="text-center">Réservation</th>
                                 <th scope="col" class="text-center">Heure d'arrivée</th>
                                 <th scope="col" class="text-center">Nombre d'invités</th>
+                                <th scope="col" class="text-center">Client</th>
+                                <th scope="col" class="text-center">Date de création</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -59,20 +42,20 @@
                             {% for booking in bookings %}
                                 <tr>
                                     <td class="text-center">{{ booking.id }}</td>
-                                    <td class="text-center">{{ booking.createdAt|date('d/m/Y') }}</td>
-                                    <td class="text-center">{{ booking.user.firstname }} {{ booking.user.lastname }}</td>
                                     <td class="text-center">{{ booking.bookedAt|date('d/m/Y') }}</td>
                                     <td class="text-center">{{ booking.startAt|date("H:i") }}</td>
                                     <td class="text-center">{{ booking.guest.id }}</td>
+                                    <td class="text-center">{{ booking.user.firstname }} {{ booking.user.lastname }}</td>
+                                    <td class="text-center">{{ booking.createdAt|date('d/m/Y') }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>
                         </table>
 
                         {# Display navigation for a pagination #}
-{#                        <div class="navigation mt-2 d-flex justify-content-center">#}
-{#                            {{ knp_pagination_render(ascendingOpeninghours) }}#}
-{#                        </div>#}
+                        <div class="navigation mt-4 d-flex justify-content-center">
+                            {{ knp_pagination_render(bookings) }}
+                        </div>
                     </div>
 
                 </div>

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Booking;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,7 +40,25 @@ class BookingRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Pagination
+     * Get the bookings order by ascending booked date and hour from today to 7 days later
+     * @return Query
+     */
+    public function findAllWithPagination() : Query
+    {
+        $now = new \DateTime();
+        $date = date('Y-m-d h:i:s', strtotime("+7 days"));
 
+        return $this->createQueryBuilder('b')
+            ->orderBy(' b.bookedAt',  'ASC')
+            ->addOrderBy(' b.startAt',  'ASC')
+            //->addOrderBy('b.remainingseats', 'DESC')
+            ->andWhere('b.bookedAt BETWEEN :now AND :n7days')
+            ->setParameter( ':now', $now)
+            ->setParameter( ':n7days', $date)
+            ->getQuery();
+    }
 
 //    /**
 //     * @return Booking[] Returns an array of Booking objects

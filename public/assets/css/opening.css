@@ -17,27 +17,6 @@
 }
 
 
-/* Pagination */
-
-.pagination .page-item .page-link {
-    background-color: #913732;
-    color: #FFFFFF;
-    border: 1px solid #BB9457;
-}
-
-.pagination .page-item .page-link:hover {
-    background-color: #913732;
-    color: #FFE6A7;
-    border: 1px solid #BB9457;
-}
-
-.pagination .page-item.disabled .page-link {
-    color: #BB9457;
-}
-
-.closed-day {
-    color: #FFE6A7;
-}
 
 
 /* *********************************************

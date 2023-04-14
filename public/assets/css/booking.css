@@ -49,7 +49,7 @@
 
 /* Button to see or hide the number of the remaining seats */
 
-.btn-displaySeats, .btn-hideSeats {
+.btn-displaySeats, .btn-hideSeats, .btn-maximumGuests {
     background-color: #000000;
     border: 1px solid #FFE6A7;
     color: #FFFFFF;
@@ -59,9 +59,13 @@
     color: #FFE6A7;
 }
 
-/*********************************************************************
-                        Admin bookings Page
-**********************************************************************/
+.btn-maximumGuests:hover {
+    color: #FFFFFF;
+}
+
+    /*********************************************************************
+                            Admin bookings Page
+    **********************************************************************/
 
 /* Bookings list */
 
@@ -82,6 +86,7 @@
     background-color: black;
     color: #FFFFFF;
 }
+
 
 /*********************************************************************
                         Media queries

@@ -106,9 +106,10 @@ a:hover {
     color: #FFFFFF!important;
     font-size: 20px;
 }
-.nav-link:hover, .navbar-brand:hover {
+.nav-link:hover, .navbar-brand:hover, .menu-icon:hover {
     color: #FFE6A7!important;
 }
+
 
 /* Footer */
 
@@ -146,6 +147,29 @@ a:hover {
     color: #BB9457;
 }
 .close:hover {
+    color: #FFE6A7;
+}
+
+
+/* Pagination */
+
+.pagination .page-item .page-link {
+    background-color: #913732;
+    color: #FFFFFF;
+    border: 1px solid #BB9457;
+}
+
+.pagination .page-item .page-link:hover {
+    background-color: #913732;
+    color: #FFE6A7;
+    border: 1px solid #BB9457;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #BB9457;
+}
+
+.closed-day {
     color: #FFE6A7;
 }
 
