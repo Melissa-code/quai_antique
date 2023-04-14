@@ -109,8 +109,8 @@ class BookingController extends AbstractController
 
                     } else {
                         echo '  Réservation Enregistrée';
-                        //$managerRegistry->getManager()->persist($booking);
-                        //$managerRegistry->getManager()->flush();
+                        $managerRegistry->getManager()->persist($booking);
+                        $managerRegistry->getManager()->flush();
                         $this->addFlash("success", "La réservation a bien été effectuée.");
                         return $this->redirectToRoute('app_account');
                     }
@@ -119,8 +119,8 @@ class BookingController extends AbstractController
                     $booking->setRemainingseats($remainingSeats) ;
                     echo 'total places restantes : '.$remainingSeats;
                     echo 'date de résa n existe pas';
-                    //$managerRegistry->getManager()->persist($booking);
-                    //$managerRegistry->getManager()->flush();
+                    $managerRegistry->getManager()->persist($booking);
+                    $managerRegistry->getManager()->flush();
                     $this->addFlash("success", "La réservation a bien été effectuée.");
                     return $this->redirectToRoute('app_account');
                 }

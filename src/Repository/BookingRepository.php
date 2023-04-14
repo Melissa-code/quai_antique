@@ -53,7 +53,6 @@ class BookingRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('b')
             ->orderBy(' b.bookedAt',  'ASC')
             ->addOrderBy(' b.startAt',  'ASC')
-            //->addOrderBy('b.remainingseats', 'DESC')
             ->andWhere('b.bookedAt BETWEEN :now AND :n7days')
             ->setParameter( ':now', $now)
             ->setParameter( ':n7days', $date)

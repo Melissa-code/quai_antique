@@ -23,9 +23,9 @@
                         {# Table with the bookings #}
 
                         <table class="table table-bg">
-                            <div class="btn btn-maximumGuests my-4">
+                            <button type="button" class="btn btn-maximumGuests my-4">
                                Seuil maximum de convives<span class="ml-3 badge badge-light"> {{ maximumGuests }}</span>
-                            </div>
+                            </button>
 
                             <thead>
                             <tr>
@@ -33,6 +33,7 @@
                                 <th scope="col" class="text-center">Réservation</th>
                                 <th scope="col" class="text-center">Heure d'arrivée</th>
                                 <th scope="col" class="text-center">Nombre d'invités</th>
+                                <th scope="col" class="text-center">Allergies</th>
                                 <th scope="col" class="text-center">Client</th>
                                 <th scope="col" class="text-center">Date de création</th>
                             </tr>
@@ -45,6 +46,13 @@
                                     <td class="text-center">{{ booking.bookedAt|date('d/m/Y') }}</td>
                                     <td class="text-center">{{ booking.startAt|date("H:i") }}</td>
                                     <td class="text-center">{{ booking.guest.id }}</td>
+                                    {% if booking.allergies %}
+                                        <td class="text-center">
+                                            {% for allergy in booking.allergies %}
+                                                <span class="d-flex justify-content-center">{{ allergy.title }}</span>
+                                            {% endfor %}
+                                        </td>
+                                    {% endif %}
                                     <td class="text-center">{{ booking.user.firstname }} {{ booking.user.lastname }}</td>
                                     <td class="text-center">{{ booking.createdAt|date('d/m/Y') }}</td>
                                 </tr>
@@ -52,7 +60,7 @@
                             </tbody>
                         </table>
 
-                        {# Display navigation for a pagination #}
+                        {# Pagination #}
                         <div class="navigation mt-4 d-flex justify-content-center">
                             {{ knp_pagination_render(bookings) }}
                         </div>
@@ -60,7 +68,6 @@
 
                 </div>
             </article>
-
         </div>
     </section>
 

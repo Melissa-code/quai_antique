@@ -38,11 +38,11 @@ class Booking
     private ?Openinghour $openinghour = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\NotBlank(allowNull : false)]
+    #[Assert\NotBlank]
     private ?\DateTimeInterface $bookedAt = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
-    #[Assert\NotBlank(allowNull : false)]
+    #[Assert\Time]
     private ?\DateTimeInterface $startAt = null;
 
     #[ORM\Column(nullable: true)]
@@ -54,7 +54,6 @@ class Booking
 
     #[ORM\ManyToMany(targetEntity: Allergy::class, inversedBy: 'bookings')]
     private Collection $allergies;
-
 
 
     public function __construct()
