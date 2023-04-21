@@ -26,10 +26,10 @@ class SignupController extends AbstractController
         $user = new User();
         $form = $this->createForm(SignupType::class, $user);
         $form->handleRequest($request);
-        //$form->get('cgu')->getData();
 
         if($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
+            //$form->get('cgu')->getData();
 
             // Hash the password
             $hashedPassword = $passwordHasher->hashPassword(
@@ -37,11 +37,9 @@ class SignupController extends AbstractController
                 $user->getPassword()
             );
             $user->setPassword($hashedPassword);
-            // Save the new user data in the database
             $managerRegistry->getManager()->persist($user);
             $managerRegistry->getManager()->flush();
-
-            // Redirect the user to the login page
+            $this->addFlash("success", "Votre compte a bien été enregistrée. Veuillez à présent vous connecter.");
             return $this->redirectToRoute('app_login');
         }
 

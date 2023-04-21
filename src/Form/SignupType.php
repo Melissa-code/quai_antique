@@ -46,33 +46,18 @@ class SignupType extends AbstractType
                 'required' => true
             ])
 
-            //General Conditions of Utilisation
-//            ->add('cgu', ChoiceType::class, [
-//                'mapped' => false, // Ici on indique que ce champ n'est pas lié à l'entité
-//                'label' => 'Accepter les CGU',
-//                'choices' => ['validate' => true],
-//                'multiple' => true,
-//                'expanded' => true,
-//            ])
-
-//            ->add('guest', EntityType::class, [
-//                'class' => Guest::class,
-//                //'choice_label' => 'quantity',
-//                'label' => 'Convives :',
-//                'attr' => [
-//                    'placeholder' => 'Ex: 2'
-//                ]
-//            ])
-
-//            ->add('allergies', EntityType::class, [
-//                'class' => Allergy::class,
-//                'choice_label' => 'title',
-//                'multiple' => true,
-//                'label' => 'Allergies :',
-//                'attr' => [
-//                    'placeholder' => 'Ex: crustacés'
-//                ]
-//            ])
+            ->add('guest', EntityType::class, [
+                'class' => Guest::class,
+                'choice_label' => 'quantity',
+                'label' => 'Nombre de couverts :',
+            ])
+            ->add('allergies', EntityType::class, [
+                'class' => Allergy::class,
+                'choice_label' => 'title',
+                'multiple' => true,
+                'expanded' => true,
+                'label' => 'Allergies :',
+            ])
 
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
@@ -92,8 +77,14 @@ class SignupType extends AbstractType
                     ],
                 ]
             ])
-
-            // ->add('roles')
+            //General Conditions of Utilisation
+//            ->add('cgu', ChoiceType::class, [
+//                'mapped' => false, // Ici on indique que ce champ n'est pas lié à l'entité
+//                'label' => 'Accepter les CGU',
+//                'choices' => ['validate' => true],
+//                'multiple' => true,
+//                'expanded' => true,
+//            ])
         ;
     }
 
