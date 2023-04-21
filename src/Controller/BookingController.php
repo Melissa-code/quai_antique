@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Booking;
 use App\Entity\User;
 use App\Form\BookingType;
+use App\Repository\AllergyRepository;
 use App\Repository\BookingRepository;
 use App\Repository\OpeningdayRepository;
 use App\Repository\OpeninghourRepository;
@@ -23,10 +24,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookingController extends AbstractController
 {
     #[Route('/reservation', name: 'app_booking')]
-    public function book(RestaurantRepository $restaurantRepository, Request $request, ManagerRegistry $managerRegistry, BookingService $bookingService, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, BookingRepository $bookingRepository, UserRepository $userRepository): Response
+    public function book(RestaurantRepository $restaurantRepository, Request $request, ManagerRegistry $managerRegistry, BookingService $bookingService, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, BookingRepository $bookingRepository, AllergyRepository $allergieRepository): Response
     {
         //$language = $request->server->get('HTTP_ACCEPT_LANGUAGE');
     	//dd($language);
+        $allergies = $allergieRepository->findAll();
 
         $booking = new Booking();
         $date = new \DateTimeImmutable();
@@ -37,9 +39,18 @@ class BookingController extends AbstractController
         $booking->setUser($user);
 
         if($user) {
-            //dd($user->getGuest());
-            $nbGuestsByDefault = $user->getGuest();
-            $booking->setGuest($nbGuestsByDefault);
+            // Display the number of the guests by default
+            if($user->getGuest()){
+                $nbGuestsByDefault = $user->getGuest();
+                $booking->setGuest($nbGuestsByDefault);
+            }
+            // Display the allergies by default
+            if($user->getAllergies()) {
+                foreach ($user->getAllergies() as $allergyOfUser) {
+                    //dd($allergyOfUser);
+                    $booking->addAllergy($allergyOfUser);
+                }
+            }
         }
 
         // Hours of the days of the week
