@@ -17,6 +17,54 @@
         <source>allergies</source>
         <target>Allergies :</target>
       </trans-unit>
+      <trans-unit id="I45NZDr" resname="form.firstname">
+        <source>form.firstname</source>
+        <target>Prénom * :</target>
+      </trans-unit>
+      <trans-unit id="pof_qvc" resname="form.lastname">
+        <source>form.lastname</source>
+        <target>Nom * :</target>
+      </trans-unit>
+      <trans-unit id="3IGOm9D" resname="form.email">
+        <source>form.email</source>
+        <target>Email * :</target>
+      </trans-unit>
+      <trans-unit id="rT7gRQe" resname="form.guest">
+        <source>form.guest</source>
+        <target>Nombre de couverts :</target>
+      </trans-unit>
+      <trans-unit id="mAxpfJw" resname="form.allergies">
+        <source>form.allergies</source>
+        <target>Allergies :</target>
+      </trans-unit>
+      <trans-unit id="x.Cwfjs" resname="form.password.first">
+        <source>form.password.first</source>
+        <target>Mot de passe * :</target>
+      </trans-unit>
+      <trans-unit id="ANy20C8" resname="form.password.second">
+        <source>form.password.second</source>
+        <target>Confirmer le mot de passe * :</target>
+      </trans-unit>
+      <trans-unit id="bOD76Oa" resname="placeholderFirstname">
+        <source>placeholderFirstname</source>
+        <target>Guillaume</target>
+      </trans-unit>
+      <trans-unit id="WMiPyvD" resname="placeholderLastname">
+        <source>placeholderLastname</source>
+        <target>Dupont</target>
+      </trans-unit>
+      <trans-unit id="hLVG9l4" resname="placeholderEmail">
+        <source>placeholderEmail</source>
+        <target>gdupont@hotmail.com</target>
+      </trans-unit>
+      <trans-unit id="KOR5vq4" resname="placeholderPassword">
+        <source>placeholderPassword</source>
+        <target>*************</target>
+      </trans-unit>
+      <trans-unit id="co7yDJS" resname="placeholderConfirmPassword">
+        <source>placeholderConfirmPassword</source>
+        <target>*************</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

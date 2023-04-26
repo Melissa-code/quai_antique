@@ -13,45 +13,57 @@
 
             <article class="container">
                 <div class="row text-white d-flex justify-content-center mx-1">
-
                     <div class="col-12 form-bg rounded p-2 p-md-4 my-md-5">
 
-                    {# Page title #}
-
+                    {# Title #}
                     <div class="col-12 py-3">
                         <h2 class="text-center">Créer un compte</h2>
                     </div>
 
                     {# Form #}
-
                     <div class="col-12">
                         {{ form_start(form) }}
                         <div class="row">
                             {# Firstname #}
-                            <div class="col-md-6">
-                                {{ form_row(form.firstname) }}
+                            <div class="col-md-6 mb-3">
+                                <label>
+                                    {{'form.firstname'|trans }}
+                                </label>
+                                {{ form_widget(form.firstname) }}
                             </div>
                             {# Lastname #}
-                            <div class="col-md-6">
-                                {{ form_row(form.lastname) }}
+                            <div class="col-md-6 mb-3">
+                                <label>
+                                    {{'form.lastname'|trans }}
+                                </label>
+                                {{ form_widget(form.lastname) }}
                             </div>
                         </div>
                         <div class="row">
                             {# Email #}
-                            <div class="col-md-6">
-                                {{ form_row(form.email) }}
+                            <div class="col-md-6 mb-3">
+                                <label>
+                                    {{'form.email'|trans }}
+                                </label>
+                                {{ form_widget(form.email) }}
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="row">
                                             {# Guests number #}
                                             <div class="col-6">
-                                                {{ form_row(form.guest) }}
+                                                <label>
+                                                    {{'form.guest'|trans }}
+                                                </label>
+                                                {{ form_widget(form.guest) }}
                                             </div>
                                             {# Allergies #}
                                             <div class="col-6">
-                                                {{ form_row(form.allergies) }}
+                                                <label>
+                                                    {{'form.allergies'|trans }}
+                                                </label>
+                                                {{ form_widget(form.allergies) }}
                                             </div>
                                         </div>
                                     </div>
@@ -60,20 +72,27 @@
                         </div>
                         <div class="row">
                             {# Password #}
-                            <div class="col-md-6">
-                                {{ form_row(form.password.first) }}
+                            <div class="col-md-6 mb-3">
+                                <label>
+                                    {{'form.password.first'|trans }}
+                                </label>
+                                {{ form_widget(form.password.first) }}
                             </div>
                             {# Confirm Password #}
-                            <div class="col-md-6">
-                                {{ form_row(form.password.second) }}
+                            <div class="col-md-6 mb-3">
+                                <label>
+                                    {{'form.password.second'|trans }}
+                                </label>
+                                {{ form_widget(form.password.second) }}
                             </div>
                         </div>
-
                         {# Sign-up button #}
                         <div class="row">
                             <div class="col-12">
                                 <p class="required-fields">* champs obligatoires</p>
+                                <small class="text-muted">En cliquant sur S'enregistrer, vous acceptez les conditions d'utilisation.</small>
                             </div>
+
                             <div class="col-12 d-flex justify-content-center my-3">
                                 <input type="submit" class="btn btn-custom" value="S'enregistrer">
                             </div>

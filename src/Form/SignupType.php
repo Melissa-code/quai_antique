@@ -16,64 +16,57 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 
+
 class SignupType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('firstname', TextType::class, [
-                'label'=> 'Prénom * : ',
                 'attr' => [
-                    'placeholder'=> 'Ex: Guillaume'
+                    'placeholder'=> 'placeholderFirstname'
                 ],
                 'constraints' => new Length(['min'=> 3, 'max'=> 50]),
                 'required' => true
             ])
             ->add('lastname', TextType::class, [
-                'label'=> 'Nom * :',
                 'attr' => [
-                    'placeholder'=> 'Ex: Dupont'
+                    'placeholder'=> 'placeholderLastname'
                 ],
                 'constraints' => new Length(['min'=> 3, 'max'=> 50]),
                 'required' => true
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Email * : ',
                 'attr' => [
-                    'placeholder' => 'Ex: gdupont@hotmail.com'
+                    'placeholder' => 'placeholderEmail'
                 ],
                 'constraints' => new Length(['min'=> 5, 'max'=> 100]),
                 'required' => true
             ])
-
             ->add('guest', EntityType::class, [
                 'class' => Guest::class,
                 'choice_label' => 'quantity',
-                'label' => 'Nombre de couverts :',
             ])
             ->add('allergies', EntityType::class, [
                 'class' => Allergy::class,
                 'choice_label' => 'title',
                 'multiple' => true,
                 'expanded' => true,
-                'label' => 'Allergies :',
             ])
-
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Le mot de passe et sa confirmation doivent être identiques',
                 'constraints' => new Length(['min'=> 5, 'max'=> 100]),
                 'required' => true,
                 'first_options' => [
-                    'label' => 'Mot de passe * : ',
+                //    'label' => 'Mot de passe * : ',
                     'attr' => [
-                        'placeholder'=> 'Ex: *************'
+                        'placeholder'=> 'placeholderPassword'
                     ],
                 ],
                 'second_options' => [
-                    'label' => 'Confirmer le mot de passe * :',
                     'attr' => [
-                        'placeholder'=> 'Ex: *************'
+                        'placeholder'=> 'placeholderConfirmPassword'
                     ],
                 ]
             ])

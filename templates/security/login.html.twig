@@ -14,7 +14,6 @@
                 <div class="col-md-8 col-lg-6 form-bg rounded p-2 p-md-4 my-4">
 
                     {# Flash success or error messages  #}
-
                     <div class="confirm-message text-center mt-2 font-weight-bold">
                         {% for label, flashes in app.session.flashbag.all %}
                             {% for flash in flashes %}
@@ -34,14 +33,12 @@
                     </div>
 
                     {# Title #}
-
                     <div class="py-3">
                         <h1 class="page-title">Connexion</h1>
                         <h2 class="text-center">Connexion</h2>
                     </div>
 
                     {# Login form #}
-
                     <form method="post" class="mx-4 my-5">
                         {% if error %}
                             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

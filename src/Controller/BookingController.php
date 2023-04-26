@@ -4,14 +4,11 @@ namespace App\Controller;
 
 
 use App\Entity\Booking;
-use App\Entity\User;
 use App\Form\BookingType;
-use App\Repository\AllergyRepository;
 use App\Repository\BookingRepository;
 use App\Repository\OpeningdayRepository;
 use App\Repository\OpeninghourRepository;
 use App\Repository\RestaurantRepository;
-use App\Repository\UserRepository;
 use App\Service\BookingService;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
@@ -24,11 +21,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookingController extends AbstractController
 {
     #[Route('/reservation', name: 'app_booking')]
-    public function book(RestaurantRepository $restaurantRepository, Request $request, ManagerRegistry $managerRegistry, BookingService $bookingService, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, BookingRepository $bookingRepository, AllergyRepository $allergieRepository): Response
+    public function book(RestaurantRepository $restaurantRepository, Request $request, ManagerRegistry $managerRegistry, BookingService $bookingService, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, BookingRepository $bookingRepository): Response
     {
         //$language = $request->server->get('HTTP_ACCEPT_LANGUAGE');
     	//dd($language);
-        $allergies = $allergieRepository->findAll();
 
         $booking = new Booking();
         $date = new \DateTimeImmutable();
