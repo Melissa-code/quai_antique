@@ -2,9 +2,7 @@
 
 {% block css %} <link rel="stylesheet" href="{{ asset('assets/css/createUpdateOpening.css') }}"> {% endblock css %}
 
-
 {% block title %} Modification/création d'un horaire {% endblock %}
-
 
 {% block main %}
 
@@ -30,18 +28,21 @@
                         <div class="col-12">
                            {{ form_start(form) }}
                             <div class="row d-flex justify-content-center">
+                                {# Start hour #}
                                 <div class="col-md-4 mb-3">
                                     <label>
                                         {{'form.starthour'|trans }}
                                     </label>
                                     {{ form_widget(form.starthour) }}
                                 </div>
+                                {# End hour #}
                                 <div class="col-md-4 mb-3">
                                     <label>
                                         {{'form.endhour'|trans }}
                                     </label>
                                     {{ form_widget(form.endhour) }}
                                 </div>
+                                {# Days #}
                                 <div class="col-md-4 mb-3">
                                     <label>
                                         {{'form.openingdays'|trans }}

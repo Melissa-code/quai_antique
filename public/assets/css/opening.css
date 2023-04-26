@@ -1,5 +1,5 @@
 .opening-list {
-    background-image: url("../images/cooking.png");
+    background-image: url("../images/clock.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -16,9 +16,6 @@
     color: #FFFFFF;
 }
 
-
-
-
 /* *********************************************
                Media queries
 ********************************************** */
@@ -26,11 +23,9 @@
 /* mobile phones */
 
 @media screen and (min-device-width: 280px) and (max-device-width: 767px) {
-
     .opening-list {
         background: #000000;
     }
-
     .list-bg {
         background-color: black;
         border: none;

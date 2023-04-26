@@ -1,5 +1,5 @@
 .update-opening {
-    background-image: url("../images/cooking.png");
+    background-image: url("../images/clock.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -19,7 +19,6 @@
 /* mobile phones */
 
 @media screen and (min-device-width: 280px) and (max-device-width: 767px) {
-
     .update-opening {
         background: #000000;
     }

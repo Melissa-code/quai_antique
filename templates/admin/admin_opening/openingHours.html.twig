@@ -11,21 +11,21 @@
         <div class="row opening-list d-flex justify-content-center">
             <article class="container h-100">
                 <div class="row text-white d-flex justify-content-center align-items-center mx-1 my-md-5">
-                    <div class="col-12 list-bg rounded p-2 p-md-4 my-md-5">
+                    <div class="col-12 list-bg rounded p-2 p-md-4 my-md-5 ">
 
-                        {# Flash messages  #}
-                        <div class="confirm-message text-center mt-2 font-weight-bold">
+                        {# Flash messages #}
+                        <div class="row d-flex justify-content-center confirm-message text-center mt-2 font-weight-bold">
                         {% for label, flashes in app.session.flashbag.all %}
                             {% for flash in flashes %}
                                 {% if ( label == 'success' ) %}
                                     {# Success message  #}
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <div class="col-md-6 alert alert-success alert-dismissible fade show" role="alert">
                                         {{ flash }}
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
                                     </div>
                                 {% elseif ( label == 'error' ) %}
                                     {# Error message  #}
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <div class="col-md-6 alert alert-danger alert-dismissible fade show" role="alert">
                                         {{ flash }}
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
                                     </div>
