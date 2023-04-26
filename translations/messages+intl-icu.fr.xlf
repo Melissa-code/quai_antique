@@ -57,6 +57,18 @@
         <source>form.bookedAt</source>
         <target>Date :</target>
       </trans-unit>
+      <trans-unit id="10TXFFX" resname="form.starthour">
+        <source>form.starthour</source>
+        <target>Ouverture :</target>
+      </trans-unit>
+      <trans-unit id="fEJJrZl" resname="form.endhour">
+        <source>form.endhour</source>
+        <target>Fermeture :</target>
+      </trans-unit>
+      <trans-unit id="w9wRt9s" resname="form.openingdays">
+        <source>form.openingdays</source>
+        <target>Jours :</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

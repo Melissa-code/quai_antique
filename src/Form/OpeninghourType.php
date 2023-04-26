@@ -18,19 +18,16 @@ class OpeninghourType extends AbstractType
     {
         $builder
             ->add('starthour', TimeType::class, [
-                'label' => 'Ouverture : ',
                 'widget' => 'single_text',
                 'required' => true,
             ])
             ->add('endhour', TimeType::class, [
-                'label' => 'Fermeture : ',
                 'widget' => 'single_text',
                 'required' => true,
             ])
             ->add('openingdays', EntityType::class, [
                 'class' => Openingday::class,
                 'choice_label' => 'day',
-                'label' => 'Jour :',
                 'multiple' => true,
                 'expanded' => true,
                 'disabled' => false,

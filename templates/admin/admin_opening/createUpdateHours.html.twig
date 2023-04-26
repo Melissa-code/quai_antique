@@ -9,16 +9,13 @@
 {% block main %}
 
     {# Create or update opening hours section #}
-
     <section id="update-opening">
         <div class="row update-opening">
-
             <article class="container my-4">
                 <div class="row text-white d-flex justify-content-center mx-1">
-                    <div class="col-md-10 form-bg rounded p-2 p-md-4 my-5">
+                    <div class="col-md-10 form-bg rounded p-2 p-md-4 my-md-5">
 
                         {# Page title #}
-
                         <div class="col-12 py-3">
                             {% if isUpdated %}
                                 <h1 class="page-title">Modification d'un horaire</h1>
@@ -30,26 +27,28 @@
                         </div>
 
                         {# Form #}
-
                         <div class="col-12">
-
                            {{ form_start(form) }}
-
                             <div class="row d-flex justify-content-center">
-
-                                <div class="col-md-4">
-                                    {{ form_row(form.starthour) }}
+                                <div class="col-md-4 mb-3">
+                                    <label>
+                                        {{'form.starthour'|trans }}
+                                    </label>
+                                    {{ form_widget(form.starthour) }}
                                 </div>
-
-                                <div class="col-md-4">
-                                    {{ form_row(form.endhour) }}
+                                <div class="col-md-4 mb-3">
+                                    <label>
+                                        {{'form.endhour'|trans }}
+                                    </label>
+                                    {{ form_widget(form.endhour) }}
                                 </div>
-
-                                <div class="col-md-4">
-                                    {{ form_row(form.openingdays) }}
+                                <div class="col-md-4 mb-3">
+                                    <label>
+                                        {{'form.openingdays'|trans }}
+                                    </label>
+                                    {{ form_widget(form.openingdays) }}
                                 </div>
                             </div>
-
                             {# Come back & save buttons #}
                             <div class="row d-flex">
                                 <div class="col-12 d-flex justify-content-center my-4">
@@ -61,7 +60,6 @@
                                     {% endif  %}
                                 </div>
                             </div>
-
                            {{ form_end(form) }}
                         </div>
                     </div>
