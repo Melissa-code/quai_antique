@@ -5,18 +5,6 @@
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
-      <trans-unit id="hJg8YPf" resname="guest">
-        <source>guest</source>
-        <target>Nombre de convives :</target>
-      </trans-unit>
-      <trans-unit id="DodjLNR" resname="date">
-        <source>date</source>
-        <target>Date :</target>
-      </trans-unit>
-      <trans-unit id="aDSoW3e" resname="allergies">
-        <source>allergies</source>
-        <target>Allergies :</target>
-      </trans-unit>
       <trans-unit id="I45NZDr" resname="form.firstname">
         <source>form.firstname</source>
         <target>Prénom * :</target>
@@ -64,6 +52,10 @@
       <trans-unit id="co7yDJS" resname="placeholderConfirmPassword">
         <source>placeholderConfirmPassword</source>
         <target>*************</target>
+      </trans-unit>
+      <trans-unit id="pSrLS9E" resname="form.bookedAt">
+        <source>form.bookedAt</source>
+        <target>Date :</target>
       </trans-unit>
     </body>
   </file>

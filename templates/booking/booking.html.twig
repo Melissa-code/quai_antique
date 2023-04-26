@@ -15,14 +15,12 @@
         <div class="row booking-bg">
             {# Booking background image #}
             <article class="container h-100 my-4 my-md-5">
-
                 <div class="row d-flex justify-content-center align-items-center text-white">
                     <div class="col-11 col-md-8 rounded form-bg m-1">
                         <div class="row form-content py-4 h-100 d-flex justify-content-center align-items-center mx-1">
                             <div class="col-12">
 
                                 {# Flash success or error messages  #}
-
                                 <div class="confirm-message text-center mt-2 font-weight-bold">
                                     {% for label, flashes in app.session.flashbag.all %}
                                         {% for flash in flashes %}
@@ -42,31 +40,31 @@
                                 </div>
 
                                 {# Title #}
-
                                 <h2 class="text-center pb-4">Réservation</h2>
                             </div>
 
                             {# Booking form #}
-
                             <div class="col-12">
                                 {{ form_start(form) }}
                                 <div class="row">
                                     {# Number of guests #}
-                                    <div class="col-md-6">
-
-                                        {{ form_row(form.guest, {'label': 'guest'|trans}) }}
-
+                                    <div class="col-md-6 mb-3">
+                                        <label>
+                                            {{'form.guest'|trans }}
+                                        </label>
+                                        {{ form_widget(form.guest) }}
                                     </div>
-                                    {# Date of the booking #}
-                                    <div class="col-md-6">
-                                        {{ form_row(form.bookedAt, {'label': 'date'|trans}) }}
-
+                                    {# Date #}
+                                    <div class="col-md-6 mb-3">
+                                        <label>
+                                            {{'form.bookedAt'|trans }}
+                                        </label>
+                                        {{ form_widget(form.bookedAt) }}
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     {# Noon hours #}
-                                    <div class="col-12 my-1" id="noon-monday">
+                                    <div class="col-12 mb-3" id="noon-monday">
                                         <label class="d-block">Lundi midi :</label>
                                         {% for noonHourMonday in noonHoursMonday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -76,7 +74,7 @@
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-1" id="noon-tuesday">
+                                    <div class="col-12 mb-3" id="noon-tuesday">
                                         <label class="d-block">Mardi midi :</label>
                                         {% for noonHourTuesday in noonHoursTuesday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -86,7 +84,7 @@
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-1" id="noon-wednesday">
+                                    <div class="col-12 mb-3" id="noon-wednesday">
                                         <label class="d-block">Mercredi midi :</label>
                                         {% for noonHourWednesday in noonHoursWednesday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -96,7 +94,7 @@
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-1" id="noon-thursday">
+                                    <div class="col-12 mb-3" id="noon-thursday">
                                         <label class="d-block">Jeudi midi :</label>
                                         {% for noonHourThursday in noonHoursThursday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="button">
@@ -106,7 +104,7 @@
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-1" id="noon-friday">
+                                    <div class="col-12 mb-3" id="noon-friday">
                                         <label class="d-block">Vendredi midi :</label>
                                         {% for noonHourFriday in noonHoursFriday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -116,7 +114,7 @@
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-1" id="noon-saturday">
+                                    <div class="col-12 mb-3" id="noon-saturday">
                                         <label class="d-block">Samedi midi :</label>
                                         {% for noonHourSaturday in noonHoursSaturday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -126,7 +124,7 @@
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-1" id="noon-sunday">
+                                    <div class="col-12 mb-3" id="noon-sunday">
                                         <label class="d-block">Dimanche midi :</label>
                                         {% for noonHourSunday in noonHoursSunday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -140,7 +138,7 @@
 
                                 <div class="row d-flex justify-content-center">
                                     {# Evening hours #}
-                                    <div class="col-12 my-1" id="evening-monday">
+                                    <div class="col-12 mb-3" id="evening-monday">
                                         <label class="d-block">Lundi soir :</label>
                                         {% for eveningHourMonday in eveningHoursMonday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -150,7 +148,7 @@
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-1" id="evening-tuesday">
+                                    <div class="col-12 mb-3" id="evening-tuesday">
                                         <label class="d-block">Mardi soir :</label>
                                         {% for eveningHourTuesday in eveningHoursTuesday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -160,7 +158,7 @@
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-1" id="evening-wednesday">
+                                    <div class="col-12 mb-3" id="evening-wednesday">
                                         <label class="d-block">Mercredi soir :</label>
                                         {% for eveningHourWednesday in eveningHoursWednesday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -170,7 +168,7 @@
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-1" id="evening-thursday">
+                                    <div class="col-12 mb-3" id="evening-thursday">
                                         <label class="d-block">Jeudi soir :</label>
                                         {% for eveningHourThursday in eveningHoursThursday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -180,7 +178,7 @@
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-1" id="evening-friday">
+                                    <div class="col-12 mb-3" id="evening-friday">
                                         <label class="d-block">Vendredi soir :</label>
                                         {% for eveningHourFriday in eveningHoursFriday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -190,7 +188,7 @@
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-1" id="evening-saturday">
+                                    <div class="col-12 mb-3" id="evening-saturday">
                                         <label class="d-block">Samedi soir :</label>
                                         {% for eveningHourSaturday in eveningHoursSaturday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -200,7 +198,7 @@
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="col-12 my-1" id="evening-sunday">
+                                    <div class="col-12 mb-3" id="evening-sunday">
                                         <label class="d-block">Dimanche soir :</label>
                                         {% for eveningHourSunday in eveningHoursSunday %}
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -214,18 +212,21 @@
 
                                 <div class="row d-flex justify-content-center">
                                     {# Allergies #}
-                                    <div class="col-md-6">
-                                        {{ form_row(form.allergies, {'label': 'allergies'|trans}) }}
+                                    <div class="col-md-6 mb-3">
+                                        <label>
+                                            {{'form.allergies'|trans }}
+                                        </label>
+                                        {{ form_widget(form.allergies) }}
                                     </div>
-                                    {# See the number of the remaining seats #}
-                                    <div class="col-md-6">
+                                    {# Remaining seats #}
+                                    <div class="col-md-6 mb-3">
                                         <a href="{{ path('app_bookings') }}" class="btn btn-displaySeats js-bookings">Afficher les places disponibles</a>
                                         <ul class="displayBookings list-unstyled mt-2"></ul>
                                     </div>
                                 </div>
 
                                 <div class="col-12 text-center">
-                                    {# Save a booking button #}
+                                    {# Save button #}
                                     <button class="btn btn-custom">Réserver</button>
                                 </div>
                                 {{ form_end(form) }}

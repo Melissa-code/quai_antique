@@ -59,7 +59,6 @@ class SignupType extends AbstractType
                 'constraints' => new Length(['min'=> 5, 'max'=> 100]),
                 'required' => true,
                 'first_options' => [
-                //    'label' => 'Mot de passe * : ',
                     'attr' => [
                         'placeholder'=> 'placeholderPassword'
                     ],
@@ -70,14 +69,6 @@ class SignupType extends AbstractType
                     ],
                 ]
             ])
-            //General Conditions of Utilisation
-//            ->add('cgu', ChoiceType::class, [
-//                'mapped' => false, // Ici on indique que ce champ n'est pas lié à l'entité
-//                'label' => 'Accepter les CGU',
-//                'choices' => ['validate' => true],
-//                'multiple' => true,
-//                'expanded' => true,
-//            ])
         ;
     }
 
