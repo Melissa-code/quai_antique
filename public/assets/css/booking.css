@@ -63,14 +63,14 @@
     color: #FFFFFF;
 }
 
-    /*********************************************************************
-                            Admin bookings Page
-    **********************************************************************/
+/**********************************************************
+              Admin bookings Page
+************************************************************/
 
 /* Bookings list */
 
 .booking-list {
-    background-image: url("../images/cooking.png");
+    background-image: url("../images/schedule.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

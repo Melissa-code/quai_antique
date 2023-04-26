@@ -14,32 +14,29 @@
                     <div class="col-12 list-bg rounded p-2 p-md-4 my-md-5">
 
                         {# Title #}
-
                         <div class="py-2 mb-3">
                             <h1 class="page-title">Administration des réservations</h1>
                             <h2 class="text-center">Administration des réservations</h2>
                         </div>
 
-                        {# Table with the bookings #}
-
+                        {# Table of the bookings #}
                         <table class="table table-bg">
                             <button type="button" class="btn btn-maximumGuests my-4">
                                Seuil maximum de convives<span class="ml-3 badge badge-light"> {{ maximumGuests }}</span>
                             </button>
-
                             <thead>
                             <tr>
                                 <th scope="col" class="text-center">Id</th>
-                                <th scope="col" class="text-center">Réservation</th>
+                                <th scope="col" class="text-center">Date</th>
                                 <th scope="col" class="text-center">Heure d'arrivée</th>
-                                <th scope="col" class="text-center">Nombre d'invités</th>
+                                <th scope="col" class="text-center">Nombre de couverts</th>
                                 <th scope="col" class="text-center">Allergies</th>
                                 <th scope="col" class="text-center">Client</th>
                                 <th scope="col" class="text-center">Date de création</th>
                             </tr>
                             </thead>
-                            <tbody>
 
+                            <tbody>
                             {% for booking in bookings %}
                                 <tr>
                                     <td class="text-center">{{ booking.id }}</td>
