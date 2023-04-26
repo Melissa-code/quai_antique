@@ -12,7 +12,6 @@
 
     <section id="update-dish">
         <div class="row update-dish">
-
             <article class="container my-4">
                 <div class="row text-white d-flex justify-content-center mx-1">
 
@@ -64,64 +63,78 @@
                         </div>
 
                         {# Form #}
-
                         <div class="col-12">
                             {{ form_start(form) }}
-
                             <div class="row d-flex justify-content-center mb-3">
                                 {# Display the image #}
                                 <div class="col-md-2 mt-3 d-flex justify-content-center">
                                     <img src="{{ asset('assets/images/uploads/' ~ dish.image) }}" alt="{{ dish.title }}" class="rounded" style="width: 6rem">
                                 </div>
                             </div>
-
                             <div class="row d-flex align-items-center ">
                                 {# Title #}
-                                <div class="col-md-6">
-                                    {{ form_row(form.title) }}
+                                <div class="col-md-6 mb-3">
+                                    <label>
+                                        {{'form.title'|trans }}
+                                    </label>
+                                    {{ form_widget(form.title) }}
                                 </div>
                                 {# Image #}
-                                <div class="col-md-6">
-                                    {{ form_row(form.imageFile) }}
+                                <div class="col-md-6 mb-3">
+                                    <label>
+                                        {{'form.imageFile'|trans }}
+                                    </label>
+                                    {{ form_widget(form.imageFile) }}
                                 </div>
-
                             </div>
 
                             <div class="row d-flex align-items-center">
                                 {# Category #}
-                                <div class="col-md-4">
-                                    {{ form_row(form.category) }}
+                                <div class="col-md-4 mb-3">
+                                    <label>
+                                        {{'form.category'|trans }}
+                                    </label>
+                                    {{ form_widget(form.category) }}
                                 </div>
                                 {# Price #}
-                                <div class="col-md-2">
-                                    {{ form_row(form.price) }}
-                                </div>
-                                {# Restaurant #}
-                                <div class="col-md-2">
-                                    {{ form_row(form.restaurant) }}
+                                <div class="col-md-2 mb-3">
+                                    <label>
+                                        {{'form.price'|trans }}
+                                    </label>
+                                    {{ form_widget(form.price) }}
                                 </div>
                                 {# Favorite #}
-                                <div class="col-md-2 mt-4">
-                                    {{ form_row(form.favorite) }}
+                                <div class="col-md-2 mt-4 mb-3">
+                                    {% set var = 'Favorite'|trans %}
+                                    {{ form_widget(form.favorite) }}
+                                    {{ form_label(form.favorite, var) }}
                                 </div>
                                 {# Active #}
-                                <div class="col-md-2 mt-4">
-                                    {{ form_row(form.active) }}
+                                <div class="col-md-2 mt-4 mb-3">
+                                    {% set var = 'Active'|trans %}
+                                    {{ form_widget(form.active) }}
+                                    {{ form_label(form.active, var) }}
                                 </div>
                             </div>
 
                             <div class="row d-flex align-items-center">
                                 {# Description #}
-                                <div class="col-md-6">
-                                    {{ form_row(form.description) }}
+                                <div class="col-md-6 mb-3">
+                                    <label>
+                                        {{'form.description'|trans }}
+                                    </label>
+                                    {{ form_widget(form.description) }}
                                 </div>
                                 {# Created at #}
-                                <div class="col-md-6">
-                                    {{ form_row(form.createdAt) }}
+                                <div class="col-md-6 mb-3">
+                                    <label>
+                                        {{'form.createdAt'|trans }}
+                                    </label>
+                                    {{ form_widget(form.createdAt) }}
                                 </div>
                             </div>
 
-                            {# buttons #}
+                            {# Come back or Save buttons #}
                             <div class="row d-flex">
                                 <div class="col-12 d-flex justify-content-center my-4">
                                     {# Come back #}

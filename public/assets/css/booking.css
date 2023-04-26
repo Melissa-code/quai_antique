@@ -95,7 +95,10 @@
 /* mobile phones */
 
 @media screen and (min-device-width: 280px) and (max-device-width: 767px) {
-    .booking-bg {
+    .booking-bg, .booking-list {
         background: black;
+    }
+    .list-bg {
+        border: none;
     }
 }

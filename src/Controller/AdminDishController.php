@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Dish;
 use App\Form\DishType;
 use App\Repository\DishRepository;
+use App\Repository\RestaurantRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -37,11 +38,12 @@ class AdminDishController extends AbstractController
      * @param Request $request
      * @param ManagerRegistry $managerRegistry
      * @param SluggerInterface $slugger
+     * @param RestaurantRepository $restaurantRepository
      * @return Response
      */
     #[Route('/admin/creer_plat', name: 'app_admin_create_dish')]
     #[Route('/admin/modifier_plat{id}', name: 'app_admin_update_dish')]
-    public function createOrUpdateDish(Dish $dish = null, Request $request, ManagerRegistry $managerRegistry, SluggerInterface $slugger): Response
+    public function createOrUpdateDish(Dish $dish = null, Request $request, ManagerRegistry $managerRegistry, SluggerInterface $slugger, RestaurantRepository $restaurantRepository): Response
     {
         // If a dish doesn't exists, create a new object Dish
         if(!$dish) {
@@ -52,6 +54,8 @@ class AdminDishController extends AbstractController
             $dish->setCreatedAt($date);
         }
         $isUpdated = $dish->getId() !== null;
+        $restaurant = $restaurantRepository->findOneBy(array('name'=> "Le Quai Antique"));
+        $dish->setRestaurant($restaurant);
 
         $form = $this->createForm(DishType::class, $dish);
         $form->handleRequest($request);

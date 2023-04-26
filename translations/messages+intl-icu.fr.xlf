@@ -69,6 +69,54 @@
         <source>form.openingdays</source>
         <target>Jours :</target>
       </trans-unit>
+      <trans-unit id="ZPgRQAU" resname="form.title">
+        <source>form.title</source>
+        <target>Titre :</target>
+      </trans-unit>
+      <trans-unit id="BRW877n" resname="form.imageFile">
+        <source>form.imageFile</source>
+        <target>Image :</target>
+      </trans-unit>
+      <trans-unit id="0yhzeFx" resname="form.category">
+        <source>form.category</source>
+        <target>Catégorie :</target>
+      </trans-unit>
+      <trans-unit id="83w1K78" resname="form.price">
+        <source>form.price</source>
+        <target>Prix :</target>
+      </trans-unit>
+      <trans-unit id="005s4oo" resname="form.restaurant">
+        <source>form.restaurant</source>
+        <target>Restaurant :</target>
+      </trans-unit>
+      <trans-unit id="hLyHYMe" resname="form.favorite">
+        <source>form.favorite</source>
+        <target>Favori</target>
+      </trans-unit>
+      <trans-unit id="dfOmu92" resname="form.active">
+        <source>form.active</source>
+        <target>Actif</target>
+      </trans-unit>
+      <trans-unit id="h2JZhLm" resname="form.description">
+        <source>form.description</source>
+        <target>Description :</target>
+      </trans-unit>
+      <trans-unit id="bwrL8IA" resname="form.createdAt">
+        <source>form.createdAt</source>
+        <target>Date de création :</target>
+      </trans-unit>
+      <trans-unit id="5FlQ.Qt" resname="placeholderDish">
+        <source>placeholderDish</source>
+        <target>Raclette</target>
+      </trans-unit>
+      <trans-unit id="6nE_zYU" resname="Favorite">
+        <source>Favorite</source>
+        <target>Favori</target>
+      </trans-unit>
+      <trans-unit id="kjQGlYm" resname="Active">
+        <source>Active</source>
+        <target>Actif</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
