@@ -42,14 +42,13 @@
                         <div class="card card-food my-4">
                             <div class="card-body text-white ml-3">
                                 {% for dish in dishes %}
-                                    {% if category.id == dish.category.id %}
-                                    <span class="dishes">
-                                        <span class="font-weight-bold">{{ dish.title }}</span> - {{ dish.price }} €
-                                        {{ dish.description }}
-                                    </span>
+                                    {% if category.id == dish.category.id and dish.active == 1 %}
+                                        <span class="dishes">
+                                            <span class="font-weight-bold">{{ dish.title }}</span> - {{ dish.price }} €
+                                            {{ dish.description }}
+                                        </span>
                                     {% endif  %}
                                 {% endfor  %}
-
                             </div>
                         </div>
                     </div>
@@ -77,7 +76,7 @@
                         <div class="card card-food my-4">
                             <div class="card-body text-white ml-3">
                                 {% for dish in dishes %}
-                                    {% if category.id == dish.category.id %}
+                                    {% if category.id == dish.category.id and dish.active == 1 %}
                                         <span class="dishes">
                                             <span class="font-weight-bold">{{ dish.title }}</span> - {{ dish.price }} €
                                         {{ dish.description }}
