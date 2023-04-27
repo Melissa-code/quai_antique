@@ -53,6 +53,7 @@
                                             {{'form.guest'|trans }}
                                         </label>
                                         {{ form_widget(form.guest) }}
+                                        {{ form_errors(form.guest) }}
                                     </div>
                                     {# Date #}
                                     <div class="col-md-6 mb-3">
@@ -60,6 +61,7 @@
                                             {{'form.bookedAt'|trans }}
                                         </label>
                                         {{ form_widget(form.bookedAt) }}
+                                        {{ form_errors(form.bookedAt) }}
                                     </div>
                                 </div>
                                 <div class="row">
@@ -217,6 +219,7 @@
                                             {{'form.allergies'|trans }}
                                         </label>
                                         {{ form_widget(form.allergies) }}
+                                        {{ form_errors(form.allergies) }}
                                     </div>
                                     {# Remaining seats #}
                                     <div class="col-md-6 mb-3">

@@ -26,7 +26,8 @@ class BookingType extends AbstractType
                     'class' => 'date-input'
                 ),
                 'widget' => 'single_text',
-                'constraints' => new Range(['min'=> $now , 'max'=> $duration, 'notInRangeMessage'=> 'Réservation impossible le jour même et après 30 jours.']),
+                //'constraints' => new Range(['min'=> $now , 'max'=> $duration, 'notInRangeMessage'=> 'Réservation impossible le jour même et après 30 jours.']),
+                'constraints' => new Range(['min'=> $now , 'max'=> $duration, 'notInRangeMessage'=> 'The booking is impossible']),
                 'required' => true,
             ])
             ->add('guest', EntityType::class, [

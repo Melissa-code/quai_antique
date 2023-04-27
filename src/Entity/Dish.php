@@ -9,8 +9,11 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 #[ORM\Entity(repositoryClass: DishRepository::class)]
+#[UniqueEntity(fields:['title'], message: "This dish already exists.")]
 class Dish
 {
     #[ORM\Id]
@@ -18,12 +21,12 @@ class Dish
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\Length(min: 3, max: 50, minMessage: 'Le nom doit comporter au minimum {{ limit }} caractères', maxMessage: 'Le nom doit comporter au maximum {{ limit }} caractères',)]
+    #[ORM\Column(length: 255, unique:true)]
+    #[Assert\Length(min: 3, max: 50, minMessage: 'The title must be at least {{ limit }} characters long', maxMessage: 'The title cannot be longer than {{ limit }} characters',)]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    #[Assert\Range(notInRangeMessage: 'Le prix doit être compris entre {{ min }} et {{ max }} €', min: 0.1, max: 2000,)]
+    #[Assert\Range(notInRangeMessage: 'This value should be between {{ min }} and {{ max }}', min: 0.1, max: 2000,)]
     private ?string $price = null;
 
     #[ORM\Column(type: Types::TEXT)]

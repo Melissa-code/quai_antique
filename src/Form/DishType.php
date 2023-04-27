@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Dish;
-use App\Entity\Restaurant;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -16,7 +15,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
-use Symfony\Component\Validator\Constraints\Length;
 
 
 class DishType extends AbstractType
@@ -25,7 +23,6 @@ class DishType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'constraints' => new Length(['min'=> 3, 'max'=> 50]),
                 'attr' => [
                     'placeholder'=> 'placeholderDish'
                 ],
@@ -35,11 +32,10 @@ class DishType extends AbstractType
                 'required' => true,
             ])
             ->add('description', TextareaType::class, [
-                'constraints' => new Length(['min'=> 3, 'max'=> 255]),
                 'required' => true,
             ])
             ->add('imageFile', FileType::class,[
-                'required' => false,
+                'required' => true,
                 'mapped' => false,
                 'constraints' => [
                     new File([
@@ -51,7 +47,7 @@ class DishType extends AbstractType
                         ],
                         'mimeTypesMessage' => 'Veuillez choisir un formar valide'
                     ])
-                ]
+                ],
             ])
             ->add('createdAt', DateTimeType::class, [
                 'widget' => 'single_text',

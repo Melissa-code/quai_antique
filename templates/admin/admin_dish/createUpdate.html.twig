@@ -78,6 +78,7 @@
                                         {{'form.title'|trans }}
                                     </label>
                                     {{ form_widget(form.title) }}
+                                    {{ form_errors(form.title) }}
                                 </div>
                                 {# Image #}
                                 <div class="col-md-6 mb-3">
@@ -85,6 +86,7 @@
                                         {{'form.imageFile'|trans }}
                                     </label>
                                     {{ form_widget(form.imageFile) }}
+                                    {{ form_errors(form.imageFile) }}
                                 </div>
                             </div>
 
@@ -95,6 +97,7 @@
                                         {{'form.category'|trans }}
                                     </label>
                                     {{ form_widget(form.category) }}
+                                    {{ form_errors(form.category) }}
                                 </div>
                                 {# Price #}
                                 <div class="col-md-2 mb-3">
@@ -102,21 +105,23 @@
                                         {{'form.price'|trans }}
                                     </label>
                                     {{ form_widget(form.price) }}
+                                    {{ form_errors(form.price) }}
                                 </div>
                                 {# Favorite #}
                                 <div class="col-md-2 mt-4 mb-3">
                                     {% set var = 'Favorite'|trans %}
                                     {{ form_widget(form.favorite) }}
                                     {{ form_label(form.favorite, var) }}
+                                    {{ form_errors(form.favorite) }}
                                 </div>
                                 {# Active #}
                                 <div class="col-md-2 mt-4 mb-3">
                                     {% set var = 'Active'|trans %}
                                     {{ form_widget(form.active) }}
                                     {{ form_label(form.active, var) }}
+                                    {{ form_errors(form.active) }}
                                 </div>
                             </div>
-
                             <div class="row d-flex align-items-center">
                                 {# Description #}
                                 <div class="col-md-6 mb-3">
@@ -124,6 +129,7 @@
                                         {{'form.description'|trans }}
                                     </label>
                                     {{ form_widget(form.description) }}
+                                    {{ form_errors(form.description) }}
                                 </div>
                                 {# Created at #}
                                 <div class="col-md-6 mb-3">
@@ -131,6 +137,7 @@
                                         {{'form.createdAt'|trans }}
                                     </label>
                                     {{ form_widget(form.createdAt) }}
+                                    {{ form_errors(form.createdAt) }}
                                 </div>
                             </div>
 

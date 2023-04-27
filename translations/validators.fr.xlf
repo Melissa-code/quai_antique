@@ -541,6 +541,35 @@
         <source>The email {{ value }} is not a valid email.</source>
         <target>Cet email {{ value }} n'est pas un email valide.</target>
       </trans-unit>
+      <trans-unit id="QIU.Zmp" resname="This dish already exists.">
+        <source>This dish already exists.</source>
+        <target>Ce plat existe déjà.</target>
+      </trans-unit>
+       <trans-unit id="The title must be at least {{ limit }} characters long" resname="The title must be at least {{ limit }} characters long">
+        <source>The title must be at least {{ limit }} characters long</source>
+        <target>Le titre doit comporter au minimum {{ limit }} caractères</target>
+       </trans-unit>
+      <trans-unit id="The title cannot be longer than {{ limit }} characters" resname="The title cannot be longer than {{ limit }} characters">
+       <source>The title cannot be longer than {{ limit }} characters</source>
+       <target>Le titre doit comporter au maximum {{ limit }} caractères</target>
+      </trans-unit>
+       <trans-unit id="This value should be between {{ min }} and {{ max }}" resname="This value should be between {{ min }} and {{ max }}">
+        <source>This value should be between {{ min }} and {{ max }}.</source>
+        <target> Le prix doit être compris entre {{ min }} et {{ max }} €</target>
+       </trans-unit>
+       <trans-unit id="The description must be at least {{ limit }} characters long" resname="The description must be at least {{ limit }} characters long">
+         <source>The description must be at least {{ limit }} characters long</source>
+         <target>La description doit comporter au minimum {{ limit }} caractères</target>
+       </trans-unit>
+       <trans-unit id="The description cannot be longer than {{ limit }} characters" resname="The description cannot be longer than {{ limit }} characters">
+        <source>The description cannot be longer than {{ limit }} characters</source>
+        <target>La description doit comporter au maximum {{ limit }} caractères</target>
+      </trans-unit>
+      <trans-unit id="The booking is impossible" resname="The booking is impossible">
+        <source>The booking is impossible</source>
+        <target>Réservation impossible le jour même et après 30 jours.</target>
+      </trans-unit>
+
     </body>
   </file>
 </xliff>
