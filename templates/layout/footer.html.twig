@@ -25,7 +25,7 @@
 
                                 {# Administration of the dishes & openning hours : Check if the admin is logged-in #}
                                 {% if app.user and is_granted('ROLE_ADMIN') %}
-                                    <a href="{{ path('app_admin_dish') }}#gallery" class="mr-2">
+                                    <a href="{{ path('app_admin_favoriteDishes') }}#gallery" class="mr-2">
                                         <img src="{{ asset('assets/icons/dish-dome-black.svg') }}" alt="Administration des plats favoris" width="20" title="Administrer les plats">
                                     </a>
                                     <a href="{{ path('app_admin_opening') }}" class="mr-2">

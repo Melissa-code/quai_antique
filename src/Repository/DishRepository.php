@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Dish;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -58,6 +59,18 @@ class DishRepository extends ServiceEntityRepository
     }
 
     /**
+     * Select all the dishes by ascending id category
+     * @return Query
+     */
+    public function findAllWithPagination(): Query
+    {
+        return $this->createQueryBuilder('d')
+            ->join('d.category' , 'c')
+            ->orderBy(' c.id',  'ASC')
+            ->getQuery();
+    }
+
+    /**
      * Select all the dishes by ascending price
      * @return array
      */
@@ -71,7 +84,7 @@ class DishRepository extends ServiceEntityRepository
     }
 
     /**
-     * Select the dishes by category and setmenu
+     * Select the dishes by category and by setmenu
      * @param string $category
      * @param string $setmenu
      * @return array
@@ -89,6 +102,7 @@ class DishRepository extends ServiceEntityRepository
             ->setParameter('setmenus', '%'. $setmenu. '%')
             ->getResult();
     }
+
 
 //    /**
 //     * @return Dish[] Returns an array of Dish objects

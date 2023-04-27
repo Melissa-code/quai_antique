@@ -35,7 +35,7 @@ class DishType extends AbstractType
                 'required' => true,
             ])
             ->add('imageFile', FileType::class,[
-                'required' => true,
+                'required' => false,
                 'mapped' => false,
                 'constraints' => [
                     new File([

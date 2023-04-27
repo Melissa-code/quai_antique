@@ -1,0 +1,33 @@
+.dishes-list {
+    background-image: url("../images/cooking.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.list-bg {
+    background-color: black;
+    border: 1px solid #FFE6A7;
+    opacity: 0.9;
+}
+
+.table-bg {
+    background-color: black;
+    color: #FFFFFF;
+}
+
+
+/* *********************************************
+               Media queries
+********************************************** */
+
+/* mobile phones */
+
+@media screen and (min-device-width: 280px) and (max-device-width: 767px) {
+    .dishes-list {
+        background: #000000;
+    }
+    .list-bg {
+        border: none;
+    }
+}

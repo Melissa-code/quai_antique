@@ -7,6 +7,7 @@ use App\Form\DishType;
 use App\Repository\DishRepository;
 use App\Repository\RestaurantRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +22,7 @@ class AdminDishController extends AbstractController
      * @param DishRepository $dishRepository
      * @return Response
      */
-    #[Route('/admin/plats', name: 'app_admin_dish')]
+    #[Route('/admin/plats_favoris', name: 'app_admin_favoriteDishes')]
     public function homeAdmin(DishRepository $dishRepository): Response
     {
         $favoriteDishes = $dishRepository->findFavoriteDishes(6);
@@ -29,6 +30,28 @@ class AdminDishController extends AbstractController
         return $this->render('home/home.html.twig', [
             'favoriteDishes' => $favoriteDishes,
             'admin' => true,
+        ]);
+    }
+
+    /**
+     * List all the dishes
+     * @param DishRepository $dishRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
+    #[Route('/admin/plats', name: 'app_admin_dishes')]
+    public function dishes(DishRepository $dishRepository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $dishes = $paginator->paginate(
+            $dishRepository->findAllWithPagination(), /* query NOT result */
+            $request->query->getInt('page', 1), /* page number */
+            4 /* limit per page */
+        );
+
+        return $this->render('admin/admin_dish/dishes.html.twig', [
+//            'dishes' => $dishRepository->findDishesByAscendingCategory(),
+            'dishes' => $dishes,
         ]);
     }
 
@@ -97,6 +120,7 @@ class AdminDishController extends AbstractController
 
             // Display a success message
             $this->addFlash("success", ($isUpdated) ? "La modification a bien été effectuée." : "L'ajout a bien été effectué.");
+            return $this->redirectToRoute('app_admin_dishes');
         }
 
         return $this->render('admin/admin_dish/createUpdate.html.twig', [
@@ -131,7 +155,7 @@ class AdminDishController extends AbstractController
                 }
             }
             $this->addFlash("success", "La suppression a bien été effectuée.");
-            return $this->redirectToRoute('app_admin_create_dish');
+            return $this->redirectToRoute('app_admin_dishes');
     }
 
 

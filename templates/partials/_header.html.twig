@@ -23,10 +23,10 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                    {# Check if the admmin is logged-in #}
+                    {# Check if the admin is logged-in #}
                     {% if app.user and is_granted('ROLE_ADMIN') %}
                         <li class="nav-item d-flex mr-md-5 align-items-center">
-                            <a class="nav-link mx-2 mx-md-0" href="{{ path('app_admin_dish') }}#gallery">
+                            <a class="nav-link mx-2 mx-md-0" href="{{ path('app_admin_favoriteDishes') }}#gallery">
                                 <img src="{{ asset('assets/icons/dish-dome.svg') }}" alt="administration des plats favoris" style="width: 1.5rem" title="Administrer les plats">
                             </a>
                             <a class="nav-link mx-2 mx-md-0" href="{{ path('app_admin_opening') }}">

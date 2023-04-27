@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block css %} <link rel="stylesheet" href="{{ asset('assets/css/dishesList.css') }}"> {% endblock css %}
+
+{% block title %} Administration des plats {% endblock %}
+
+
+{% block main %}
+
+    <section id="dishesList">
+        <div class="row dishes-list d-flex justify-content-center">
+            <article class="container h-100">
+                <div class="row text-white d-flex justify-content-center align-items-center mx-1 my-md-5">
+                    <div class="col-12 list-bg rounded p-2 p-md-4 my-md-5">
+
+                        {# Flash messages #}
+                        <div class="row d-flex justify-content-center confirm-message text-center mt-2 font-weight-bold">
+                            {% for label, flashes in app.session.flashbag.all %}
+                                {% for flash in flashes %}
+                                    {% if ( label == 'success' ) %}
+                                        {# Success message  #}
+                                        <div class="col-md-6 alert alert-success alert-dismissible fade show" role="alert">
+                                            {{ flash }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+                                        </div>
+                                    {% elseif ( label == 'error' ) %}
+                                        {# Error message  #}
+                                        <div class="col-md-6 alert alert-danger alert-dismissible fade show" role="alert">
+                                            {{ flash }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+
+                        {# Title #}
+                        <div class="py-2 mb-3">
+                            <h1 class="page-title">Administration des plats</h1>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <h2 class="text-center mr-5">Administration des plats</h2>
+                                <a href="{{ path('app_admin_favoriteDishes') }}#gallery" class="mb-1">Voir les favoris</a>
+                            </div>
+                        </div>
+
+                        {# Table with the dishes #}
+                        <table class="table table-bg">
+                            <thead>
+                            <tr>
+                                <th scope="col" class="text-center">Id</th>
+                                <th scope="col" class="text-center">Catégorie</th>
+                                <th scope="col" class="text-center">Image</th>
+                                <th scope="col" class="text-center">Titre</th>
+                                <th scope="col" class="text-center">Prix</th>
+                                <th scope="col" class="text-center">Description</th>
+                                <th scope="col" class="text-center">Favori</th>
+                                <th scope="col" class="text-center">Actif</th>
+                                <th scope="col" class="text-center">Créé</th>
+                                <th scope="col" class="text-center">Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {% for dish in dishes %}
+                            <tr>
+                                <th scope="row" class="text-center">{{ dish.id }}</th>
+                                <td class="text-center">{{ dish.category.title|capitalize }}</td>
+                                <td class="text-center">
+                                    <img src="{{ asset('assets/images/uploads/' ~ dish.image) }}" alt="{{ dish.title }}" class="rounded" style="width: 4rem">
+                                </td>
+                                <td class="text-center">{{ dish.title }}</td>
+                                <td class="text-center">{{ dish.price }}</td>
+                                <td class="text-center">{{ dish.description }}</td>
+                                <td class="text-center">{{ dish.favorite }}</td>
+                                <td class="text-center">{{ dish.active }}</td>
+                                <td class="text-center">{{ dish.createdAt|date("d-m-Y") }}</td>
+                                <td class="text-center">
+                                    <span class="d-flex justify-content-center">
+                                         {# Update a dish button #}
+                                        <a class="btn btn-admin mr-2" href="{{path('app_admin_update_dish', {'id': dish.id }) }}">
+                                            <img src="{{ asset('assets/icons/edit.svg') }}" alt="Modifier un plat" width="15">
+                                        </a>
+                                         {# Delete a dish button #}
+                                        <form method="POST" action="{{ path('app_admin_delete_dish', {'id': dish.id }) }}" onsubmit="return confirm('Confirmer la suppression du plat.')" >
+                                            <input type="hidden" name="_method" value="delete">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('remove' ~ dish.id) }}">
+                                            <button type="submit" class="btn btn-admin">
+                                                <img src="{{ asset('assets/icons/trash.svg') }}" alt="Supprimer un plat" width="15">
+                                            </button>
+                                        </form>
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                        {# Create a new opening hour button #}
+                        <div class="text-center mb-5">
+                            <a href="{{ path('app_admin_create_dish') }}" class="btn btn-admin w-100">
+                                <img src="{{ asset('assets/icons/add.svg') }}" alt="Ajouter un nouveau plat" width="28">
+                                Ajouter un nouveau plat
+                            </a>
+                        </div>
+
+                        {# Pagination #}
+                        <div class="navigation mt-2 d-flex justify-content-center">
+                            {{ knp_pagination_render(dishes) }}
+                        </div>
+                    </div>
+
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    {% block javascripts %}
+        <script src=""></script>
+    {% endblock %}
+
+{% endblock main %}
