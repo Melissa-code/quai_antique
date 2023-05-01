@@ -1,31 +1,32 @@
 # Le Quai Antique
-***
+
 Le Quai Antique is a hypothetical school project : ECF's exam topic. 
 
 This is the website of the Savoyard restaurant Le Quai Antique in Chambery. 
 It serves traditional dishes brought up to date. 
 It's Arnaud Michant's third restaurant. The Chef wants to offer an authentic gastronomic experience without pretention, creating dishes that allow the local ingredients their rightful place.
 
+
 ## How to use ?
-***
+
 See the website : [Le Quai Antique](https://le-quai-antique-restaurant.herokuapp.com/)
 
 ## Table of Contents
-***
 
-1. [How to use](#How_to_use)
-2. [Prerequisite](#Prerequisite)
+1. [How to use ?](#How-to-use-?)
+2. [Prerequisites](#Prerequisites)
 3. [Installation](#Installation)
 4. [Run](#Run)
-5. [Add an administrator](#Add_an_administrator)
-6. [Built_with](#Built_with)
+5. [Add an administrator](#Add-an-administrator)
+6. [Built with](#Built-with)
 7. [Deploying](#Deploying)
-8. [Tests](#Test)
+8. [Tests](#Tests)
 9. [Author](#Author)
 10. [License](#License)
 
-## Prerequisite
-***
+
+## Prerequisites
+
 - MySQL version 5.7.32
 - PHP 8.1
 - Composer version 2.4.1
@@ -34,7 +35,6 @@ See the website : [Le Quai Antique](https://le-quai-antique-restaurant.herokuapp
     (cf. the usual [Symfony application requirements](https://symfony.com/doc/current/setup.html#technical-requirements/ "Usual Symfony application requirements")).
 
 ## Installation
-***
 
 1. Download the zip or clone the project in local :   
    `git clone https://github.com/Melissa-code/quai_antique.git`
@@ -72,8 +72,8 @@ See the website : [Le Quai Antique](https://le-quai-antique-restaurant.herokuapp
 
 
 ## Run
-***
-1. Start the local web server : 
+
+1. Start the local web server :
    
     `symfony server:start`
 
@@ -102,14 +102,14 @@ See the website : [Le Quai Antique](https://le-quai-antique-restaurant.herokuapp
 - Load the data fixtures : `php bin/console doctrine:fixtures:load`
 
 ## Add an administrator
-***
+
 1. Create a new user with the Create a new account form of the application
 2. Use in the terminal :
     `php bin/console doctrine:query:sql "UPDATE user SET user.roles = '[\"ROLE_ADMIN\"]' WHERE user.id = 4;"`
 
 
 ## Built with
-***
+
 ### Languages & Frameworks
 - Symfony (Symfony Documentation [Symfony Documentation](https://symfony.com/doc/current/index.html "Symfony Documentation")).
 - PHP (PHP Documentation [PHP Documentation](https://www.php.net/manual/fr/index.php "PHP Documentation")).
@@ -123,18 +123,18 @@ See the website : [Le Quai Antique](https://le-quai-antique-restaurant.herokuapp
 - Git (Git Documentation [Git Documentation](https://git-scm.com/doc "Git Documentation")).
   
 
-###Tools
+### Tools
 
 - FontAwesome (Fontawesome [Fontawesome](https://fontawesome.com/icons "Fontawesome")) and 
 CDN font-awesome (CDN font-awesome [CDN font-awesome](https://cdnjs.com/libraries/font-awesome "CDN font-awesome")).
 - Noun Project (Noun Project [Noun Project](https://thenounproject.com/ "Noun Project")).
 - GitHub (Noun Project [Noun Project](https://github.com/ "Noun Project")).
 
-##Deploying
-***
+## Deploying
+
 The production deployment of Le Quai Antique is hosted on Heroku.
 
-###Prerequisite
+### Prerequisite
 
 1. Install Git and Initialize a Git repository
 2. Create a Heroku account 
@@ -144,7 +144,7 @@ The production deployment of Le Quai Antique is hosted on Heroku.
    
     Verify the installation using : `heroku --version`
 
-###Get started
+### Get started
 1. Check if `APP_ENV=prod` in the .env file and empty the cache using : `php bin/console cache:clear`
 
 2. Login to Heroku with the command :
@@ -169,7 +169,7 @@ The production deployment of Le Quai Antique is hosted on Heroku.
    
     (cf. Deploying Symfony 4/5/6 Apps on Heroku [Deploying Symfony 4/5/6 Apps on Heroku](https://devcenter.heroku.com/articles/deploying-symfony4 "Deploying Symfony 4/5/6 Apps on Heroku")).
 
-    ####Create a database :
+    #### Create a database :
    
 6. Create a new MySQL database with the Addon JawsDb :  
    
@@ -201,14 +201,14 @@ The production deployment of Le Quai Antique is hosted on Heroku.
 2. Use in the terminal :
    `heroku run php bin/console doctrine:query:sql "UPDATE user SET user.roles = '[\"ROLE_ADMIN\"]' WHERE user.id = 6;"`
 
-##Tests
+## Tests
 ***
 
 
-##Author
+## Author
 ***
 Melissa-code
 
-##License
+## License
 ***
 [MIT](https://choosealicense.com/licenses/mit/)
