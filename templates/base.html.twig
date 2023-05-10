@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="Le Quai Antique est le troisième restaurant du chef Arnaud Michant. Situé en plein coeur de Chambéry il est facile d'accès. Dans un cadre moderne, il propose des plats typiques savoyards remis au goût du jour ainsi que des burgers et des salades.">
         <title>{% block title %}{% endblock %}</title>
-        <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/arrange.png') }}">
+        <link rel="shortcut icon" type="image/png" href="{{ asset('assets/icons/favicon.svg') }}" class="img-favicon">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -17,7 +17,6 @@
     </head>
 
     <body>
-
         {# Header #}
         {% include 'partials/_header.html.twig' %}
 
@@ -27,8 +26,6 @@
         </main>
 
         {# Footer #}
-{#        {% include 'partials/_footer.html.twig' %}#}
-        <!-- affiche le pied de page -->
         {{ render(controller('App\\Controller\\LayoutController::footer')) }}
 
         {# Jquery & Bootstrap JS #}
@@ -37,6 +34,5 @@
         {# Ekko-lightbox JS for Bootstrap #}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
         {% block javascripts %}{% endblock %}
-
     </body>
 </html>
