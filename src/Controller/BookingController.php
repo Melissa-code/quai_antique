@@ -23,9 +23,6 @@ class BookingController extends AbstractController
     #[Route('/reservation', name: 'app_booking')]
     public function book(RestaurantRepository $restaurantRepository, Request $request, ManagerRegistry $managerRegistry, BookingService $bookingService, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, BookingRepository $bookingRepository): Response
     {
-        //$language = $request->server->get('HTTP_ACCEPT_LANGUAGE');
-    	//dd($language);
-
         $booking = new Booking();
         $date = new \DateTimeImmutable();
         $booking->setCreatedAt($date);
@@ -121,7 +118,6 @@ class BookingController extends AbstractController
                     if ($booking->getRemainingseats() < 52) {
                         echo '  Nb de Places restantes à la même date si < 52 : ' . $booking->getRemainingseats();
                         $this->addFlash("error", "Réservation impossible, le restaurant est complet.");
-
                     } else {
                         echo '  Réservation Enregistrée';
                         $managerRegistry->getManager()->persist($booking);

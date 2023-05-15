@@ -17,3 +17,16 @@
 .required-fields {
     font-size: 0.8rem;
 }
+
+/* *********************************************
+               Media queries
+********************************************** */
+
+/* mobile phones */
+
+@media screen and (min-device-width: 280px) and (max-device-width: 767px) {
+
+    .signup {
+        background: #000000;
+    }
+}
