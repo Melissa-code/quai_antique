@@ -29,8 +29,6 @@ class SignupController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
-            //$form->get('cgu')->getData();
-
             // Hash the password
             $hashedPassword = $passwordHasher->hashPassword(
                 $user,

@@ -175,7 +175,7 @@ a:hover {
 
 
 /*********************************************************************
-media queries
+                    media queries
 **********************************************************************/
 
 /* mobile phones */
@@ -185,16 +185,5 @@ media queries
     h2 {
         font-size: 20px;
     }
-    .chef {
-        display: flex;
-        flex-direction: column-reverse;
-    }
-
 }
 
-
-/* tablets and computers */
-
-@media screen and (min-device-width: 768px) {
-
-}

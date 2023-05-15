@@ -4,98 +4,92 @@
 
 {% block title %} La carte {% endblock %}
 
-
 {% block main %}
 
     {# Food presentation section #}
 
     <section id="food-presentation">
         <div class="row">
-            {# Food image #}
+            {# Food image top #}
             <article class="col-12 food-bg">
                 <h1 class="page-title">La Carte</h1>
             </article>
         </div>
     </section>
 
-
     {% for category in categories %}
+        <section class="container my-5 h-100" id="food">
+            {# Display the categories whose the id is uneven #}
+            {% if category.id % 2 != 0 %}
+            <div class="row">
+                {# Category image #}
+                <article class="col-md-6 d-flex justify-content-center align-items-center">
+                    <img src="{{ asset('assets/images/' ~ category.image ) }}" width="350" height="350" alt="photo d'une entrée" class="category-img">
+                </article>
 
-    <section class="container my-5 h-100" id="food">
-        {%  if category.id % 2 != 0 %}
-        <div class="row">
+                {# Dishes list #}
+                <article class="col-md-6">
+                    {# Category title #}
+                    <div class="d-block mx-auto">
+                        <h2 class="text-center">{{ category.title|capitalize }}</h2>
+                    </div>
+                    {# Dishes by category #}
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-10">
+                            <div class="card card-food my-4">
+                                <div class="card-body text-white ml-3">
+                                    {% for dish in dishes %}
+                                        {% if category.id == dish.category.id and dish.active == 1 %}
+                                            <span class="dishes">
+                                                <span class="font-weight-bold">{{ dish.title }}</span> - {{ dish.price }} €
+                                                {{ dish.description }}
+                                            </span>
+                                        {% endif  %}
+                                    {% endfor  %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
 
-            {# Category image #}
+            {# Display the categories whose the id is even #}
+            {% else %}
+            <div class="row d-flex flex-row-reverse">
+                {# Category image #}
+                <article class="col-md-6 d-flex justify-content-center align-items-center ">
+                    <img src="{{ asset('assets/images/' ~ category.image ) }}" width="350" height="350" alt="photo exemple d'une entrée" class="category-img">
+                </article>
 
-            <article class="col-md-6 d-flex justify-content-center align-items-center">
-                <img src="{{ asset('assets/images/' ~ category.image ) }}" width="350" height="350" alt="photo exemple d'une entrée" class="category-img">
-            </article>
-
-            {# Dishes list #}
-            <article class="col-md-6">
-                <div class="d-block mx-auto">
-                    <h2 class="text-center">{{ category.title|capitalize }}</h2>
-                </div>
-
-                <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-10">
-                        <div class="card card-food my-4">
-                            <div class="card-body text-white ml-3">
-                                {% for dish in dishes %}
-                                    {% if category.id == dish.category.id and dish.active == 1 %}
-                                        <span class="dishes">
-                                            <span class="font-weight-bold">{{ dish.title }}</span> - {{ dish.price }} €
+                {# Dishes list #}
+                <article class="col-md-6">
+                    {# Category title #}
+                    <div class="d-block mx-auto">
+                        <h2 class="text-center">{{ category.title|capitalize }}</h2>
+                    </div>
+                    {# Dishes by category #}
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-10">
+                            <div class="card card-food my-4">
+                                <div class="card-body text-white ml-3">
+                                    {% for dish in dishes %}
+                                        {% if category.id == dish.category.id and dish.active == 1 %}
+                                            <span class="dishes">
+                                                <span class="font-weight-bold">{{ dish.title }}</span> - {{ dish.price }} €
                                             {{ dish.description }}
                                         </span>
-                                    {% endif  %}
-                                {% endfor  %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </article>
-        </div>
-
-        {% else %}
-        <div class="row d-flex flex-row-reverse">
-
-            {# Category image #}
-            <article class="col-md-6 d-flex justify-content-center align-items-center ">
-                <img src="{{ asset('assets/images/' ~ category.image ) }}" width="350" height="350" alt="photo exemple d'une entrée" class="category-img">
-            </article>
-
-
-            {# Dishes list #}
-            <article class="col-md-6">
-                <div class="d-block mx-auto">
-                    <h2 class="text-center">{{ category.title|capitalize }}</h2>
-                </div>
-
-                <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-10">
-                        <div class="card card-food my-4">
-                            <div class="card-body text-white ml-3">
-                                {% for dish in dishes %}
-                                    {% if category.id == dish.category.id and dish.active == 1 %}
-                                        <span class="dishes">
-                                            <span class="font-weight-bold">{{ dish.title }}</span> - {{ dish.price }} €
-                                        {{ dish.description }}
-                                    </span>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-        {% endif %}
-    </section>
-
-    <hr>
-
+                </article>
+            </div>
+            {% endif %}
+        </section>
+        <hr>
     {% endfor %}
-
 
     {% block javascripts %}
         <script src=""></script>

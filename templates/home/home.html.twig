@@ -70,7 +70,6 @@
                     <img src="{{ asset('assets/images/concept-img.png') }}" width="350" height="350" alt="dressage des plats élaborés sur place uniquement à base de produits frais issus des meilleurs producteurs locaux">
                 </div>
             </article>
-
         </div>
     </section>
 
@@ -123,14 +122,15 @@
             {# Title #}
             <div class="col-12 d-flex justify-content-center">
                 <h2 class="text-center mr-5 mb-4">Les plats favoris</h2>
-                {% if app.user and is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('app_admin_dishes') }}" class="mt-1"> Voir la liste </a>
+                {% if(admin) %}
+                    <a href="{{ path('app_admin_dishes') }}" class="mt-1 mr-5"> Voir la liste des plats</a>
+                    <a href="{{ path('app_home') }}#top"><img src="{{ asset('assets/icons/top.svg') }}" alt="flèche pour un retour en haut de la page" width="25" title="Haut de la page"></a>
                 {% endif %}
             </div>
 
-
             {# Photos gallery #}
             <article class="col-12 mt-1">
+                {# Create a dish button if admin is logged in #}
                 {% if(admin) %}
                     <div class="row my-3">
                         <div class="col-12 d-flex justify-content-center">
@@ -138,40 +138,35 @@
                         </div>
                     </div>
                 {% endif %}
-                    <div class="row mb-1">
-                        {% for favoriteDish in favoriteDishes %}
-                            <div class="col-md-4 mb-2">
-                                <a href="{{ asset('assets/images/uploads/' ~ favoriteDish.image) }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="{{ favoriteDish.title }}">
-                                    <span class="caption-photo">{{ favoriteDish.title }}</span>
-                                    <span class="bg"></span>
-                                    <img src="{{ asset('assets/images/uploads/'~ favoriteDish.image) }}" alt="{{ favoriteDish.title }}" class="img-fluid img-gallery">
-                                </a>
-                                {# update & delete buttons #}
-                                <div class="row d-flex align-items-center m-0">
-                                    {% if(admin) %}
-                                        <a class="btn btn-admin px-3 p-2 w-50" href="{{ path('app_admin_update_dish', {'id': favoriteDish.id }) }}">Modifier</a>
-
-                                        {# Delete button #}
-                                        <form class="w-50" method="POST" action="{{ path('app_admin_delete_dish', {'id': favoriteDish.id }) }}" onsubmit="return confirm('Confirmez-vous la suppression de ce plat ?')">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <input type="hidden" name="_token" value="{{ csrf_token('REMOVE' ~ favoriteDish.id) }}">
-                                            <input type="submit" class="btn btn-admin px-3 p-2 w-100" value="Supprimer">
-                                        </form>
-                                    {% endif %}
-                                </div>
+                <div class="row mb-1">
+                    {% for favoriteDish in favoriteDishes %}
+                        <div class="col-md-4 mb-2">
+                            <a href="{{ asset('assets/images/uploads/' ~ favoriteDish.image) }}" data-toggle="lightbox" data-gallery="photos-gallery" data-title="{{ favoriteDish.title }}">
+                                <span class="caption-photo">{{ favoriteDish.title }}</span>
+                                <span class="bg"></span>
+                                <img src="{{ asset('assets/images/uploads/'~ favoriteDish.image) }}" alt="{{ favoriteDish.title }}" class="img-fluid img-gallery">
+                            </a>
+                            {# update & delete buttons if admin is logged in #}
+                            <div class="row d-flex align-items-center m-0">
+                                {% if(admin) %}
+                                    <a class="btn btn-admin px-3 p-2 w-50" href="{{ path('app_admin_update_dish', {'id': favoriteDish.id }) }}">Modifier</a>
+                                    {# Delete button #}
+                                    <form class="w-50" method="POST" action="{{ path('app_admin_delete_dish', {'id': favoriteDish.id }) }}" onsubmit="return confirm('Confirmez-vous la suppression de ce plat ?')">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('REMOVE' ~ favoriteDish.id) }}">
+                                        <input type="submit" class="btn btn-admin px-3 p-2 w-100" value="Supprimer">
+                                    </form>
+                                {% endif %}
                             </div>
-                        {% endfor %}
-                    </div>
+                        </div>
+                    {% endfor %}
+                </div>
 
                 {# Link to the booking page #}
                 <div class="mt-4 d-flex justify-content-center">
                     <a class="btn btn-custom" href="{{ path('app_booking') }}">Réserver</a>
                 </div>
-                <div class="d-flex justify-content-end">
-                    <a href="{{ path('app_home') }}#top" class="" ><img src="{{ asset('assets/icons/top.svg') }}" alt="flèche pour un retour en haut de la page" width="25" title="Haut de la page"></a>
-                </div>
             </article>
-
         </div>
     </section>
 

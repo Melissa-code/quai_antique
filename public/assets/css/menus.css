@@ -13,6 +13,8 @@
     color: #000000;
 }
 
+/* Toggle switch */
+
 .choice-menu {
     border-radius: 60px;
     background-color: #000000;
@@ -28,6 +30,7 @@
     cursor: pointer;
     overflow: hidden;
 }
+
 .switch input {
     position: absolute;
     top: -30px;
@@ -35,6 +38,7 @@
     width: 0;
     height: 0;
 }
+
 .switch input + span {
     position: absolute;
     top: 0;
@@ -45,6 +49,7 @@
     border-radius: 20px;
     border: 1px solid #000000;
 }
+
 .switch input + span:before {
     content: "";
     display: inline-block;
@@ -59,9 +64,11 @@
     background: #913732;
     border: 1px solid #000000;
 }
+
 .switch input:checked + span {
     background: #BB9457;
 }
+
 .switch input:checked + span:before {
     left: 34px;
     background: #913732;
@@ -69,6 +76,14 @@
 
 
 /* Setmenus section */
+
+.noon-menus {
+    display: block;
+}
+
+.evening-menus {
+    display: none;
+}
 
 .light-menu {
     background-color: #913732;
@@ -85,9 +100,3 @@
     color: #000000;
 }
 
-.noon-menus {
-    display: block;
-}
-.evening-menus {
-    display: none;
-}

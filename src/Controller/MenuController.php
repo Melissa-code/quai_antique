@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MenuController extends AbstractController
 {
     /**
-     * Get and display the 4 menus including the setmenus with their dishes on Menu page
+     * Get and display the 4 menus including the setmenus with their dishes on the Menus page
      * @param DaytimeRepository $daytimeRepository
      * @param MenuRepository $menuRepository
      * @param SetmenuRepository $setmenuRepository
@@ -22,7 +22,7 @@ class MenuController extends AbstractController
      * @return Response
      */
     #[Route('/menus', name: 'app_menus')]
-    public function menu(DaytimeRepository $daytimeRepository, MenuRepository $menuRepository, SetmenuRepository $setmenuRepository, DishRepository $dishRepository): Response
+    public function menus(DaytimeRepository $daytimeRepository, MenuRepository $menuRepository, SetmenuRepository $setmenuRepository, DishRepository $dishRepository): Response
     {
         $menus = $menuRepository->findAll();
         $daytimes = $daytimeRepository->findAll();
@@ -43,7 +43,6 @@ class MenuController extends AbstractController
         $startersMenu4 = $dishRepository->findDishesByCategory("entrées",  "salade");
         $dishesMenu4 = $dishRepository->findDishesByCategory("salades",  "salade");
         $dessertsMenu4 = $dishRepository->findDishesByCategory("desserts",  "salade");
-
 
         return $this->render('menu/menus.html.twig', [
             'menus' => $menus,

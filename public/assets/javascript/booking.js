@@ -159,7 +159,7 @@ function getBookings(event) {
         // response.data is the array of the bookings saved in the database in a JSON format
         if(this.classList.contains("btn-displaySeats")) {
             response.data.forEach(booking => {
-                // Get the values of the date and the hour of each booking saved in the database in a string format
+                // Get the values of the date and the hour of each booking saved in the database in a string
                 let dateOfBooking = booking.bookedAt;
                 dateOfBooking = editDateFormat(dateOfBooking);
                 let hourOfBooking = booking.startAt;

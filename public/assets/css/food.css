@@ -8,14 +8,7 @@
     height: 20vh;
 }
 
-/* Starters section */
-
-.starters-img {
-    background-image: url("../images/starters-img.png");
-    height: 20vh;
-    background-position: center;
-    background-repeat: no-repeat;
-}
+/* Dishes by category section */
 
 .card-food {
     background-color: #913732;
@@ -27,11 +20,14 @@
 }
 
 
+/*********************************************************************
+                    Media queries
+**********************************************************************/
 
-
-/* mobile phones */
+/* Mobile phones */
 
 @media screen and (min-device-width: 280px) and (max-device-width: 768px) {
+
     .category-img {
         display: none;
     }

@@ -9,7 +9,7 @@ use phpDocumentor\Reflection\Type;
 class OpeningService
 {
     /**
-     * Display the opening days of the restaurant
+     * Return the opening days of the restaurant
      * @param $openingdays
      * @return array
      */
@@ -24,7 +24,7 @@ class OpeningService
     }
 
     /**
-     * Display the opening hours of the restaurant
+     * Return the opening hours of the restaurant
      * @param Openingday $day
      * @return mixed
      */
@@ -95,6 +95,5 @@ class OpeningService
         }
         return $notFoundDays;
     }
-
 
 }

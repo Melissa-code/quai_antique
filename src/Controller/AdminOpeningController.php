@@ -20,7 +20,7 @@ use function Symfony\Component\HttpKernel\Log\format;
 class AdminOpeningController extends AbstractController
 {
     /**
-     * List the opening days and their hours
+     * Get and Display the opening days and their hours
      * @param OpeningService $openingService
      * @param OpeningdayRepository $openingdayRepository
      * @param OpeninghourRepository $openinghourRepository
@@ -47,7 +47,6 @@ class AdminOpeningController extends AbstractController
                 }
             }
         }
-
         // Update the attribute open of a day: true to false if it doesn't have any opening hours
         $daysWithHours = $openingService->getDaysWithHours($openingdays, $openinghours);
         $notFoundDays = $openingService->getNotFoundDaysInOpeningdays($openingdays, $daysWithHours);
@@ -59,7 +58,6 @@ class AdminOpeningController extends AbstractController
                 }
             }
         }
-
         // Pagination (4 hours a page) : $hours replaces $openinghours = $openinghourRepository->findAll();
         $ascendingOpeninghours = $paginator->paginate(
             $openinghourRepository->findAllWithPagination(), /* query NOT result */
@@ -135,6 +133,5 @@ class AdminOpeningController extends AbstractController
             return $this->redirectToRoute('app_admin_opening');
         }
     }
-
 
 }

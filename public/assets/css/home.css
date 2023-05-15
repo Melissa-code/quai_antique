@@ -112,3 +112,18 @@
     left: 0;
     z-index: 1;
 }
+
+
+/*********************************************************************
+                    Media queries
+**********************************************************************/
+
+/* Mobile phones */
+
+@media screen and (min-device-width: 280px) and (max-device-width: 767px) {
+
+    .chef {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}

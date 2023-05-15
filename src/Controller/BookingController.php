@@ -104,7 +104,7 @@ class BookingController extends AbstractController
                 $bookingsDate = $bookingRepository->findBy(array('bookedAt' => $bookedAtSelected, 'openinghour' => $booking->getOpeninghour()));
 
                 if($bookingsDate) {
-                    echo 'date de résa existe déjà';
+                    //echo 'date de résa existe déjà';
                     $guests = [];
                     foreach ($bookingsDate as $bookingDate) {
                         if($bookingDate->getBookedAt() == $bookedAtSelected && $bookingDate->getOpeninghour() == $booking->getOpeninghour()) {

@@ -2,8 +2,7 @@
 
 {% block css %} <link rel="stylesheet" href="{{ asset('assets/css/menus.css') }}"> {% endblock css %}
 
-{% block title %} Nos menus {% endblock %}
-
+{% block title %} Menus {% endblock %}
 
 {% block main %}
 
@@ -16,8 +15,8 @@
                 <h1 class="page-title">Nos Menus</h1>
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-4 col-md-3 d-flex justify-content-center align-items-center">
-                        <div class="choice-menu d-flex justify-content-center align-items-center p-2" >
-                            {# toggle switch to see the noon menus or the evening menus #}
+                        <div class="choice-menu d-flex justify-content-center align-items-center p-2">
+                            {# Toggle switch to display the noon menus or the evening menus #}
                             {% for daytime in daytimes %}
                                 {% if daytime.id == 1 %}
                                     <span class="text-white mr-3">{{ daytime.title }}</span>
@@ -30,20 +29,19 @@
                                 {% endif %}
                             {% endfor %}
                         </div>
-
                     </div>
                 </div>
             </article>
         </div>
     </section>
 
-    {# Menu section #}
+    {# Menus section #}
 
     {% for menu in menus %}
         {% if menu.id == 1 or menu.id == 3 or menu.id == 4 %}
+
             <section class="container h-100" id="noon-menus">
                 <div class="row d-flex justify-content-center align-items-center my-5">
-
                     {# Menu title  #}
                     <div class="col-12 mb-4">
                         <h2 class="text-center">{{ menu.title }}</h2>
@@ -69,14 +67,10 @@
                         {% endfor %}
                     </article>
 
-
                     {# Setmenus food #}
-
                     <article class="col-md-6">
                         <div class="row d-block justify-content-start">
-
-                            {#  Starters of the setmenus #}
-
+                            {# Starters of the setmenus #}
                             <div class="card my-2 mx-1 food-setmenu">
                                 <div class="card-body">
                                     <h4 class="card-title font-weight-bold">Entrées au choix :</h4>
@@ -104,8 +98,7 @@
                                 </div>
                             </div>
 
-                            {#  Dishes of the setmenus #}
-
+                            {# Dishes of the setmenus #}
                             <div class="card my-2 mx-1 food-setmenu">
                                 <div class="card-body">
                                     {% if (menu.title == "Menu burger") %}
@@ -135,13 +128,11 @@
                                                 {% endfor %}
                                             {% endif %}
                                         </ul>
-
                                     </div>
                                 </div>
                             </div>
 
-                            {#  Desserts of the setmenus #}
-
+                            {# Desserts of the setmenus #}
                             <div class="card my-2 mx-1 food-setmenu">
                                 <div class="card-body">
                                     <h4 class="card-title font-weight-bold">Desserts au choix :</h4>
@@ -168,10 +159,13 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </article>
 
+                    {# Link to the booking page #}
+                    <div class="mt-4 d-flex justify-content-center">
+                        <a class="btn btn-custom" href="{{ path('app_booking') }}">Réserver</a>
+                    </div>
                 </div>
             </section>
 
@@ -181,15 +175,11 @@
 
             <section class="container h-100" id="evening-menus">
                 <div class="row d-flex justify-content-center align-items-center my-5">
-
                     {# Menu title  #}
-
                     <div class="col-12 mb-4">
                         <h2 class="text-center">{{ menu.title }}</h2>
                     </div>
-
                     {# Setmenus #}
-
                     <article class="col-md-6">
                         {% for setmenu in menu.setmenus %}
                             <div class="row d-block justify-content-end">
@@ -209,14 +199,10 @@
                         {% endfor %}
                     </article>
 
-
                     {# Setmenus food #}
-
                     <article class="col-md-6">
                         <div class="row d-block justify-content-start">
-
                             {#  Starters of the setmenus #}
-
                             <div class="card my-2 mx-1 food-setmenu">
                                 <div class="card-body">
                                     <h4 class="card-title font-weight-bold">Entrées au choix :</h4>
@@ -243,9 +229,7 @@
                                     </div>
                                 </div>
                             </div>
-
-                            {#  Dishes of the setmenus #}
-
+                            {# Dishes of the setmenus #}
                             <div class="card my-2 mx-1 food-setmenu">
                                 <div class="card-body">
                                     {% if (menu.title == "Menu burger") %}
@@ -275,13 +259,10 @@
                                                 {% endfor %}
                                             {% endif %}
                                         </ul>
-
                                     </div>
                                 </div>
                             </div>
-
-                            {#  Desserts of the setmenus #}
-
+                            {# Desserts of the setmenus #}
                             <div class="card my-2 mx-1 food-setmenu">
                                 <div class="card-body">
                                     <h4 class="card-title font-weight-bold">Desserts au choix :</h4>
@@ -308,15 +289,18 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </article>
 
+                    {# Link to the booking page #}
+                    {% if  menu.id == 2 %}
+                    <div class="mt-4 d-flex justify-content-center">
+                        <a class="btn btn-custom" href="{{ path('app_booking') }}">Réserver</a>
+                    </div>
+                    {% endif %}
                 </div>
             </section>
-
             <hr>
-
         {% endif %}
      {% endfor %}
 

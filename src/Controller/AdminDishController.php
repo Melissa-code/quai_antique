@@ -34,7 +34,7 @@ class AdminDishController extends AbstractController
     }
 
     /**
-     * List all the dishes
+     * Display all the dishes (list)
      * @param DishRepository $dishRepository
      * @param PaginatorInterface $paginator
      * @param Request $request
@@ -50,7 +50,6 @@ class AdminDishController extends AbstractController
         );
 
         return $this->render('admin/admin_dish/dishes.html.twig', [
-//            'dishes' => $dishRepository->findDishesByAscendingCategory(),
             'dishes' => $dishes,
         ]);
     }
@@ -71,7 +70,6 @@ class AdminDishController extends AbstractController
         // If a dish doesn't exists, create a new object Dish
         if(!$dish) {
             $dish = new Dish();
-
             // Fill in the gap createdAt by the date of the day by default
             $date = new \DateTimeImmutable();
             $dish->setCreatedAt($date);
@@ -86,13 +84,13 @@ class AdminDishController extends AbstractController
             $oldImage = $this->getParameter('directory_images_dishes').'/'.$dish->getImage();
             // Get the uploaded image file
             $imageFile = $form->get('imageFile')->getData();
-            //Check if the image is valid
+            // Check if the image is valid
             if($imageFile) {
                 $imageFileOriginal = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME );
                 // Reformat the image file name to be conform to an URL
                 $imageFileReformat = $slugger->slug($imageFileOriginal);
                 // Create a unique name & unique id for the image file
-                //$imageName = $imageFileReformat.'-'.uniqid().'-'.$imageFile->getExtension();
+                // $imageName = $imageFileReformat.'-'.uniqid().'-'.$imageFile->getExtension();
                 $imageName = $imageFileReformat.'-'.uniqid().'-.png';
                 // Move the image file to a specific directory in the server
                 try {
@@ -105,24 +103,19 @@ class AdminDishController extends AbstractController
                 }
                 // Save the name of the image file only
                 $dish->setImage($imageName);
-
+                // Delete the image file if it's updated
                 if($isUpdated) {
-                    // Delete the image file if it's updated
                     if(file_exists($oldImage)) {
                         unlink($oldImage);
                     }
                 }
             }
-
-            // Save the changes in the database
+            // Save the changes in the database and display a success message
             $managerRegistry->getManager()->persist($dish);
             $managerRegistry->getManager()->flush();
-
-            // Display a success message
             $this->addFlash("success", ($isUpdated) ? "La modification a bien été effectuée." : "L'ajout a bien été effectué.");
             return $this->redirectToRoute('app_admin_dishes');
         }
-
         return $this->render('admin/admin_dish/createUpdate.html.twig', [
             'form' => $form->createView(),
             'dish' => $dish,
@@ -143,11 +136,9 @@ class AdminDishController extends AbstractController
         $image = $this->getParameter('directory_images_dishes').'/'.$dish->getImage();
 
         if($this->isCsrfTokenValid('REMOVE'.$dish->getId(), $request->get('_token')));
-
             // Delete the dish in the database
             $managerRegistry->getManager()->remove($dish);
             $managerRegistry->getManager()->flush();
-
             // Delete the image in the server
             if($image) {
                 if(file_exists($image)) {
@@ -157,6 +148,5 @@ class AdminDishController extends AbstractController
             $this->addFlash("success", "La suppression a bien été effectuée.");
             return $this->redirectToRoute('app_admin_dishes');
     }
-
 
 }

@@ -105,7 +105,7 @@ See the website : [Le Quai Antique](https://le-quai-antique-restaurant.herokuapp
 
 1. Create a new user with the Create a new account form of the application
 2. Use in the terminal :
-    `php bin/console doctrine:query:sql "UPDATE user SET user.roles = '[\"ROLE_ADMIN\"]' WHERE user.id = 4;"`
+    `php bin/console doctrine:query:sql "UPDATE user SET user.roles = '[\"ROLE_ADMIN\"]' WHERE user.id = 1;"`
 
 
 ## Built with
@@ -120,8 +120,9 @@ See the website : [Le Quai Antique](https://le-quai-antique-restaurant.herokuapp
 - Bootstrap (Bootstrap Documentation [Bootstrap Documentation](https://getbootstrap.com/ "Bootstrap Documentation")).
 - Lightbox for Bootstrap (Ekko Lightbox [Ekko Lightbox](http://ashleydw.github.io/lightbox/ "Ekko Lightbox")).
 - JavaScript (JavaScript Documentation [MDN JavaScript Documentation](https://developer.mozilla.org/fr/docs/Web/JavaScript "MDN JavaScript Documentation")).
+- Axios (Axios Documentation [Axios](https://axios-http.com/docs/intro "Axios Documentation")).
+- Moment.js (Moment.js Documentation [Moment.js](https://momentjs.com/ "Moment.js")).
 - Git (Git Documentation [Git Documentation](https://git-scm.com/doc "Git Documentation")).
-  
 
 ### Tools
 
@@ -129,6 +130,10 @@ See the website : [Le Quai Antique](https://le-quai-antique-restaurant.herokuapp
 CDN font-awesome (CDN font-awesome [CDN font-awesome](https://cdnjs.com/libraries/font-awesome "CDN font-awesome")).
 - Noun Project (Noun Project [Noun Project](https://thenounproject.com/ "Noun Project")).
 - GitHub (Noun Project [Noun Project](https://github.com/ "Noun Project")).
+
+### IDE 
+- PHPStorm version pro
+
 
 ## Deploying
 
@@ -199,16 +204,14 @@ The production deployment of Le Quai Antique is hosted on Heroku.
 
 1. Create if necessary a new user with the Create a new account form of the application
 2. Use in the terminal :
-   `heroku run php bin/console doctrine:query:sql "UPDATE user SET user.roles = '[\"ROLE_ADMIN\"]' WHERE user.id = 6;"`
+   `heroku run php bin/console doctrine:query:sql "UPDATE user SET user.roles = '[\"ROLE_ADMIN\"]' WHERE user.id = 1;"`
 
 ## Tests
-***
+
 
 
 ## Author
-***
 Melissa-code
 
 ## License
-***
 [MIT](https://choosealicense.com/licenses/mit/)
