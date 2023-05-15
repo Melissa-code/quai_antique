@@ -13,7 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 #[ORM\Entity(repositoryClass: DishRepository::class)]
-#[UniqueEntity(fields:['title'], message: "This dish already exists.")]
+#[UniqueEntity(fields:['title'], message: "This dish already exists")]
 class Dish
 {
     #[ORM\Id]

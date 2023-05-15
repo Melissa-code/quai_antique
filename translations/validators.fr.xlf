@@ -569,7 +569,14 @@
         <source>The booking is impossible</source>
         <target>Réservation impossible le jour même et après 30 jours.</target>
       </trans-unit>
-
+      <trans-unit id="This dish already exists" resname="This dish already exists">
+        <source>This dish already exists</source>
+        <target>Ce plat existe déjà.</target>
+      </trans-unit>
+      <trans-unit id="This email already exists" resname="This email already exists">
+        <source>This email already exists</source>
+        <target>Cet email n'est pas disponible.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

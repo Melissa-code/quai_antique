@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-//use Symfony\Component\Security\Core\Security;
+// use Symfony\Component\Security\Core\Security;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;
@@ -50,7 +50,7 @@ class AppLoginAuthenticator extends AbstractLoginFormAuthenticator
     }
 
     /**
-     * If the user authentification is ok, redirect hte user to another page
+     * If the user authentification is ok, redirect hte user to the account page
      *
      * @param Request $request
      * @param TokenInterface $token
@@ -66,7 +66,7 @@ class AppLoginAuthenticator extends AbstractLoginFormAuthenticator
 
         // Redirect the user to the account page
         return new RedirectResponse($this->urlGenerator->generate('app_account'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
     /**
