@@ -25,8 +25,9 @@ class HomeController extends AbstractController
         $word = "herokuapp.com";
         $url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         if(strpos($url, $word)) {
-            header('Location:https://le-quai-antique-restaurant.herokuapp.com/');
-            exit();
+            //header('Location:https://le-quai-antique-restaurant.herokuapp.com/');
+            //exit();
+            echo "<script> window.location='https://le-quai-antique-restaurant.herokuapp.com/'</script>";
         }
 
         return $this->render('home/home.html.twig', [
