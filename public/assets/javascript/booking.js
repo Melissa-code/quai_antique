@@ -156,6 +156,7 @@ function getBookings(event) {
 
     axios.get(this.href).then(response => {
         const bookings = document.querySelector("ul.displayBookings");
+
         // response.data is the array of the bookings saved in the database in a JSON format
         if(this.classList.contains("btn-displaySeats")) {
             response.data.forEach(booking => {
@@ -176,8 +177,10 @@ function getBookings(event) {
             });
             // last is the last value of the array of the remaining seats
             const last = arrayOfRemainingSeats[arrayOfRemainingSeats.length-1];
+            let limitGuests = 10;
+            // If the array of remaining seats has more than one value
             if(arrayOfRemainingSeats.length > 1) {
-                if((last - getNumberOfGuestsSelected()) <= 10) {
+                if((last - getNumberOfGuestsSelected()) <= limitGuests) {
                     console.log(last - getNumberOfGuestsSelected());
                     alert("Réservation impossible car le restaurant est complet.")
                 } else {
@@ -185,8 +188,9 @@ function getBookings(event) {
                     node.textContent = "Places disponibles : " + (last - getNumberOfGuestsSelected());
                     bookings.appendChild(node);
                 }
+            // If the array of remaining seats has one value
             } else if(arrayOfRemainingSeats.length === 1) {
-                if((last - getNumberOfGuestsSelected()) <= 10) {
+                if((last - getNumberOfGuestsSelected()) <= limitGuests) {
                     console.log(last - getNumberOfGuestsSelected());
                     alert("Réservation impossible car le restaurant est complet.")
                 } else {
