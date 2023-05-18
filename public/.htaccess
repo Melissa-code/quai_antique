@@ -54,7 +54,7 @@ DirectoryIndex index.php
 
     RewriteEngine On
 
-        RewriteCond %{HTTPS} off
+        RewriteCond %{HTTP:X-Forwarded-Proto} !https
         RewriteCond %{ENV:REDIRECT_STATUS} ^$
         RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
