@@ -101,7 +101,9 @@ a:hover {
     background-color: black!important;
     opacity: 0.8;
 }
-
+.menu-icon {
+    font-family: 'Savoye LET', sans-serif;
+}
 .nav-link {
     color: #FFFFFF!important;
     font-size: 20px;
