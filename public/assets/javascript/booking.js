@@ -178,6 +178,7 @@ function getBookings(event) {
             // last is the last value of the array of the remaining seats
             const last = arrayOfRemainingSeats[arrayOfRemainingSeats.length-1];
             let limitGuests = 10;
+
             // If the array of remaining seats has more than one value
             if(arrayOfRemainingSeats.length > 1) {
                 if((last - getNumberOfGuestsSelected()) <= limitGuests) {

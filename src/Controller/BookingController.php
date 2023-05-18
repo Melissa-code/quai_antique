@@ -109,17 +109,17 @@ class BookingController extends AbstractController
                         }
                     }
                     $nbGuests = array_sum($guests) + $booking->getGuest()->getQuantity();
-                    echo '  Total nb d invités à la même date: ' . $nbGuests;
+                    //echo '  Total nb d invités à la même date: ' . $nbGuests;
                     $remainingSeats = ($restaurant->getNbseatings() - $nbGuests);
                     $booking->setRemainingseats($remainingSeats);
-                    echo '  Places restantes ' . $remainingSeats;
+                    //echo '  Places restantes ' . $remainingSeats;
 
                     // Check the limit of the guests
                     if ($booking->getRemainingseats() < 52) {
-                        echo '  Nb de Places restantes à la même date si < 52 : ' . $booking->getRemainingseats();
+                        //echo '  Nb de Places restantes à la même date si < 52 : ' . $booking->getRemainingseats();
                         $this->addFlash("error", "Réservation impossible, le restaurant est complet.");
                     } else {
-                        echo '  Réservation Enregistrée';
+                        //echo '  Réservation Enregistrée';
                         $managerRegistry->getManager()->persist($booking);
                         $managerRegistry->getManager()->flush();
                         $this->addFlash("success", "La réservation a bien été effectuée.");
@@ -128,8 +128,8 @@ class BookingController extends AbstractController
                 } else {
                     $remainingSeats = $restaurant->getNbseatings() - $booking->getGuest()->getQuantity();
                     $booking->setRemainingseats($remainingSeats) ;
-                    echo 'total places restantes : '.$remainingSeats;
-                    echo 'date de résa n existe pas';
+                    //echo 'total places restantes : '.$remainingSeats;
+                    //echo 'date de résa n existe pas';
                     $managerRegistry->getManager()->persist($booking);
                     $managerRegistry->getManager()->flush();
                     $this->addFlash("success", "La réservation a bien été effectuée.");
