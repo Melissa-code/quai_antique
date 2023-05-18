@@ -202,12 +202,18 @@ The production deployment of Le Quai Antique is hosted on Heroku.
 
     #### Change the .htaccess file to redirect to HTTPS after the logout :
 1. Comment the lines 52 and 53 :
+   
    `RewriteCond %{ENV:REDIRECT_STATUS} =""`
+   
    `RewriteRule ^index\.php(?:/(.*)|$) %{ENV:BASE}/$1 [R=301,L]`
+
 2. Add the code : 
    ``
+   
    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+   
    RewriteCond %{ENV:REDIRECT_STATUS} ^$`
+   
    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
    ``
    

@@ -20,6 +20,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class BookingController extends AbstractController
 {
+    /**
+     * Booking : Display the form and make a booking
+     * @param RestaurantRepository $restaurantRepository
+     * @param Request $request
+     * @param ManagerRegistry $managerRegistry
+     * @param BookingService $bookingService
+     * @param OpeningdayRepository $openingdayRepository
+     * @param OpeninghourRepository $openinghourRepository
+     * @param BookingRepository $bookingRepository
+     * @return Response
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     #[Route('/reservation', name: 'app_booking')]
     public function book(RestaurantRepository $restaurantRepository, Request $request, ManagerRegistry $managerRegistry, BookingService $bookingService, OpeningdayRepository $openingdayRepository, OpeninghourRepository $openinghourRepository, BookingRepository $bookingRepository): Response
     {
@@ -97,9 +109,9 @@ class BookingController extends AbstractController
 
             // Check if the user is logged-in to make a booking
             if($user) {
-                // Check if a date and hour of booking already exist in the DB
+                // Check if a date and hour of booking already exist in the database
                 $bookingsDate = $bookingRepository->findBy(array('bookedAt' => $bookedAtSelected, 'openinghour' => $booking->getOpeninghour()));
-
+                // Push into an array the number of the guests from the bookings of the database
                 if($bookingsDate) {
                     $guests = [];
                     foreach ($bookingsDate as $bookingDate) {
@@ -107,7 +119,9 @@ class BookingController extends AbstractController
                             $guests[] .= $bookingDate->getGuest()->getQuantity();
                         }
                     }
+                    // Get the sum of the guests
                     $nbGuests = array_sum($guests) + $booking->getGuest()->getQuantity();
+                    // subtract the number of the guests saved in the database by the number of the guests selected by the user
                     $remainingSeats = ($restaurant->getNbseatings() - $nbGuests);
                     $booking->setRemainingseats($remainingSeats);
 

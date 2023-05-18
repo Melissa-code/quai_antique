@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * Get and display the favorite dishes in the photos gallery of the home page
+     * Home page & the favorite dishes in the photos gallery
      * @param DishRepository $dishRepository
      * @return Response
      */

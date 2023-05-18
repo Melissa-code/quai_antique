@@ -12,7 +12,6 @@ class SecurityController extends AbstractController
 {
     /**
      * Login
-     *
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
      */

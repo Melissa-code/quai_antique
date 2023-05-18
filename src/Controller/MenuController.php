@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MenuController extends AbstractController
 {
     /**
-     * Get and display the 4 menus including the setmenus with their dishes on the Menus page
+     * Menus : get and display the 4 menus including the setmenus with their dishes
      * @param DaytimeRepository $daytimeRepository
      * @param MenuRepository $menuRepository
      * @param SetmenuRepository $setmenuRepository

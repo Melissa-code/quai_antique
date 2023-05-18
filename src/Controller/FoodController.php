@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class FoodController extends AbstractController
 {
     /**
-     * Get and display all the dishes on the La Carte page
+     * La Carte : Get and display all the dishes
      * @param CategoryRepository $categoryRepository
      * @param DishRepository $dishRepository
      * @return Response
