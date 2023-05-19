@@ -129,7 +129,7 @@ See the website : [Le Quai Antique](https://le-quai-antique-restaurant.herokuapp
 - FontAwesome (Fontawesome [Fontawesome](https://fontawesome.com/icons "Fontawesome")) and 
 CDN font-awesome (CDN font-awesome [CDN font-awesome](https://cdnjs.com/libraries/font-awesome "CDN font-awesome")).
 - Noun Project (Noun Project [Noun Project](https://thenounproject.com/ "Noun Project")).
-- GitHub (Noun Project [GtiHub](https://github.com/ "GitHub")).
+- GitHub (GitHub [GitHub](https://github.com/ "GitHub")).
 
 ### IDE 
 - PHPStorm version pro
@@ -210,13 +210,16 @@ The production deployment of Le Quai Antique is hosted on Heroku.
 2. Add the code : 
    
    `RewriteCond %{HTTP:X-Forwarded-Proto} !https`
+   
    `RewriteCond %{ENV:REDIRECT_STATUS} ^$`
+   
    `RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]`
    
     #### Add or update an administrator : 
 
 1. Create if necessary a new user with the Create a new account form of the application
 2. Use in the terminal :
+   
    `heroku run php bin/console doctrine:query:sql "UPDATE user SET user.roles = '[\"ROLE_ADMIN\"]' WHERE user.id = 1;"`
 
 ## Tests
